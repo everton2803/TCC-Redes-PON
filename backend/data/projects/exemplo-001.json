@@ -1,0 +1,154 @@
+{
+  "id": "exemplo-001",
+  "nome": "Rede PON de Exemplo — Bairro Centro",
+  "descricao": "Projeto didático com 1 OLT, 2 splitters em cascata e 4 ONUs",
+  "versao": "1.0.0",
+  "criado_em": "2026-05-30T10:00:00",
+  "atualizado_em": "2026-05-30T10:00:00",
+
+  "parametros": {
+    "atenuacao_fibra_db_por_km": 0.35,
+    "perda_conector_db": 0.5,
+    "perda_fusao_db": 0.1,
+    "margem_sistema_db": 3.0
+  },
+
+  "nos": [
+    {
+      "id": "olt-01",
+      "tipo": "OLT",
+      "nome": "OLT Central",
+      "posicao": { "x": 100, "y": 300 },
+      "padrao_pon": "GPON",
+      "potencia_tx_dbm": 5.0,
+      "sensibilidade_rx_dbm": -28.0,
+      "observacao": "OLT instalada na central telefônica"
+    },
+    {
+      "id": "spl-01",
+      "tipo": "Splitter",
+      "nome": "Splitter 1x8 — Rua A",
+      "posicao": { "x": 400, "y": 300 },
+      "razao": 8,
+      "perda_insercao_db": null,
+      "observacao": "Splitter nível 1 — caixa de distribuição externa"
+    },
+    {
+      "id": "spl-02",
+      "tipo": "Splitter",
+      "nome": "Splitter 1x4 — Ed. Res. Ipê",
+      "posicao": { "x": 650, "y": 200 },
+      "razao": 4,
+      "perda_insercao_db": null
+    },
+    {
+      "id": "cxe-01",
+      "tipo": "CaixaEmenda",
+      "nome": "CEO-01 — Poste 42",
+      "posicao": { "x": 270, "y": 300 },
+      "num_fusoes": 4,
+      "perda_por_fusao_db": 0.1
+    },
+    {
+      "id": "onu-01",
+      "tipo": "ONU",
+      "nome": "ONU — Apto 101",
+      "posicao": { "x": 900, "y": 100 },
+      "sensibilidade_rx_dbm": -27.0,
+      "potencia_rx_minima_dbm": -27.0
+    },
+    {
+      "id": "onu-02",
+      "tipo": "ONU",
+      "nome": "ONU — Apto 201",
+      "posicao": { "x": 900, "y": 220 },
+      "sensibilidade_rx_dbm": -27.0,
+      "potencia_rx_minima_dbm": -27.0
+    },
+    {
+      "id": "onu-03",
+      "tipo": "ONU",
+      "nome": "ONU — Apto 301",
+      "posicao": { "x": 900, "y": 340 },
+      "sensibilidade_rx_dbm": -27.0,
+      "potencia_rx_minima_dbm": -27.0
+    },
+    {
+      "id": "onu-04",
+      "tipo": "ONU",
+      "nome": "ONU — Apto 401",
+      "posicao": { "x": 900, "y": 460 },
+      "sensibilidade_rx_dbm": -27.0,
+      "potencia_rx_minima_dbm": -27.0
+    }
+  ],
+
+  "enlaces": [
+    {
+      "id": "lnk-01",
+      "id_origem": "olt-01",
+      "id_destino": "cxe-01",
+      "comprimento_km": 0.5,
+      "atenuacao_db_por_km": 0.35,
+      "num_conectores": 2,
+      "perda_por_conector_db": 0.5,
+      "observacao": "Trecho OLT → CEO (cabo de distribuição)"
+    },
+    {
+      "id": "lnk-02",
+      "id_origem": "cxe-01",
+      "id_destino": "spl-01",
+      "comprimento_km": 0.2,
+      "atenuacao_db_por_km": 0.35,
+      "num_conectores": 2,
+      "perda_por_conector_db": 0.5,
+      "observacao": "Trecho CEO → Splitter 1"
+    },
+    {
+      "id": "lnk-03",
+      "id_origem": "spl-01",
+      "id_destino": "spl-02",
+      "comprimento_km": 1.2,
+      "atenuacao_db_por_km": 0.35,
+      "num_conectores": 2,
+      "perda_por_conector_db": 0.5,
+      "observacao": "Trecho distribuição até edifício"
+    },
+    {
+      "id": "lnk-04",
+      "id_origem": "spl-02",
+      "id_destino": "onu-01",
+      "comprimento_km": 0.05,
+      "atenuacao_db_por_km": 0.35,
+      "num_conectores": 2,
+      "perda_por_conector_db": 0.5
+    },
+    {
+      "id": "lnk-05",
+      "id_origem": "spl-02",
+      "id_destino": "onu-02",
+      "comprimento_km": 0.08,
+      "atenuacao_db_por_km": 0.35,
+      "num_conectores": 2,
+      "perda_por_conector_db": 0.5
+    },
+    {
+      "id": "lnk-06",
+      "id_origem": "spl-02",
+      "id_destino": "onu-03",
+      "comprimento_km": 0.10,
+      "atenuacao_db_por_km": 0.35,
+      "num_conectores": 2,
+      "perda_por_conector_db": 0.5
+    },
+    {
+      "id": "lnk-07",
+      "id_origem": "spl-02",
+      "id_destino": "onu-04",
+      "comprimento_km": 0.12,
+      "atenuacao_db_por_km": 0.35,
+      "num_conectores": 2,
+      "perda_por_conector_db": 0.5
+    }
+  ]
+}

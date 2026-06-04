@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PON Planner</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+  /* ── Tokens ──────────────────────────────────────────────────── */
+  :root {
+    --bg:      #f7f7f5;
+    --surface: #ffffff;
+    --border:  #e2e2de;
+    --text:    #1a1a18;
+    --muted:   #888880;
+    --accent:  #1a1a18;
+    --panel:   240px;
+    --radius:  6px;
+    --sans:    'IBM Plex Sans', system-ui, sans-serif;
+    --mono:    'JetBrains Mono', 'Fira Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  /* ── Topbar ──────────────────────────────────────────────────── */
+  #topbar {
+    height: 48px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 12px;
+    flex-shrink: 0;
+    user-select: none;
+  }
+  .logo { font-weight: 700; font-size: 15px; letter-spacing: -0.3px; }
+  .logo span { color: var(--muted); font-weight: 400; }
+  .sep { width: 1px; height: 20px; background: var(--border); }
+  #projeto-nome {
+    border: none; background: transparent;
+    font-family: var(--sans); font-size: 14px; color: var(--text);
+    outline: none; width: 200px;
+    border-bottom: 1px solid transparent; transition: border-color .15s;
+  }
+  #projeto-nome:focus { border-color: var(--border); }
+
+  /* ── Layout ──────────────────────────────────────────────────── */
+  #workspace { display: flex; flex: 1; overflow: hidden; }
+
+  /* ── Paleta ──────────────────────────────────────────────────── */
+  #palette {
+    width: var(--panel);
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow-y: auto; flex-shrink: 0;
+  }
+  .section { padding: 12px 14px; border-bottom: 1px solid var(--border); }
+  .section h3 {
+    font-size: 10px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
+  .palette-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 10px; border-radius: var(--radius);
+    cursor: grab; border: 1px solid var(--border);
+    margin-bottom: 6px; background: var(--bg);
+    font-size: 13px; transition: background .12s, border-color .12s;
+  }
+  .palette-item:hover { background: var(--surface); border-color: var(--accent); }
+  .palette-item:last-child { margin-bottom: 0; }
+  .node-icon {
+    width: 30px; height: 30px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .icon-OLT         { background: #e8f0fe; }
+  .icon-Splitter    { background: #fce8e6; }
+  .icon-CaixaEmenda { background: #fff3e0; }
+  .icon-ONU         { background: #e6f4ea; }
+
+  .hint { font-size: 12px; color: var(--muted); line-height: 1.7; }
+  .hint b { color: var(--text); }
+
+  /* ── Canvas ──────────────────────────────────────────────────── */
+  #canvas-wrap {
+    flex: 1; position: relative; overflow: hidden; background: var(--bg);
+  }
+  #canvas-wrap svg { width: 100%; height: 100%; }
+  .grid-line { stroke: var(--border); stroke-width: .5; }
+
+  /* ── Nós SVG ─────────────────────────────────────────────────── */
+  .node { cursor: pointer; }
+  .node rect { transition: filter .15s; }
+  .node:hover rect { filter: drop-shadow(0 2px 8px rgba(0,0,0,.13)); }
+  .node text { pointer-events: none; font-family: var(--sans); }
+
+  /* ── Porta de saída ─────────────────────────────────────────── */
+  .port { cursor: crosshair; }
+
+  /* ── Enlaces SVG ─────────────────────────────────────────────── */
+  .link {
+    stroke: #999; stroke-width: 1.8; fill: none;
+    cursor: pointer; transition: stroke .12s, stroke-width .12s;
+  }
+  .link:hover  { stroke: #1a1a18; stroke-width: 2.5; }
+  .link.sel    { stroke: #1a1a18; stroke-width: 2.5; }
+  .link-label  {
+    font-family: var(--mono); font-size: 10px;
+    fill: var(--muted); pointer-events: none;
+  }
+  #link-preview {
+    stroke: #1a1a18; stroke-width: 1.5;
+    stroke-dasharray: 5 3; pointer-events: none; opacity: .6;
+  }
+
+  /* ── Painel direito — formulário ────────────────────────────── */
+  #side {
+    width: var(--panel);
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    flex-shrink: 0; overflow-y: auto;
+    padding: 14px;
+  }
+  #side h3 {
+    font-size: 10px; font-weight: 600; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 12px;
+  }
+  .empty-hint { font-size: 12px; color: var(--muted); line-height: 1.7; }
+
+  /* Cabeçalho do elemento selecionado */
+  .form-header {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 14px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .form-header .fh-icon {
+    width: 28px; height: 28px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; font-size: 14px;
+  }
+  .form-header .fh-tipo { font-size: 10px; color: var(--muted); }
+  .form-header .fh-id   { font-size: 10px; color: var(--muted); font-family: var(--mono); }
+
+  /* Seletor de cor do nó */
+  .color-picker-wrap {
+    display: flex; gap: 5px; flex-wrap: wrap; margin-top: 3px;
+  }
+  .color-swatch {
+    width: 22px; height: 22px; border-radius: 4px; cursor: pointer;
+    border: 2px solid transparent; transition: border-color .1s, transform .1s;
+    flex-shrink: 0;
+  }
+  .color-swatch:hover   { transform: scale(1.15); }
+  .color-swatch.active  { border-color: #1a1a18; }
+  .color-swatch.custom  {
+    background: linear-gradient(135deg,#f00,#ff0,#0f0,#0ff,#00f,#f0f);
+    position: relative; overflow: hidden;
+  }
+  .color-swatch.custom input[type=color] {
+    position: absolute; inset: 0; opacity: 0;
+    cursor: pointer; width: 100%; height: 100%; border: none; padding: 0;
+  }
+
+  /* Campos do formulário */
+  .field { margin-bottom: 10px; }
+  .field label {
+    display: block; font-size: 11px; color: var(--muted);
+    font-weight: 500; margin-bottom: 3px;
+  }
+  .field input, .field select {
+    width: 100%; height: 30px; padding: 0 8px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 12px; font-family: var(--sans); background: var(--bg);
+    color: var(--text); outline: none; transition: border-color .12s;
+  }
+  .field input:focus, .field select:focus { border-color: var(--accent); background: var(--surface); }
+  .field-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* Separador de seção dentro do form */
+  .form-sep {
+    font-size: 10px; font-weight: 600; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 12px 0 8px; padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* Botões de ação */
+  .btn-apply {
+    width: 100%; height: 30px; background: var(--accent); color: #fff;
+    border: none; border-radius: var(--radius); font-size: 12px;
+    font-family: var(--sans); cursor: pointer; margin-top: 6px;
+    transition: opacity .12s;
+  }
+  .btn-apply:hover { opacity: .85; }
+  .btn-del {
+    width: 100%; height: 28px; background: transparent; color: #c0392b;
+    border: 1px solid #c0392b; border-radius: var(--radius); font-size: 12px;
+    font-family: var(--sans); cursor: pointer; margin-top: 6px;
+    transition: background .12s;
+  }
+  .btn-del:hover { background: #fdecea; }
+
+  /* Linha de leitura (não editável) */
+  .read-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 11px; margin-bottom: 5px;
+  }
+  .read-row .rl { color: var(--muted); }
+  .read-row .rv { font-family: var(--mono); font-size: 11px; }
+
+  /* ── Topbar — botão calcular ────────────────────────────────── */
+  .tb-btn {
+    height: 30px; padding: 0 12px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--surface); font-size: 12px; font-family: var(--sans);
+    cursor: pointer; color: var(--text); transition: background .12s;
+  }
+  .tb-btn:hover { background: var(--bg); }
+  .tb-btn.primary {
+    background: var(--accent); color: #fff; border-color: var(--accent);
+  }
+  .tb-btn.primary:hover { opacity: .85; }
+  .tb-btn.loading { opacity: .6; pointer-events: none; }
+
+  /* ── Painel direito — abas ───────────────────────────────────── */
+  #side {
+    width: var(--panel);
+    background: var(--surface);
+    border-left: 1px solid var(--border);
+    flex-shrink: 0;
+    display: flex; flex-direction: column;
+    overflow: hidden;
+  }
+  #side-tabs {
+    display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .tab-btn {
+    flex: 1; height: 36px; border: none; background: transparent;
+    font-size: 11px; font-family: var(--sans); cursor: pointer;
+    color: var(--muted); border-bottom: 2px solid transparent;
+    transition: color .12s, border-color .12s; font-weight: 500;
+  }
+  .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+  .tab-pane { display: none; flex: 1; overflow-y: auto; padding: 14px; }
+  .tab-pane.active { display: block; }
+
+  /* ── Resultados ──────────────────────────────────────────────── */
+  .btn-calc {
+    width: 100%; height: 32px; background: var(--accent); color: #fff;
+    border: none; border-radius: var(--radius); font-size: 12px;
+    font-family: var(--sans); cursor: pointer; margin-bottom: 12px;
+    transition: opacity .12s;
+  }
+  .btn-calc:hover   { opacity: .85; }
+  .btn-calc.loading { opacity: .6; pointer-events: none; }
+
+  /* Resumo chips */
+  .summary { display: flex; gap: 6px; margin-bottom: 12px; }
+  .chip {
+    flex: 1; padding: 6px 4px; border-radius: var(--radius);
+    text-align: center; font-size: 10px; line-height: 1.3;
+  }
+  .chip .num { font-size: 17px; font-weight: 700; display: block; font-family: var(--mono); }
+  .chip-ok   { background: #eaf5ee; color: #2d7a4f; }
+  .chip-warn { background: #fdf6e3; color: #b87a00; }
+  .chip-err  { background: #fdecea; color: #c0392b; }
+
+  /* Cards de resultado por ONU */
+  .res-card { border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 8px; overflow: hidden; }
+  .res-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 10px; cursor: pointer; user-select: none;
+    transition: background .1s;
+  }
+  .res-head:hover { background: var(--bg); }
+  .res-head .rh-name { font-size: 12px; font-weight: 600; }
+  .badge {
+    font-size: 10px; font-weight: 700; padding: 2px 7px;
+    border-radius: 20px; letter-spacing: .03em;
+  }
+  .badge-ok   { background: #eaf5ee; color: #2d7a4f; }
+  .badge-warn { background: #fdf6e3; color: #b87a00; }
+  .badge-err  { background: #fdecea; color: #c0392b; }
+
+  .res-body { padding: 10px; border-top: 1px solid var(--border); display: none; }
+  .res-body.open { display: block; }
+  .res-metric {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 11px; margin-bottom: 5px;
+  }
+  .res-metric .rm-l { color: var(--muted); }
+  .res-metric .rm-v { font-family: var(--mono); font-size: 11px; }
+  .rm-ok   { color: #2d7a4f; }
+  .rm-warn { color: #b87a00; }
+  .rm-err  { color: #c0392b; }
+
+  .detail-sep { font-size: 10px; color: var(--muted); margin: 8px 0 5px;
+                padding-top: 7px; border-top: 1px solid var(--border); }
+  .detail-row {
+    display: flex; justify-content: space-between;
+    font-size: 10px; color: var(--muted); margin-bottom: 3px;
+  }
+  .detail-row .dv { font-family: var(--mono); }
+
+  /* Overlay de erro da API */
+  .api-error {
+    font-size: 12px; color: #c0392b; background: #fdecea;
+    border: 1px solid #f5c6cb; border-radius: var(--radius);
+    padding: 10px; margin-bottom: 10px; line-height: 1.5;
+  }
+  #statusbar {
+    height: 26px; background: var(--surface); border-top: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 14px;
+    font-size: 11px; color: var(--muted); gap: 16px; flex-shrink: 0;
+  }
+  #statusbar span b { color: var(--text); }
+</style>
+</head>
+<body>
+
+<!-- Topbar -->
+<div id="topbar">
+  <div class="logo">PON <span>Planner</span></div>
+  <div class="sep"></div>
+  <input id="projeto-nome" type="text" value="Novo Projeto" spellcheck="false">
+  <div style="flex:1"></div>
+  <button class="tb-btn primary" id="btn-calcular" onclick="calcularOrcamento()">▶ Calcular</button>
+</div>
+
+<!-- Workspace -->
+<div id="workspace">
+
+  <!-- Paleta -->
+  <div id="palette">
+    <div class="section">
+      <h3>Elementos</h3>
+      <div class="palette-item" draggable="true" data-tipo="OLT">
+        <div class="node-icon icon-OLT">📡</div>
+        <div>
+          <div style="font-weight:600">OLT</div>
+          <div style="font-size:11px;color:var(--muted)">Optical Line Transmitter</div>
+        </div>
+      </div>
+      <div class="palette-item" draggable="true" data-tipo="Splitter">
+        <div class="node-icon icon-Splitter">⑂</div>
+        <div>
+          <div style="font-weight:600">Splitter</div>
+          <div style="font-size:11px;color:var(--muted)">Divisor óptico passivo</div>
+        </div>
+      </div>
+      <div class="palette-item" draggable="true" data-tipo="CaixaEmenda">
+        <div class="node-icon icon-CaixaEmenda">⊟</div>
+        <div>
+          <div style="font-weight:600">Cx. Emenda</div>
+          <div style="font-size:11px;color:var(--muted)">CEO / caixa de emenda</div>
+        </div>
+      </div>
+      <div class="palette-item" draggable="true" data-tipo="ONU">
+        <div class="node-icon icon-ONU">▣</div>
+        <div>
+          <div style="font-weight:600">ONU</div>
+          <div style="font-size:11px;color:var(--muted)">Terminal do assinante</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Como usar</h3>
+      <div class="hint">
+        <b>Adicionar:</b> arraste para o canvas<br>
+        <b>Conectar:</b> clique na porta ● do nó<br>
+        <b>Mover:</b> arraste o nó<br>
+        <b>Selecionar:</b> clique no nó ou enlace<br>
+        <b>Cancelar:</b> clique no fundo<br>
+        <b>Pan:</b> arraste o fundo<br>
+        <b>Zoom:</b> scroll do mouse
+      </div>
+    </div>
+  </div>
+
+  <!-- Canvas SVG -->
+  <div id="canvas-wrap">
+    <svg id="svg">
+      <defs></defs>
+      <g id="g-grid"></g>
+      <g id="g-links"></g>
+      <g id="g-nodes"></g>
+      <line id="link-preview" style="display:none"/>
+    </svg>
+  </div>
+
+  <!-- Painel direito -->
+  <div id="side">
+    <div id="side-tabs">
+      <button class="tab-btn active" onclick="switchTab('props')">Propriedades</button>
+      <button class="tab-btn"        onclick="switchTab('results')">Resultados</button>
+    </div>
+    <div id="tab-props" class="tab-pane active">
+      <div id="side-content">
+        <div class="empty-hint">Clique num nó ou enlace para editar suas propriedades.</div>
+      </div>
+    </div>
+    <div id="tab-results" class="tab-pane">
+      <button class="btn-calc" id="btn-calc-panel" onclick="calcularOrcamento()">▶ Calcular orçamento</button>
+      <div id="results-content">
+        <div class="empty-hint">Clique em "Calcular" para analisar o orçamento óptico da rede.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Status bar -->
+<div id="statusbar">
+  <span>Nós: <b id="st-nos">0</b></span>
+  <span>Enlaces: <b id="st-links">0</b></span>
+  <span>Selecionado: <b id="st-sel">—</b></span>
+  <span style="margin-left:auto">Etapa 4.4 — Resultados</span>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════
+// Estilos por tipo de nó
+// ═══════════════════════════════════════════════════════
+const STYLE = {
+  OLT:         { fill:'#e8f0fe', stroke:'#4a7cdc', icon:'📡', sub: n => `${n.potencia_tx_dbm} dBm TX` },
+  Splitter:    { fill:'#fce8e6', stroke:'#d95a4a', icon:'⑂',  sub: n => {
+    const rotulo = n.tipo_splitter === 'desbalanceado' ? `${n.razao_desbalanceada || '20/80'}` : `1x${n.razao}`;
+    const cap    = n.tipo_splitter === 'desbalanceado' ? 2 : (n.razao || 2);
+    const usadas = typeof saidasUsadas === 'function' ? saidasUsadas(n.id) : 0;
+    return `${rotulo}  (${usadas}/${cap})`;
+  }},
+  CaixaEmenda: { fill:'#fff3e0', stroke:'#e09000', icon:'⊟',  sub: n => `${n.num_fusoes} fusões` },
+  ONU:         { fill:'#e6f4ea', stroke:'#2d7a4f', icon:'▣',  sub: n => `${n.sensibilidade_rx_dbm} dBm` },
+};
+
+const NW = 114, NH = 46; // largura e altura do nó
+
+// Paleta de cores para agrupamento visual de nós
+const NODE_COLORS = [
+  '#e8f0fe', // azul claro (padrão OLT)
+  '#fce8e6', // vermelho claro (padrão Splitter)
+  '#fff3e0', // laranja claro (padrão CEO)
+  '#e6f4ea', // verde claro (padrão ONU)
+  '#f3e8fd', // lilás
+  '#fef9e7', // amarelo
+  '#e8f8f5', // turquesa
+  '#fdedec', // salmão
+  '#eaf2ff', // azul médio
+  '#f9f9f9', // cinza claro
+];
+
+// ═══════════════════════════════════════════════════════
+// Estado
+// ═══════════════════════════════════════════════════════
+let nodes   = [];
+let links   = [];   // { id, id_origem, id_destino, comprimento_m, ... }
+let selId   = null; // id do elemento selecionado
+let selType = null; // 'node' | 'link'
+let linkSrc     = null; // nó de origem ao criar enlace
+let linkSrcY    = null; // Y absoluto da porta (usado no preview)
+let linkSrcRelY = null; // Y relativo ao nó (persistido no enlace)
+let idSeq   = 0;
+
+function uid(prefix) { return `${prefix}-${++idSeq}`; }
+
+function defaultParams(tipo) {
+  return {
+    OLT:         { potencia_tx_dbm: 5.0, sensibilidade_rx_dbm: -28.0, padrao_pon: 'GPON' },
+    Splitter:    { razao: 8, tipo_splitter: 'balanceado' },
+    CaixaEmenda: { num_fusoes: 4, perda_por_fusao_db: 0.1 },
+    ONU:         { sensibilidade_rx_dbm: -27.0 },
+  }[tipo];
+}
+
+// ═══════════════════════════════════════════════════════
+// D3 — SVG, zoom/pan
+// ═══════════════════════════════════════════════════════
+const svg    = d3.select('#svg');
+const gGrid  = d3.select('#g-grid');
+const gLinks = d3.select('#g-links');
+const gNodes = d3.select('#g-nodes');
+const prevLine = d3.select('#link-preview');
+
+const zoom = d3.zoom()
+  .scaleExtent([0.15, 5])
+  .filter(e => {
+    if (e.type === 'wheel') return true;
+    return e.target.tagName === 'svg' || e.target.classList.contains('grid-line');
+  })
+  .on('zoom', e => {
+    gGrid.attr('transform', e.transform);
+    gLinks.attr('transform', e.transform);
+    gNodes.attr('transform', e.transform);
+  });
+
+svg.call(zoom);
+
+// Grade de fundo
+function drawGrid() {
+  const W = window.innerWidth, H = window.innerHeight, step = 28;
+  gGrid.selectAll('*').remove();
+  for (let x = -W; x < W * 3; x += step)
+    gGrid.append('line').attr('class','grid-line')
+      .attr('x1', x).attr('y1', -H).attr('x2', x).attr('y2', H * 3);
+  for (let y = -H; y < H * 3; y += step)
+    gGrid.append('line').attr('class','grid-line')
+      .attr('x1', -W).attr('y1', y).attr('x2', W * 3).attr('y2', y);
+}
+drawGrid();
+window.addEventListener('resize', drawGrid);
+
+// Deseleciona ao clicar no fundo
+svg.on('click', () => {
+  // Cancela criação de enlace se estiver em andamento
+  if (linkSrc) { cancelLink(); return; }
+  selId = null; selType = null;
+  render(); updateSide();
+});
+
+// ═══════════════════════════════════════════════════════
+// Drag da paleta → canvas
+// ═══════════════════════════════════════════════════════
+let dragTipo = null;
+
+document.querySelectorAll('.palette-item').forEach(el => {
+  el.addEventListener('dragstart', e => {
+    dragTipo = e.currentTarget.dataset.tipo;
+  });
+});
+
+const wrap = document.getElementById('canvas-wrap');
+wrap.addEventListener('dragover', e => e.preventDefault());
+wrap.addEventListener('drop', e => {
+  e.preventDefault();
+  if (!dragTipo) return;
+  const rect = wrap.getBoundingClientRect();
+  const t    = d3.zoomTransform(svg.node());
+  const cx   = t.invertX(e.clientX - rect.left);
+  const cy   = t.invertY(e.clientY - rect.top);
+  const w = dragTipo === 'Splitter' ? SW : dragTipo === 'CaixaEmenda' ? CR : NW;
+  const h = dragTipo === 'Splitter' ? SH : dragTipo === 'CaixaEmenda' ? CR : NH;
+  addNode(dragTipo, cx - w, cy - h);
+  dragTipo = null;
+});
+
+// ═══════════════════════════════════════════════════════
+// Adicionar nó
+// ═══════════════════════════════════════════════════════
+function addNode(tipo, x, y) {
+  const id = uid(tipo.toLowerCase());
+  nodes.push({ id, tipo, nome: id, x, y, ...defaultParams(tipo) });
+  render();
+  updateStatus();
+}
+
+// ═══════════════════════════════════════════════════════
+// Render principal
+// ═══════════════════════════════════════════════════════
+function render() {
+  renderLinks();
+  renderNodes();
+}
+
+// ═══════════════════════════════════════════════════════
+// Geometria do splitter
+// ═══════════════════════════════════════════════════════
+// Dimensões do triângulo (coordenadas locais, origem = canto sup-esq da bbox)
+const SW = 80;  // largura total da bbox do splitter
+const SH = 60;  // altura total da bbox do splitter
+
+// Vértices do triângulo: ponta esquerda, base superior, base inferior
+function triPoints(w, h) {
+  return `0,${h/2} ${w},0 ${w},${h}`;
+}
+
+// Quantos círculos de saída mostrar na base direita
+function numCirculosSaida(n) {
+  if (n.tipo_splitter === 'desbalanceado') return 2;
+  const r = n.razao || 2;
+  if (r <= 4)  return r;   // 1x2 → 2, 1x4 → 4
+  return 1;                // 1x8, 1x16, 1x32, 1x64 → 1 círculo genérico
+}
+
+// Posições Y dos círculos de saída, centrados na altura do triângulo
+function posCirculos(count, h) {
+  if (count === 1) return [h / 2];
+  const step = h / (count + 1);
+  return Array.from({ length: count }, (_, i) => step * (i + 1));
+}
+
+// ═══════════════════════════════════════════════════════
+// Render — Nós
+// ═══════════════════════════════════════════════════════
+function renderNodes() {
+  const regular  = nodes.filter(n => n.tipo !== 'Splitter' && n.tipo !== 'CaixaEmenda');
+  const ceos     = nodes.filter(n => n.tipo === 'CaixaEmenda');
+  const splitters= nodes.filter(n => n.tipo === 'Splitter');
+
+  renderRegularNodes(regular);
+  renderCEONodes(ceos);
+  renderSplitterNodes(splitters);
+}
+
+// ── Nós regulares (retângulo) ────────────────────────
+function renderRegularNodes(data) {
+  const sel = gNodes.selectAll('.node-regular').data(data, d => d.id);
+
+  const enter = sel.enter().append('g')
+    .attr('class', 'node node-regular')
+    .call(nodeDrag())
+    .on('click', nodeClick);
+
+  enter.append('rect').attr('width', NW).attr('height', NH).attr('rx', 6);
+  enter.append('text').attr('class','icon-t')
+    .attr('x', 13).attr('y', NH/2)
+    .attr('dominant-baseline','middle').attr('font-size', 16);
+  enter.append('text').attr('class','name-t')
+    .attr('x', 36).attr('y', NH/2 - 6)
+    .attr('dominant-baseline','middle')
+    .attr('font-size', 11).attr('font-weight', 600);
+  enter.append('text').attr('class','sub-t')
+    .attr('x', 36).attr('y', NH/2 + 8)
+    .attr('dominant-baseline','middle')
+    .attr('font-size', 10).attr('fill','#888');
+  // Porta única de saída
+  enter.append('circle').attr('class','port out-port')
+    .attr('cx', NW + 6).attr('cy', NH/2).attr('r', 5)
+    .attr('fill','#fff').attr('stroke','#aaa').attr('stroke-width', 1.5)
+    .on('mousedown', (e,d) => { e.stopPropagation(); startLink(d); })
+    .on('click', e => e.stopPropagation());
+
+  const all = enter.merge(sel);
+  all.attr('transform', d => `translate(${d.x},${d.y})`);
+
+  const STATUS_FILL   = { OK:'#eaf5ee', MARGEM_BAIXA:'#fdf6e3', REPROVADO:'#fdecea' };
+  const STATUS_STROKE = { OK:'#2d7a4f', MARGEM_BAIXA:'#b87a00', REPROVADO:'#c0392b' };
+
+  all.select('rect')
+    .attr('fill', d => {
+      if (d.tipo === 'ONU' && resultadoONUs[d.id])
+        return STATUS_FILL[resultadoONUs[d.id]] || d.cor || STYLE[d.tipo].fill;
+      return d.cor || STYLE[d.tipo].fill;
+    })
+    .attr('stroke', d => {
+      if (selType === 'node' && d.id === selId) return '#1a1a18';
+      if (d.tipo === 'ONU' && resultadoONUs[d.id])
+        return STATUS_STROKE[resultadoONUs[d.id]] || STYLE[d.tipo].stroke;
+      return STYLE[d.tipo].stroke;
+    })
+    .attr('stroke-width', d => selType === 'node' && d.id === selId ? 2.5 : 1.5);
+
+  all.select('.out-port')
+    .attr('fill',   d => linkSrc?.id === d.id ? '#1a1a18' : '#fff')
+    .attr('stroke', d => linkSrc?.id === d.id ? '#1a1a18' : '#aaa');
+
+  all.select('.icon-t').text(d => STYLE[d.tipo].icon);
+  all.select('.name-t').text(d => d.nome.length > 13 ? d.nome.slice(0,12)+'…' : d.nome);
+  all.select('.sub-t').text(d => STYLE[d.tipo].sub(d));
+
+  sel.exit().remove();
+}
+
+// ── CEO — círculo ────────────────────────────────────
+const CR = 28; // raio do círculo CEO
+
+function renderCEONodes(data) {
+  const sel = gNodes.selectAll('.node-ceo').data(data, d => d.id);
+
+  const enter = sel.enter().append('g')
+    .attr('class', 'node node-ceo')
+    .call(nodeDrag())
+    .on('click', nodeClick);
+
+  // Círculo principal
+  enter.append('circle').attr('class','ceo-body')
+    .attr('cx', CR).attr('cy', CR).attr('r', CR)
+    .attr('stroke-width', 1.5);
+
+  // Ícone centralizado
+  enter.append('text').attr('class','icon-t')
+    .attr('x', CR).attr('y', CR - 5)
+    .attr('text-anchor','middle')
+    .attr('dominant-baseline','middle')
+    .attr('font-size', 14);
+
+  // Nome abaixo do ícone
+  enter.append('text').attr('class','name-t')
+    .attr('x', CR).attr('y', CR + 9)
+    .attr('text-anchor','middle')
+    .attr('dominant-baseline','middle')
+    .attr('font-size', 10).attr('font-weight', 600);
+
+  // Porta de saída (direita do círculo)
+  enter.append('circle').attr('class','port out-port')
+    .attr('cx', CR * 2 + 6).attr('cy', CR).attr('r', 5)
+    .attr('fill','#fff').attr('stroke','#aaa').attr('stroke-width', 1.5)
+    .on('mousedown', (e, d) => { e.stopPropagation(); startLink(d); })
+    .on('click', e => e.stopPropagation());
+
+  const all = enter.merge(sel);
+  all.attr('transform', d => `translate(${d.x},${d.y})`);
+
+  all.select('.ceo-body')
+    .attr('fill',   d => d.cor || STYLE.CaixaEmenda.fill)
+    .attr('stroke', d => selType === 'node' && d.id === selId
+      ? '#1a1a18' : STYLE.CaixaEmenda.stroke)
+    .attr('stroke-width', d => selType === 'node' && d.id === selId ? 2.5 : 1.5);
+
+  all.select('.out-port')
+    .attr('fill',   d => linkSrc?.id === d.id ? '#1a1a18' : '#fff')
+    .attr('stroke', d => linkSrc?.id === d.id ? '#1a1a18' : '#aaa');
+
+  all.select('.icon-t').text(d => STYLE[d.tipo].icon);
+  all.select('.name-t').text(d => d.nome.length > 7 ? d.nome.slice(0,6)+'…' : d.nome);
+
+  sel.exit().remove();
+}
+
+// ── Splitters (triângulo + círculos de saída) ────────
+function renderSplitterNodes(data) {
+  const sel = gNodes.selectAll('.node-splitter').data(data, d => d.id);
+
+  const enter = sel.enter().append('g')
+    .attr('class', 'node node-splitter')
+    .call(nodeDrag())
+    .on('click', nodeClick);
+
+  // Triângulo
+  enter.append('polygon').attr('class','spl-tri');
+
+  // Nome acima do triângulo
+  enter.append('text').attr('class','name-t')
+    .attr('text-anchor','middle')
+    .attr('font-size', 11).attr('font-weight', 600);
+
+  // Subtítulo abaixo
+  enter.append('text').attr('class','sub-t')
+    .attr('text-anchor','middle')
+    .attr('font-size', 10).attr('fill','#888');
+
+  // ── Update ────────────────────────────────────────
+  const all = enter.merge(sel);
+  all.attr('transform', d => `translate(${d.x},${d.y})`);
+
+  // Triângulo
+  all.select('.spl-tri')
+    .attr('points', triPoints(SW, SH))
+    .attr('fill',   d => d.cor || STYLE.Splitter.fill)
+    .attr('stroke', d => selType === 'node' && d.id === selId ? '#1a1a18' : STYLE.Splitter.stroke)
+    .attr('stroke-width', d => selType === 'node' && d.id === selId ? 2.5 : 1.5)
+    .attr('stroke-linejoin','round');
+
+  all.select('.name-t')
+    .attr('x', SW / 2).attr('y', -5)
+    .text(d => d.nome.length > 12 ? d.nome.slice(0,11)+'…' : d.nome);
+
+  all.select('.sub-t')
+    .attr('x', SW / 2).attr('y', SH + 13)
+    .text(d => STYLE.Splitter.sub(d));
+
+  // Círculos de saída — recriados a cada render pois dependem da razão
+  all.selectAll('.spl-port').remove();
+
+   all.each(function(d) {
+     const g     = d3.select(this);
+     const count = numCirculosSaida(d);
+     const ys    = posCirculos(count, SH);
+     const isGenerico = count === 1 && (d.razao >= 8 || d.tipo_splitter === 'desbalanceado' && false);
+
+     // Para splitters desbalanceados, inverte a ordem:
+     // - Círculo superior = saída com MAIOR atenuação
+     // - Círculo inferior = saída com MENOR atenuação
+     const portasOrdenadas = d.tipo_splitter === 'desbalanceado' ? [...ys].reverse() : ys;
+
+     portasOrdenadas.forEach((cy, i) => {
+       const isSrc = linkSrc?.id === d.id;
+       g.append('circle').attr('class','port spl-port')
+         .attr('cx', SW + 6).attr('cy', cy).attr('r', 5)
+         .attr('fill',   isSrc ? '#1a1a18' : '#fff')
+         .attr('stroke', isSrc ? '#1a1a18' : STYLE.Splitter.stroke)
+         .attr('stroke-width', 1.5)
+         .style('cursor','crosshair')
+         .on('mousedown', (e) => {
+           e.stopPropagation();
+           // cy é relativo ao nó; guardamos relativo para recalcular ao mover
+           startLink(d, d.y + cy, cy);
+         })
+         .on('click', e => e.stopPropagation());
+
+     });
+   });
+
+  sel.exit().remove();
+}
+
+// ── Helpers de drag e click compartilhados ────────────
+function nodeDrag() {
+  return d3.drag()
+    .on('start', function(e) {
+      d3.select(this).raise();
+      e.sourceEvent.stopPropagation();
+    })
+    .on('drag', (e, d) => {
+      if (linkSrc) return;
+      d.x += e.dx;
+      d.y += e.dy;
+      render();
+    });
+}
+
+function nodeClick(e, d) {
+  e.stopPropagation();
+  if (linkSrc) { finishLink(d); return; }
+  selId = d.id; selType = 'node';
+  render(); updateSide();
+}
+
+// ═══════════════════════════════════════════════════════
+// Render — Enlaces
+// ═══════════════════════════════════════════════════════
+// Ponto de saída do enlace (lado direito)
+function nodeCx(n) {
+  if (n.tipo === 'Splitter')    return n.x + SW + 6;
+  if (n.tipo === 'CaixaEmenda') return n.x + CR * 2 + 6;
+  return n.x + NW + 6;
+}
+function nodeCy(n) {
+  if (n.tipo === 'Splitter')    return n.y + SH / 2;
+  if (n.tipo === 'CaixaEmenda') return n.y + CR;
+  return n.y + NH / 2;
+}
+// Ponto de entrada do enlace (lado esquerdo)
+function nodeRx(n) { return n.x; }
+function nodeRy(n) {
+  if (n.tipo === 'Splitter')    return n.y + SH / 2;
+  if (n.tipo === 'CaixaEmenda') return n.y + CR;
+  return n.y + NH / 2;
+}
+
+function renderLinks() {
+  const data = gLinks.selectAll('.link-g').data(links, d => d.id);
+
+  const enter = data.enter().append('g').attr('class','link-g');
+
+  enter.append('line').attr('class','link')
+    .on('click', (e, d) => {
+      e.stopPropagation();
+      selId = d.id; selType = 'link';
+      render(); updateSide();
+    });
+
+  // Rótulo central com o comprimento
+  enter.append('text').attr('class','link-label');
+
+  const all = enter.merge(data);
+
+  all.select('line').each(function(d) {
+    const src = nodes.find(n => n.id === d.id_origem);
+    const dst = nodes.find(n => n.id === d.id_destino);
+    if (!src || !dst) return;
+    // Y de saída: usa porta relativa ao nó se disponível, senão centro
+    const y1 = d.porta_origem_rel_y !== undefined && d.porta_origem_rel_y !== null
+      ? src.y + d.porta_origem_rel_y
+      : nodeCy(src);
+    d3.select(this)
+      .attr('x1', nodeCx(src)).attr('y1', y1)
+      .attr('x2', nodeRx(dst)).attr('y2', nodeRy(dst))
+      .classed('sel', selType === 'link' && d.id === selId);
+  });
+
+  all.select('.link-label').each(function(d) {
+    const src = nodes.find(n => n.id === d.id_origem);
+    const dst = nodes.find(n => n.id === d.id_destino);
+    if (!src || !dst) return;
+    const y1 = d.porta_origem_rel_y !== undefined && d.porta_origem_rel_y !== null
+      ? src.y + d.porta_origem_rel_y
+      : nodeCy(src);
+    const mx = (nodeCx(src) + nodeRx(dst)) / 2;
+    const my = (y1 + nodeRy(dst)) / 2 - 8;
+    d3.select(this)
+      .attr('x', mx).attr('y', my)
+      .attr('text-anchor', 'middle')
+      .text(`${d.comprimento_m} m`);
+  });
+
+  data.exit().remove();
+}
+
+// ═══════════════════════════════════════════════════════
+// Criação de enlace
+// ═══════════════════════════════════════════════════════
+function startLink(node, absY, relY) {
+  linkSrc      = node;
+  linkSrcRelY  = relY !== undefined ? relY : null; // Y relativo ao nó
+  linkSrcY     = absY !== undefined ? absY : nodeCy(node);
+  render();
+
+  const rect = wrap.getBoundingClientRect();
+  svg.on('mousemove.link', e => {
+    const t  = d3.zoomTransform(svg.node());
+    const mx = t.invertX(e.clientX - rect.left);
+    const my = t.invertY(e.clientY - rect.top);
+    prevLine
+      .style('display', null)
+      .attr('x1', nodeCx(linkSrc)).attr('y1', linkSrcY)
+      .attr('x2', mx).attr('y2', my);
+  });
+}
+
+// ── Tipo de enlace ────────────────────────────────────
+// Retorna 'conector' somente para ONU → Splitter; demais são 'fusao'.
+function tipoEnlace(src, dst) {
+  if (!src || !dst) return 'fusao';
+  const sT = typeof src === 'string' ? nodes.find(n => n.id === src)?.tipo : src.tipo;
+  const dT = typeof dst === 'string' ? nodes.find(n => n.id === dst)?.tipo : dst.tipo;
+  return (sT === 'ONU' && dT === 'Splitter') ? 'conector' : 'fusao';
+}
+
+// ── Capacidade de saídas de um splitter ──────────────
+function capacidadeSplitter(n) {
+  // Desbalanceados e balanceado 1x2 → sempre 2 saídas
+  if (n.tipo_splitter === 'desbalanceado') return 2;
+  return n.razao || 2;
+}
+
+function saidasUsadas(nodeId) {
+  return links.filter(l => l.id_origem === nodeId).length;
+}
+
+function finishLink(dst) {
+  if (!linkSrc || dst.id === linkSrc.id) { cancelLink(); return; }
+
+  // Valida capacidade do nó de origem (somente Splitter)
+  if (linkSrc.tipo === 'Splitter') {
+    const cap  = capacidadeSplitter(linkSrc);
+    const usadas = saidasUsadas(linkSrc.id);
+    if (usadas >= cap) {
+      toast(`Este splitter já usa todas as ${cap} saídas disponíveis`);
+      cancelLink();
+      return;
+    }
+  }
+
+  // Evita enlace duplicado na mesma direção
+  const dup = links.find(l => l.id_origem === linkSrc.id && l.id_destino === dst.id);
+  if (!dup) {
+    const eConector = tipoEnlace(linkSrc, dst) === 'conector';
+    links.push({
+      id:                    uid('lnk'),
+      id_origem:             linkSrc.id,
+      id_destino:            dst.id,
+      porta_origem_rel_y:    linkSrcRelY,
+      comprimento_m:        100,
+      atenuacao_db_por_km:   0.35,
+      // Conector (ONU → Splitter): 2 conectores SC/APC de 0,5 dB cada
+      // Fusão (demais):            2 fusões de 0,1 dB cada
+      num_conexoes:          2,
+      perda_por_conexao_db:  eConector ? 0.5 : 0.1,
+      tipo_conexao:          eConector ? 'conector' : 'fusao',
+    });
+  }
+  cancelLink();
+  updateStatus();
+}
+
+function cancelLink() {
+  linkSrc     = null;
+  linkSrcY    = null;
+  linkSrcRelY = null;
+  prevLine.style('display', 'none');
+  svg.on('mousemove.link', null);
+  render();
+}
+
+// ═══════════════════════════════════════════════════════
+// Painel direito — formulários de edição
+// ═══════════════════════════════════════════════════════
+function updateSide() {
+  const el = document.getElementById('side-content');
+
+  if (!selId) {
+    el.innerHTML = '<div class="empty-hint">Clique num nó ou enlace para editar suas propriedades.</div>';
+    document.getElementById('st-sel').textContent = '—';
+    return;
+  }
+
+  if (selType === 'node') {
+    const n = nodes.find(x => x.id === selId);
+    document.getElementById('st-sel').textContent = n.nome;
+    el.innerHTML = buildNodeForm(n);
+    // Exibe/oculta campos do splitter conforme tipo
+    if (n.tipo === 'Splitter') toggleSplitterFields();
+    return;
+  }
+
+  if (selType === 'link') {
+    const l = links.find(x => x.id === selId);
+    const sNome = nodes.find(n => n.id === l.id_origem)?.nome || l.id_origem;
+    const dNome = nodes.find(n => n.id === l.id_destino)?.nome || l.id_destino;
+    document.getElementById('st-sel').textContent = `${sNome} → ${dNome}`;
+    el.innerHTML = buildLinkForm(l, sNome, dNome);
+  }
+}
+
+// ── Formulário de nó ─────────────────────────────────
+function buildNodeForm(n) {
+  const st = STYLE[n.tipo];
+  const bgMap = {
+    OLT:'#e8f0fe', Splitter:'#fce8e6', CaixaEmenda:'#fff3e0', ONU:'#e6f4ea'
+  };
+
+  let html = `
+    <div class="form-header">
+      <div class="fh-icon" style="background:${bgMap[n.tipo]}">${st.icon}</div>
+      <div>
+        <div style="font-size:13px;font-weight:600">${n.tipo}</div>
+        <div class="fh-id">${n.id}</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Nome</label>
+      <input id="f-nome" value="${esc(n.nome)}" placeholder="Nome do elemento">
+    </div>
+    <div class="field">
+      <label>Cor do nó</label>
+      <div class="color-picker-wrap">
+        ${NODE_COLORS.map(c => `
+          <div class="color-swatch ${n.cor === c ? 'active' : ''}"
+               style="background:${c}"
+               onclick="selectColor('${c}')"
+               title="${c}">
+          </div>`).join('')}
+        <div class="color-swatch custom" title="Cor personalizada">
+          <input type="color" id="f-cor-custom"
+            value="${n.cor || NODE_COLORS[0]}"
+            oninput="selectColor(this.value)">
+        </div>
+      </div>
+      <input type="hidden" id="f-cor" value="${n.cor || ''}">
+    </div>`;
+
+  // ── OLT ──────────────────────────────────────────────
+  if (n.tipo === 'OLT') {
+    html += `
+    <div class="form-sep">Transceptor</div>
+    <div class="field">
+      <label>Padrão PON</label>
+      <select id="f-padrao">
+        <option ${n.padrao_pon==='GPON'?'selected':''}>GPON</option>
+        <option ${n.padrao_pon==='EPON'?'selected':''}>EPON</option>
+      </select>
+    </div>
+    <div class="field-2col">
+      <div class="field">
+        <label>Potência TX (dBm)</label>
+        <input id="f-ptx" type="number" step="0.1" min="-10" max="10" value="${n.potencia_tx_dbm}">
+      </div>
+      <div class="field">
+        <label>Sens. RX (dBm)</label>
+        <input id="f-srx" type="number" step="0.1" value="${n.sensibilidade_rx_dbm}">
+      </div>
+    </div>`;
+  }
+
+  // ── Splitter ──────────────────────────────────────────
+  if (n.tipo === 'Splitter') {
+    html += `
+    <div class="form-sep">Divisão</div>
+    <div class="field">
+      <label>Tipo</label>
+      <select id="f-tspl" onchange="toggleSplitterFields()">
+        <option value="balanceado"    ${n.tipo_splitter==='balanceado'   ?'selected':''}>Balanceado (1xN)</option>
+        <option value="desbalanceado" ${n.tipo_splitter==='desbalanceado'?'selected':''}>Desbalanceado (1x2)</option>
+      </select>
+    </div>
+    <div id="wrap-bal">
+      <div class="field">
+        <label>Razão de divisão</label>
+        <select id="f-razao">
+          ${[2,4,8,16,32,64].map(r =>
+            `<option value="${r}" ${n.razao==r?'selected':''}>${r} saídas (1x${r})</option>`
+          ).join('')}
+        </select>
+      </div>
+    </div>
+    <div id="wrap-desb" style="display:none">
+      <div class="field">
+        <label>Divisão (%)</label>
+        <select id="f-razao-d">
+          ${['01/99','02/98','05/95','10/90','15/85','20/80','25/75','30/70','35/65','40/60','45/55','50/50'].map(r =>
+            `<option value="${r}" ${n.razao_desbalanceada===r?'selected':''}>${r}</option>`
+          ).join('')}
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <label>Perda de inserção manual (dB)</label>
+      <input id="f-perda-spl" type="number" step="0.01" min="0"
+        placeholder="Deixe vazio para usar a tabela padrão"
+        value="${n.perda_insercao_db ?? ''}">
+    </div>`;
+  }
+
+  // ── Caixa de Emenda ───────────────────────────────────
+  if (n.tipo === 'CaixaEmenda') {
+    html += `
+    <div class="form-sep">Fusões</div>
+    <div class="field-2col">
+      <div class="field">
+        <label>Nº de fusões</label>
+        <input id="f-fusoes" type="number" min="0" max="288" value="${n.num_fusoes}">
+      </div>
+      <div class="field">
+        <label>Perda/fusão (dB)</label>
+        <input id="f-pfusao" type="number" step="0.01" min="0" value="${n.perda_por_fusao_db}">
+      </div>
+    </div>`;
+  }
+
+  // ── ONU ───────────────────────────────────────────────
+  if (n.tipo === 'ONU') {
+    html += `
+    <div class="form-sep">Transceptor</div>
+    <div class="field">
+      <label>Sensibilidade RX (dBm)</label>
+      <input id="f-srx-onu" type="number" step="0.1" value="${n.sensibilidade_rx_dbm}">
+    </div>`;
+  }
+
+  html += `
+    <div class="form-sep">Posição</div>
+    <div class="field-2col">
+      <div class="field"><label>X (px)</label><input id="f-px" type="number" value="${Math.round(n.x)}"></div>
+      <div class="field"><label>Y (px)</label><input id="f-py" type="number" value="${Math.round(n.y)}"></div>
+    </div>
+    <button class="btn-apply" onclick="applyNode('${n.id}')">✓ Aplicar</button>
+    <button class="btn-del"   onclick="delNode('${n.id}')">✕ Excluir nó</button>`;
+
+  return html;
+}
+
+// ── Formulário de enlace ─────────────────────────────
+function buildLinkForm(l, sNome, dNome) {
+  const eConector   = l.tipo_conexao === 'conector';
+  const perdaFibra  = ((l.comprimento_m / 1000) * l.atenuacao_db_por_km).toFixed(3);
+  const perdaConexao= ((l.num_conexoes ?? 2) * (l.perda_por_conexao_db ?? (eConector ? 0.5 : 0.1))).toFixed(3);
+  const perdaTotal  = (parseFloat(perdaFibra) + parseFloat(perdaConexao)).toFixed(3);
+  const labelConexao= eConector ? 'Conectores (SC/APC)' : 'Fusões';
+  const labelPerda  = eConector ? 'Perda/conector (dB)' : 'Perda/fusão (dB)';
+  const badgeBg     = eConector ? '#e8f0fe' : '#fff3e0';
+  const badgeColor  = eConector ? '#4a7cdc' : '#e09000';
+  const badgeLabel  = eConector ? 'Conector' : 'Fusão';
+
+  return `
+    <div class="form-header">
+      <div class="fh-icon" style="background:#f0f0ee">→</div>
+      <div>
+        <div style="font-size:12px;font-weight:600">Enlace
+          <span style="font-size:10px;padding:1px 7px;border-radius:10px;
+            background:${badgeBg};color:${badgeColor};margin-left:4px">${badgeLabel}</span>
+        </div>
+        <div class="fh-id">${l.id}</div>
+      </div>
+    </div>
+
+    <div class="read-row">
+      <span class="rl">Origem</span>
+      <span class="rv">${esc(sNome)}</span>
+    </div>
+    <div class="read-row" style="margin-bottom:12px">
+      <span class="rl">Destino</span>
+      <span class="rv">${esc(dNome)}</span>
+    </div>
+
+    <div class="form-sep">Fibra óptica</div>
+    <div class="field-2col">
+      <div class="field">
+        <label>Comprimento (m)</label>
+        <input id="l-km" type="number" step="1" min="1" value="${l.comprimento_m}">
+      </div>
+      <div class="field">
+        <label>Atem. (dB/km)</label>
+        <input id="l-att" type="number" step="0.01" min="0.01" value="${l.atenuacao_db_por_km}">
+      </div>
+    </div>
+
+    <div class="form-sep">${labelConexao}</div>
+    <div class="field-2col">
+      <div class="field">
+        <label>Quantidade</label>
+        <input id="l-nconn" type="number" min="0" max="20" value="${l.num_conexoes ?? 2}">
+      </div>
+      <div class="field">
+        <label>${labelPerda}</label>
+        <input id="l-pconn" type="number" step="0.01" min="0"
+          value="${l.perda_por_conexao_db ?? (eConector ? 0.5 : 0.1)}">
+      </div>
+    </div>
+
+    <div class="form-sep">Perdas calculadas</div>
+    <div class="read-row">
+      <span class="rl">Perda fibra</span>
+      <span class="rv">${perdaFibra} dB</span>
+    </div>
+    <div class="read-row">
+      <span class="rl">Perda ${badgeLabel.toLowerCase()}s</span>
+      <span class="rv">${perdaConexao} dB</span>
+    </div>
+    <div class="read-row" style="font-weight:600">
+      <span class="rl" style="color:var(--text)">Perda total</span>
+      <span class="rv">${perdaTotal} dB</span>
+    </div>
+
+    <button class="btn-apply" onclick="applyLink('${l.id}')">✓ Aplicar</button>
+    <button class="btn-del"   onclick="delLink('${l.id}')">✕ Excluir enlace</button>`;
+}
+
+// ── Helpers ──────────────────────────────────────────
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+function toggleSplitterFields() {
+  const v = document.getElementById('f-tspl')?.value;
+  if (!v) return;
+  document.getElementById('wrap-bal').style.display  = v === 'balanceado'    ? '' : 'none';
+  document.getElementById('wrap-desb').style.display = v === 'desbalanceado' ? '' : 'none';
+}
+
+// ── Seletor de cor ────────────────────────────────────
+function selectColor(hex) {
+  // Atualiza o campo hidden
+  const fCor = document.getElementById('f-cor');
+  if (fCor) fCor.value = hex;
+  // Atualiza destaque dos swatches
+  document.querySelectorAll('.color-swatch:not(.custom)').forEach(sw => {
+    sw.classList.toggle('active', sw.style.background === hex);
+  });
+  // Sincroniza o color input customizado
+  const custom = document.getElementById('f-cor-custom');
+  if (custom) custom.value = hex;
+}
+
+// ── Aplicar edições ───────────────────────────────────
+function applyNode(id) {
+  const n = nodes.find(x => x.id === id);
+  n.nome = document.getElementById('f-nome').value.trim() || n.nome;
+  n.x    = parseFloat(document.getElementById('f-px').value) || n.x;
+  n.y    = parseFloat(document.getElementById('f-py').value) || n.y;
+  const corVal = document.getElementById('f-cor')?.value;
+  if (corVal) n.cor = corVal;
+
+  if (n.tipo === 'OLT') {
+    n.padrao_pon           = document.getElementById('f-padrao').value;
+    n.potencia_tx_dbm      = parseFloat(document.getElementById('f-ptx').value);
+    n.sensibilidade_rx_dbm = parseFloat(document.getElementById('f-srx').value);
+  }
+  if (n.tipo === 'Splitter') {
+    const novoTipo  = document.getElementById('f-tspl').value;
+    const novaRazao = parseInt(document.getElementById('f-razao').value);
+    const novaRazaoD= document.getElementById('f-razao-d').value;
+    const manual    = document.getElementById('f-perda-spl').value;
+
+    // Calcula nova capacidade antes de aplicar
+    const novaCapacidade = novoTipo === 'desbalanceado' ? 2 : novaRazao;
+    const usadas = saidasUsadas(n.id);
+
+    if (usadas > novaCapacidade) {
+      toast(`Não é possível: ${usadas} enlace(s) de saída existentes excedem a capacidade ${novaCapacidade}. Remova enlace(s) primeiro.`);
+      return; // aborta sem aplicar
+    }
+
+    n.tipo_splitter       = novoTipo;
+    n.razao               = novaRazao;
+    n.razao_desbalanceada = novaRazaoD;
+    n.perda_insercao_db   = manual !== '' ? parseFloat(manual) : null;
+  }
+  if (n.tipo === 'CaixaEmenda') {
+    n.num_fusoes         = parseInt(document.getElementById('f-fusoes').value);
+    n.perda_por_fusao_db = parseFloat(document.getElementById('f-pfusao').value);
+  }
+  if (n.tipo === 'ONU') {
+    n.sensibilidade_rx_dbm = parseFloat(document.getElementById('f-srx-onu').value);
+  }
+
+  render();
+  updateSide(); // atualiza os valores calculados no painel
+  toast('Propriedades aplicadas');
+}
+
+function applyLink(id) {
+  const l = links.find(x => x.id === id);
+  l.comprimento_m       = parseFloat(document.getElementById('l-km').value);
+  l.atenuacao_db_por_km  = parseFloat(document.getElementById('l-att').value);
+  l.num_conexoes         = parseInt(document.getElementById('l-nconn').value);
+  l.perda_por_conexao_db = parseFloat(document.getElementById('l-pconn').value);
+
+  render();
+  updateSide();
+  toast('Enlace atualizado');
+}
+
+// ── Excluir ───────────────────────────────────────────
+function delNode(id) {
+  nodes = nodes.filter(n => n.id !== id);
+  links = links.filter(l => l.id_origem !== id && l.id_destino !== id);
+  selId = null; selType = null;
+  render(); updateSide(); updateStatus();
+  toast('Nó excluído');
+}
+
+function delLink(id) {
+  links = links.filter(l => l.id !== id);
+  selId = null; selType = null;
+  render(); updateSide(); updateStatus();
+  toast('Enlace excluído');
+}
+
+// ── Toast ─────────────────────────────────────────────
+let _toastTimer;
+function toast(msg) {
+  let el = document.getElementById('toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'toast';
+    el.style.cssText = `position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(6px);
+      background:#1a1a18;color:#fff;padding:7px 16px;border-radius:20px;font-size:12px;
+      opacity:0;transition:opacity .2s,transform .2s;pointer-events:none;z-index:999`;
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.style.opacity = '1';
+  el.style.transform = 'translateX(-50%) translateY(0)';
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(() => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateX(-50%) translateY(6px)';
+  }, 2000);
+}
+
+// ═══════════════════════════════════════════════════════
+// Abas do painel direito
+// ═══════════════════════════════════════════════════════
+function switchTab(name) {
+  document.querySelectorAll('.tab-btn').forEach((b, i) =>
+    b.classList.toggle('active', ['props','results'][i] === name)
+  );
+  document.querySelectorAll('.tab-pane').forEach(p =>
+    p.classList.toggle('active', p.id === `tab-${name}`)
+  );
+}
+
+// ═══════════════════════════════════════════════════════
+// Cálculo do orçamento óptico — integração com a API
+// ═══════════════════════════════════════════════════════
+const API = 'http://localhost:8000';
+
+// Mapa { onu_id → status } para colorir nós no canvas
+let resultadoONUs = {};
+
+async function calcularOrcamento() {
+  // Muda para aba de resultados
+  switchTab('results');
+
+  // Estado de carregamento
+  const btnTop   = document.getElementById('btn-calcular');
+  const btnPanel = document.getElementById('btn-calc-panel');
+  btnTop.textContent   = '⏳ Calculando…';
+  btnTop.classList.add('loading');
+  btnPanel.textContent = '⏳ Calculando…';
+  btnPanel.classList.add('loading');
+
+  const payload = buildProjeto();
+
+  try {
+    const res  = await fetch(`${API}/calculo/orcamento`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body:    JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({ detail: 'Erro desconhecido' }));
+      showResultsError(err.detail || `Erro ${res.status}`);
+      return;
+    }
+
+    const data = await res.json();
+    showResults(data);
+
+  } catch (e) {
+    showResultsError(
+      'Não foi possível conectar à API.<br>' +
+      'Verifique se o backend está rodando em <b>localhost:8000</b>.'
+    );
+  } finally {
+    btnTop.textContent   = '▶ Calcular';
+    btnTop.classList.remove('loading');
+    btnPanel.textContent = '▶ Calcular orçamento';
+    btnPanel.classList.remove('loading');
+  }
+}
+
+function buildProjeto() {
+  return {
+    id:   'frontend-' + Date.now(),
+    nome: document.getElementById('projeto-nome').value || 'Sem nome',
+    parametros: {
+      atenuacao_fibra_db_por_km: 0.35,
+      perda_conector_db:  0.5,
+      perda_fusao_db:     0.1,
+      margem_sistema_db:  3.0,
+    },
+    nos:     nodes.map(n => ({ ...n, posicao: { x: n.x, y: n.y } })),
+    enlaces: links,
+  };
+}
+
+// ── Exibe resultados ──────────────────────────────────
+function showResults(data) {
+  const el = document.getElementById('results-content');
+
+  // Atualiza mapa de status para colorir canvas
+  resultadoONUs = {};
+  (data.caminhos || []).forEach(c => { resultadoONUs[c.onu_id] = c.status; });
+  render(); // redesenha com cores de resultado
+
+  if (!data.caminhos || data.caminhos.length === 0) {
+    el.innerHTML = '<div class="empty-hint">Nenhum caminho OLT→ONU encontrado. Verifique a topologia.</div>';
+    return;
+  }
+
+  let html = `
+    <div class="summary">
+      <div class="chip chip-ok">
+        <span class="num">${data.onus_ok}</span>OK
+      </div>
+      <div class="chip chip-warn">
+        <span class="num">${data.onus_margem_baixa}</span>Baixa
+      </div>
+      <div class="chip chip-err">
+        <span class="num">${data.onus_reprovadas}</span>Reprov.
+      </div>
+    </div>`;
+
+  data.caminhos.forEach((c, i) => {
+    const { badge, label } = statusBadge(c.status);
+    const mCls = c.margem_disponivel_db >= 0 ? 'rm-ok'
+               : c.margem_db >= 0           ? 'rm-warn' : 'rm-err';
+
+    const detalhes = c.detalhes.map(d =>
+      `<div class="detail-row">
+         <span>${esc(d.tipo)}: ${esc(d.descricao)}</span>
+         <span class="dv">${d.perda_db.toFixed(3)} dB</span>
+       </div>`
+    ).join('');
+
+    html += `
+      <div class="res-card">
+        <div class="res-head" onclick="toggleCard(${i})">
+          <span class="rh-name">${esc(c.onu_nome)}</span>
+          <span class="badge ${badge}">${label}</span>
+        </div>
+        <div class="res-body" id="rc-${i}">
+          <div class="res-metric">
+            <span class="rm-l">Potência TX</span>
+            <span class="rm-v">${c.potencia_tx_dbm.toFixed(1)} dBm</span>
+          </div>
+          <div class="res-metric">
+            <span class="rm-l">Perda total</span>
+            <span class="rm-v">${c.perda_total_db.toFixed(3)} dB</span>
+          </div>
+          <div class="res-metric">
+            <span class="rm-l">Potência RX</span>
+            <span class="rm-v ${mCls}">${c.potencia_rx_dbm.toFixed(3)} dBm</span>
+          </div>
+          <div class="res-metric">
+            <span class="rm-l">Sens. mín. ONU</span>
+            <span class="rm-v">${c.sensibilidade_rx_dbm.toFixed(1)} dBm</span>
+          </div>
+          <div class="res-metric" style="font-weight:600">
+            <span class="rm-l" style="color:var(--text)">Margem disponível</span>
+            <span class="rm-v ${mCls}">${c.margem_disponivel_db.toFixed(3)} dB</span>
+          </div>
+          <div class="detail-sep">Detalhamento de perdas</div>
+          ${detalhes}
+        </div>
+      </div>`;
+  });
+
+  el.innerHTML = html;
+}
+
+function showResultsError(msg) {
+  document.getElementById('results-content').innerHTML =
+    `<div class="api-error">${msg}</div>`;
+  // Limpa cores de resultado
+  resultadoONUs = {};
+  render();
+}
+
+function toggleCard(i) {
+  document.getElementById(`rc-${i}`).classList.toggle('open');
+}
+
+function statusBadge(status) {
+  if (status === 'OK')           return { badge: 'badge-ok',   label: 'OK' };
+  if (status === 'MARGEM_BAIXA') return { badge: 'badge-warn', label: 'Margem baixa' };
+  return                                { badge: 'badge-err',  label: 'Reprovado' };
+}
+
+// ═══════════════════════════════════════════════════════
+// Status bar
+// ═══════════════════════════════════════════════════════
+function updateStatus() {
+  document.getElementById('st-nos').textContent   = nodes.length;
+  document.getElementById('st-links').textContent = links.length;
+}
+</script>
+</body>
+</html>
