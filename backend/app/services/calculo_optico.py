@@ -42,16 +42,21 @@ class ResultadoCaminho:
     """Resultado completo do orçamento óptico de um caminho OLT → ONU."""
     onu_id: str
     onu_nome: str
-    potencia_tx_dbm: float          # Potência transmitida pela OLT
-    perda_total_db: float           # Soma de todas as perdas do caminho
-    potencia_rx_dbm: float          # Potência estimada na ONU
-    sensibilidade_rx_dbm: float     # Mínimo aceitável pela ONU
-    margem_db: float                # potencia_rx - sensibilidade_rx
-    margem_sistema_db: float        # Margem de segurança configurada
-    margem_disponivel_db: float     # margem_db - margem_sistema_db
-    status: str                     # "OK" | "MARGEM_BAIXA" | "REPROVADO"
+    potencia_tx_dbm: float
+    perda_total_db: float
+    potencia_rx_dbm: float
+    sensibilidade_rx_dbm: float
+    margem_db: float
+    margem_sistema_db: float
+    margem_disponivel_db: float
+    status: str
     detalhes: list[DetalhePerda] = field(default_factory=list)
-    caminho_ids: list[str] = field(default_factory=list)  # sequência de IDs de nós
+    caminho_ids: list[str] = field(default_factory=list)
+    # Potência óptica (dBm) nas pontas de cada enlace do caminho
+    # { enlace_id → {"inicio": dBm, "fim": dBm} }
+    # inicio = potência saindo do nó de origem (após perda do splitter/CEO)
+    # fim    = potência chegando no nó destino (após fibra + conexões)
+    potencia_por_enlace: dict = field(default_factory=dict)
     erro: Optional[str] = None
 
 
@@ -205,23 +210,34 @@ class CalculadoraOrcamentoOptico:
     ) -> ResultadoCaminho:
         detalhes: list[DetalhePerda] = []
         perda_total_db = 0.0
+        potencia_atual = self.olt.potencia_tx_dbm
+        potencia_por_enlace: dict[str, dict] = {}
 
         # --- Percorre cada enlace do caminho ---
         for enlace in enlaces:
             no_origem = self.nos[enlace.id_origem]
 
             # 1. Perdas do nó de origem (splitter ou caixa de emenda)
-            #    OLT não introduz perda de inserção neste modelo.
             if isinstance(no_origem, NoSplitter):
-                perda_spl = self._perda_splitter(no_origem)
+                if enlace.perda_splitter_db is not None:
+                    perda_spl = enlace.perda_splitter_db
+                    razao_d   = no_origem.razao_desbalanceada or '20/80'
+                    descricao = f"Splitter {razao_d} (porta: {perda_spl} dB)"
+                else:
+                    perda_spl = self._perda_splitter(no_origem)
+                    if no_origem.tipo_splitter == 'desbalanceado':
+                        descricao = f"Splitter {no_origem.razao_desbalanceada} (média)"
+                    else:
+                        descricao = f"Splitter 1x{no_origem.razao}"
                 detalhes.append(DetalhePerda(
                     elemento_id=no_origem.id,
                     elemento_nome=no_origem.nome,
                     tipo="Splitter",
-                    descricao=f"Splitter 1x{no_origem.razao}",
+                    descricao=descricao,
                     perda_db=perda_spl,
                 ))
                 perda_total_db += perda_spl
+                potencia_atual -= perda_spl
 
             elif isinstance(no_origem, NoCaixaEmenda):
                 perda_fusoes = self._perda_fusoes(no_origem)
@@ -234,24 +250,26 @@ class CalculadoraOrcamentoOptico:
                         perda_db=perda_fusoes,
                     ))
                     perda_total_db += perda_fusoes
+                    potencia_atual -= perda_fusoes
 
-            # 2. Perda da fibra no enlace
+            # Potência na ponta de início do enlace (após perdas do nó de origem)
+            p_inicio = round(potencia_atual, 3)
+
+            # 2. Perda da fibra
             perda_fibra = enlace.perda_fibra_db
             detalhes.append(DetalhePerda(
                 elemento_id=enlace.id,
                 elemento_nome=f"Enlace {enlace.id_origem}→{enlace.id_destino}",
                 tipo="Fibra",
-                descricao=(
-                    f"{enlace.comprimento_m} m × "
-                    f"{enlace.atenuacao_db_por_km} dB/km"
-                ),
+                descricao=f"{enlace.comprimento_m} m × {enlace.atenuacao_db_por_km} dB/km",
                 perda_db=perda_fibra,
             ))
             perda_total_db += perda_fibra
+            potencia_atual -= perda_fibra
 
             # 3. Perda das conexões (fusões ou conectores)
             if enlace.num_conexoes > 0:
-                perda_conn = enlace.perda_conexoes_db
+                perda_conn  = enlace.perda_conexoes_db
                 is_conector = enlace.tipo_conexao.value == 'conector'
                 tipo_label  = "Conector" if is_conector else "Fusão"
                 detalhes.append(DetalhePerda(
@@ -265,10 +283,17 @@ class CalculadoraOrcamentoOptico:
                     perda_db=perda_conn,
                 ))
                 perda_total_db += perda_conn
+                potencia_atual -= perda_conn
 
-        # --- Calcula potência recebida e margem ---
-        potencia_rx = self.olt.potencia_tx_dbm - perda_total_db
-        margem = potencia_rx - onu.sensibilidade_rx_dbm
+            # Registra potência nas pontas deste enlace
+            potencia_por_enlace[enlace.id] = {
+                "inicio": p_inicio,
+                "fim":    round(potencia_atual, 3),
+            }
+
+        # --- Calcula margem ---
+        potencia_rx   = potencia_atual  # já rastreada ao longo do caminho
+        margem        = potencia_rx - onu.sensibilidade_rx_dbm
         margem_disponivel = margem - self.params.margem_sistema_db
 
         # --- Classificação ---
@@ -284,7 +309,7 @@ class CalculadoraOrcamentoOptico:
             onu_nome=onu.nome,
             potencia_tx_dbm=self.olt.potencia_tx_dbm,
             perda_total_db=round(perda_total_db, 3),
-            potencia_rx_dbm=round(potencia_rx, 3),
+            potencia_rx_dbm=round(potencia_atual, 3),
             sensibilidade_rx_dbm=onu.sensibilidade_rx_dbm,
             margem_db=round(margem, 3),
             margem_sistema_db=self.params.margem_sistema_db,
@@ -292,6 +317,7 @@ class CalculadoraOrcamentoOptico:
             status=status,
             detalhes=detalhes,
             caminho_ids=caminho_ids,
+            potencia_por_enlace=potencia_por_enlace,
         )
 
     # ------------------------------------------------------------------
@@ -300,20 +326,12 @@ class CalculadoraOrcamentoOptico:
 
     def _perda_splitter(self, splitter: NoSplitter) -> float:
         """
-        Retorna a perda de inserção do splitter em dB.
+        Retorna a perda de inserção do splitter balanceado em dB.
 
-        Balanceado:
-          Usa perda_insercao_db (se informada) ou a tabela PERDA_SPLITTER_BALANCEADO_DB.
-
-        Desbalanceado:
-          Requer que o enlace de saída esteja associado à porta correta.
-          Como o grafo não distingue porta principal de derivação,
-          retorna a MÉDIA das duas portas — o projetista deve usar
-          perda_principal_db / perda_derivacao_db no enlace quando precisar
-          de precisão por ramal.
-
-        Nota: para cálculo individualizado por ramal desbalanceado, o frontend
-        deve registrar qual porta cada enlace usa; esta função é o fallback.
+        Para splitters desbalanceados, a perda é determinada pela porta
+        específica e deve ser enviada pelo frontend em enlace.perda_splitter_db.
+        Este método é chamado apenas como fallback quando perda_splitter_db
+        está ausente no enlace.
         """
         from app.models.constants import PERDA_SPLITTER_BALANCEADO_DB
 
@@ -322,8 +340,9 @@ class CalculadoraOrcamentoOptico:
             dados = SPLITTERS_DESBALANCEADOS.get(razao)
             if dados is None:
                 raise ValueError(f"Razão desbalanceada '{razao}' não encontrada na tabela.")
-            # Retorna a média — cálculo individualizado por porta é feito no frontend
-            return (dados.perda_principal_db + dados.perda_derivacao_db) / 2
+            # Fallback conservador: usa a porta de maior perda (derivação)
+            # O valor correto por porta deve vir em enlace.perda_splitter_db
+            return dados.perda_derivacao_db
 
         # Balanceado
         if splitter.perda_insercao_db is not None:

@@ -213,6 +213,12 @@ class Enlace(BaseModel):
     perda_por_conector_db: Optional[float] = Field(None, exclude=True)
 
     porta_origem_rel_y: Optional[float] = Field(None, description="Y relativo da porta de saída (uso do frontend)")
+    perda_splitter_db: Optional[float] = Field(
+        None,
+        ge=0.0, le=25.0,
+        description="Perda de inserção do splitter desbalanceado para esta porta específica (dB). "
+                    "Quando presente, sobrescreve a tabela padrão no cálculo."
+    )
     observacao: Optional[str] = Field(None, max_length=500)
 
     def model_post_init(self, __context):

@@ -119,9 +119,9 @@
     font-family: var(--mono); font-size: 10px;
     fill: var(--muted); pointer-events: none;
   }
-  #link-preview {
-    stroke: #1a1a18; stroke-width: 1.5;
-    stroke-dasharray: 5 3; pointer-events: none; opacity: .6;
+  .link-pwr {
+    font-family: var(--mono); font-size: 9px;
+    pointer-events: none; font-weight: 600;
   }
 
   /* ── Painel direito — formulário ────────────────────────────── */
@@ -388,17 +388,16 @@
     </div>
   </div>
 
-   <!-- Canvas SVG -->
-   <div id="canvas-wrap">
-     <svg id="svg">
-       <defs></defs>
-       <g id="g-grid"></g>
-       <g id="g-links">
-         <line id="link-preview" style="display:none"/>
-       </g>
-       <g id="g-nodes"></g>
-     </svg>
-   </div>
+  <!-- Canvas SVG -->
+  <div id="canvas-wrap">
+    <svg id="svg">
+      <defs></defs>
+      <g id="g-grid"></g>
+      <g id="g-links"></g>
+      <g id="g-nodes"></g>
+      <line id="link-preview" style="display:none"/>
+    </svg>
+  </div>
 
   <!-- Painel direito -->
   <div id="side">
@@ -442,10 +441,63 @@ const STYLE = {
     return `${rotulo}  (${usadas}/${cap})`;
   }},
   CaixaEmenda: { fill:'#fff3e0', stroke:'#e09000', icon:'⊟',  sub: n => `${n.num_fusoes} fusões` },
-  ONU:         { fill:'#e6f4ea', stroke:'#2d7a4f', icon:'▣',  sub: n => `${n.sensibilidade_rx_dbm} dBm` },
+  ONU:         { fill:'#e6f4ea', stroke:'#2d7a4f', icon:'▣',  sub: n => {
+    const rx = potenciaRxONUs[n.id];
+    return rx !== undefined ? `${rx.toFixed(2)} dBm RX` : '0 dBm RX';
+  }},
 };
 
 const NW = 114, NH = 46; // largura e altura do nó
+
+// Tabela de perdas para splitters desbalanceados (Furukawa ET02372 v4)
+// perda_derivacao = porta superior (menor %, maior perda)
+// perda_principal = porta inferior (maior %, menor perda)
+const SPLITTERS_DESB = {
+  '01/99': { perda_derivacao: 21.60, perda_principal:  0.09 },
+  '02/98': { perda_derivacao: 18.70, perda_principal:  0.16 },
+  '05/95': { perda_derivacao: 14.60, perda_principal:  0.36 },
+  '10/90': { perda_derivacao: 11.00, perda_principal:  0.55 },
+  '15/85': { perda_derivacao:  9.60, perda_principal:  1.00 },
+  '20/80': { perda_derivacao:  7.90, perda_principal:  1.40 },
+  '25/75': { perda_derivacao:  6.95, perda_principal:  1.70 },
+  '30/70': { perda_derivacao:  6.00, perda_principal:  1.90 },
+  '35/65': { perda_derivacao:  5.35, perda_principal:  2.30 },
+  '40/60': { perda_derivacao:  4.70, perda_principal:  2.70 },
+  '45/55': { perda_derivacao:  4.15, perda_principal:  3.15 },
+  '50/50': { perda_derivacao:  3.50, perda_principal:  3.50 },
+};
+
+/**
+ * Retorna a perda de inserção do splitter para um dado enlace.
+ * Para desbalanceados, usa porta_origem_rel_y para identificar
+ * se é a porta superior (derivação) ou inferior (passagem).
+ * Para balanceados, retorna null (o backend usa a tabela padrão).
+ */
+function perdaSplitterParaEnlace(splitter, portaRelY) {
+  if (splitter.tipo_splitter !== 'desbalanceado') return null;
+  const razao = splitter.razao_desbalanceada || '20/80';
+  const dados = SPLITTERS_DESB[razao];
+  if (!dados) return null;
+
+  // Porta superior (índice 0) = derivação (menor %, maior perda)
+  // Porta inferior (índice 1) = passagem (maior %, menor perda)
+  const ys   = posCirculos(2, SH);
+  const ySup = ys[0]; // ex: 20
+  const yInf = ys[1]; // ex: 40
+
+  // Se portaRelY é null ou desconhecido, verifica qual porta está mais próxima
+  // Tolerância de 5px para absorver imprecisões de float
+  if (portaRelY === null || portaRelY === undefined) {
+    // Enlace criado antes de o splitter ser desbalanceado — assume porta superior
+    return dados.perda_derivacao;
+  }
+
+  const distSup = Math.abs(portaRelY - ySup);
+  const distInf = Math.abs(portaRelY - yInf);
+
+  // Usa a porta mais próxima
+  return distSup <= distInf ? dados.perda_derivacao : dados.perda_principal;
+}
 
 // Paleta de cores para agrupamento visual de nós
 const NODE_COLORS = [
@@ -491,7 +543,7 @@ const svg    = d3.select('#svg');
 const gGrid  = d3.select('#g-grid');
 const gLinks = d3.select('#g-links');
 const gNodes = d3.select('#g-nodes');
-const prevLine = d3.select('#link-preview');
+const prevLine = d3.select('#link-preview'); // mantido para evitar erros de referência
 
 const zoom = d3.zoom()
   .scaleExtent([0.15, 5])
@@ -634,12 +686,20 @@ function renderRegularNodes(data) {
     .attr('x', 36).attr('y', NH/2 + 8)
     .attr('dominant-baseline','middle')
     .attr('font-size', 10).attr('fill','#888');
-  // Porta única de saída
-  enter.append('circle').attr('class','port out-port')
+  // Porta de saída (OLT) — direita, clicável para criar enlace
+  enter.filter(d => d.tipo !== 'ONU')
+    .append('circle').attr('class','port out-port')
     .attr('cx', NW + 6).attr('cy', NH/2).attr('r', 5)
     .attr('fill','#fff').attr('stroke','#aaa').attr('stroke-width', 1.5)
     .on('mousedown', (e,d) => { e.stopPropagation(); startLink(d); })
     .on('click', e => e.stopPropagation());
+
+  // Porta de entrada (ONU) — esquerda, somente visual
+  enter.filter(d => d.tipo === 'ONU')
+    .append('circle').attr('class','in-port-onu')
+    .attr('cx', -6).attr('cy', NH/2).attr('r', 5)
+    .attr('fill','#fff').attr('stroke','#aaa').attr('stroke-width', 1.5)
+    .style('pointer-events','none');
 
   const all = enter.merge(sel);
   all.attr('transform', d => `translate(${d.x},${d.y})`);
@@ -673,7 +733,7 @@ function renderRegularNodes(data) {
 }
 
 // ── CEO — círculo ────────────────────────────────────
-const CR = 28; // raio do círculo CEO
+const CR = 38; // raio do círculo CEO (maior, proporcional aos retângulos)
 
 function renderCEONodes(data) {
   const sel = gNodes.selectAll('.node-ceo').data(data, d => d.id);
@@ -690,19 +750,25 @@ function renderCEONodes(data) {
 
   // Ícone centralizado
   enter.append('text').attr('class','icon-t')
-    .attr('x', CR).attr('y', CR - 5)
+    .attr('x', CR).attr('y', CR - 6)
     .attr('text-anchor','middle')
     .attr('dominant-baseline','middle')
-    .attr('font-size', 14);
+    .attr('font-size', 16);
 
   // Nome abaixo do ícone
   enter.append('text').attr('class','name-t')
-    .attr('x', CR).attr('y', CR + 9)
+    .attr('x', CR).attr('y', CR + 10)
     .attr('text-anchor','middle')
     .attr('dominant-baseline','middle')
     .attr('font-size', 10).attr('font-weight', 600);
 
-  // Porta de saída (direita do círculo)
+  // Porta de entrada (esquerda) — recebe o sinal
+  enter.append('circle').attr('class','in-port-ceo')
+    .attr('cx', -6).attr('cy', CR).attr('r', 5)
+    .attr('fill','#fff').attr('stroke','#aaa').attr('stroke-width', 1.5)
+    .style('pointer-events','none');
+
+  // Porta de saída (direita) — envia o sinal
   enter.append('circle').attr('class','port out-port')
     .attr('cx', CR * 2 + 6).attr('cy', CR).attr('r', 5)
     .attr('fill','#fff').attr('stroke','#aaa').attr('stroke-width', 1.5)
@@ -723,7 +789,7 @@ function renderCEONodes(data) {
     .attr('stroke', d => linkSrc?.id === d.id ? '#1a1a18' : '#aaa');
 
   all.select('.icon-t').text(d => STYLE[d.tipo].icon);
-  all.select('.name-t').text(d => d.nome.length > 7 ? d.nome.slice(0,6)+'…' : d.nome);
+  all.select('.name-t').text(d => d.nome.length > 9 ? d.nome.slice(0,8)+'…' : d.nome);
 
   sel.exit().remove();
 }
@@ -773,34 +839,30 @@ function renderSplitterNodes(data) {
   // Círculos de saída — recriados a cada render pois dependem da razão
   all.selectAll('.spl-port').remove();
 
-   all.each(function(d) {
-     const g     = d3.select(this);
-     const count = numCirculosSaida(d);
-     const ys    = posCirculos(count, SH);
-     const isGenerico = count === 1 && (d.razao >= 8 || d.tipo_splitter === 'desbalanceado' && false);
+  all.each(function(d) {
+    const g     = d3.select(this);
+    const count = numCirculosSaida(d);
+    const ys    = posCirculos(count, SH);
+    const isGenerico = count === 1 && (d.razao >= 8 || d.tipo_splitter === 'desbalanceado' && false);
 
-     // Para splitters desbalanceados, inverte a ordem:
-     // - Círculo superior = saída com MAIOR atenuação
-     // - Círculo inferior = saída com MENOR atenuação
-     const portasOrdenadas = d.tipo_splitter === 'desbalanceado' ? [...ys].reverse() : ys;
+    ys.forEach((cy, i) => {
+      // Escurece somente o círculo exato que foi clicado para iniciar o enlace
+      const isSrc = linkSrc?.id === d.id && linkSrcRelY === cy;
+      g.append('circle').attr('class','port spl-port')
+        .attr('cx', SW + 6).attr('cy', cy).attr('r', 5)
+        .attr('fill',   isSrc ? '#1a1a18' : '#fff')
+        .attr('stroke', isSrc ? '#1a1a18' : STYLE.Splitter.stroke)
+        .attr('stroke-width', 1.5)
+        .style('cursor','crosshair')
+        .on('mousedown', (e) => {
+          e.stopPropagation();
+          // cy é relativo ao nó; guardamos relativo para recalcular ao mover
+          startLink(d, d.y + cy, cy);
+        })
+        .on('click', e => e.stopPropagation());
 
-     portasOrdenadas.forEach((cy, i) => {
-       const isSrc = linkSrc?.id === d.id;
-       g.append('circle').attr('class','port spl-port')
-         .attr('cx', SW + 6).attr('cy', cy).attr('r', 5)
-         .attr('fill',   isSrc ? '#1a1a18' : '#fff')
-         .attr('stroke', isSrc ? '#1a1a18' : STYLE.Splitter.stroke)
-         .attr('stroke-width', 1.5)
-         .style('cursor','crosshair')
-         .on('mousedown', (e) => {
-           e.stopPropagation();
-           // cy é relativo ao nó; guardamos relativo para recalcular ao mover
-           startLink(d, d.y + cy, cy);
-         })
-         .on('click', e => e.stopPropagation());
-
-     });
-   });
+    });
+  });
 
   sel.exit().remove();
 }
@@ -842,7 +904,12 @@ function nodeCy(n) {
   return n.y + NH / 2;
 }
 // Ponto de entrada do enlace (lado esquerdo)
-function nodeRx(n) { return n.x; }
+// Ponto de entrada do enlace (lado esquerdo)
+function nodeRx(n) {
+  if (n.tipo === 'CaixaEmenda') return n.x - 6; // círculo de entrada CEO
+  if (n.tipo === 'ONU')         return n.x - 6; // círculo de entrada ONU
+  return n.x;
+}
 function nodeRy(n) {
   if (n.tipo === 'Splitter')    return n.y + SH / 2;
   if (n.tipo === 'CaixaEmenda') return n.y + CR;
@@ -863,6 +930,9 @@ function renderLinks() {
 
   // Rótulo central com o comprimento
   enter.append('text').attr('class','link-label');
+  // Rótulos de potência nas pontas
+  enter.append('text').attr('class','link-pwr pwr-inicio');
+  enter.append('text').attr('class','link-pwr pwr-fim');
 
   const all = enter.merge(data);
 
@@ -870,7 +940,6 @@ function renderLinks() {
     const src = nodes.find(n => n.id === d.id_origem);
     const dst = nodes.find(n => n.id === d.id_destino);
     if (!src || !dst) return;
-    // Y de saída: usa porta relativa ao nó se disponível, senão centro
     const y1 = d.porta_origem_rel_y !== undefined && d.porta_origem_rel_y !== null
       ? src.y + d.porta_origem_rel_y
       : nodeCy(src);
@@ -885,14 +954,46 @@ function renderLinks() {
     const dst = nodes.find(n => n.id === d.id_destino);
     if (!src || !dst) return;
     const y1 = d.porta_origem_rel_y !== undefined && d.porta_origem_rel_y !== null
-      ? src.y + d.porta_origem_rel_y
-      : nodeCy(src);
+      ? src.y + d.porta_origem_rel_y : nodeCy(src);
     const mx = (nodeCx(src) + nodeRx(dst)) / 2;
     const my = (y1 + nodeRy(dst)) / 2 - 8;
     d3.select(this)
       .attr('x', mx).attr('y', my)
       .attr('text-anchor', 'middle')
       .text(`${d.comprimento_m} m`);
+  });
+
+  // Potência na ponta de origem (saída do nó src)
+  all.select('.pwr-inicio').each(function(d) {
+    const src = nodes.find(n => n.id === d.id_origem);
+    const dst = nodes.find(n => n.id === d.id_destino);
+    if (!src || !dst) { d3.select(this).text(''); return; }
+    const pwr = potenciaPorEnlace[d.id];
+    if (!pwr) { d3.select(this).text(''); return; }
+    const y1 = d.porta_origem_rel_y !== undefined && d.porta_origem_rel_y !== null
+      ? src.y + d.porta_origem_rel_y : nodeCy(src);
+    // Posiciona perto da origem, levemente deslocado
+    d3.select(this)
+      .attr('x', nodeCx(src) + 6)
+      .attr('y', y1 - 6)
+      .attr('text-anchor', 'start')
+      .attr('fill', '#4a7cdc')
+      .text(`${pwr.inicio.toFixed(2)} dBm`);
+  });
+
+  // Potência na ponta de destino (chegada no nó dst)
+  all.select('.pwr-fim').each(function(d) {
+    const src = nodes.find(n => n.id === d.id_origem);
+    const dst = nodes.find(n => n.id === d.id_destino);
+    if (!src || !dst) { d3.select(this).text(''); return; }
+    const pwr = potenciaPorEnlace[d.id];
+    if (!pwr) { d3.select(this).text(''); return; }
+    d3.select(this)
+      .attr('x', nodeRx(dst) - 6)
+      .attr('y', nodeRy(dst) - 6)
+      .attr('text-anchor', 'end')
+      .attr('fill', '#2d7a4f')
+      .text(`${pwr.fim.toFixed(2)} dBm`);
   });
 
   data.exit().remove();
@@ -902,21 +1003,10 @@ function renderLinks() {
 // Criação de enlace
 // ═══════════════════════════════════════════════════════
 function startLink(node, absY, relY) {
-  linkSrc      = node;
-  linkSrcRelY  = relY !== undefined ? relY : null; // Y relativo ao nó
-  linkSrcY     = absY !== undefined ? absY : nodeCy(node);
-  render();
-
-  const rect = wrap.getBoundingClientRect();
-  svg.on('mousemove.link', e => {
-    const t  = d3.zoomTransform(svg.node());
-    const mx = t.invertX(e.clientX - rect.left);
-    const my = t.invertY(e.clientY - rect.top);
-    prevLine
-      .style('display', null)
-      .attr('x1', nodeCx(linkSrc)).attr('y1', linkSrcY)
-      .attr('x2', mx).attr('y2', my);
-  });
+  linkSrc     = node;
+  linkSrcRelY = relY !== undefined ? relY : null;
+  linkSrcY    = absY !== undefined ? absY : nodeCy(node);
+  render(); // destaca a porta clicada
 }
 
 // ── Tipo de enlace ────────────────────────────────────
@@ -957,15 +1047,22 @@ function finishLink(dst) {
   const dup = links.find(l => l.id_origem === linkSrc.id && l.id_destino === dst.id);
   if (!dup) {
     const eConector = tipoEnlace(linkSrc, dst) === 'conector';
+
+    // Perda de inserção do splitter desbalanceado por porta
+    let perdaSplitter = null;
+    if (linkSrc.tipo === 'Splitter' && linkSrc.tipo_splitter === 'desbalanceado') {
+      perdaSplitter = perdaSplitterParaEnlace(linkSrc, linkSrcRelY);
+    }
+
     links.push({
       id:                    uid('lnk'),
       id_origem:             linkSrc.id,
       id_destino:            dst.id,
       porta_origem_rel_y:    linkSrcRelY,
-      comprimento_m:        100,
+      // Perda do splitter desbalanceado para esta porta (null = balanceado, usa tabela no backend)
+      perda_splitter_db:     perdaSplitter,
+      comprimento_m:         100,
       atenuacao_db_por_km:   0.35,
-      // Conector (ONU → Splitter): 2 conectores SC/APC de 0,5 dB cada
-      // Fusão (demais):            2 fusões de 0,1 dB cada
       num_conexoes:          2,
       perda_por_conexao_db:  eConector ? 0.5 : 0.1,
       tipo_conexao:          eConector ? 'conector' : 'fusao',
@@ -979,7 +1076,6 @@ function cancelLink() {
   linkSrc     = null;
   linkSrcY    = null;
   linkSrcRelY = null;
-  prevLine.style('display', 'none');
   svg.on('mousemove.link', null);
   render();
 }
@@ -1185,6 +1281,22 @@ function buildLinkForm(l, sNome, dNome) {
       <span class="rv">${esc(dNome)}</span>
     </div>
 
+    ${(() => {
+      // Mostra qual porta do splitter desbalanceado este enlace usa
+      const src = nodes.find(n => n.id === l.id_origem);
+      if (src?.tipo === 'Splitter' && src?.tipo_splitter === 'desbalanceado' && l.perda_splitter_db !== null && l.perda_splitter_db !== undefined) {
+        const razao = src.razao_desbalanceada || '20/80';
+        const ys    = posCirculos(2, SH);
+        const eSup  = l.porta_origem_rel_y !== null && Math.abs(l.porta_origem_rel_y - ys[0]) < 1;
+        const porta = eSup ? `Superior (${razao.split('/')[0]}% — ${l.perda_splitter_db} dB)` : `Inferior (${razao.split('/')[1]}% — ${l.perda_splitter_db} dB)`;
+        return `<div class="read-row" style="margin-bottom:12px">
+          <span class="rl">Porta splitter</span>
+          <span class="rv" style="color:var(--accent);font-weight:600">${porta}</span>
+        </div>`;
+      }
+      return '';
+    })()}
+
     <div class="form-sep">Fibra óptica</div>
     <div class="field-2col">
       <div class="field">
@@ -1281,10 +1393,22 @@ function applyNode(id) {
       return; // aborta sem aplicar
     }
 
+    const countAntes = numCirculosSaida(n);  // antes de aplicar
     n.tipo_splitter       = novoTipo;
     n.razao               = novaRazao;
     n.razao_desbalanceada = novaRazaoD;
     n.perda_insercao_db   = manual !== '' ? parseFloat(manual) : null;
+    const countDepois = numCirculosSaida(n); // depois de aplicar
+
+    // Se o layout de portas mudou (ex: 1x8→1x4: 1 círculo→4 círculos),
+    // move todos os enlaces existentes para o círculo superior (porta 0)
+    if (countAntes !== countDepois) {
+      const novasYs = posCirculos(countDepois, SH);
+      const yTopo   = novasYs[0]; // círculo superior
+      links
+        .filter(l => l.id_origem === n.id)
+        .forEach(l => { l.porta_origem_rel_y = yTopo; });
+    }
   }
   if (n.tipo === 'CaixaEmenda') {
     n.num_fusoes         = parseInt(document.getElementById('f-fusoes').value);
@@ -1367,13 +1491,16 @@ function switchTab(name) {
 const API = 'http://localhost:8000';
 
 // Mapa { onu_id → status } para colorir nós no canvas
-let resultadoONUs = {};
+let resultadoONUs   = {};
+// Mapa { onu_id → potencia_rx_dbm } para exibir no nó ONU
+let potenciaRxONUs  = {};
+// Mapa { enlace_id → {inicio, fim} } com potência nas pontas de cada enlace
+// Para um enlace A→B: inicio = potência saindo de A, fim = potência chegando em B
+let potenciaPorEnlace = {};
 
 async function calcularOrcamento() {
-  // Muda para aba de resultados
   switchTab('results');
 
-  // Estado de carregamento
   const btnTop   = document.getElementById('btn-calcular');
   const btnPanel = document.getElementById('btn-calc-panel');
   btnTop.textContent   = '⏳ Calculando…';
@@ -1384,10 +1511,26 @@ async function calcularOrcamento() {
   const payload = buildProjeto();
 
   try {
-    const res  = await fetch(`${API}/calculo/orcamento`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
+    // 1. Salva/sobrescreve o projeto no backend antes de calcular
+    await fetch(`${API}/projetos/${payload.id}`, {
+      method:  'PUT',
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
       body:    JSON.stringify(payload),
+    }).catch(() => null); // silencia erro de PUT (projeto pode não existir ainda)
+
+    // Se não existe, cria
+    await fetch(`${API}/projetos`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+      body:    JSON.stringify(payload),
+    }).catch(() => null);
+
+    // 2. Calcula com o payload atual (inline — não depende do arquivo salvo)
+    const res = await fetch(`${API}/calculo/orcamento`, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+      body:    JSON.stringify(payload),
+      cache:   'no-store',
     });
 
     if (!res.ok) {
@@ -1412,9 +1555,29 @@ async function calcularOrcamento() {
   }
 }
 
+// ID fixo para o projeto da sessão atual
+let projetoId = 'projeto-' + Math.random().toString(36).slice(2, 10);
+
 function buildProjeto() {
+  // Recalcula perda_splitter_db para cada enlace com base no estado atual dos nós.
+  // Isso garante que alterações de razão/tipo do splitter após a criação do enlace
+  // sejam refletidas corretamente no cálculo.
+  const enderecosAtualizados = links.map(l => {
+    const src = nodes.find(n => n.id === l.id_origem);
+    let perda_splitter_db = l.perda_splitter_db ?? null;
+
+    if (src?.tipo === 'Splitter' && src?.tipo_splitter === 'desbalanceado') {
+      perda_splitter_db = perdaSplitterParaEnlace(src, l.porta_origem_rel_y);
+    } else {
+      // Balanceado ou não-splitter: não usa perda_splitter_db
+      perda_splitter_db = null;
+    }
+
+    return { ...l, perda_splitter_db };
+  });
+
   return {
-    id:   'frontend-' + Date.now(),
+    id:   projetoId,
     nome: document.getElementById('projeto-nome').value || 'Sem nome',
     parametros: {
       atenuacao_fibra_db_por_km: 0.35,
@@ -1423,7 +1586,7 @@ function buildProjeto() {
       margem_sistema_db:  3.0,
     },
     nos:     nodes.map(n => ({ ...n, posicao: { x: n.x, y: n.y } })),
-    enlaces: links,
+    enlaces: enderecosAtualizados,
   };
 }
 
@@ -1432,9 +1595,20 @@ function showResults(data) {
   const el = document.getElementById('results-content');
 
   // Atualiza mapa de status para colorir canvas
-  resultadoONUs = {};
-  (data.caminhos || []).forEach(c => { resultadoONUs[c.onu_id] = c.status; });
-  render(); // redesenha com cores de resultado
+  resultadoONUs     = {};
+  potenciaRxONUs    = {};
+  potenciaPorEnlace = {};
+
+  (data.caminhos || []).forEach(c => {
+    resultadoONUs[c.onu_id]  = c.status;
+    potenciaRxONUs[c.onu_id] = c.potencia_rx_dbm;
+
+    // potencia_por_enlace já vem indexado por enlace_id do backend
+    if (c.potencia_por_enlace) {
+      Object.assign(potenciaPorEnlace, c.potencia_por_enlace);
+    }
+  });
+  render();
 
   if (!data.caminhos || data.caminhos.length === 0) {
     el.innerHTML = '<div class="empty-hint">Nenhum caminho OLT→ONU encontrado. Verifique a topologia.</div>';
@@ -1506,7 +1680,9 @@ function showResultsError(msg) {
   document.getElementById('results-content').innerHTML =
     `<div class="api-error">${msg}</div>`;
   // Limpa cores de resultado
-  resultadoONUs = {};
+  resultadoONUs     = {};
+  potenciaRxONUs    = {};
+  potenciaPorEnlace = {};
   render();
 }
 

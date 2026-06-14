@@ -320,11 +320,36 @@ class TestSplittersDesbalanceados:
         resultado = CalculadoraOrcamentoOptico(projeto).calcular()
         caminho = resultado.caminhos[0]
 
-        # Perda splitter esperada: média (7,8 + 3,8) / 2 = 5,8 dB
+        # Sem perda_splitter_db no enlace → fallback conservador usa perda_derivacao (maior perda)
         perda_spl = next(d for d in caminho.detalhes if d.tipo == "Splitter")
         dados = SPLITTERS_DESBALANCEADOS["20/80"]
-        media_esperada = (dados.perda_derivacao_db + dados.perda_principal_db) / 2
-        assert abs(perda_spl.perda_db - media_esperada) < 0.001
+        assert abs(perda_spl.perda_db - dados.perda_derivacao_db) < 0.001
+
+    def test_calculo_com_porta_especifica_20_80(self):
+        """Quando perda_splitter_db vem no enlace, usa o valor exato da porta."""
+        from app.models.constants import SPLITTERS_DESBALANCEADOS
+        olt = NoOLT(id="olt", tipo=TipoNo.OLT, nome="OLT", potencia_tx_dbm=5.0, sensibilidade_rx_dbm=-28.0, padrao_pon=PadraPON.GPON)
+        from app.models.network import TipoSplitter
+        spl = NoSplitter(id="spl", tipo=TipoNo.SPLITTER, nome="Spl 20/80",
+                         tipo_splitter=TipoSplitter.DESBALANCEADO, razao_desbalanceada="20/80")
+        onu = NoONU(id="onu", tipo=TipoNo.ONU, nome="ONU-01", sensibilidade_rx_dbm=-27.0)
+        dados = SPLITTERS_DESBALANCEADOS["20/80"]
+
+        # Porta inferior (passagem, 80%, menor perda = 1,40 dB)
+        projeto = Projeto(
+            id="p_desb2", nome="Porta passagem 20/80",
+            nos=[olt.model_dump(), spl.model_dump(), onu.model_dump()],
+            enlaces=[
+                Enlace(id="e1", id_origem="olt", id_destino="spl", comprimento_m=1000, atenuacao_db_por_km=0.35, num_conexoes=2, perda_por_conexao_db=0.1, tipo_conexao="fusao"),
+                Enlace(id="e2", id_origem="spl", id_destino="onu", comprimento_m=500, atenuacao_db_por_km=0.35, num_conexoes=2, perda_por_conexao_db=0.1, tipo_conexao="fusao",
+                       perda_splitter_db=dados.perda_principal_db),
+            ],
+            parametros=ParametrosGlobais(margem_sistema_db=3.0),
+        )
+        resultado = CalculadoraOrcamentoOptico(projeto).calcular()
+        caminho = resultado.caminhos[0]
+        perda_spl = next(d for d in caminho.detalhes if d.tipo == "Splitter")
+        assert abs(perda_spl.perda_db - dados.perda_principal_db) < 0.001
 
     def test_splitters_balanceados_corrigidos(self):
         """Garante que os valores balanceados estão alinhados com a Tabela 4 do TCC."""
