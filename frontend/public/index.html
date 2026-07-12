@@ -161,7 +161,10 @@
     flex-shrink: 0;
   }
   .color-swatch:hover   { transform: scale(1.15); }
-  .color-swatch.active  { border-color: #1a1a18; }
+  .color-swatch.active  {
+    border-color: #1a1a18;
+    box-shadow: 0 0 0 1px #fff inset, 0 0 0 3px #1a1a18;
+  }
   .color-swatch.custom  {
     background: linear-gradient(135deg,#f00,#ff0,#0f0,#0ff,#00f,#f0f);
     position: relative; overflow: hidden;
@@ -170,6 +173,49 @@
     position: absolute; inset: 0; opacity: 0;
     cursor: pointer; width: 100%; height: 100%; border: none; padding: 0;
   }
+
+  /* ── Explorador de projetos ──────────────────────────── */
+  .fb-toolbar {
+    display: flex; gap: 4px; margin-bottom: 10px; flex-wrap: wrap;
+  }
+  .fb-btn {
+    height: 26px; padding: 0 9px; border: 1px solid var(--border);
+    background: var(--bg); border-radius: var(--radius);
+    font-size: 11px; cursor: pointer; color: var(--text);
+    transition: background .1s;
+  }
+  .fb-btn:hover { background: var(--surface); border-color: var(--accent); }
+  .fb-btn.primary { background: var(--accent); color:#fff; border-color:var(--accent); }
+  .fb-btn.primary:hover { opacity:.85; }
+  .fb-path {
+    font-size: 11px; color: var(--muted); margin-bottom: 8px;
+    word-break: break-all; font-family: var(--mono);
+    padding: 4px 6px; background: var(--bg);
+    border-radius: var(--radius); border: 1px solid var(--border);
+  }
+  .fb-path span { color: var(--accent); cursor: pointer; }
+  .fb-path span:hover { text-decoration: underline; }
+  .fb-item {
+    display: flex; align-items: center; gap: 7px;
+    padding: 5px 6px; border-radius: var(--radius);
+    font-size: 12px; cursor: pointer;
+    transition: background .1s;
+  }
+  .fb-item:hover { background: var(--bg); }
+  .fb-item .fb-icon { font-size: 14px; flex-shrink: 0; }
+  .fb-item .fb-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .fb-item .fb-actions { display: flex; gap: 3px; opacity: 0; transition: opacity .1s; }
+  .fb-item:hover .fb-actions { opacity: 1; }
+  .fb-act {
+    width: 20px; height: 20px; border: none; background: transparent;
+    cursor: pointer; border-radius: 3px; font-size: 11px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted); transition: background .1s, color .1s;
+  }
+  .fb-act:hover { background: var(--border); color: var(--text); }
+  .fb-act.del:hover { background: #fdecea; color: #c0392b; }
+  .fb-sep { height: 1px; background: var(--border); margin: 6px 0; }
+  .fb-empty { font-size: 11px; color: var(--muted); padding: 8px 6px; }
 
   /* Campos do formulário */
   .field { margin-bottom: 10px; }
@@ -318,6 +364,148 @@
     border: 1px solid #f5c6cb; border-radius: var(--radius);
     padding: 10px; margin-bottom: 10px; line-height: 1.5;
   }
+  /* ── Modal gerenciador ──────────────────────────────── */
+  #modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.35); z-index: 100;
+    align-items: center; justify-content: center;
+  }
+  #modal-overlay.open { display: flex; }
+  #modal {
+    background: var(--surface); border-radius: 8px;
+    width: 560px; max-width: 95vw; max-height: 80vh;
+    display: flex; flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0,0,0,.18); overflow: hidden;
+  }
+  #modal-header {
+    padding: 14px 16px; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 8px;
+  }
+  #modal-header h2 { font-size: 14px; font-weight: 700; flex: 1; }
+  #modal-close { background: none; border: none; font-size: 18px;
+    cursor: pointer; color: var(--muted); padding: 0 4px; }
+  #modal-body { flex: 1; overflow-y: auto; padding: 12px; }
+  #breadcrumb {
+    display: flex; align-items: center; gap: 4px;
+    font-size: 12px; margin-bottom: 10px; flex-wrap: wrap;
+  }
+  .bc-item { cursor: pointer; color: var(--accent);
+    text-decoration: underline; text-underline-offset: 2px; }
+  .bc-sep { color: var(--muted); }
+  #pasta-toolbar { display: flex; gap: 6px; margin-bottom: 10px; }
+  .pt-btn {
+    height: 28px; padding: 0 10px; border: 1px solid var(--border);
+    background: var(--bg); border-radius: var(--radius);
+    font-size: 12px; cursor: pointer; font-family: var(--sans);
+  }
+  .pt-btn:hover { background: var(--surface); border-color: var(--accent); }
+  .pt-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .pt-btn.primary:hover { opacity: .85; }
+  .tree-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 10px; border-radius: var(--radius); cursor: pointer;
+    font-size: 13px; border: 1px solid transparent; margin-bottom: 3px;
+  }
+  .tree-item:hover { background: var(--bg); }
+  .tree-icon { font-size: 15px; flex-shrink: 0; }
+  .tree-name { flex: 1; }
+  .tree-meta { font-size: 10px; color: var(--muted); font-family: var(--mono); }
+  .tree-actions { display: none; gap: 4px; }
+  .tree-item:hover .tree-actions { display: flex; }
+  .tree-action {
+    background: none; border: none; cursor: pointer;
+    color: var(--muted); font-size: 12px; padding: 1px 5px;
+    border-radius: 3px;
+  }
+  .tree-action:hover { background: var(--border); color: var(--text); }
+  .tree-action.del { color: #c0392b; }
+  .tree-empty { color: var(--muted); font-size: 12px; padding: 20px; text-align: center; }
+  #modal-footer {
+    padding: 10px 16px; border-top: 1px solid var(--border);
+    display: flex; gap: 8px; align-items: center;
+  }
+  #modal-nome-arq {
+    flex: 1; height: 30px; padding: 0 8px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    font-size: 13px; font-family: var(--sans);
+    background: var(--bg); color: var(--text); outline: none;
+  }
+  #modal-nome-arq:focus { border-color: var(--accent); }
+  #modal-mode-label { font-size: 12px; color: var(--muted); }
+
+  /* ── Painel lateral de projetos ──────────────────────── */
+  /* ── Painel de projetos (esquerda, fixo no layout) ── */
+  /* ── Abas do painel esquerdo ─────────────────────────── */
+  #left-tabs {
+    display: flex; border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .left-tab {
+    flex: 1; height: 36px; border: none; background: transparent;
+    font-size: 12px; font-family: var(--sans); cursor: pointer;
+    color: var(--muted); border-bottom: 2px solid transparent;
+    transition: color .12s, border-color .12s;
+  }
+  .left-tab.active { color: var(--text); border-bottom-color: var(--accent); font-weight: 600; }
+
+  /* ── Aba Projetos (dentro da paleta esquerda) ─────────── */
+  #left-projetos {
+    display: none; flex-direction: column; flex: 1; overflow: hidden;
+  }
+  #left-projetos.active { display: flex; }
+
+  .fp-breadcrumb {
+    padding: 6px 10px; font-size: 11px; font-family: var(--mono);
+    color: var(--muted); background: var(--bg);
+    border-bottom: 1px solid var(--border); flex-shrink: 0;
+    display: flex; align-items: center; flex-wrap: wrap; gap: 2px;
+  }
+  .fp-crumb { cursor: pointer; color: var(--accent); padding: 1px 3px; border-radius: 3px; }
+  .fp-crumb:hover { background: var(--border); }
+  .fp-crumb-sep { color: var(--border); }
+
+  .fp-toolbar {
+    display: flex; gap: 5px; padding: 7px 10px;
+    border-bottom: 1px solid var(--border); flex-shrink: 0;
+  }
+  .fp-btn {
+    flex: 1; height: 26px; border: 1px solid var(--border);
+    background: var(--bg); border-radius: var(--radius);
+    font-size: 11px; cursor: pointer; font-family: var(--sans);
+    color: var(--text); transition: background .1s, border-color .1s;
+  }
+  .fp-btn:hover { background: var(--surface); border-color: var(--accent); }
+  .fp-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .fp-btn.primary:hover { opacity: .85; }
+
+  .fp-list { flex: 1; overflow-y: auto; padding: 4px 6px; }
+
+  .fp-item {
+    display: flex; align-items: center; gap: 7px;
+    padding: 6px 8px; border-radius: var(--radius);
+    cursor: pointer; transition: background .1s;
+    border: 1px solid transparent; margin-bottom: 2px;
+  }
+  .fp-item:hover { background: var(--bg); border-color: var(--border); }
+  .fp-item-icon { font-size: 16px; flex-shrink: 0; }
+  .fp-item-name {
+    flex: 1; font-size: 12px; font-weight: 500;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .fp-item-acts { display: flex; gap: 2px; opacity: 0; transition: opacity .1s; }
+  .fp-item:hover .fp-item-acts { opacity: 1; }
+  .fp-act {
+    width: 22px; height: 22px; border: none; background: transparent;
+    cursor: pointer; border-radius: 3px; font-size: 12px;
+    display: flex; align-items: center; justify-content: center; color: var(--muted);
+  }
+  .fp-act:hover { background: var(--border); color: var(--text); }
+  .fp-act.del:hover { background: #fdecea; color: #c0392b; }
+  .fp-empty { text-align: center; color: var(--muted); font-size: 12px;
+              padding: 24px 12px; line-height: 1.7; }
+  .fp-section { font-size: 10px; font-weight: 600; letter-spacing: .07em;
+                text-transform: uppercase; color: var(--muted);
+                padding: 8px 6px 3px; }
+
   #statusbar {
     height: 26px; background: var(--surface); border-top: 1px solid var(--border);
     display: flex; align-items: center; padding: 0 14px;
@@ -334,56 +522,83 @@
   <div class="sep"></div>
   <input id="projeto-nome" type="text" value="Novo Projeto" spellcheck="false">
   <div style="flex:1"></div>
+  <button class="tb-btn" onclick="importarJSON()" title="Importar projeto JSON">↑ Importar</button>
+  <button class="tb-btn" onclick="exportarJSON()" title="Exportar projeto JSON">↓ JSON</button>
+  <button class="tb-btn" onclick="exportarPDF()" title="Exportar relatório PDF">↓ PDF</button>
+  <div class="sep"></div>
   <button class="tb-btn primary" id="btn-calcular" onclick="calcularOrcamento()">▶ Calcular</button>
 </div>
+<input type="file" id="file-input" accept=".json" style="display:none" onchange="lerArquivoJSON(event)">
 
 <!-- Workspace -->
 <div id="workspace">
 
-  <!-- Paleta -->
+  <!-- Paleta esquerda com abas -->
   <div id="palette">
-    <div class="section">
-      <h3>Elementos</h3>
-      <div class="palette-item" draggable="true" data-tipo="OLT">
-        <div class="node-icon icon-OLT">📡</div>
-        <div>
-          <div style="font-weight:600">OLT</div>
-          <div style="font-size:11px;color:var(--muted)">Optical Line Transmitter</div>
+    <!-- Abas -->
+    <div id="left-tabs">
+      <button class="left-tab active" id="lt-elementos" onclick="switchLeft('elementos')">Elementos</button>
+      <button class="left-tab"        id="lt-projetos"  onclick="switchLeft('projetos')">📁 Projetos</button>
+    </div>
+
+    <!-- Aba: Elementos -->
+    <div id="left-elementos" style="overflow-y:auto">
+      <div class="section">
+        <h3>Elementos</h3>
+        <div class="palette-item" draggable="true" data-tipo="OLT">
+          <div class="node-icon icon-OLT">📡</div>
+          <div>
+            <div style="font-weight:600">OLT</div>
+            <div style="font-size:11px;color:var(--muted)">Optical Line Transmitter</div>
+          </div>
+        </div>
+        <div class="palette-item" draggable="true" data-tipo="Splitter">
+          <div class="node-icon icon-Splitter">⑂</div>
+          <div>
+            <div style="font-weight:600">Splitter</div>
+            <div style="font-size:11px;color:var(--muted)">Divisor óptico passivo</div>
+          </div>
+        </div>
+        <div class="palette-item" draggable="true" data-tipo="CaixaEmenda">
+          <div class="node-icon icon-CaixaEmenda">⊟</div>
+          <div>
+            <div style="font-weight:600">Cx. Emenda</div>
+            <div style="font-size:11px;color:var(--muted)">CEO / caixa de emenda</div>
+          </div>
+        </div>
+        <div class="palette-item" draggable="true" data-tipo="ONU">
+          <div class="node-icon icon-ONU">▣</div>
+          <div>
+            <div style="font-weight:600">ONU</div>
+            <div style="font-size:11px;color:var(--muted)">Terminal do assinante</div>
+          </div>
         </div>
       </div>
-      <div class="palette-item" draggable="true" data-tipo="Splitter">
-        <div class="node-icon icon-Splitter">⑂</div>
-        <div>
-          <div style="font-weight:600">Splitter</div>
-          <div style="font-size:11px;color:var(--muted)">Divisor óptico passivo</div>
-        </div>
-      </div>
-      <div class="palette-item" draggable="true" data-tipo="CaixaEmenda">
-        <div class="node-icon icon-CaixaEmenda">⊟</div>
-        <div>
-          <div style="font-weight:600">Cx. Emenda</div>
-          <div style="font-size:11px;color:var(--muted)">CEO / caixa de emenda</div>
-        </div>
-      </div>
-      <div class="palette-item" draggable="true" data-tipo="ONU">
-        <div class="node-icon icon-ONU">▣</div>
-        <div>
-          <div style="font-weight:600">ONU</div>
-          <div style="font-size:11px;color:var(--muted)">Terminal do assinante</div>
+      <div class="section">
+        <h3>Como usar</h3>
+        <div class="hint">
+          <b>Adicionar:</b> arraste para o canvas<br>
+          <b>Conectar:</b> clique na porta ● do nó<br>
+          <b>Mover:</b> arraste o nó<br>
+          <b>Selecionar:</b> clique no nó ou enlace<br>
+          <b>Cancelar:</b> clique no fundo<br>
+          <b>Pan:</b> arraste o fundo<br>
+          <b>Zoom:</b> scroll do mouse
         </div>
       </div>
     </div>
 
-    <div class="section">
-      <h3>Como usar</h3>
-      <div class="hint">
-        <b>Adicionar:</b> arraste para o canvas<br>
-        <b>Conectar:</b> clique na porta ● do nó<br>
-        <b>Mover:</b> arraste o nó<br>
-        <b>Selecionar:</b> clique no nó ou enlace<br>
-        <b>Cancelar:</b> clique no fundo<br>
-        <b>Pan:</b> arraste o fundo<br>
-        <b>Zoom:</b> scroll do mouse
+    <!-- Aba: Projetos -->
+    <div id="left-projetos">
+      <div class="fp-breadcrumb" id="fp-breadcrumb">
+        <span class="fp-crumb" onclick="carregarArvore('')">⌂ raiz</span>
+      </div>
+      <div class="fp-toolbar">
+        <button class="fp-btn" onclick="fbNovaPasta()">+ Pasta</button>
+        <button class="fp-btn primary" onclick="fbSalvarProjeto()">↓ Salvar</button>
+      </div>
+      <div class="fp-list" id="fp-list">
+        <div class="fp-empty">Clique na aba<br>para navegar</div>
       </div>
     </div>
   </div>
@@ -432,6 +647,11 @@
 // ═══════════════════════════════════════════════════════
 // Estilos por tipo de nó
 // ═══════════════════════════════════════════════════════
+// ── Mapas de resultado (declarados antes de STYLE para evitar TDZ) ──
+let resultadoONUs   = {};  // { onu_id → status }
+let potenciaRxONUs  = {};  // { onu_id → potencia_rx_dbm }
+let potenciaPorEnlace = {}; // { enlace_id → {inicio, fim} }
+
 const STYLE = {
   OLT:         { fill:'#e8f0fe', stroke:'#4a7cdc', icon:'📡', sub: n => `${n.potencia_tx_dbm} dBm TX` },
   Splitter:    { fill:'#fce8e6', stroke:'#d95a4a', icon:'⑂',  sub: n => {
@@ -615,6 +835,7 @@ function addNode(tipo, x, y) {
   nodes.push({ id, tipo, nome: id, x, y, ...defaultParams(tipo) });
   render();
   updateStatus();
+  calcularAuto();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1070,6 +1291,7 @@ function finishLink(dst) {
   }
   cancelLink();
   updateStatus();
+  calcularAuto();
 }
 
 function cancelLink() {
@@ -1136,6 +1358,7 @@ function buildNodeForm(n) {
         ${NODE_COLORS.map(c => `
           <div class="color-swatch ${n.cor === c ? 'active' : ''}"
                style="background:${c}"
+               data-color="${c}"
                onclick="selectColor('${c}')"
                title="${c}">
           </div>`).join('')}
@@ -1352,14 +1575,15 @@ function toggleSplitterFields() {
 
 // ── Seletor de cor ────────────────────────────────────
 function selectColor(hex) {
-  // Atualiza o campo hidden
   const fCor = document.getElementById('f-cor');
   if (fCor) fCor.value = hex;
-  // Atualiza destaque dos swatches
+
+  // Compara pelo atributo data-color em vez de sw.style.background
+  // (o browser normaliza inline styles para rgb(), quebrando a comparação com hex)
   document.querySelectorAll('.color-swatch:not(.custom)').forEach(sw => {
-    sw.classList.toggle('active', sw.style.background === hex);
+    sw.classList.toggle('active', sw.dataset.color === hex);
   });
-  // Sincroniza o color input customizado
+
   const custom = document.getElementById('f-cor-custom');
   if (custom) custom.value = hex;
 }
@@ -1419,7 +1643,8 @@ function applyNode(id) {
   }
 
   render();
-  updateSide(); // atualiza os valores calculados no painel
+  updateSide();
+  calcularAuto();
   toast('Propriedades aplicadas');
 }
 
@@ -1432,6 +1657,7 @@ function applyLink(id) {
 
   render();
   updateSide();
+  calcularAuto();
   toast('Enlace atualizado');
 }
 
@@ -1441,6 +1667,7 @@ function delNode(id) {
   links = links.filter(l => l.id_origem !== id && l.id_destino !== id);
   selId = null; selType = null;
   render(); updateSide(); updateStatus();
+  calcularAuto();
   toast('Nó excluído');
 }
 
@@ -1448,6 +1675,7 @@ function delLink(id) {
   links = links.filter(l => l.id !== id);
   selId = null; selType = null;
   render(); updateSide(); updateStatus();
+  calcularAuto();
   toast('Enlace excluído');
 }
 
@@ -1490,42 +1718,33 @@ function switchTab(name) {
 // ═══════════════════════════════════════════════════════
 const API = 'http://localhost:8000';
 
-// Mapa { onu_id → status } para colorir nós no canvas
-let resultadoONUs   = {};
-// Mapa { onu_id → potencia_rx_dbm } para exibir no nó ONU
-let potenciaRxONUs  = {};
-// Mapa { enlace_id → {inicio, fim} } com potência nas pontas de cada enlace
-// Para um enlace A→B: inicio = potência saindo de A, fim = potência chegando em B
-let potenciaPorEnlace = {};
-
-async function calcularOrcamento() {
-  switchTab('results');
+async function calcularOrcamento(silencioso = false) {
+  if (!silencioso) switchTab('results');
 
   const btnTop   = document.getElementById('btn-calcular');
   const btnPanel = document.getElementById('btn-calc-panel');
-  btnTop.textContent   = '⏳ Calculando…';
-  btnTop.classList.add('loading');
-  btnPanel.textContent = '⏳ Calculando…';
-  btnPanel.classList.add('loading');
+
+  if (!silencioso) {
+    btnTop.textContent   = '⏳ Calculando…';
+    btnTop.classList.add('loading');
+    btnPanel.textContent = '⏳ Calculando…';
+    btnPanel.classList.add('loading');
+  } else {
+    // Indicador sutil no botão sem bloquear a UI
+    btnTop.textContent = '⟳ Calculando…';
+  }
 
   const payload = buildProjeto();
 
   try {
-    // 1. Salva/sobrescreve o projeto no backend antes de calcular
-    await fetch(`${API}/projetos/${payload.id}`, {
-      method:  'PUT',
+    // Salva projeto em background (silencia erros — foco é o cálculo)
+    fetch(`${API}/projetos/${payload.id}`, {
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-      body:    JSON.stringify(payload),
-    }).catch(() => null); // silencia erro de PUT (projeto pode não existir ainda)
-
-    // Se não existe, cria
-    await fetch(`${API}/projetos`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
-      body:    JSON.stringify(payload),
+      body: JSON.stringify(payload),
     }).catch(() => null);
 
-    // 2. Calcula com o payload atual (inline — não depende do arquivo salvo)
+    // Calcula inline
     const res = await fetch(`${API}/calculo/orcamento`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
@@ -1534,25 +1753,530 @@ async function calcularOrcamento() {
     });
 
     if (!res.ok) {
-      const err = await res.json().catch(() => ({ detail: 'Erro desconhecido' }));
-      showResultsError(err.detail || `Erro ${res.status}`);
+      if (!silencioso) {
+        const err = await res.json().catch(() => ({ detail: 'Erro desconhecido' }));
+        showResultsError(err.detail || `Erro ${res.status}`);
+      }
       return;
     }
 
     const data = await res.json();
+    window._ultimoResultado = data; // cache para exportação PDF
     showResults(data);
 
-  } catch (e) {
-    showResultsError(
-      'Não foi possível conectar à API.<br>' +
-      'Verifique se o backend está rodando em <b>localhost:8000</b>.'
-    );
+  } catch {
+    if (!silencioso) {
+      showResultsError(
+        'Não foi possível conectar à API.<br>' +
+        'Verifique se o backend está rodando em <b>localhost:8000</b>.'
+      );
+    }
   } finally {
-    btnTop.textContent   = '▶ Calcular';
+    btnTop.textContent = '▶ Calcular';
     btnTop.classList.remove('loading');
-    btnPanel.textContent = '▶ Calcular orçamento';
-    btnPanel.classList.remove('loading');
+    if (!silencioso) {
+      btnPanel.textContent = '▶ Calcular orçamento';
+      btnPanel.classList.remove('loading');
+    }
   }
+}
+
+// ═══════════════════════════════════════════════════════
+// Painel lateral de projetos (esquerda)
+// ═══════════════════════════════════════════════════════
+
+let fbCaminhoAtual = '';
+
+// ── Troca de aba no painel esquerdo ──────────────────
+function switchLeft(aba) {
+  document.getElementById('lt-elementos').classList.toggle('active', aba === 'elementos');
+  document.getElementById('lt-projetos').classList.toggle('active',  aba === 'projetos');
+  document.getElementById('left-elementos').style.display = aba === 'elementos' ? '' : 'none';
+  document.getElementById('left-projetos').classList.toggle('active', aba === 'projetos');
+  if (aba === 'projetos') carregarArvore(fbCaminhoAtual);
+}
+
+// ── Explorador de projetos ────────────────────────────
+async function carregarArvore(caminho) {
+  fbCaminhoAtual = caminho;
+  const list = document.getElementById('fp-list');
+  list.innerHTML = '<div class="fp-empty">Carregando…</div>';
+  renderBreadcrumb(caminho);
+  try {
+    const url = caminho
+      ? `${API}/pastas/${encodeURIComponent(caminho)}/conteudo`
+      : `${API}/pastas`;
+    const res  = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) throw new Error();
+    renderListaProjetos(await res.json());
+  } catch {
+    list.innerHTML = '<div class="fp-empty" style="color:var(--err)">Sem conexão com o backend.</div>';
+  }
+}
+
+function renderBreadcrumb(caminho) {
+  const el     = document.getElementById('fp-breadcrumb');
+  const partes = caminho ? caminho.split('/') : [];
+  let html     = `<span class="fp-crumb" onclick="carregarArvore('')">⌂ raiz</span>`;
+  let acc      = '';
+  partes.forEach(p => {
+    acc   = acc ? acc + '/' + p : p;
+    const c = acc;
+    html += `<span class="fp-crumb-sep"> / </span>
+             <span class="fp-crumb" onclick="carregarArvore('${esc(c)}')">${esc(p)}</span>`;
+  });
+  el.innerHTML = html;
+}
+
+function renderListaProjetos(data) {
+  const list    = document.getElementById('fp-list');
+  const pastas  = data.pastas   || [];
+  const projetos = data.projetos || [];
+
+  if (!pastas.length && !projetos.length) {
+    list.innerHTML = '<div class="fp-empty">Pasta vazia.<br>Crie uma pasta ou salve um projeto.</div>';
+    return;
+  }
+
+  let html = '';
+  if (pastas.length) {
+    html += '<div class="fp-section">Pastas</div>';
+    pastas.forEach(p => {
+      html += `<div class="fp-item" onclick="carregarArvore('${esc(p.caminho)}')">
+        <span class="fp-item-icon">📁</span>
+        <span class="fp-item-name" title="${esc(p.nome)}">${esc(p.nome)}</span>
+        <div class="fp-item-acts">
+          <button class="fp-act del" title="Excluir"
+            onclick="event.stopPropagation();fbExcluirPasta('${esc(p.caminho)}')">✕</button>
+        </div>
+      </div>`;
+    });
+  }
+  if (projetos.length) {
+    html += '<div class="fp-section">Projetos</div>';
+    projetos.forEach(p => {
+      const n = esc(p.nome || p.nome_arquivo);
+      const pasta = esc(p.caminho_pasta);
+      const arq   = esc(p.nome_arquivo);
+      html += `<div class="fp-item" onclick="fbAbrirProjeto('${pasta}','${arq}')">
+        <span class="fp-item-icon">📄</span>
+        <span class="fp-item-name" title="${n}">${n}</span>
+        <div class="fp-item-acts">
+          <button class="fp-act del" title="Excluir"
+            onclick="event.stopPropagation();fbExcluirProjeto('${pasta}','${arq}')">✕</button>
+        </div>
+      </div>`;
+    });
+  }
+  list.innerHTML = html;
+}
+
+function parentPath(caminho) {
+  const p = caminho.split('/'); p.pop(); return p.join('/');
+}
+
+async function fbNovaPasta() {
+  const nome = prompt('Nome da nova pasta:');
+  if (!nome?.trim()) return;
+  const caminho = fbCaminhoAtual ? `${fbCaminhoAtual}/${nome.trim()}` : nome.trim();
+  try {
+    const res = await fetch(`${API}/pastas/nova/${encodeURIComponent(caminho)}`,
+      { method: 'POST', cache: 'no-store' });
+    if (res.ok) { carregarArvore(fbCaminhoAtual); toast(`Pasta "${nome}" criada`); }
+    else toast('Erro ao criar pasta');
+  } catch { toast('Backend inacessível'); }
+}
+
+async function fbSalvarProjeto() {
+  const nomeSugerido = (document.getElementById('projeto-nome').value || 'projeto')
+    .trim().replace(/[^\w\s\-]/g, '').replace(/\s+/g, '_');
+  const nome = prompt('Nome do arquivo (sem .json):', nomeSugerido);
+  if (!nome?.trim()) return;
+  const pasta = fbCaminhoAtual;
+  const url   = pasta
+    ? `${API}/pastas/${encodeURIComponent(pasta)}/projetos/${encodeURIComponent(nome.trim())}`
+    : `${API}/pastas/raiz/projetos/${encodeURIComponent(nome.trim())}`;
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+      body: JSON.stringify(buildProjeto()),
+    });
+    if (res.ok) { carregarArvore(fbCaminhoAtual); toast('Projeto salvo'); }
+    else { const e = await res.json().catch(()=>({})); toast(`Erro: ${e.detail||res.status}`); }
+  } catch { toast('Backend inacessível'); }
+}
+
+async function fbAbrirProjeto(pasta, nome) {
+  const url = pasta
+    ? `${API}/pastas/${encodeURIComponent(pasta)}/projetos/${encodeURIComponent(nome)}`
+    : `${API}/pastas/raiz/projetos/${encodeURIComponent(nome)}`;
+  try {
+    const res = await fetch(url, { cache: 'no-store' });
+    if (!res.ok) { toast('Projeto não encontrado'); return; }
+    const data = await res.json();
+    carregarDados(data);
+    switchLeft('elementos');
+    toast(`"${data.nome || nome}" aberto`);
+  } catch { toast('Erro ao carregar projeto'); }
+}
+
+async function fbExcluirProjeto(pasta, nome) {
+  if (!confirm(`Excluir "${nome}"?`)) return;
+  const url = pasta
+    ? `${API}/pastas/${encodeURIComponent(pasta)}/projetos/${encodeURIComponent(nome)}`
+    : `${API}/pastas/raiz/projetos/${encodeURIComponent(nome)}`;
+  try {
+    await fetch(url, { method: 'DELETE', cache: 'no-store' });
+    carregarArvore(fbCaminhoAtual);
+    toast('Projeto excluído');
+  } catch { toast('Erro ao excluir'); }
+}
+
+async function fbExcluirPasta(caminho) {
+  if (!confirm(`Excluir pasta "${caminho}" e todo seu conteúdo?`)) return;
+  try {
+    await fetch(`${API}/pastas/del/${encodeURIComponent(caminho)}`,
+      { method: 'DELETE', cache: 'no-store' });
+    carregarArvore(fbCaminhoAtual);
+    toast('Pasta excluída');
+  } catch { toast('Erro ao excluir pasta'); }
+}
+
+// ═══════════════════════════════════════════════════════
+// Exportar PDF
+// ═══════════════════════════════════════════════════════
+
+async function exportarPDF() {
+  const { jsPDF } = window.jspdf;
+  const nomeProjeto = document.getElementById('projeto-nome').value || 'PON Planner';
+  const dataHora    = new Date().toLocaleString('pt-BR');
+
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  const PW  = 210; // largura A4 mm
+  const PH  = 297; // altura A4 mm
+  const M   = 14;  // margem
+  const CW  = PW - M * 2; // largura útil
+
+  let y = M; // cursor vertical
+
+  // ── Funções auxiliares ──────────────────────────────
+  function cabecalho(pagina) {
+    // Tarja superior
+    doc.setFillColor(26, 26, 24);
+    doc.rect(0, 0, PW, 10, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.text('PON Planner — Relatório de Orçamento Óptico', M, 6.5);
+    doc.setFont('helvetica', 'normal');
+    doc.text(`Pág. ${pagina}`, PW - M, 6.5, { align: 'right' });
+    doc.setTextColor(26, 26, 24);
+  }
+
+  function rodape() {
+    doc.setFontSize(7.5);
+    doc.setTextColor(150);
+    doc.text(
+      `Gerado em ${dataHora} — IFC Campus Videira`,
+      PW / 2, PH - 6, { align: 'center' }
+    );
+    doc.setTextColor(26, 26, 24);
+  }
+
+  function novaLinha(delta = 5) {
+    y += delta;
+    if (y > PH - 20) {
+      rodape();
+      doc.addPage();
+      cabecalho(doc.internal.getNumberOfPages());
+      y = 18;
+    }
+  }
+
+  function titulo(txt, size = 13) {
+    doc.setFontSize(size);
+    doc.setFont('helvetica', 'bold');
+    doc.text(txt, M, y);
+    doc.setFont('helvetica', 'normal');
+  }
+
+  function linha(label, valor, yy, cinza = false) {
+    if (cinza) {
+      doc.setFillColor(247, 247, 245);
+      doc.rect(M, yy - 4, CW, 6, 'F');
+    }
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.text(label, M + 1, yy);
+    doc.setFont('helvetica', 'normal');
+    doc.text(String(valor), M + CW * 0.52, yy);
+  }
+
+  // ── Página 1: Cabeçalho + Diagrama ──────────────────
+  cabecalho(1);
+  y = 18;
+
+  // Título do projeto
+  titulo(nomeProjeto, 16);
+  novaLinha(8);
+
+  // Metadados
+  doc.setFontSize(9);
+  doc.setTextColor(100);
+  doc.text(`Data: ${dataHora}`, M, y);
+  doc.text(`Nós: ${nodes.length}   Enlaces: ${links.length}`, M + CW / 2, y);
+  doc.setTextColor(26, 26, 24);
+  novaLinha(8);
+
+  // Captura o SVG como imagem PNG via canvas
+  try {
+    const svgEl  = document.getElementById('svg');
+    const bbox   = svgEl.getBBox ? svgEl.getBBox() : svgEl.getBoundingClientRect();
+    const t      = d3.zoomTransform(svgEl);
+    const svgClone = svgEl.cloneNode(true);
+
+    // Aplica estilos inline para renderização off-screen
+    svgClone.setAttribute('width', '1200');
+    svgClone.setAttribute('height', '700');
+    svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    svgClone.style.background = '#f7f7f5';
+
+    // Serializa SVG → Blob → URL → Image → Canvas
+    const svgStr = new XMLSerializer().serializeToString(svgClone);
+    const blob   = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+    const url    = URL.createObjectURL(blob);
+
+    await new Promise((resolve, reject) => {
+      const img    = new Image();
+      img.onload   = () => {
+        const canvas = document.createElement('canvas');
+        canvas.width  = 1200;
+        canvas.height = 700;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#f7f7f5';
+        ctx.fillRect(0, 0, 1200, 700);
+        ctx.drawImage(img, 0, 0);
+        URL.revokeObjectURL(url);
+
+        const imgData = canvas.toDataURL('image/png');
+        const imgH    = (700 / 1200) * CW; // mantém proporção
+        doc.addImage(imgData, 'PNG', M, y, CW, imgH);
+        y += imgH + 6;
+        resolve();
+      };
+      img.onerror = reject;
+      img.src = url;
+    });
+  } catch (e) {
+    doc.setFontSize(9);
+    doc.setTextColor(150);
+    doc.text('[Diagrama não disponível]', M, y);
+    y += 8;
+    doc.setTextColor(26, 26, 24);
+  }
+
+  // ── Seção: Parâmetros globais ────────────────────────
+  novaLinha(4);
+  titulo('Parâmetros Globais', 11);
+  novaLinha(6);
+
+  const params = [
+    ['Atenuação da fibra (SMF)',   '0,35 dB/km'],
+    ['Perda por fusão',            '0,10 dB'],
+    ['Perda por conector (SC/APC)','0,50 dB'],
+    ['Margem de segurança',        '3,0 dB'],
+  ];
+  params.forEach((p, i) => { linha(p[0], p[1], y, i % 2 === 0); novaLinha(6); });
+
+  // ── Seção: Elementos da rede ────────────────────────
+  novaLinha(2);
+  titulo('Elementos da Rede', 11);
+  novaLinha(6);
+
+  // Cabeçalho da tabela
+  doc.setFillColor(26, 26, 24);
+  doc.rect(M, y - 4.5, CW, 6.5, 'F');
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(8.5);
+  doc.setFont('helvetica', 'bold');
+  ['Tipo', 'Nome', 'Parâmetro chave'].forEach((h, i) => {
+    doc.text(h, M + 1 + [0, CW * 0.25, CW * 0.6][i], y);
+  });
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(26, 26, 24);
+  novaLinha(6);
+
+  nodes.forEach((n, i) => {
+    const param =
+      n.tipo === 'OLT'         ? `TX: ${n.potencia_tx_dbm} dBm`             :
+      n.tipo === 'Splitter'    ? (n.tipo_splitter === 'desbalanceado'
+                                   ? n.razao_desbalanceada : `1x${n.razao}`) :
+      n.tipo === 'CaixaEmenda' ? `${n.num_fusoes} fusões`                    :
+      n.tipo === 'ONU'         ? `Sens: ${n.sensibilidade_rx_dbm} dBm`       : '';
+
+    if (i % 2 === 0) {
+      doc.setFillColor(247, 247, 245);
+      doc.rect(M, y - 4, CW, 6, 'F');
+    }
+    doc.setFontSize(8.5);
+    doc.text(n.tipo,  M + 1,            y);
+    doc.text(n.nome,  M + CW * 0.25,    y);
+    doc.text(param,   M + CW * 0.6,     y);
+    novaLinha(6);
+  });
+
+  // ── Seção: Resultados por ONU ────────────────────────
+  novaLinha(4);
+  titulo('Orçamento Óptico — Resultados por ONU', 11);
+  novaLinha(6);
+
+  // Verifica se há resultados calculados
+  const onus = nodes.filter(n => n.tipo === 'ONU');
+  if (onus.length === 0 || Object.keys(resultadoONUs).length === 0) {
+    doc.setFontSize(9);
+    doc.setTextColor(150);
+    doc.text('Nenhum resultado disponível. Execute o cálculo antes de exportar.', M, y);
+    novaLinha(8);
+    doc.setTextColor(26, 26, 24);
+  } else {
+    // Para cada caminho calculado, monta bloco de resultado
+    const caminhoCache = window._ultimoResultado?.caminhos || [];
+
+    caminhoCache.forEach((c, ci) => {
+      // Cor do status
+      const statusCor = c.status === 'OK' ? [45, 122, 79]
+                      : c.status === 'MARGEM_BAIXA' ? [184, 122, 0]
+                      : [192, 57, 43];
+
+      // Cabeçalho do bloco
+      doc.setFillColor(...statusCor);
+      doc.rect(M, y - 4.5, CW, 6.5, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      const statusLabel = c.status === 'OK' ? 'OK'
+                        : c.status === 'MARGEM_BAIXA' ? 'MARGEM BAIXA' : 'REPROVADO';
+      doc.text(`${c.onu_nome}`, M + 1, y);
+      doc.text(statusLabel, M + CW - 1, y, { align: 'right' });
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(26, 26, 24);
+      novaLinha(7);
+
+      // Métricas principais
+      const metricas = [
+        ['Potência TX (OLT)',    `${c.potencia_tx_dbm.toFixed(2)} dBm`],
+        ['Perda total do caminho', `${c.perda_total_db.toFixed(3)} dB`],
+        ['Potência RX estimada', `${c.potencia_rx_dbm.toFixed(3)} dBm`],
+        ['Sensibilidade mínima (ONU)', `${c.sensibilidade_rx_dbm.toFixed(1)} dBm`],
+        ['Margem disponível',    `${c.margem_disponivel_db.toFixed(3)} dB`],
+      ];
+      metricas.forEach((m, i) => { linha(m[0], m[1], y, i % 2 === 0); novaLinha(6); });
+
+      // Detalhamento de perdas
+      novaLinha(2);
+      doc.setFontSize(8);
+      doc.setTextColor(100);
+      doc.text('Detalhamento de perdas:', M + 1, y);
+      doc.setTextColor(26, 26, 24);
+      novaLinha(5);
+
+      c.detalhes.forEach((d, i) => {
+        if (i % 2 === 0) {
+          doc.setFillColor(247, 247, 245);
+          doc.rect(M, y - 4, CW, 5.5, 'F');
+        }
+        doc.setFontSize(8);
+        doc.text(`${d.tipo}: ${d.descricao}`, M + 2, y);
+        doc.text(`${d.perda_db.toFixed(3)} dB`, M + CW - 1, y, { align: 'right' });
+        novaLinha(5.5);
+      });
+
+      if (ci < caminhoCache.length - 1) novaLinha(6);
+    });
+  }
+
+  rodape();
+
+  // ── Download ─────────────────────────────────────────
+  const nomeArq = (nomeProjeto || 'pon_planner')
+    .replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_\-]/g, '');
+  doc.save(`${nomeArq}_orcamento.pdf`);
+  toast('PDF exportado com sucesso');
+}
+
+// ═══════════════════════════════════════════════════════
+// Exportar / Importar JSON
+// ═══════════════════════════════════════════════════════
+
+function exportarJSON() {
+  const projeto = buildProjeto();
+  const json    = JSON.stringify(projeto, null, 2);
+  const blob    = new Blob([json], { type: 'application/json' });
+  const url     = URL.createObjectURL(blob);
+
+  const nome = (document.getElementById('projeto-nome').value || 'projeto')
+    .trim()
+    .replace(/\s+/g, '_')
+    .replace(/[^a-zA-Z0-9_\-]/g, '');
+
+  const a = document.createElement('a');
+  a.href     = url;
+  a.download = `${nome || 'pon_planner'}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  toast('Projeto exportado com sucesso');
+}
+
+function importarJSON() {
+  // Reseta o input para permitir reimportar o mesmo arquivo
+  const fi = document.getElementById('file-input');
+  fi.value = '';
+  fi.click();
+}
+
+function lerArquivoJSON(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = e => {
+    try {
+      const data = JSON.parse(e.target.result);
+      carregarDados(data);
+      toast(`Projeto "${data.nome || file.name}" importado`);
+    } catch {
+      toast('Arquivo inválido — não é um JSON válido');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function carregarDados(data) {
+  // Restaura nome e ID do projeto
+  document.getElementById('projeto-nome').value = data.nome || 'Projeto Importado';
+  projetoId = data.id || ('projeto-' + Math.random().toString(36).slice(2, 10));
+
+  // Restaura nós — garante campos x/y a partir de posicao se necessário
+  nodes = (data.nos || []).map(n => ({
+    ...n,
+    x: n.x ?? n.posicao?.x ?? 100,
+    y: n.y ?? n.posicao?.y ?? 100,
+  }));
+
+  // Restaura enlaces
+  links = data.enlaces || [];
+
+  // Limpa resultados anteriores
+  resultadoONUs     = {};
+  potenciaRxONUs    = {};
+  potenciaPorEnlace = {};
+  selId   = null;
+  selType = null;
+
+  render();
+  updateSide();
+  updateStatus();
 }
 
 // ID fixo para o projeto da sessão atual
@@ -1703,6 +2427,22 @@ function updateStatus() {
   document.getElementById('st-nos').textContent   = nodes.length;
   document.getElementById('st-links').textContent = links.length;
 }
+
+// ═══════════════════════════════════════════════════════
+// Cálculo automático com debounce
+// ═══════════════════════════════════════════════════════
+let _autoCalcTimer = null;
+
+function calcularAuto() {
+  // Só dispara se houver ao menos uma OLT e uma ONU conectadas
+  const temOLT = nodes.some(n => n.tipo === 'OLT');
+  const temONU = nodes.some(n => n.tipo === 'ONU');
+  if (!temOLT || !temONU || links.length === 0) return;
+
+  clearTimeout(_autoCalcTimer);
+  _autoCalcTimer = setTimeout(() => calcularOrcamento(true), 800);
+}
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </body>
 </html>

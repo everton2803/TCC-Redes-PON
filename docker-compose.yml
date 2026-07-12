@@ -1,8 +1,11 @@
 services:
   backend:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/data:/app/data   # persiste os projetos JSON entre reinicializações
+      - ./backend/data:/app/data          # persiste projetos JSON
+      - ./frontend:/app/frontend          # frontend servido em /app
     restart: unless-stopped
