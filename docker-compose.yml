@@ -1,11 +1,30 @@
+version: "3.8"
+
 services:
   backend:
     build:
       context: .
       dockerfile: backend/Dockerfile
+    container_name: pon-planner
+    restart: unless-stopped
+    environment:
+      TZ: America/Sao_Paulo
     ports:
       - "8000:8000"
     volumes:
       - ./backend/data:/app/data          # persiste projetos JSON
       - ./frontend:/app/frontend          # frontend servido em /app
-    restart: unless-stopped
+    networks:
+      - default
+      - infra
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=infra"
+      - "traefik.http.routers.pon.rule=Host(`pon.iper.net.br`)"
+      - "traefik.http.routers.pon.entrypoints=websecure"
+      - "traefik.http.routers.pon.tls.certresolver=le"
+      - "traefik.http.services.pon.loadbalancer.server.port=8000"
+
+networks:
+  infra:
+    external: true

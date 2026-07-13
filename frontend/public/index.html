@@ -522,6 +522,7 @@
   <div class="sep"></div>
   <input id="projeto-nome" type="text" value="Novo Projeto" spellcheck="false">
   <div style="flex:1"></div>
+  <button class="tb-btn" onclick="novoProjeto()" title="Novo projeto">+ Novo</button>
   <button class="tb-btn" onclick="importarJSON()" title="Importar projeto JSON">↑ Importar</button>
   <button class="tb-btn" onclick="exportarJSON()" title="Exportar projeto JSON">↓ JSON</button>
   <button class="tb-btn" onclick="exportarPDF()" title="Exportar relatório PDF">↓ PDF</button>
@@ -1944,265 +1945,168 @@ async function fbExcluirPasta(caminho) {
 }
 
 // ═══════════════════════════════════════════════════════
+// Novo projeto
+// ═══════════════════════════════════════════════════════
+
+function novoProjeto() {
+  if (nodes.length > 0 || links.length > 0) {
+    if (!confirm('Criar novo projeto? O projeto atual não salvo será perdido.')) return;
+  }
+
+  // Limpa estado
+  nodes   = [];
+  links   = [];
+  selId   = null;
+  selType = null;
+  linkSrc = null;
+  linkSrcY    = null;
+  linkSrcRelY = null;
+
+  // Limpa resultados
+  resultadoONUs     = {};
+  potenciaRxONUs    = {};
+  potenciaPorEnlace = {};
+  window._ultimoResultado = null;
+
+  // Gera novo ID de sessão
+  projetoId = 'projeto-' + Math.random().toString(36).slice(2, 10);
+
+  // Reseta nome
+  document.getElementById('projeto-nome').value = 'Novo Projeto';
+
+  // Reseta painel de resultados
+  document.getElementById('results-content').innerHTML =
+    '<div class="empty-hint">Clique em "Calcular" para analisar o orçamento óptico da rede.</div>';
+
+  // Reseta zoom/pan para posição inicial
+  svg.call(zoom.transform, d3.zoomIdentity);
+
+  render();
+  updateSide();
+  updateStatus();
+  switchTab('props');
+  toast('Novo projeto criado');
+}
+
+// ═══════════════════════════════════════════════════════
 // Exportar PDF
 // ═══════════════════════════════════════════════════════
 
 async function exportarPDF() {
+  if (nodes.length === 0) {
+    toast('Canvas vazio — adicione elementos antes de exportar');
+    return;
+  }
+
   const { jsPDF } = window.jspdf;
   const nomeProjeto = document.getElementById('projeto-nome').value || 'PON Planner';
-  const dataHora    = new Date().toLocaleString('pt-BR');
 
-  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-  const PW  = 210; // largura A4 mm
-  const PH  = 297; // altura A4 mm
-  const M   = 14;  // margem
-  const CW  = PW - M * 2; // largura útil
+  // ── 1. Calcula bounding box de todo o conteúdo ──────
+  // Considera posições reais de nós + margens
+  const PAD = 60; // margem em volta do conteúdo (px canvas)
 
-  let y = M; // cursor vertical
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
 
-  // ── Funções auxiliares ──────────────────────────────
-  function cabecalho(pagina) {
-    // Tarja superior
-    doc.setFillColor(26, 26, 24);
-    doc.rect(0, 0, PW, 10, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'bold');
-    doc.text('PON Planner — Relatório de Orçamento Óptico', M, 6.5);
-    doc.setFont('helvetica', 'normal');
-    doc.text(`Pág. ${pagina}`, PW - M, 6.5, { align: 'right' });
-    doc.setTextColor(26, 26, 24);
-  }
-
-  function rodape() {
-    doc.setFontSize(7.5);
-    doc.setTextColor(150);
-    doc.text(
-      `Gerado em ${dataHora} — IFC Campus Videira`,
-      PW / 2, PH - 6, { align: 'center' }
-    );
-    doc.setTextColor(26, 26, 24);
-  }
-
-  function novaLinha(delta = 5) {
-    y += delta;
-    if (y > PH - 20) {
-      rodape();
-      doc.addPage();
-      cabecalho(doc.internal.getNumberOfPages());
-      y = 18;
-    }
-  }
-
-  function titulo(txt, size = 13) {
-    doc.setFontSize(size);
-    doc.setFont('helvetica', 'bold');
-    doc.text(txt, M, y);
-    doc.setFont('helvetica', 'normal');
-  }
-
-  function linha(label, valor, yy, cinza = false) {
-    if (cinza) {
-      doc.setFillColor(247, 247, 245);
-      doc.rect(M, yy - 4, CW, 6, 'F');
-    }
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'bold');
-    doc.text(label, M + 1, yy);
-    doc.setFont('helvetica', 'normal');
-    doc.text(String(valor), M + CW * 0.52, yy);
-  }
-
-  // ── Página 1: Cabeçalho + Diagrama ──────────────────
-  cabecalho(1);
-  y = 18;
-
-  // Título do projeto
-  titulo(nomeProjeto, 16);
-  novaLinha(8);
-
-  // Metadados
-  doc.setFontSize(9);
-  doc.setTextColor(100);
-  doc.text(`Data: ${dataHora}`, M, y);
-  doc.text(`Nós: ${nodes.length}   Enlaces: ${links.length}`, M + CW / 2, y);
-  doc.setTextColor(26, 26, 24);
-  novaLinha(8);
-
-  // Captura o SVG como imagem PNG via canvas
-  try {
-    const svgEl  = document.getElementById('svg');
-    const bbox   = svgEl.getBBox ? svgEl.getBBox() : svgEl.getBoundingClientRect();
-    const t      = d3.zoomTransform(svgEl);
-    const svgClone = svgEl.cloneNode(true);
-
-    // Aplica estilos inline para renderização off-screen
-    svgClone.setAttribute('width', '1200');
-    svgClone.setAttribute('height', '700');
-    svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-    svgClone.style.background = '#f7f7f5';
-
-    // Serializa SVG → Blob → URL → Image → Canvas
-    const svgStr = new XMLSerializer().serializeToString(svgClone);
-    const blob   = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
-    const url    = URL.createObjectURL(blob);
-
-    await new Promise((resolve, reject) => {
-      const img    = new Image();
-      img.onload   = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width  = 1200;
-        canvas.height = 700;
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = '#f7f7f5';
-        ctx.fillRect(0, 0, 1200, 700);
-        ctx.drawImage(img, 0, 0);
-        URL.revokeObjectURL(url);
-
-        const imgData = canvas.toDataURL('image/png');
-        const imgH    = (700 / 1200) * CW; // mantém proporção
-        doc.addImage(imgData, 'PNG', M, y, CW, imgH);
-        y += imgH + 6;
-        resolve();
-      };
-      img.onerror = reject;
-      img.src = url;
-    });
-  } catch (e) {
-    doc.setFontSize(9);
-    doc.setTextColor(150);
-    doc.text('[Diagrama não disponível]', M, y);
-    y += 8;
-    doc.setTextColor(26, 26, 24);
-  }
-
-  // ── Seção: Parâmetros globais ────────────────────────
-  novaLinha(4);
-  titulo('Parâmetros Globais', 11);
-  novaLinha(6);
-
-  const params = [
-    ['Atenuação da fibra (SMF)',   '0,35 dB/km'],
-    ['Perda por fusão',            '0,10 dB'],
-    ['Perda por conector (SC/APC)','0,50 dB'],
-    ['Margem de segurança',        '3,0 dB'],
-  ];
-  params.forEach((p, i) => { linha(p[0], p[1], y, i % 2 === 0); novaLinha(6); });
-
-  // ── Seção: Elementos da rede ────────────────────────
-  novaLinha(2);
-  titulo('Elementos da Rede', 11);
-  novaLinha(6);
-
-  // Cabeçalho da tabela
-  doc.setFillColor(26, 26, 24);
-  doc.rect(M, y - 4.5, CW, 6.5, 'F');
-  doc.setTextColor(255, 255, 255);
-  doc.setFontSize(8.5);
-  doc.setFont('helvetica', 'bold');
-  ['Tipo', 'Nome', 'Parâmetro chave'].forEach((h, i) => {
-    doc.text(h, M + 1 + [0, CW * 0.25, CW * 0.6][i], y);
-  });
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(26, 26, 24);
-  novaLinha(6);
-
-  nodes.forEach((n, i) => {
-    const param =
-      n.tipo === 'OLT'         ? `TX: ${n.potencia_tx_dbm} dBm`             :
-      n.tipo === 'Splitter'    ? (n.tipo_splitter === 'desbalanceado'
-                                   ? n.razao_desbalanceada : `1x${n.razao}`) :
-      n.tipo === 'CaixaEmenda' ? `${n.num_fusoes} fusões`                    :
-      n.tipo === 'ONU'         ? `Sens: ${n.sensibilidade_rx_dbm} dBm`       : '';
-
-    if (i % 2 === 0) {
-      doc.setFillColor(247, 247, 245);
-      doc.rect(M, y - 4, CW, 6, 'F');
-    }
-    doc.setFontSize(8.5);
-    doc.text(n.tipo,  M + 1,            y);
-    doc.text(n.nome,  M + CW * 0.25,    y);
-    doc.text(param,   M + CW * 0.6,     y);
-    novaLinha(6);
+  nodes.forEach(n => {
+    const w = n.tipo === 'Splitter' ? SW : n.tipo === 'CaixaEmenda' ? CR * 2 : NW;
+    const h = n.tipo === 'Splitter' ? SH : n.tipo === 'CaixaEmenda' ? CR * 2 : NH;
+    minX = Math.min(minX, n.x - PAD);
+    minY = Math.min(minY, n.y - PAD);
+    maxX = Math.max(maxX, n.x + w + PAD);
+    maxY = Math.max(maxY, n.y + h + PAD);
   });
 
-  // ── Seção: Resultados por ONU ────────────────────────
-  novaLinha(4);
-  titulo('Orçamento Óptico — Resultados por ONU', 11);
-  novaLinha(6);
+  // Garante dimensões mínimas
+  const viewW = Math.max(maxX - minX, 400);
+  const viewH = Math.max(maxY - minY, 300);
 
-  // Verifica se há resultados calculados
-  const onus = nodes.filter(n => n.tipo === 'ONU');
-  if (onus.length === 0 || Object.keys(resultadoONUs).length === 0) {
-    doc.setFontSize(9);
-    doc.setTextColor(150);
-    doc.text('Nenhum resultado disponível. Execute o cálculo antes de exportar.', M, y);
-    novaLinha(8);
-    doc.setTextColor(26, 26, 24);
-  } else {
-    // Para cada caminho calculado, monta bloco de resultado
-    const caminhoCache = window._ultimoResultado?.caminhos || [];
+  // ── 2. Clona o SVG aplicando viewBox no conteúdo ────
+  const svgEl    = document.getElementById('svg');
+  const svgClone = svgEl.cloneNode(true);
 
-    caminhoCache.forEach((c, ci) => {
-      // Cor do status
-      const statusCor = c.status === 'OK' ? [45, 122, 79]
-                      : c.status === 'MARGEM_BAIXA' ? [184, 122, 0]
-                      : [192, 57, 43];
+  svgClone.setAttribute('xmlns',   'http://www.w3.org/2000/svg');
+  svgClone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+  svgClone.setAttribute('viewBox', `${minX} ${minY} ${viewW} ${viewH}`);
+  svgClone.setAttribute('width',   String(viewW));
+  svgClone.setAttribute('height',  String(viewH));
 
-      // Cabeçalho do bloco
-      doc.setFillColor(...statusCor);
-      doc.rect(M, y - 4.5, CW, 6.5, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      const statusLabel = c.status === 'OK' ? 'OK'
-                        : c.status === 'MARGEM_BAIXA' ? 'MARGEM BAIXA' : 'REPROVADO';
-      doc.text(`${c.onu_nome}`, M + 1, y);
-      doc.text(statusLabel, M + CW - 1, y, { align: 'right' });
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(26, 26, 24);
-      novaLinha(7);
+  // Remove a grade de fundo (não é necessária no PDF)
+  const gridG = svgClone.querySelector('#g-grid');
+  if (gridG) gridG.remove();
 
-      // Métricas principais
-      const metricas = [
-        ['Potência TX (OLT)',    `${c.potencia_tx_dbm.toFixed(2)} dBm`],
-        ['Perda total do caminho', `${c.perda_total_db.toFixed(3)} dB`],
-        ['Potência RX estimada', `${c.potencia_rx_dbm.toFixed(3)} dBm`],
-        ['Sensibilidade mínima (ONU)', `${c.sensibilidade_rx_dbm.toFixed(1)} dBm`],
-        ['Margem disponível',    `${c.margem_disponivel_db.toFixed(3)} dB`],
-      ];
-      metricas.forEach((m, i) => { linha(m[0], m[1], y, i % 2 === 0); novaLinha(6); });
+  // Fundo branco
+  const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  bg.setAttribute('x',      String(minX));
+  bg.setAttribute('y',      String(minY));
+  bg.setAttribute('width',  String(viewW));
+  bg.setAttribute('height', String(viewH));
+  bg.setAttribute('fill',   '#ffffff');
+  svgClone.insertBefore(bg, svgClone.firstChild);
 
-      // Detalhamento de perdas
-      novaLinha(2);
-      doc.setFontSize(8);
-      doc.setTextColor(100);
-      doc.text('Detalhamento de perdas:', M + 1, y);
-      doc.setTextColor(26, 26, 24);
-      novaLinha(5);
+  // Injeta estilos CSS inline para garantir renderização correta
+  const style = document.createElementNS('http://www.w3.org/2000/svg', 'style');
+  style.textContent = `
+    text { font-family: Arial, sans-serif; }
+    .link { stroke: #999; stroke-width: 1.8; fill: none; }
+    .link.sel { stroke: #1a1a18; stroke-width: 2.5; }
+    .link-label { font-size: 10px; fill: #888; }
+    .link-pwr { font-size: 9px; font-weight: 600; }
+    .port { fill: #fff; stroke: #aaa; stroke-width: 1.5; }
+    .in-port-ceo, .in-port-onu { fill: #fff; stroke: #aaa; stroke-width: 1.5; }
+  `;
+  svgClone.insertBefore(style, svgClone.firstChild);
 
-      c.detalhes.forEach((d, i) => {
-        if (i % 2 === 0) {
-          doc.setFillColor(247, 247, 245);
-          doc.rect(M, y - 4, CW, 5.5, 'F');
-        }
-        doc.setFontSize(8);
-        doc.text(`${d.tipo}: ${d.descricao}`, M + 2, y);
-        doc.text(`${d.perda_db.toFixed(3)} dB`, M + CW - 1, y, { align: 'right' });
-        novaLinha(5.5);
+  // ── 3. Serializa SVG → Blob → URL → imagem PNG ──────
+  // Escala alta para resolução de zoom (3x)
+  const SCALE  = 3;
+  const pxW    = viewW * SCALE;
+  const pxH    = viewH * SCALE;
+
+  const svgStr = new XMLSerializer().serializeToString(svgClone);
+  const blob   = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+  const url    = URL.createObjectURL(blob);
+
+  await new Promise((resolve, reject) => {
+    const img  = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width  = pxW;
+      canvas.height = pxH;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, pxW, pxH);
+      ctx.scale(SCALE, SCALE);
+      ctx.drawImage(img, 0, 0);
+      URL.revokeObjectURL(url);
+
+      // ── 4. Cria PDF com tamanho exato do conteúdo ───
+      // Converte px para mm (96 dpi → 1px = 0.2646mm)
+      const mmW = viewW * 0.2646;
+      const mmH = viewH * 0.2646;
+
+      const doc = new jsPDF({
+        orientation: mmW >= mmH ? 'landscape' : 'portrait',
+        unit:   'mm',
+        format: [mmW, mmH],
       });
 
-      if (ci < caminhoCache.length - 1) novaLinha(6);
-    });
-  }
+      const imgData = canvas.toDataURL('image/png', 1.0);
+      doc.addImage(imgData, 'PNG', 0, 0, mmW, mmH, '', 'FAST');
 
-  rodape();
-
-  // ── Download ─────────────────────────────────────────
-  const nomeArq = (nomeProjeto || 'pon_planner')
-    .replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_\-]/g, '');
-  doc.save(`${nomeArq}_orcamento.pdf`);
-  toast('PDF exportado com sucesso');
+      const nomeArq = nomeProjeto
+        .replace(/\s+/g, '_')
+        .replace(/[^a-zA-Z0-9_\-]/g, '');
+      doc.save(`${nomeArq || 'pon_planner'}.pdf`);
+      toast('PDF exportado com sucesso');
+      resolve();
+    };
+    img.onerror = () => {
+      URL.revokeObjectURL(url);
+      toast('Erro ao gerar PDF');
+      reject();
+    };
+    img.src = url;
+  });
 }
 
 // ═══════════════════════════════════════════════════════
