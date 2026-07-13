@@ -26,5 +26,9 @@ services:
       - "traefik.http.services.pon.loadbalancer.server.port=8000"
 
 networks:
+  default:
+    ipam:
+      config:
+        - subnet: 172.22.2.0/24
   infra:
     external: true
