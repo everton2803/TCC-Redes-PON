@@ -104,6 +104,13 @@
   .node rect { transition: filter .15s; }
   .node:hover rect { filter: drop-shadow(0 2px 8px rgba(0,0,0,.13)); }
   .node text { pointer-events: none; font-family: var(--sans); }
+  .text-resize-handle {
+    fill: #fff;
+    stroke: var(--accent);
+    stroke-width: 1.2;
+    cursor: nwse-resize;
+    pointer-events: all;
+  }
 
   /* ── Porta de saída ─────────────────────────────────────────── */
   .port { cursor: crosshair; }
@@ -752,6 +759,8 @@ let selType = null; // 'node' | 'link'
 let linkSrc     = null; // nó de origem ao criar enlace
 let linkSrcY    = null; // Y absoluto da porta (usado no preview)
 let linkSrcRelY = null; // Y relativo ao nó (persistido no enlace)
+let clipboardTextNode = null;
+let textResizeState = null;
 let idSeq   = 0;
 
 function uid(prefix) { return `${prefix}-${++idSeq}`; }
@@ -810,6 +819,41 @@ svg.on('click', () => {
   selId = null; selType = null;
   render(); updateSide();
 });
+
+function handleDiagramKeyboard(e) {
+  const target = e.target;
+  const editable = target && (target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
+  if (editable) return;
+
+  const isCopy = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c';
+  const isPaste = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'v';
+  if (!isCopy && !isPaste) return;
+
+  const selectedNode = selType === 'node' ? nodes.find(n => n.id === selId) : null;
+  if (isCopy) {
+    if (selectedNode && selectedNode.tipo === 'Texto') {
+      clipboardTextNode = { ...selectedNode };
+      e.preventDefault();
+    }
+    return;
+  }
+
+  if (isPaste && clipboardTextNode) {
+    const clone = {
+      ...clipboardTextNode,
+      id: uid('texto'),
+      x: (clipboardTextNode.x || 0) + 24,
+      y: (clipboardTextNode.y || 0) + 24
+    };
+    nodes.push(clone);
+    selId = clone.id;
+    selType = 'node';
+    render();
+    updateSide();
+    e.preventDefault();
+  }
+}
+window.addEventListener('keydown', handleDiagramKeyboard);
 
 // ═══════════════════════════════════════════════════════
 // Drag da paleta → canvas
@@ -892,13 +936,85 @@ function renderNodes() {
   const splitters = nodes.filter(n => n.tipo === 'Splitter');
   const textos    = nodes.filter(n => n.tipo === 'Texto');
 
+  renderTextoNodes(textos);
   renderRegularNodes(regular);
   renderCEONodes(ceos);
   renderSplitterNodes(splitters);
-  renderTextoNodes(textos);
 }
 
 // ── Texto livre (anotação) ─────────────────────────────
+function atualizaTextoNode(g, d, isSelected) {
+  const texto = d.texto || 'Texto';
+  const w = Math.max(120, Number(d.largura) || 160);
+  const h = Math.max(40, Number(d.altura) || 70);
+  const fontSize = Math.max(10, Number(d.tamanho) || 12);
+  const linhas = quebrarTexto(texto, w - 16, fontSize);
+  const preenchido = d.preenchido !== false;
+
+  g.select('.texto-bg')
+    .attr('width', w)
+    .attr('height', h)
+    .attr('fill', preenchido ? (d.cor || STYLE.Texto.fill) : 'transparent')
+    .attr('stroke', isSelected ? '#1a1a18' : STYLE.Texto.stroke)
+    .attr('stroke-width', isSelected ? 2.5 : 1.5);
+
+  g.select('.text-resize-handle')
+    .attr('display', isSelected ? 'block' : 'none')
+    .attr('x', w - 10)
+    .attr('y', h - 10);
+
+  g.select('.texto-label')
+    .attr('x', 8)
+    .attr('y', 8 + fontSize)
+    .attr('font-size', fontSize)
+    .attr('fill', '#1a1a18')
+    .text('')
+    .selectAll('tspan')
+    .remove();
+
+  g.select('.texto-label')
+    .append('tspan')
+    .attr('x', 8)
+    .attr('dy', 0)
+    .text(linhas[0] || '');
+
+  linhas.slice(1).forEach(l => {
+    g.select('.texto-label')
+      .append('tspan')
+      .attr('x', 8)
+      .attr('dy', fontSize + 2)
+      .text(l);
+  });
+}
+
+function textResizeDrag() {
+  return d3.drag()
+    .on('start', function(e, d) {
+      e.sourceEvent.stopPropagation();
+      textResizeState = {
+        id: d.id,
+        startW: Number(d.largura) || 160,
+        startH: Number(d.altura) || 70,
+        startX: e.x,
+        startY: e.y
+      };
+      d3.select(document.body).style('cursor', 'nwse-resize');
+    })
+    .on('drag', function(e, d) {
+      if (!textResizeState || textResizeState.id !== d.id) return;
+      const transform = d3.zoomTransform(svg.node());
+      const dx = (e.x - textResizeState.startX) / transform.k;
+      const dy = (e.y - textResizeState.startY) / transform.k;
+      d.largura = Math.max(120, textResizeState.startW + dx);
+      d.altura = Math.max(40, textResizeState.startH + dy);
+      atualizaTextoNode(d3.select(this.parentNode), d, true);
+    })
+    .on('end', function() {
+      textResizeState = null;
+      d3.select(document.body).style('cursor', 'default');
+    });
+}
+
 function renderTextoNodes(data) {
   const sel = gNodes.selectAll('.node-texto').data(data, d => d.id);
 
@@ -908,51 +1024,20 @@ function renderTextoNodes(data) {
     .on('click', nodeClick);
 
   enter.append('rect').attr('class','texto-bg').attr('rx', 6).attr('ry', 6);
+  enter.append('rect').attr('class','text-resize-handle').attr('width', 10).attr('height', 10).attr('rx', 2).attr('ry', 2);
   enter.append('text').attr('class','texto-label')
     .attr('text-anchor','start')
     .attr('font-weight', 600);
 
   const all = enter.merge(sel);
   all.attr('transform', d => `translate(${d.x},${d.y})`);
+  all.lower();
 
   all.each(function(d) {
     const g = d3.select(this);
-    const texto = d.texto || 'Texto';
-    const w = Math.max(120, Number(d.largura) || 160);
-    const h = Math.max(40, Number(d.altura) || 70);
-    const fontSize = Math.max(10, Number(d.tamanho) || 12);
-    const linhas = quebrarTexto(texto, w - 16, fontSize);
-
-    const preenchido = d.preenchido !== false;
-    g.select('.texto-bg')
-      .attr('width', w)
-      .attr('height', h)
-      .attr('fill', preenchido ? (d.cor || STYLE.Texto.fill) : 'transparent')
-      .attr('stroke', d => selType === 'node' && d.id === selId ? '#1a1a18' : STYLE.Texto.stroke)
-      .attr('stroke-width', d => selType === 'node' && d.id === selId ? 2.5 : 1.5);
-
-    g.select('.texto-label')
-      .attr('x', 8)
-      .attr('y', 8 + fontSize)
-      .attr('font-size', fontSize)
-      .attr('fill', '#1a1a18')
-      .text('')
-      .selectAll('tspan')
-      .remove();
-
-    const linhasSelection = g.select('.texto-label')
-      .append('tspan')
-      .attr('x', 8)
-      .attr('dy', 0)
-      .text(linhas[0] || '');
-
-    linhas.slice(1).forEach(l => {
-      g.select('.texto-label')
-        .append('tspan')
-        .attr('x', 8)
-        .attr('dy', fontSize + 2)
-        .text(l);
-    });
+    const isSelected = selType === 'node' && d.id === selId;
+    atualizaTextoNode(g, d, isSelected);
+    g.select('.text-resize-handle').call(textResizeDrag());
   });
 
   sel.exit().remove();
@@ -1183,8 +1268,13 @@ function renderSplitterNodes(data) {
 // ── Helpers de drag e click compartilhados ────────────
 function nodeDrag() {
   return d3.drag()
-    .on('start', function(e) {
-      d3.select(this).raise();
+    .on('start', function(e, d) {
+      const group = d3.select(this);
+      if (d.tipo === 'Texto') {
+        group.lower();
+      } else {
+        group.raise();
+      }
       e.sourceEvent.stopPropagation();
     })
     .on('drag', (e, d) => {
