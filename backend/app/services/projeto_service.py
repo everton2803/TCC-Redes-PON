@@ -146,9 +146,12 @@ def salvar_projeto(caminho_pasta: str, nome_arquivo: str, projeto: Projeto) -> P
         projeto.criado_em = agora
     projeto.atualizado_em = agora
 
+    payload = projeto.model_dump(mode="json")
+    if isinstance(payload.get("parametros"), dict):
+        payload["parametros"].setdefault("perda_fusao_db", 0.03)
     arq = _arquivo_abs(caminho_pasta, nome_arquivo)
     with open(arq, "w", encoding="utf-8") as f:
-        json.dump(projeto.model_dump(), f, ensure_ascii=False, indent=2)
+        json.dump(payload, f, ensure_ascii=False, indent=2)
     return projeto
 
 
@@ -158,7 +161,10 @@ def carregar_projeto(caminho_pasta: str, nome_arquivo: str) -> Projeto | None:
     if not os.path.exists(arq):
         return None
     with open(arq, encoding="utf-8") as f:
-        return Projeto(**json.load(f))
+        dados = json.load(f)
+    if isinstance(dados.get("parametros"), dict):
+        dados["parametros"].setdefault("perda_fusao_db", 0.03)
+    return Projeto(**dados)
 
 
 def excluir_projeto_arquivo(caminho_pasta: str, nome_arquivo: str) -> bool:
@@ -202,7 +208,10 @@ def obter_projeto(projeto_id: str) -> Projeto | None:
     if not os.path.exists(arq):
         return None
     with open(arq, encoding="utf-8") as f:
-        return Projeto(**json.load(f))
+        dados = json.load(f)
+    if isinstance(dados.get("parametros"), dict):
+        dados["parametros"].setdefault("perda_fusao_db", 0.03)
+    return Projeto(**dados)
 
 
 def criar_projeto(projeto: Projeto) -> Projeto:
@@ -215,8 +224,11 @@ def atualizar_projeto(projeto_id: str, projeto: Projeto) -> Projeto | None:
         return None
     projeto.id = projeto_id
     projeto.atualizado_em = _agora()
+    payload = projeto.model_dump(mode="json")
+    if isinstance(payload.get("parametros"), dict):
+        payload["parametros"].setdefault("perda_fusao_db", 0.03)
     with open(arq, "w", encoding="utf-8") as f:
-        json.dump(projeto.model_dump(), f, ensure_ascii=False, indent=2)
+        json.dump(payload, f, ensure_ascii=False, indent=2)
     return projeto
 
 

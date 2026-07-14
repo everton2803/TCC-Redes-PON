@@ -135,7 +135,7 @@ SPLITTERS_DESBALANCEADOS: dict[str, PerdaSplitterDesbalanceado] = {
 # ---------------------------------------------------------------------------
 # Atenuação da fibra óptica monomodo (SMF — G.652)
 # ---------------------------------------------------------------------------
-ATENUACAO_SMF_1310nm_DB_KM = 0.35   # dB/km — janela de 1310 nm (mais comum em PON)
+ATENUACAO_SMF_1310nm_DB_KM = 0.30   # dB/km — janela de 1310 nm (mais comum em PON)
 ATENUACAO_SMF_1550nm_DB_KM = 0.20   # dB/km — janela de 1550 nm
 
 # ---------------------------------------------------------------------------
@@ -143,8 +143,8 @@ ATENUACAO_SMF_1550nm_DB_KM = 0.20   # dB/km — janela de 1550 nm
 # ---------------------------------------------------------------------------
 PERDA_CONECTOR_SC_APC_DB  = 0.5    # dB — conector SC/APC (padrão FTTH)
 PERDA_CONECTOR_SC_UPC_DB  = 0.5    # dB — conector SC/UPC
-PERDA_FUSAO_MECANICA_DB   = 0.1    # dB — fusão por arco elétrico
-PERDA_FUSAO_RAPIDA_DB     = 0.3    # dB — emenda rápida (fusão mecânica)
+PERDA_FUSAO_MECANICA_DB   = 0.03    # dB — fusão por arco elétrico
+PERDA_FUSAO_RAPIDA_DB     = 0.03    # dB — emenda rápida (fusão mecânica)
 
 # ---------------------------------------------------------------------------
 # Potência de transmissão típica das OLTs (classes ópticas ITU-T G.984.2)
@@ -186,5 +186,5 @@ MARGEM_SISTEMA_DB = 3.0   # dB — reserva para degradações futuras
 # ---------------------------------------------------------------------------
 DIVISAO_MAXIMA_PON: dict[str, int] = {
     "GPON": 128,
-    "EPON": 32,
+    "EPON": 64,
 }

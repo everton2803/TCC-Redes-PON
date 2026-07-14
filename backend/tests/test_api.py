@@ -76,6 +76,17 @@ class TestProjetoCRUD:
         assert dados["criado_em"] is not None
         assert dados["atualizado_em"] is not None
 
+    def test_criar_projeto_usa_perda_fusao_padrao_03(self):
+        payload = _projeto_minimo()
+        payload["parametros"] = {
+            "atenuacao_fibra_db_por_km": 0.35,
+            "perda_conector_db": 0.5,
+            "margem_sistema_db": 3.0,
+        }
+        r = client.post("/projetos", json=payload)
+        assert r.status_code == 201
+        assert r.json()["parametros"]["perda_fusao_db"] == 0.03
+
     def test_obter_projeto(self):
         payload = _projeto_minimo()
         client.post("/projetos", json=payload)

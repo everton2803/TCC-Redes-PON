@@ -137,7 +137,7 @@ class NoCaixaEmenda(NoBase):
         description="Número de fusões realizadas nesta caixa"
     )
     perda_por_fusao_db: float = Field(
-        default=0.1,
+        default=0.03,
         ge=0.0, le=0.5,
         description="Perda média por fusão em dB"
     )
@@ -278,7 +278,7 @@ class ParametrosGlobais(BaseModel):
         description="Perda padrão por conector SC/APC em dB"
     )
     perda_fusao_db: float = Field(
-        default=0.1,
+        default=0.03,
         description="Perda padrão por fusão mecânica em dB"
     )
     margem_sistema_db: float = Field(

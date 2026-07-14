@@ -623,6 +623,7 @@
     <svg id="svg">
       <defs></defs>
       <g id="g-grid"></g>
+      <g id="g-text"></g>
       <g id="g-links"></g>
       <g id="g-nodes"></g>
       <line id="link-preview" style="display:none"/>
@@ -759,7 +760,7 @@ let selType = null; // 'node' | 'link'
 let linkSrc     = null; // nó de origem ao criar enlace
 let linkSrcY    = null; // Y absoluto da porta (usado no preview)
 let linkSrcRelY = null; // Y relativo ao nó (persistido no enlace)
-let clipboardTextNode = null;
+let clipboardNode = null;
 let textResizeState = null;
 let idSeq   = 0;
 
@@ -769,7 +770,7 @@ function defaultParams(tipo) {
   return {
     OLT:         { potencia_tx_dbm: 5.0, sensibilidade_rx_dbm: -28.0, padrao_pon: 'GPON' },
     Splitter:    { razao: 8, tipo_splitter: 'balanceado' },
-    CaixaEmenda: { num_fusoes: 4, perda_por_fusao_db: 0.1 },
+    CaixaEmenda: { num_fusoes: 4, perda_por_fusao_db: 0.03 },
     ONU:         { sensibilidade_rx_dbm: -27.0 },
     Texto:       { texto: 'Texto', tamanho: 12, largura: 160, altura: 70, preenchido: true },
   }[tipo];
@@ -780,6 +781,7 @@ function defaultParams(tipo) {
 // ═══════════════════════════════════════════════════════
 const svg    = d3.select('#svg');
 const gGrid  = d3.select('#g-grid');
+const gText  = d3.select('#g-text');
 const gLinks = d3.select('#g-links');
 const gNodes = d3.select('#g-nodes');
 const prevLine = d3.select('#link-preview'); // mantido para evitar erros de referência
@@ -792,6 +794,7 @@ const zoom = d3.zoom()
   })
   .on('zoom', e => {
     gGrid.attr('transform', e.transform);
+    gText.attr('transform', e.transform);
     gLinks.attr('transform', e.transform);
     gNodes.attr('transform', e.transform);
   });
@@ -825,35 +828,43 @@ function handleDiagramKeyboard(e) {
   const editable = target && (target.tagName === 'INPUT' || target.tagName === 'SELECT' || target.tagName === 'TEXTAREA' || target.isContentEditable);
   if (editable) return;
 
-  const isCopy = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c';
-  const isPaste = (e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'v';
+  const key = e.key ? e.key.toLowerCase() : '';
+  const isCopy = (e.ctrlKey || e.metaKey) && key === 'c';
+  const isPaste = (e.ctrlKey || e.metaKey) && key === 'v';
   if (!isCopy && !isPaste) return;
 
   const selectedNode = selType === 'node' ? nodes.find(n => n.id === selId) : null;
   if (isCopy) {
-    if (selectedNode && selectedNode.tipo === 'Texto') {
-      clipboardTextNode = { ...selectedNode };
+    if (selectedNode) {
+      clipboardNode = JSON.parse(JSON.stringify(selectedNode));
+      clipboardNode.x = selectedNode.x;
+      clipboardNode.y = selectedNode.y;
       e.preventDefault();
+      e.stopPropagation();
     }
     return;
   }
 
-  if (isPaste && clipboardTextNode) {
+  if (isPaste && clipboardNode) {
     const clone = {
-      ...clipboardTextNode,
-      id: uid('texto'),
-      x: (clipboardTextNode.x || 0) + 24,
-      y: (clipboardTextNode.y || 0) + 24
+      ...JSON.parse(JSON.stringify(clipboardNode)),
+      id: uid((clipboardNode.tipo || 'Texto').toLowerCase()),
+      x: (clipboardNode.x || 0) + 24,
+      y: (clipboardNode.y || 0) + 24,
+      nome: `${clipboardNode.nome || clipboardNode.tipo || 'nó'}-cópia`
     };
     nodes.push(clone);
     selId = clone.id;
     selType = 'node';
     render();
     updateSide();
+    updateStatus();
+    calcularAuto();
     e.preventDefault();
+    e.stopPropagation();
   }
 }
-window.addEventListener('keydown', handleDiagramKeyboard);
+window.addEventListener('keydown', handleDiagramKeyboard, true);
 
 // ═══════════════════════════════════════════════════════
 // Drag da paleta → canvas
@@ -898,6 +909,11 @@ function addNode(tipo, x, y) {
 function render() {
   renderLinks();
   renderNodes();
+  gGrid.lower();
+  gText.lower();
+  gLinks.raise();
+  gNodes.raise();
+  gText.selectAll('.node-texto').lower();
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1016,7 +1032,7 @@ function textResizeDrag() {
 }
 
 function renderTextoNodes(data) {
-  const sel = gNodes.selectAll('.node-texto').data(data, d => d.id);
+  const sel = gText.selectAll('.node-texto').data(data, d => d.id);
 
   const enter = sel.enter().append('g')
     .attr('class', 'node node-texto')
@@ -2416,19 +2432,28 @@ function lerArquivoJSON(event) {
 }
 
 function carregarDados(data) {
-  // Restaura nome e ID do projeto
-  document.getElementById('projeto-nome').value = data.nome || 'Projeto Importado';
-  projetoId = data.id || ('projeto-' + Math.random().toString(36).slice(2, 10));
+  const payload = data || {};
+  const nome = payload.nome || payload.projeto?.nome || 'Projeto Importado';
+  const id = payload.id || payload.projeto?.id || ('projeto-' + Math.random().toString(36).slice(2, 10));
 
-  // Restaura nós — garante campos x/y a partir de posicao se necessário
-  nodes = (data.nos || []).map(n => ({
-    ...n,
-    x: n.x ?? n.posicao?.x ?? 100,
-    y: n.y ?? n.posicao?.y ?? 100,
-  }));
+  // Restaura nome e ID do projeto
+  document.getElementById('projeto-nome').value = nome;
+  projetoId = id;
+
+  // Restaura nós — aceita tanto o formato atual (nos/enlaces) quanto versões antigas (nodes/links)
+  const rawNodes = payload.nos || payload.nodes || [];
+  nodes = rawNodes.map(n => {
+    const pos = n.posicao || {};
+    return {
+      ...n,
+      x: n.x ?? pos.x ?? 100,
+      y: n.y ?? pos.y ?? 100,
+      posicao: { x: n.x ?? pos.x ?? 100, y: n.y ?? pos.y ?? 100 },
+    };
+  });
 
   // Restaura enlaces
-  links = data.enlaces || [];
+  links = (payload.enlaces || payload.links || []).map(l => ({ ...l }));
 
   // Limpa resultados anteriores
   resultadoONUs     = {};
@@ -2469,7 +2494,7 @@ function buildProjeto() {
     parametros: {
       atenuacao_fibra_db_por_km: 0.35,
       perda_conector_db:  0.5,
-      perda_fusao_db:     0.1,
+      perda_fusao_db:     0.03,
       margem_sistema_db:  3.0,
     },
     nos:     nodes.map(n => ({ ...n, posicao: { x: n.x, y: n.y } })),
