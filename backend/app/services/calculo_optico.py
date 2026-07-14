@@ -17,7 +17,7 @@ from typing import Optional
 from app.models.constants import PERDA_SPLITTER_DB
 from app.models.network import (
     Projeto, Enlace,
-    TipoNo, TipoSplitter, NoOLT, NoSplitter, NoCaixaEmenda, NoONU,
+    TipoNo, TipoSplitter, NoOLT, NoSplitter, NoCaixaEmenda, NoONU, NoTexto,
     RazaoSplitter,
 )
 from app.models.constants import SPLITTERS_DESBALANCEADOS
@@ -87,6 +87,8 @@ def _parse_no(no_dict: dict):
         return NoCaixaEmenda(**no_dict)
     elif tipo == TipoNo.ONU:
         return NoONU(**no_dict)
+    elif tipo == TipoNo.TEXTO:
+        return NoTexto(**no_dict)
     raise ValueError(f"Tipo de nó desconhecido: {tipo}")
 
 
@@ -111,7 +113,7 @@ class CalculadoraOrcamentoOptico:
         self.params = projeto.parametros
 
         # Deserializa os nós
-        self.nos: dict[str, NoOLT | NoSplitter | NoCaixaEmenda | NoONU] = {
+        self.nos: dict[str, NoOLT | NoSplitter | NoCaixaEmenda | NoONU | NoTexto] = {
             no["id"]: _parse_no(no) for no in projeto.nos
         }
 
@@ -171,7 +173,9 @@ class CalculadoraOrcamentoOptico:
         enlaces_caminho: list[Enlace],
         caminhos_encontrados: list[ResultadoCaminho],
     ):
-        no_atual = self.nos[no_atual_id]
+        no_atual = self.nos.get(no_atual_id)
+        if no_atual is None:
+            return
 
         # Chegou numa ONU — calcula o orçamento desse caminho
         if isinstance(no_atual, NoONU):
@@ -215,7 +219,9 @@ class CalculadoraOrcamentoOptico:
 
         # --- Percorre cada enlace do caminho ---
         for enlace in enlaces:
-            no_origem = self.nos[enlace.id_origem]
+            no_origem = self.nos.get(enlace.id_origem)
+            if no_origem is None:
+                continue
 
             # 1. Perdas do nó de origem (splitter ou caixa de emenda)
             if isinstance(no_origem, NoSplitter):

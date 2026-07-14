@@ -222,6 +222,26 @@ class TestCalculoReprovado:
         assert self.resultado.onus_reprovadas + self.resultado.onus_margem_baixa >= 1
 
 
+def test_projeto_com_no_texto_nao_quebra_calculo():
+    olt = NoOLT(id="olt", tipo=TipoNo.OLT, nome="OLT", potencia_tx_dbm=5.0, sensibilidade_rx_dbm=-28.0, padrao_pon=PadraPON.GPON)
+    texto = {"id": "txt-01", "tipo": "Texto", "nome": "Texto", "posicao": {"x": 100, "y": 100}}
+    onu = NoONU(id="onu", tipo=TipoNo.ONU, nome="ONU-01", sensibilidade_rx_dbm=-27.0)
+
+    projeto = Projeto(
+        id="p-texto", nome="Com Texto",
+        nos=[olt.model_dump(), texto, onu.model_dump()],
+        enlaces=[
+            Enlace(id="e1", id_origem="olt", id_destino="onu", comprimento_m=1000, atenuacao_db_por_km=0.35, num_conexoes=2, perda_por_conexao_db=0.1, tipo_conexao="fusao"),
+        ],
+        parametros=ParametrosGlobais(margem_sistema_db=3.0),
+    )
+
+    resultado = CalculadoraOrcamentoOptico(projeto).calcular()
+
+    assert resultado.total_onus == 1
+    assert resultado.caminhos[0].status in {"OK", "MARGEM_BAIXA", "REPROVADO"}
+
+
 class TestMultiplasONUs:
     """Carrega o projeto de exemplo JSON e valida múltiplos caminhos."""
 

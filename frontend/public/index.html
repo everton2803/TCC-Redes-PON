@@ -574,6 +574,13 @@
             <div style="font-size:11px;color:var(--muted)">Terminal do assinante</div>
           </div>
         </div>
+        <div class="palette-item" draggable="true" data-tipo="Texto">
+          <div class="node-icon" style="background:#f4f4ee">T</div>
+          <div>
+            <div style="font-weight:600">Texto</div>
+            <div style="font-size:11px;color:var(--muted)">Anotação no diagrama</div>
+          </div>
+        </div>
       </div>
       <div class="section">
         <h3>Como usar</h3>
@@ -655,6 +662,7 @@ let potenciaPorEnlace = {}; // { enlace_id → {inicio, fim} }
 
 const STYLE = {
   OLT:         { fill:'#e8f0fe', stroke:'#4a7cdc', icon:'📡', sub: n => `${n.potencia_tx_dbm} dBm TX` },
+  Texto:       { fill:'#f4f4ee', stroke:'#5f5f57', icon:'T',  sub: n => n.texto || 'Texto' },
   Splitter:    { fill:'#fce8e6', stroke:'#d95a4a', icon:'⑂',  sub: n => {
     const rotulo = n.tipo_splitter === 'desbalanceado' ? `${n.razao_desbalanceada || '20/80'}` : `1x${n.razao}`;
     const cap    = n.tipo_splitter === 'desbalanceado' ? 2 : (n.razao || 2);
@@ -754,6 +762,7 @@ function defaultParams(tipo) {
     Splitter:    { razao: 8, tipo_splitter: 'balanceado' },
     CaixaEmenda: { num_fusoes: 4, perda_por_fusao_db: 0.1 },
     ONU:         { sensibilidade_rx_dbm: -27.0 },
+    Texto:       { texto: 'Texto', tamanho: 12, largura: 160, altura: 70, preenchido: true },
   }[tipo];
 }
 
@@ -822,8 +831,8 @@ wrap.addEventListener('drop', e => {
   const t    = d3.zoomTransform(svg.node());
   const cx   = t.invertX(e.clientX - rect.left);
   const cy   = t.invertY(e.clientY - rect.top);
-  const w = dragTipo === 'Splitter' ? SW : dragTipo === 'CaixaEmenda' ? CR : NW;
-  const h = dragTipo === 'Splitter' ? SH : dragTipo === 'CaixaEmenda' ? CR : NH;
+  const w = dragTipo === 'Splitter' ? SW : dragTipo === 'CaixaEmenda' ? CR : dragTipo === 'Texto' ? 140 : NW;
+  const h = dragTipo === 'Splitter' ? SH : dragTipo === 'CaixaEmenda' ? CR : dragTipo === 'Texto' ? 44 : NH;
   addNode(dragTipo, cx - w, cy - h);
   dragTipo = null;
 });
@@ -878,13 +887,95 @@ function posCirculos(count, h) {
 // Render — Nós
 // ═══════════════════════════════════════════════════════
 function renderNodes() {
-  const regular  = nodes.filter(n => n.tipo !== 'Splitter' && n.tipo !== 'CaixaEmenda');
-  const ceos     = nodes.filter(n => n.tipo === 'CaixaEmenda');
-  const splitters= nodes.filter(n => n.tipo === 'Splitter');
+  const regular   = nodes.filter(n => n.tipo !== 'Splitter' && n.tipo !== 'CaixaEmenda' && n.tipo !== 'Texto');
+  const ceos      = nodes.filter(n => n.tipo === 'CaixaEmenda');
+  const splitters = nodes.filter(n => n.tipo === 'Splitter');
+  const textos    = nodes.filter(n => n.tipo === 'Texto');
 
   renderRegularNodes(regular);
   renderCEONodes(ceos);
   renderSplitterNodes(splitters);
+  renderTextoNodes(textos);
+}
+
+// ── Texto livre (anotação) ─────────────────────────────
+function renderTextoNodes(data) {
+  const sel = gNodes.selectAll('.node-texto').data(data, d => d.id);
+
+  const enter = sel.enter().append('g')
+    .attr('class', 'node node-texto')
+    .call(nodeDrag())
+    .on('click', nodeClick);
+
+  enter.append('rect').attr('class','texto-bg').attr('rx', 6).attr('ry', 6);
+  enter.append('text').attr('class','texto-label')
+    .attr('text-anchor','start')
+    .attr('font-weight', 600);
+
+  const all = enter.merge(sel);
+  all.attr('transform', d => `translate(${d.x},${d.y})`);
+
+  all.each(function(d) {
+    const g = d3.select(this);
+    const texto = d.texto || 'Texto';
+    const w = Math.max(120, Number(d.largura) || 160);
+    const h = Math.max(40, Number(d.altura) || 70);
+    const fontSize = Math.max(10, Number(d.tamanho) || 12);
+    const linhas = quebrarTexto(texto, w - 16, fontSize);
+
+    const preenchido = d.preenchido !== false;
+    g.select('.texto-bg')
+      .attr('width', w)
+      .attr('height', h)
+      .attr('fill', preenchido ? (d.cor || STYLE.Texto.fill) : 'transparent')
+      .attr('stroke', d => selType === 'node' && d.id === selId ? '#1a1a18' : STYLE.Texto.stroke)
+      .attr('stroke-width', d => selType === 'node' && d.id === selId ? 2.5 : 1.5);
+
+    g.select('.texto-label')
+      .attr('x', 8)
+      .attr('y', 8 + fontSize)
+      .attr('font-size', fontSize)
+      .attr('fill', '#1a1a18')
+      .text('')
+      .selectAll('tspan')
+      .remove();
+
+    const linhasSelection = g.select('.texto-label')
+      .append('tspan')
+      .attr('x', 8)
+      .attr('dy', 0)
+      .text(linhas[0] || '');
+
+    linhas.slice(1).forEach(l => {
+      g.select('.texto-label')
+        .append('tspan')
+        .attr('x', 8)
+        .attr('dy', fontSize + 2)
+        .text(l);
+    });
+  });
+
+  sel.exit().remove();
+}
+
+function quebrarTexto(texto, larguraPx, fontSize) {
+  const palavras = String(texto).split(/\s+/).filter(Boolean);
+  const linhas = [];
+  let linhaAtual = '';
+  const charsPorLinha = Math.max(8, Math.floor(larguraPx / Math.max(5, fontSize * 0.6)));
+
+  palavras.forEach(palavra => {
+    const teste = linhaAtual ? `${linhaAtual} ${palavra}` : palavra;
+    if (teste.length <= charsPorLinha) {
+      linhaAtual = teste;
+    } else {
+      if (linhaAtual) linhas.push(linhaAtual);
+      linhaAtual = palavra;
+    }
+  });
+
+  if (linhaAtual) linhas.push(linhaAtual);
+  return linhas.length ? linhas : ['Texto'];
 }
 
 // ── Nós regulares (retângulo) ────────────────────────
@@ -909,7 +1000,7 @@ function renderRegularNodes(data) {
     .attr('dominant-baseline','middle')
     .attr('font-size', 10).attr('fill','#888');
   // Porta de saída (OLT) — direita, clicável para criar enlace
-  enter.filter(d => d.tipo !== 'ONU')
+  enter.filter(d => d.tipo !== 'ONU' && d.tipo !== 'Texto')
     .append('circle').attr('class','port out-port')
     .attr('cx', NW + 6).attr('cy', NH/2).attr('r', 5)
     .attr('fill','#fff').attr('stroke','#aaa').attr('stroke-width', 1.5)
@@ -1225,6 +1316,7 @@ function renderLinks() {
 // Criação de enlace
 // ═══════════════════════════════════════════════════════
 function startLink(node, absY, relY) {
+  if (!node || node.tipo === 'Texto') return;
   linkSrc     = node;
   linkSrcRelY = relY !== undefined ? relY : null;
   linkSrcY    = absY !== undefined ? absY : nodeCy(node);
@@ -1252,7 +1344,8 @@ function saidasUsadas(nodeId) {
 }
 
 function finishLink(dst) {
-  if (!linkSrc || dst.id === linkSrc.id) { cancelLink(); return; }
+  if (!linkSrc || !dst || dst.tipo === 'Texto' || linkSrc.tipo === 'Texto') { cancelLink(); return; }
+  if (dst.id === linkSrc.id) { cancelLink(); return; }
 
   // Valida capacidade do nó de origem (somente Splitter)
   if (linkSrc.tipo === 'Splitter') {
@@ -1337,7 +1430,7 @@ function updateSide() {
 function buildNodeForm(n) {
   const st = STYLE[n.tipo];
   const bgMap = {
-    OLT:'#e8f0fe', Splitter:'#fce8e6', CaixaEmenda:'#fff3e0', ONU:'#e6f4ea'
+    OLT:'#e8f0fe', Splitter:'#fce8e6', CaixaEmenda:'#fff3e0', ONU:'#e6f4ea', Texto:'#f4f4ee'
   };
 
   let html = `
@@ -1457,6 +1550,34 @@ function buildNodeForm(n) {
     <div class="field">
       <label>Sensibilidade RX (dBm)</label>
       <input id="f-srx-onu" type="number" step="0.1" value="${n.sensibilidade_rx_dbm}">
+    </div>`;
+  }
+
+  // ── Texto ─────────────────────────────────────────────
+  if (n.tipo === 'Texto') {
+    html += `
+    <div class="form-sep">Conteúdo</div>
+    <div class="field">
+      <label>Texto</label>
+      <textarea id="f-texto" rows="4" style="width:100%;min-height:70px;padding:8px;border:1px solid var(--border);border-radius:var(--radius);font-size:12px;resize:vertical">${esc(n.texto || 'Texto')}</textarea>
+    </div>
+    <div class="field-2col">
+      <div class="field">
+        <label>Largura (px)</label>
+        <input id="f-largura" type="number" min="120" step="1" value="${Math.round(n.largura || 160)}">
+      </div>
+      <div class="field">
+        <label>Altura (px)</label>
+        <input id="f-altura" type="number" min="40" step="1" value="${Math.round(n.altura || 70)}">
+      </div>
+    </div>
+    <div class="field">
+      <label>Tamanho da fonte</label>
+      <input id="f-tamanho" type="number" min="10" max="24" step="1" value="${Math.round(n.tamanho || 12)}">
+    </div>
+    <div class="field" style="display:flex;align-items:center;gap:8px">
+      <input id="f-preenchido" type="checkbox" ${n.preenchido !== false ? 'checked' : ''}>
+      <label for="f-preenchido" style="margin:0">Preenchimento visível</label>
     </div>`;
   }
 
@@ -1641,6 +1762,13 @@ function applyNode(id) {
   }
   if (n.tipo === 'ONU') {
     n.sensibilidade_rx_dbm = parseFloat(document.getElementById('f-srx-onu').value);
+  }
+  if (n.tipo === 'Texto') {
+    n.texto = document.getElementById('f-texto').value.trim() || 'Texto';
+    n.largura = parseInt(document.getElementById('f-largura').value) || 160;
+    n.altura = parseInt(document.getElementById('f-altura').value) || 70;
+    n.tamanho = parseInt(document.getElementById('f-tamanho').value) || 12;
+    n.preenchido = document.getElementById('f-preenchido').checked;
   }
 
   render();
@@ -1988,6 +2116,57 @@ function novoProjeto() {
   toast('Novo projeto criado');
 }
 
+function calcularBoundsExportacao() {
+  const PAD = 200;
+  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+
+  function incluir(x, y) {
+    minX = Math.min(minX, x);
+    minY = Math.min(minY, y);
+    maxX = Math.max(maxX, x);
+    maxY = Math.max(maxY, y);
+  }
+
+  function boundsNo(n) {
+    if (n.tipo === 'Splitter') {
+      return { x1: n.x, y1: n.y, x2: n.x + SW, y2: n.y + SH };
+    }
+    if (n.tipo === 'CaixaEmenda') {
+      return { x1: n.x, y1: n.y, x2: n.x + CR * 2, y2: n.y + CR * 2 };
+    }
+    if (n.tipo === 'Texto') {
+      const w = Math.max(120, Number(n.largura) || 160);
+      const h = Math.max(40, Number(n.altura) || 70);
+      return { x1: n.x, y1: n.y, x2: n.x + w, y2: n.y + h };
+    }
+    return { x1: n.x, y1: n.y, x2: n.x + NW, y2: n.y + NH };
+  }
+
+  nodes.forEach(n => {
+    const b = boundsNo(n);
+    incluir(b.x1 - PAD, b.y1 - PAD);
+    incluir(b.x2 + PAD, b.y2 + PAD);
+  });
+
+  links.forEach(l => {
+    const src = nodes.find(n => n.id === l.id_origem);
+    const dst = nodes.find(n => n.id === l.id_destino);
+    if (!src || !dst) return;
+    const x1 = nodeCx(src);
+    const y1 = l.porta_origem_rel_y !== undefined && l.porta_origem_rel_y !== null
+      ? src.y + l.porta_origem_rel_y
+      : nodeCy(src);
+    const x2 = nodeRx(dst);
+    const y2 = nodeRy(dst);
+    incluir(x1, y1);
+    incluir(x2, y2);
+  });
+
+  const viewW = Math.max(maxX - minX, 400);
+  const viewH = Math.max(maxY - minY, 300);
+  return { minX, minY, viewW, viewH };
+}
+
 // ═══════════════════════════════════════════════════════
 // Exportar PDF
 // ═══════════════════════════════════════════════════════
@@ -2002,23 +2181,7 @@ async function exportarPDF() {
   const nomeProjeto = document.getElementById('projeto-nome').value || 'PON Planner';
 
   // ── 1. Calcula bounding box de todo o conteúdo ──────
-  // Considera posições reais de nós + margens
-  const PAD = 60; // margem em volta do conteúdo (px canvas)
-
-  let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
-
-  nodes.forEach(n => {
-    const w = n.tipo === 'Splitter' ? SW : n.tipo === 'CaixaEmenda' ? CR * 2 : NW;
-    const h = n.tipo === 'Splitter' ? SH : n.tipo === 'CaixaEmenda' ? CR * 2 : NH;
-    minX = Math.min(minX, n.x - PAD);
-    minY = Math.min(minY, n.y - PAD);
-    maxX = Math.max(maxX, n.x + w + PAD);
-    maxY = Math.max(maxY, n.y + h + PAD);
-  });
-
-  // Garante dimensões mínimas
-  const viewW = Math.max(maxX - minX, 400);
-  const viewH = Math.max(maxY - minY, 300);
+  const { minX, minY, viewW, viewH } = calcularBoundsExportacao();
 
   // ── 2. Clona o SVG aplicando viewBox no conteúdo ────
   const svgEl    = document.getElementById('svg');
@@ -2029,6 +2192,12 @@ async function exportarPDF() {
   svgClone.setAttribute('viewBox', `${minX} ${minY} ${viewW} ${viewH}`);
   svgClone.setAttribute('width',   String(viewW));
   svgClone.setAttribute('height',  String(viewH));
+
+  // Remove transformações de pan/zoom do canvas para exportar o conteúdo em coordenadas reais
+  ['#g-grid', '#g-links', '#g-nodes'].forEach(sel => {
+    const el = svgClone.querySelector(sel);
+    if (el) el.removeAttribute('transform');
+  });
 
   // Remove a grade de fundo (não é necessária no PDF)
   const gridG = svgClone.querySelector('#g-grid');

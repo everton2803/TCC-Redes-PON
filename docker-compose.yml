@@ -16,19 +16,19 @@ services:
       - ./frontend:/app/frontend          # frontend servido em /app
     networks:
       - default
-      - infra
-    labels:
-      - "traefik.enable=true"
-      - "traefik.docker.network=infra"
-      - "traefik.http.routers.pon.rule=Host(`pon.iper.net.br`)"
-      - "traefik.http.routers.pon.entrypoints=websecure"
-      - "traefik.http.routers.pon.tls.certresolver=le"
-      - "traefik.http.services.pon.loadbalancer.server.port=8000"
+      #- infra
+    #labels:
+      #- "traefik.enable=true"
+      #- "traefik.docker.network=infra"
+      #- "traefik.http.routers.pon.rule=Host(`pon.iper.net.br`)"
+      #- "traefik.http.routers.pon.entrypoints=websecure"
+      #- "traefik.http.routers.pon.tls.certresolver=le"
+      #- "traefik.http.services.pon.loadbalancer.server.port=8000"
 
-networks:
-  default:
-    ipam:
-      config:
-        - subnet: 172.22.2.0/24
-  infra:
-    external: true
+#networks:
+  #default:
+    #ipam:
+      #config:
+        #- subnet: 172.22.2.0/24
+  #infra:
+    #external: true

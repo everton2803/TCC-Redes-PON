@@ -29,6 +29,7 @@ class TipoNo(str, Enum):
     SPLITTER = "Splitter"     # Divisor óptico passivo
     CAIXA_EMENDA = "CaixaEmenda"  # Caixa de emenda / CEO
     ONU = "ONU"               # Optical Network Unit — terminal do cliente
+    TEXTO = "Texto"           # Anotação sem efeito no cálculo óptico
 
 
 class PadraPON(str, Enum):
@@ -158,6 +159,12 @@ class NoONU(NoBase):
     )
 
 
+class NoTexto(NoBase):
+    """Anotação visual sem efeito no cálculo óptico."""
+    tipo: TipoNo = TipoNo.TEXTO
+    texto: Optional[str] = Field(None, max_length=200)
+
+
 # ---------------------------------------------------------------------------
 # Enlace (aresta) entre dois nós
 # ---------------------------------------------------------------------------
@@ -254,7 +261,7 @@ class Enlace(BaseModel):
 # ---------------------------------------------------------------------------
 
 # União discriminada para aceitar qualquer tipo de nó
-NoRede = NoOLT | NoSplitter | NoCaixaEmenda | NoONU
+NoRede = NoOLT | NoSplitter | NoCaixaEmenda | NoONU | NoTexto
 
 
 class ParametrosGlobais(BaseModel):
