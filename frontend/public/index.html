@@ -1485,7 +1485,7 @@ function finishLink(dst) {
       comprimento_m:         100,
       atenuacao_db_por_km:   0.35,
       num_conexoes:          2,
-      perda_por_conexao_db:  eConector ? 0.5 : 0.1,
+      perda_por_conexao_db:  eConector ? 0.5 : 0.03,
       tipo_conexao:          eConector ? 'conector' : 'fusao',
     });
   }
@@ -1703,7 +1703,7 @@ function buildNodeForm(n) {
 function buildLinkForm(l, sNome, dNome) {
   const eConector   = l.tipo_conexao === 'conector';
   const perdaFibra  = ((l.comprimento_m / 1000) * l.atenuacao_db_por_km).toFixed(3);
-  const perdaConexao= ((l.num_conexoes ?? 2) * (l.perda_por_conexao_db ?? (eConector ? 0.5 : 0.1))).toFixed(3);
+  const perdaConexao= ((l.num_conexoes ?? 2) * (l.perda_por_conexao_db ?? (eConector ? 0.5 : 0.03))).toFixed(3);
   const perdaTotal  = (parseFloat(perdaFibra) + parseFloat(perdaConexao)).toFixed(3);
   const labelConexao= eConector ? 'Conectores (SC/APC)' : 'Fusões';
   const labelPerda  = eConector ? 'Perda/conector (dB)' : 'Perda/fusão (dB)';
@@ -1769,7 +1769,7 @@ function buildLinkForm(l, sNome, dNome) {
       <div class="field">
         <label>${labelPerda}</label>
         <input id="l-pconn" type="number" step="0.01" min="0"
-          value="${l.perda_por_conexao_db ?? (eConector ? 0.5 : 0.1)}">
+          value="${l.perda_por_conexao_db ?? (eConector ? 0.5 : 0.03)}">
       </div>
     </div>
 
