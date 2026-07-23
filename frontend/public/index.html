@@ -2309,6 +2309,9 @@ async function exportarPDF() {
   const gridG = svgClone.querySelector('#g-grid');
   if (gridG) gridG.remove();
 
+  // Remove os rótulos de comprimento e sinais dos enlaces na exportação
+  svgClone.querySelectorAll('.link-label, .link-pwr').forEach(el => el.remove());
+
   // Fundo branco
   const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
   bg.setAttribute('x',      String(minX));
