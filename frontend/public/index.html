@@ -2346,7 +2346,7 @@ async function exportarPDF() {
   svgClone.setAttribute('height',  String(viewH));
 
   // Remove transformações de pan/zoom do canvas para exportar o conteúdo em coordenadas reais
-  ['#g-grid', '#g-links', '#g-nodes'].forEach(sel => {
+  ['#g-grid', '#g-links', '#g-nodes', '#g-text'].forEach(sel => {
     const el = svgClone.querySelector(sel);
     if (el) el.removeAttribute('transform');
   });
