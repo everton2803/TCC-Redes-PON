@@ -126,6 +126,10 @@
     font-family: var(--mono); font-size: 10px;
     fill: var(--muted); pointer-events: none;
   }
+  .link-share {
+    font-family: var(--mono); font-size: 9px;
+    fill: #2d7a4f; pointer-events: none; font-weight: 600;
+  }
   .link-pwr {
     font-family: var(--mono); font-size: 9px;
     pointer-events: none; font-weight: 600;
@@ -734,6 +738,25 @@ function perdaSplitterParaEnlace(splitter, portaRelY) {
 
   // Usa a porta mais próxima
   return distSup <= distInf ? dados.perda_derivacao : dados.perda_principal;
+}
+
+function porcentagemSplitterParaEnlace(splitter, portaRelY) {
+  if (splitter.tipo_splitter !== 'desbalanceado') return null;
+  const razao = splitter.razao_desbalanceada || '20/80';
+  const [pctSup, pctInf] = razao.split('/').map(v => Number(v.trim()));
+
+  if (!Number.isFinite(pctSup) || !Number.isFinite(pctInf)) return null;
+
+  const ys   = posCirculos(2, SH);
+  const ySup = ys[0];
+  const yInf = ys[1];
+
+  if (portaRelY === null || portaRelY === undefined) return pctSup;
+
+  const distSup = Math.abs(portaRelY - ySup);
+  const distInf = Math.abs(portaRelY - yInf);
+
+  return distSup <= distInf ? pctSup : pctInf;
 }
 
 // Paleta de cores para agrupamento visual de nós
@@ -1349,6 +1372,8 @@ function renderLinks() {
 
   // Rótulo central com o comprimento
   enter.append('text').attr('class','link-label');
+  // Rótulo de porcentagem do splitter desbalanceado
+  enter.append('text').attr('class','link-share');
   // Rótulos de potência nas pontas
   enter.append('text').attr('class','link-pwr pwr-inicio');
   enter.append('text').attr('class','link-pwr pwr-fim');
@@ -1380,6 +1405,27 @@ function renderLinks() {
       .attr('x', mx).attr('y', my)
       .attr('text-anchor', 'middle')
       .text(`${d.comprimento_m} m`);
+  });
+
+  all.select('.link-share').each(function(d) {
+    const src = nodes.find(n => n.id === d.id_origem);
+    const dst = nodes.find(n => n.id === d.id_destino);
+    if (!src || !dst) return;
+
+    const pct = porcentagemSplitterParaEnlace(src, d.porta_origem_rel_y);
+    if (pct === null || pct === undefined) {
+      d3.select(this).text('');
+      return;
+    }
+
+    const y1 = d.porta_origem_rel_y !== undefined && d.porta_origem_rel_y !== null
+      ? src.y + d.porta_origem_rel_y : nodeCy(src);
+    const mx = (nodeCx(src) + nodeRx(dst)) / 2;
+    const my = (y1 + nodeRy(dst)) / 2 - 18;
+    d3.select(this)
+      .attr('x', mx).attr('y', my)
+      .attr('text-anchor', 'middle')
+      .text(`${pct}%`);
   });
 
   // Potência na ponta de origem (saída do nó src)
@@ -2328,6 +2374,7 @@ async function exportarPDF() {
     .link { stroke: #999; stroke-width: 1.8; fill: none; }
     .link.sel { stroke: #1a1a18; stroke-width: 2.5; }
     .link-label { font-size: 10px; fill: #888; }
+    .link-share { font-size: 9px; fill: #2d7a4f; font-weight: 600; }
     .link-pwr { font-size: 9px; font-weight: 600; }
     .port { fill: #fff; stroke: #aaa; stroke-width: 1.5; }
     .in-port-ceo, .in-port-onu { fill: #fff; stroke: #aaa; stroke-width: 1.5; }
