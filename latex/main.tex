@@ -1,0 +1,115 @@
+%=======================================================================
+% abnTeX2: Modelo de Trabalho Acadêmico em conformidade com 
+% ABNT NBR 14724:2011: Informação e documentação - Trabalhos acadêmicos
+% Adaptado para o IFC
+%=======================================================================
+
+\PassOptionsToPackage{brazilian}{babel}
+\documentclass[
+    % -- opções da classe memoir --
+    12pt,                 % tamanho da fonte    
+    oneside,              % não imprimir em verso e anverso
+    a4paper,              % tamanho do papel. 
+    % -- opções da classe abntex2 --
+    chapter=TITLE,        % títulos de capítulos em maiúsculas
+    section=TITLE,        % títulos de seções em maiúsculas
+    subsection=TITLE,     % títulos de subseções em maiúsculas
+    % -- opções do pacote babel --
+    english,              % idioma adicional para hifenização
+    brazilian,            % idioma principal
+    sumario=tradicional,
+]{abntex2-IFC}
+
+% Usa \input em vez de \include no preâmbulo para as configurações
+\input{config_inicial}
+
+% Capa inserida antes do \begin{document}
+\include{pretextuais/capa}
+
+\begin{document}
+
+% Retira espaço extra obsoleto entre as frases
+\frenchspacing 
+
+% ----------------------------------------------------------
+% ELEMENTOS PRÉ-TEXTUAIS
+% ----------------------------------------------------------
+
+% CAPA
+\imprimircapa
+
+% FOLHA DE ROSTO
+\imprimirfolhaderosto
+
+% FOLHA DE APROVAÇÃO
+\include{pretextuais/folhadeaprovacao}
+
+% DEDICATÓRIA, AGRADECIMENTOS E EPÍGRAFE
+\include{pretextuais/dedicatoria}
+\include{pretextuais/agradecimentos}
+\include{pretextuais/epigrafe}
+
+% RESUMO
+\include{pretextuais/resumo}
+
+% LISTA DE ILUSTRAÇÕES
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+
+% LISTA DE QUADROS (Se necessário descomentar)
+%\pdfbookmark[0]{\listofquadrosname}{loq}
+%\listofquadros*
+%\cleardoublepage
+
+% LISTA DE TABELAS (Se necessário descomentar)
+%\pdfbookmark[0]{\listtablename}{lot}
+%\listoftables*
+%\cleardoublepage
+
+% ACRÔNIMOS E SIGLAS
+\include{pretextuais/acronimos}
+
+\renewcommand*{\acronymname}{LISTA DE ABREVIATURAS E SIGLAS}
+\newglossarystyle{mylong}{%
+  \setglossarystyle{long}%
+  \renewenvironment{theglossary}%
+     {\begin{longtable}[l]{@{}p{\dimexpr 2cm-\tabcolsep}p{0.8\hsize}}}
+     {\end{longtable}}%
+}
+
+% Corrigido: Vírgula adicionada entre Acronyms e type=acronym
+\printglossary[toctitle=Acronyms, type=acronym, style=mylong, title=LISTA DE ABREVIATURAS E SIGLAS]
+\newpage
+
+% SUMÁRIO
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+
+% ------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ------------------------------------------------------
+\textual
+
+\include{conteudo/introducao}
+\include{conteudo/fundamentacao}
+\include{conteudo/metodologia}
+\include{conteudo/trabalhoscorrelatos}
+%\include{conteudo/cronograma}
+\include{conteudo/desenvolvimento}
+\include{conteudo/conclusao}
+
+% ----------------------------------------------------------
+% ELEMENTOS PÓS-TEXTUAIS
+% ----------------------------------------------------------
+\postextual
+
+% REFERÊNCIAS BIBLIOGRÁFICAS
+\bibliography{referencias}
+
+% APÊNDICES E ANEXOS (Descomentar se for usar)
+% \include{postextuais/apendice}
+% \include{postextuais/anexo}
+
+\end{document}

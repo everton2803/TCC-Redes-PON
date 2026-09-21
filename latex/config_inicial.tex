@@ -1,0 +1,73 @@
+% ---
+% Pacotes fundamentais 
+% ---
+\usepackage[brazilian]{babel}    % Define o idioma do documento (resolve o erro do tracklang)
+\usepackage{fontspec}            % Gerenciamento moderno de fontes
+\setmainfont{Times New Roman}    % Fonte Times nativa para XeLaTeX/LuaLaTeX
+
+\usepackage{lastpage}            % Usado pela Ficha catalográfica
+\usepackage{indentfirst}         % Indenta o primeiro parágrafo de cada seção
+\usepackage{color}               % Controle das cores
+\usepackage{graphicx}            % Inclusão de gráficos
+\usepackage{amsfonts}            % Símbolos
+
+% ---- Ajuste no alinhamento das listas
+\usepackage{enumitem}
+\setitemize[0]{itemindent=0.4cm,itemsep=0pt}
+\setenumerate[0]{itemindent=0.5cm,itemsep=0pt}
+
+% Lista de Acrônimos (carregado DEPOIS do babel)
+\usepackage[acronym, nomain, nonumberlist]{glossaries}
+\makeglossaries
+
+% ---
+% Pacotes de citações e layout
+% ---
+\usepackage[brazilian,hyperpageref]{backref} % Páginas com as citações na bibl
+\usepackage[a4paper]{geometry}
+
+% Referência ABNT
+\usepackage[alf,      
+            abnt-emphasize=bf,
+            abnt-url-package=none,
+            abnt-repeated-title-omit=yes,
+            abnt-full-initials=yes,
+            abnt-etal-list=3
+]{abntex2/abntex2cite}
+
+\usepackage{lipsum}              % Para geração de dummy text
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{setspace}
+\usepackage{tabularx}
+\usepackage[table,xcdraw]{xcolor}
+
+% Configurações de aparência do PDF final
+\definecolor{blue}{RGB}{41,5,195}
+
+% --- 
+% Espaçamentos entre linhas e parágrafos 
+% --- 
+\setlength{\parindent}{2cm}
+\linespread{1.5}
+
+% Espaçamento depois dos títulos
+\setlength{\afterchapskip}{\baselineskip}
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0cm}
+
+\hangcaption
+\captionstyle[\raggedright]{}
+
+% Desativa o texto de backref nas referências
+\renewcommand{\backref}{}
+\renewcommand*{\backrefalt}[4]{}
+
+% Ajuste nas listas de tabela, ilustrações e quadros
+\setlength\cftbeforechapterskip{0pt}
+
+% ---
+% Compila o índice
+% ---
+\makeindex

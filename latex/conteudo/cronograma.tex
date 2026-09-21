@@ -1,0 +1,58 @@
+\chapter{Considerações Finais}
+
+As considerações apresentadas neste capítulo buscam sintetizar os principais aspectos do projeto desenvolvido, destacando sua relevância acadêmica e aplicada, bem como os resultados esperados com a implementação da solução proposta. Considerando que o trabalho ainda se encontra em fase de desenvolvimento, esta seção concentra-se na retomada dos objetivos definidos, nas contribuições pretendidas e nos encaminhamentos previstos para a continuidade da pesquisa e da construção da aplicação.
+
+\section{Síntese da proposta e resultados esperados}
+
+O presente projeto tem como propósito o desenvolvimento de uma aplicação web interativa voltada ao planejamento de redes ópticas \gls{ftth} baseadas em arquitetura \gls{pon}, integrando, em um mesmo ambiente, a modelagem visual da topologia da rede, o cálculo automatizado do orçamento óptico e o armazenamento estruturado das informações do projeto. A proposta foi concebida a partir da constatação de que o planejamento dessas redes, quando realizado com apoio de planilhas, diagramas isolados e procedimentos manuais, tende a demandar maior esforço operacional, além de apresentar limitações quanto à clareza da representação da topologia e à validação técnica dos enlaces.
+
+Nesse contexto, espera-se que a solução proposta contribua para tornar o processo de planejamento mais claro, organizado e tecnicamente confiável, ao permitir que o projetista visualize a estrutura lógica da rede e acompanhe, de forma integrada, os impactos das escolhas topológicas sobre o orçamento óptico. Como resultados esperados, prevê-se a obtenção de uma aplicação funcional capaz de representar os principais elementos de uma rede \gls{pon}, processar automaticamente os cálculos associados às perdas ópticas e possibilitar o armazenamento e a recuperação dos projetos desenvolvidos. Além disso, espera-se que a aplicação constitua um instrumento de apoio tanto à elaboração quanto à análise de projetos, favorecendo a compreensão do encadeamento dos componentes da rede e auxiliando a tomada de decisão em cenários de planejamento.
+
+Do ponto de vista acadêmico, o projeto busca contribuir para a discussão sobre o uso integrado de visualização de dados e processamento técnico no contexto de redes ópticas, articulando conceitos de telecomunicações, desenvolvimento web e arquitetura de software em uma solução aplicada. Do ponto de vista prático, pretende-se oferecer uma ferramenta que possa apoiar a validação prévia de projetos de redes \gls{ftth}, reduzindo a dependência de processos fragmentados e favorecendo maior consistência na análise dos enlaces. Como etapa seguinte, o desenvolvimento da aplicação será conduzido conforme o cronograma proposto, abrangendo a implementação dos módulos previstos, sua integração, a realização de testes em cenários controlados e a análise dos resultados obtidos. Assim, entende-se que este projeto estabelece uma base coerente e tecnicamente fundamentada para a continuidade do trabalho no TCC final.
+
+\section{CRONOGRAMA}
+
+Este capítulo apresenta o cronograma previsto para a execução das etapas do projeto, contemplando as atividades de fundamentação teórica, modelagem, desenvolvimento, integração, validação e redação final do trabalho. A organização temporal das etapas busca assegurar a condução progressiva e coerente da pesquisa e da implementação da aplicação proposta.
+
+\begin{table}[h]
+\caption{Cronograma de execução do TCC}
+\label{tab:cronograma}
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|
+    >{\RaggedRight\hspace{0pt}}m{8cm}|
+    >{\Centering\hspace{0pt}}m{1cm}|
+    >{\Centering\hspace{0pt}}m{1cm}|
+    >{\Centering\hspace{0pt}}m{1cm}|
+    >{\Centering\hspace{0pt}}m{1cm}|
+    >{\Centering\hspace{0pt}}m{1cm}|
+    >{\Centering\hspace{0pt}}m{1cm}|
+    >{\Centering\hspace{0pt}}m{1cm}|
+}
+\hline
+\textbf{Etapa} & \textbf{Jul} & \textbf{Ago} & \textbf{Set} & \textbf{Out} & \textbf{Nov} & \textbf{Dez} \\
+\hline Revisão bibliográfica, levantamento de requisitos e definição da arquitetura da solução & X & X & & & & \\
+\hline Modelagem do sistema, prototipação da interface e definição da estrutura de dados & & X & X & & & \\
+\hline Desenvolvimento do \textit{backend} e implementação da lógica de cálculo do orçamento óptico & & X & X & & & \\
+\hline Desenvolvimento do \textit{frontend} e implementação da visualização interativa & & & X & X & & \\
+\hline Integração dos módulos, persistência dos dados e testes funcionais & & & & X & X & \\
+\hline Validação da aplicação, refinamento e ajustes finais & & & & & X & X \\
+\hline Redação da monografia e preparação da apresentação final & X & X & X & X & X & X \\
+\hline
+\end{tabular}
+}
+
+\vspace{3pt}
+{\raggedright \noindent Fonte: Elaboração Própria.}
+\end{table}
+\renewcommand{\arraystretch}{1}
+
+\begin{description}[style=nextline, leftmargin=0cm, itemsep=0.5em]
+    \item[Revisão bibliográfica, levantamento de requisitos e definição da arquitetura.] Prevista para julho e agosto, essa etapa concentra o aprofundamento da fundamentação teórica, a consolidação dos requisitos do sistema e a definição da arquitetura geral da aplicação, estabelecendo as bases conceituais e técnicas do projeto.
+    \item[Modelagem do sistema, prototipação da interface e definição da estrutura de dados.] Desenvolvida entre agosto e setembro, essa etapa compreende a organização lógica dos módulos da aplicação, a elaboração dos protótipos de interface e a definição da estrutura dos dados que representarão a topologia da rede e os parâmetros técnicos associados.
+    \item[Desenvolvimento do \textit{backend} e implementação da lógica de cálculo do orçamento óptico.] Previsto para agosto e setembro, contempla a implementação da \gls{api}, das regras de negócio, das validações e das rotinas responsáveis pelo processamento dos cálculos ópticos da aplicação.
+    \item[Desenvolvimento do \textit{frontend} e implementação da visualização interativa.] Distribuída entre setembro e outubro, essa etapa envolve a construção da interface web da aplicação e da visualização interativa da topologia da rede, permitindo a modelagem gráfica dos elementos e a interação do usuário com o sistema.
+    \item[Integração dos módulos, persistência dos dados e testes funcionais.] Prevista para outubro e novembro, essa etapa corresponde à integração entre \textit{frontend} e \textit{backend}, à implementação do armazenamento das informações da rede e à realização de testes funcionais para verificação do comportamento da aplicação.
+    \item[Validação da aplicação, refinamento e ajustes finais.] Desenvolvida entre novembro e dezembro, essa etapa compreende a execução dos cenários de teste, a comparação dos resultados obtidos com valores de referência e a incorporação de ajustes necessários ao aprimoramento da solução.
+    \item[Redação da monografia e preparação da apresentação final.] Realizada de forma contínua ao longo de todo o período, essa etapa envolve a consolidação da escrita acadêmica do trabalho, a revisão do texto e a preparação do material a ser apresentado à banca examinadora.
+\end{description}
