@@ -21,7 +21,7 @@ Para atingir o objetivo geral proposto, foram definidos os seguintes objetivos e
 \begin{itemize}
   \item Permitir a modelagem visual de topologias de redes ópticas \gls{pon}, com inserção e edição de elementos e enlaces da rede.
   \item Calcular o orçamento óptico dos caminhos entre \gls{olt} e \gls{onu}, considerando perdas de fibra, conectores, fusões e \textit{splitters} a partir dos parâmetros informados no projeto.
-  \item Apresentar indicadores de potência, margem e status dos enlaces para apoiar a análise técnica durante a elaboração da topologia.
+  \item Apresentar indicadores de potência, margem e \textit{status} dos enlaces para apoiar a análise técnica durante a elaboração da topologia.
   \item Permitir a persistência, a recuperação e a troca dos projetos modelados por meio de arquivos no formato \gls{json}.
 \end{itemize}
 
@@ -29,11 +29,11 @@ Para atingir o objetivo geral proposto, foram definidos os seguintes objetivos e
 
 A expansão das redes ópticas de acesso, especialmente daquelas baseadas na arquitetura \gls{pon}, aumenta a necessidade de processos de planejamento precisos e rastreáveis. O orçamento óptico precisa considerar a potência dos equipamentos, a atenuação da fibra, conectores, fusões e \textit{splitters}, além da configuração específica de cada caminho. Uma ferramenta que mantenha esses elementos relacionados pode reduzir o retrabalho e apoiar a identificação antecipada de enlaces com margem insuficiente \cite{keiser2011pon,oliviero2014fiber}.
 
-O comparativo apresentado no Capítulo 3 mostra que as soluções analisadas atendem a partes do problema. Abordagens baseadas em GIS e ferramentas de inventário favorecem a documentação geográfica e operacional; aplicações de visualização facilitam a exploração da topologia; e planilhas permitem organizar parâmetros e executar cálculos. Entretanto, a integração entre edição visual da topologia lógica, cálculo automático do orçamento óptico e apresentação dos resultados técnicos não aparece como elemento central em conjunto. Essa lacuna justifica investigar uma solução que reúna essas funções em um mesmo fluxo de planejamento.
+O comparativo apresentado no Capítulo 3 mostra que as soluções analisadas atendem a partes do problema. Abordagens baseadas em \gls{gis} e ferramentas de inventário favorecem a documentação geográfica e operacional; aplicações de visualização facilitam a exploração da topologia; e planilhas permitem organizar parâmetros e executar cálculos. Entretanto, a integração entre edição visual da topologia lógica, cálculo automático do orçamento óptico e apresentação dos resultados técnicos não aparece como elemento central em conjunto. Essa lacuna justifica investigar uma solução que reúna essas funções em um mesmo fluxo de planejamento.
 
 Nesse contexto, a aplicação proposta justifica-se por unir a visualização interativa da topologia ao cálculo automático do orçamento óptico. A representação gráfica permite acompanhar a estrutura lógica e localizar os componentes de cada caminho, enquanto os indicadores de potência e margem apoiam a avaliação da viabilidade do projeto. O objetivo não é substituir ferramentas geográficas ou de inventário, mas atender à etapa de análise técnica do planejamento.
 
-As decisões de implementação sustentam essa integração. A biblioteca D3.js oferece recursos para manipulação dos nós, enlaces, zoom e arraste, enquanto a API REST separa a interface da lógica de cálculo. O formato JSON organiza a topologia e seus parâmetros em uma estrutura leve e interoperável, facilitando a persistência e a troca dos projetos \cite{bray2017json,bostock2011d3,fielding2000rest}.
+As decisões de implementação sustentam essa integração. A biblioteca D3.js oferece recursos para manipulação dos nós, enlaces, zoom e arraste, enquanto a \gls{api} \gls{rest} separa a interface da lógica de cálculo. O formato \gls{json} organiza a topologia e seus parâmetros em uma estrutura leve e interoperável, facilitando a persistência e a troca dos projetos \cite{bray2017json,bostock2011d3,fielding2000rest}.
 
 \section{Estrutura do texto}
 
