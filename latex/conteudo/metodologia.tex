@@ -56,6 +56,12 @@ Na sequência, serão executadas as etapas de prototipação das interfaces, imp
 
 Por fim, o sistema será submetido a uma etapa de refinamento, na qual eventuais ajustes identificados durante os testes serão incorporados com o objetivo de aprimorar a usabilidade, a clareza da visualização e a robustez do processamento. Como critério geral, busca-se assegurar que cada incremento preserve coerência arquitetural, funcionamento adequado e alinhamento com os objetivos definidos para o trabalho.
 
+\subsection{Documentação dos requisitos e dos testes}
+
+Os requisitos funcionais, não funcionais e as restrições do sistema são consolidados no Capítulo 5, juntamente com a descrição da arquitetura, da modelagem de dados e dos módulos implementados. O código-fonte e os arquivos de projeto permanecem versionados no repositório do GitHub, que funciona como registro das alterações realizadas durante o desenvolvimento. Para esta versão do trabalho, não foi adotado um sistema separado de histórias de usuários ou de casos de uso; as necessidades do sistema são descritas diretamente como requisitos e relacionadas às funcionalidades implementadas.
+
+Os procedimentos de teste serão documentados na seção de resultados e análise do trabalho. Para cada caso serão apresentados a finalidade, a topologia utilizada, os parâmetros de entrada, o procedimento de execução, o resultado esperado, o resultado obtido e a diferença observada. Os testes automatizados correspondentes permanecem organizados nos arquivos do diretório \texttt{backend/tests}, enquanto os cálculos manuais de referência e os resultados consolidados serão apresentados em tabelas no texto. Dessa forma, o leitor poderá reproduzir a validação a partir da documentação acadêmica e conferir sua correspondência com os artefatos do repositório.
+
 \section{Procedimentos de Validação e Análise}
 
 A validação da solução será realizada por meio de cenários controlados e reproduzíveis, representativos do planejamento de redes ópticas \gls{pon}. Para cada cenário serão congelados a topologia, os parâmetros globais, os valores de potência e sensibilidade dos equipamentos e as perdas dos componentes. Os instrumentos de coleta serão constituídos pelos arquivos de projeto, pelos valores calculados pelo \textit{backend} e por uma tabela de referência elaborada independentemente do código.
