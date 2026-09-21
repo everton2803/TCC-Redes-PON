@@ -3,7 +3,7 @@ A crescente demanda por serviços de banda larga tem impulsionado o desenvolvime
 
 O dimensionamento de redes ópticas \gls{pon} exige a consideração de diversos elementos técnicos, como a potência transmitida pela \gls{olt}, as perdas introduzidas por fibras ópticas, conectores, fusões e \textit{splitters}, bem como a topologia adotada ao longo da rede. Conforme apresentado por \citeonline{keiser2011pon}, a correta análise do orçamento óptico é essencial para garantir que o sinal chegue ao usuário final dentro dos limites de potência recomendados. Quando esses cálculos são realizados manualmente, o processo tende a ser demorado e sujeito a falhas, sobretudo em projetos com múltiplos componentes distribuídos geograficamente. Dessa forma, a ausência de ferramentas automatizadas e visuais pode comprometer a eficiência e a confiabilidade do planejamento das redes \gls{ftth}.
 
-Para mitigar tais limitações, propõe-se o desenvolvimento de uma aplicação web interativa voltada à modelagem e análise de redes ópticas \gls{pon}. A ferramenta permitirá ao usuário projetar a topologia da rede de forma visual, realizar cálculos de orçamento óptico e avaliar a viabilidade do projeto antes de sua implementação. Desse modo, busca-se auxiliar profissionais e empresas do setor de telecomunicações na tomada de decisão, reduzindo erros de dimensionamento, custos operacionais e tempo de planejamento.
+Para mitigar tais limitações, propõe-se o desenvolvimento de uma aplicação web interativa voltada à modelagem e análise de redes ópticas \gls{pon}. A ferramenta não se limita à representação visual da rede: ela integra a construção da topologia ao cálculo do orçamento óptico, permitindo que o projetista altere componentes e parâmetros e receba indicadores técnicos para apoiar decisões de dimensionamento. Desse modo, busca-se reduzir erros de cálculo e o tempo de planejamento antes da implementação do projeto.
 
 \section{Problema}
 O planejamento de redes ópticas baseadas na arquitetura \gls{pon} envolve a análise de múltiplos parâmetros técnicos, como topologia da rede, distribuição de componentes passivos e cálculo do orçamento óptico. Na prática, esses processos são frequentemente realizados de forma manual, por meio de planilhas e diagramas não integrados, o que torna o planejamento demorado, suscetível a erros e de difícil visualização. Embora existam ferramentas para esse fim, muitas delas são voltadas principalmente ao registro físico ou geográfico dos elementos da rede, ou se baseiam no uso de planilhas, apresentando limitações quanto à integração entre modelagem visual e análise de desempenho. Assim, a ausência de soluções que integrem, de maneira automatizada e visual, a modelagem da topologia e o cálculo do orçamento óptico dificulta a validação técnica dos projetos e compromete a eficiência do planejamento de redes \gls{ftth}.
@@ -12,14 +12,13 @@ O planejamento de redes ópticas baseadas na arquitetura \gls{pon} envolve a an�
 Desenvolver uma aplicação web interativa que integre a modelagem visual da topologia de redes ópticas \gls{pon} ao cálculo automático do orçamento óptico, fornecendo uma solução que auxilie o planejamento, a análise e a validação técnica de projetos de redes \gls{ftth}.
 
 \section{Objetivos Específicos}
-Para atingir o objetivo geral proposto, este trabalho foi dividido em um conjunto de objetivos específicos que orientam o desenvolvimento da aplicação web. Esses objetivos contemplam tanto os aspectos técnicos relacionados à modelagem e ao cálculo do orçamento óptico em redes \gls{pon} quanto as decisões arquiteturais e de usabilidade. São eles:
+Para atingir o objetivo geral proposto, foram definidos os seguintes objetivos específicos:
 
 \begin{itemize}
-  \item Projetar uma interface para a modelagem visual da topologia de redes ópticas \gls{pon}, possibilitando a inserção de elementos como \gls{olt}, caixas de emenda, \textit{splitters} e terminais de forma interativa.
-  \item Implementar o cálculo automático do orçamento óptico, considerando perdas associadas à fibra óptica, conectores, fusões e divisores ópticos, conforme parâmetros técnicos definidos.
-  \item Desenvolver uma interface dinâmica e interativa, utilizando a biblioteca D3.js para a visualização gráfica da topologia da rede e atualização em tempo real dos resultados.
-  \item Estruturar o \textit{backend} da aplicação seguindo a arquitetura \gls{mvc}, disponibilizando os dados e resultados por meio de uma \gls{api} \textit{RESTful} e garantindo a separação entre lógica de negócio, dados e interface.
-  \item Armazenar as informações da rede planejada em formato \gls{json}, permitindo o armazenamento, a recuperação e a reutilização dos projetos desenvolvidos na aplicação.
+  \item Permitir a modelagem visual de topologias de redes ópticas \gls{pon}, com inserção e edição de elementos e enlaces da rede.
+  \item Calcular o orçamento óptico dos caminhos entre \gls{olt} e \gls{onu}, considerando perdas de fibra, conectores, fusões e \textit{splitters} a partir dos parâmetros informados no projeto.
+  \item Apresentar indicadores de potência, margem e status dos enlaces para apoiar a análise técnica durante a elaboração da topologia.
+  \item Permitir a persistência, a recuperação e a troca dos projetos modelados por meio de arquivos no formato \gls{json}.
 \end{itemize}
 
 \section{Justificativa}
@@ -32,14 +31,14 @@ Nesse contexto, o desenvolvimento de uma aplicação \textit{web} que una visual
 
 \section{Estrutura do texto}
 
-O presente trabalho está organizado de forma a apresentar, de maneira lógica e progressiva, os conceitos, a fundamentação teórica, o desenvolvimento da solução proposta e a análise dos resultados obtidos, com foco no planejamento de redes ópticas baseadas na arquitetura \gls{pon}. 
+O presente trabalho está organizado de forma a apresentar, de maneira lógica e progressiva, os conceitos, a fundamentação teórica, os trabalhos correlatos, a metodologia, o desenvolvimento da solução proposta e a análise dos resultados obtidos, com foco no planejamento de redes ópticas baseadas na arquitetura \gls{pon}.
 
 O Capítulo 2 contempla a fundamentação teórica, reunindo os principais conceitos relacionados às redes de acesso ópticas, arquitetura \gls{pon}, topologias de rede, cálculo do orçamento óptico e ferramentas de planejamento. Também são abordados conceitos de visualização de dados e arquiteturas de aplicações web, que fundamentam as escolhas tecnológicas adotadas na solução proposta. 
 
-No Capítulo 3 é descrita a metodologia adotada no trabalho, incluindo a caracterização da pesquisa, a arquitetura da solução baseada em modelo cliente-servidor, as tecnologias empregadas e o processo de desenvolvimento da aplicação. Além disso, são apresentados os procedimentos definidos para a validação do sistema e análise dos resultados. 
+O Capítulo 3 apresenta os trabalhos correlatos, discutindo soluções acadêmicas e ferramentas de mercado voltadas ao planejamento e à gestão de redes \gls{ftth}. A análise comparativa delimita a lacuna relacionada à integração entre a modelagem da topologia e o cálculo do orçamento óptico.
 
-O Capítulo 4 apresenta os trabalhos correlatos, discutindo soluções acadêmicas e ferramentas de mercado voltadas ao planejamento e gestão de redes \gls{ftth}. A análise comparativa permite identificar limitações existentes, especialmente quanto à integração entre visualização da topologia e cálculo do orçamento óptico, justificando a proposta desenvolvida neste estudo. 
+No Capítulo 4 é descrita a metodologia adotada no trabalho, incluindo a caracterização da pesquisa, a arquitetura da solução, as tecnologias empregadas, o processo de desenvolvimento e os procedimentos de validação e análise.
 
-Os capítulos subsequentes contemplam a apresentação dos resultados esperados, as discussões e as considerações finais do trabalho, nas quais são sintetizadas as contribuições da aplicação desenvolvida, suas limitações e sugestões para trabalhos futuros, reforçando sua relevância no contexto do planejamento de redes ópticas. 
+O Capítulo 5 apresenta o desenvolvimento da aplicação, incluindo seus requisitos, sua arquitetura, a modelagem dos dados, o algoritmo de cálculo e a implementação dos módulos. Os capítulos subsequentes contemplam os resultados, as discussões e as considerações finais, nas quais são sintetizadas as contribuições da aplicação, suas limitações e sugestões para trabalhos futuros.
 
 A estrutura adotada busca garantir organização, clareza e coerência na apresentação do conteúdo, permitindo ao leitor compreender, de maneira progressiva, os aspectos teóricos, técnicos e práticos envolvidos no desenvolvimento da solução proposta.

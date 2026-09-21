@@ -11,15 +11,15 @@ Na etapa de análise e especificação de requisitos busquei mapear as necessida
 Os Requisitos Funcionais descrevem as ações, cálculos e comportamentos que o sistema deve executar para atender às necessidades do usuário:
 
 \begin{itemize}
-    \item \textbf{Criação e Edição Interativa da Topologia:} O sistema deve permitir ao usuário construir e modificar visualmente a árvore da rede, inserindo, movendo e removendo elementos típicos de rede \gls{pon}, tais como \gls{olt}, caixas de emenda/fusão, \textit{splitters} (balanceados e desbalanceados), \gls{cto} e \gls{onu}.
+    \item \textbf{Criação e Edição Interativa da Topologia:} O sistema deve permitir ao usuário construir e modificar visualmente a árvore da rede, inserindo, movendo e removendo elementos como \gls{olt}, caixas de emenda/fusão, \textit{splitters} (balanceados e desbalanceados) e \gls{onu}. Elementos sem comportamento próprio no cálculo, como CTOs, podem ser identificados por anotações visuais.
     
     \item \textbf{Cálculo Automatizado do Orçamento Óptico:} O sistema deve calcular automaticamente a perda acumulada de potência ao longo de cada enlace, considerando a atenuação distribuída da fibra por quilômetro.
     
     \item \textbf{Contabilização de Atenuações Concentradas:} O sistema deve computar as perdas pontuais de inserção introduzidas por conectores ópticos, emendas/fusões de fibra e elementos passivos de divisão (\textit{splitters} balanceados e desbalanceados).
     
-    \item \textbf{Validação por Classe de Transceptor:} O sistema deve parametrizar e validar os níveis de potência de transmissão ($T_x$) e os limites de sensibilidade do receptor ($R_x$) de acordo com as classes normatizadas.
+    \item \textbf{Parametrização dos Equipamentos:} O sistema deve permitir informar a potência de transmissão ($T_x$) da \gls{olt} e a sensibilidade de recepção ($R_x$) das \glspl{onu}, possibilitando representar diferentes equipamentos por meio de parâmetros customizados.
     
-    \item \textbf{Indicação do Status do Link:} O sistema deve sinalizar visualmente em tempo real se a potência óptica que atinge cada nó de terminação \gls{onu} está dentro dos limites operacionais adequados, exibindo alertas em caso de sinal degradado ou fora da margem de sensibilidade.
+    \item \textbf{Indicação do Status do Link:} O sistema deve sinalizar, após alterações na topologia ou nos parâmetros, se a potência óptica que atinge cada nó de terminação \gls{onu} está dentro dos limites operacionais adequados, exibindo alertas em caso de sinal degradado ou fora da margem de sensibilidade.
     
     \item \textbf{Persistência de Projetos em \gls{json}:} O sistema deve permitir salvar, carregar, atualizar e exportar a estrutura completa da topologia da rede e seus parâmetros de configuração em arquivos no formato \gls{json}.
     
@@ -33,11 +33,11 @@ Os Requisitos Não Funcionais definem os critérios de qualidade, desempenho, us
 \begin{itemize}
     \item \textbf{Arquitetura em Camadas e Desacoplamento:} O \textit{backend} deve ser implementado em Python utilizando o \textit{framework} FastAPI, seguindo o padrão de projeto \gls{mvc} para separação clara entre rotas, regras de negócio e persistência.
     
-    \item \textbf{Renderização Gráfica de Alto Desempenho:} A interface gráfica (\textit{frontend}) deve utilizar a biblioteca manipuladora de grafos D3.js no navegador, garantindo renderização fluida e reativa da estrutura da rede em tempo real.
+    \item \textbf{Renderização Gráfica Interativa:} A interface gráfica (\textit{frontend}) deve utilizar a biblioteca D3.js no navegador para permitir a manipulação dos nós e enlaces, o zoom, o arraste e a atualização dos indicadores. O comportamento em redes densas deve ser avaliado por testes de desempenho, não presumido como garantia para qualquer escala.
     
     \item \textbf{Portabilidade e Conteinerização:} A aplicação deve fornecer suporte completo a contêineres Docker e orquestração via Docker Compose, permitindo execução simples e padronizada em ambientes de desenvolvimento e produção independente do sistema operacional hospedeiro.
     
-    \item \textbf{Baixo Tempo de Resposta:} As chamadas à \gls{api} REST para recalculo do orçamento óptico devem responder em tempo inferior a 200 milissegundos.
+    \item \textbf{Tempo de Resposta Avaliável:} O tempo de resposta das chamadas à \gls{api} REST para recálculo do orçamento óptico deve ser medido em cenários controlados, considerando o tamanho da topologia e a quantidade de caminhos analisados.
     
 \end{itemize}
 
@@ -63,7 +63,7 @@ A interface foi concebida em três áreas funcionais integradas:
     
     \item \textbf{Área Central de Modelagem (\textit{Canvas}):} Espaço interativo principal onde a topologia gráfica é desenhada e manipulada via arrasto, renderizando os enlaces de fibra e caixas de atendimento.
     
-    \item \textbf{Painel de Propriedades e Orçamento Óptico:} Coluna lateral à direita dedicada à edição dos parâmetros do nó selecionado e exibição em tempo real do nível de sinal calculado.
+    \item \textbf{Painel de Propriedades e Orçamento Óptico:} Coluna lateral à direita dedicada à edição dos parâmetros do nó selecionado e exibição do nível de sinal calculado após o recálculo da topologia.
 \end{itemize}
 
 A Figura~\ref{fig:wireframe_interface} ilustra a concepção estrutural da interface do sistema.
@@ -254,7 +254,7 @@ O ciclo de execução ilustrado compreende as seguintes etapas encadeadas:
 \begin{enumerate}
     \item \textbf{Captura da Ação:} O usuário altera a topologia (ex.: altera a distância de um cabo de fibra óptica ou altera a razão de um \textit{splitter}).
     \item \textbf{Serialização:} O \textit{frontend} lê a estrutura do grafo manipulado via D3.js e monta o documento \gls{json} padronizado com os nós, enlaces e parâmetros de rede.
-    \item \textbf{Requisição HTTP:} A aplicação envia uma requisição \gls{http} \texttt{POST} assíncrona contendo o estado da rede para a rota \texttt{/api/calculo}.
+    \item \textbf{Requisição HTTP:} A aplicação envia uma requisição \gls{http} \texttt{POST} assíncrona contendo o estado da rede para a rota \texttt{/calculo/orcamento}.
     \item \textbf{Validação e Processamento:} O controlador valida os dados via Pydantic e aciona o motor de cálculo em Python (\texttt{calculo\_optico.py}), que percorre iterativamente a árvore da rede somando as perdas do trecho.
     \item \textbf{Renderização Visual:} O \textit{backend} retorna a lista de nós com seus respectivos valores de potência estimada. O \textit{frontend} atualiza imediatamente os rótulos de sinal em tela e aplica códigos de cores (verde para sinal dentro da margem, amarelo para atenção e vermelho para degradação/inoperância).
 \end{enumerate}
@@ -490,7 +490,7 @@ from fastapi import APIRouter, HTTPException, status
 from app.models.network import ProjetoSchema
 from app.services.calculo_optico import calcular_orcamento_optico
 
-router = APIRouter(prefix="/api/calculo", tags=["Cálculo Óptico"])
+router = APIRouter(prefix="/calculo", tags=["Cálculo Óptico"])
 
 @router.post("", status_code=status.HTTP_200_OK)
 async def processar_calculo(projeto: ProjetoSchema):
@@ -624,7 +624,7 @@ A reatividade do sistema ocorre pelo envio assíncrono do estado do grafo para a
 \begin{verbatim}
 async function calcularOrcamentoOptico() {
     try {
-        const response = await fetch('/api/calculo', {
+        const response = await fetch('/calculo/orcamento', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(projetoAtual)
