@@ -1,0 +1,105 @@
+This is BibTeX, Version 0.99e (TeX Live 2026)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: pretextuais/folhadeaprovacao.aux
+A level-1 auxiliary file: pretextuais/dedicatoria.aux
+A level-1 auxiliary file: pretextuais/agradecimentos.aux
+A level-1 auxiliary file: pretextuais/resumo.aux
+A level-1 auxiliary file: pretextuais/acronimos.aux
+A level-1 auxiliary file: conteudo/introducao.aux
+A level-1 auxiliary file: conteudo/fundamentacao.aux
+A level-1 auxiliary file: conteudo/metodologia.aux
+A level-1 auxiliary file: conteudo/trabalhoscorrelatos.aux
+A level-1 auxiliary file: conteudo/desenvolvimento.aux
+A level-1 auxiliary file: conteudo/conclusao.aux
+The style file: abntex2/abntex2-alf.bst
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Database file #1: abntex2/abntex2-options.bib
+Database file #2: referencias.bib
+Reallocated singl_function (elt_size=4) to 100 items from 50.
+Reallocated glb_str_ptr (elt_size=4) to 20 items from 10.
+Reallocated global_strs (elt_size=200001) to 20 items from 10.
+Reallocated glb_str_end (elt_size=4) to 20 items from 10.
+You can't pop an empty literal stack for entry apnic_gpon_budget
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry cto_fibracem
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry ftthplanner2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry geogridmaps2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry cto_ftth_distribution
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry holight_optical_budget
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry geogrid_iclass_2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry itu_optical_access_tutorial
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry ozmap_help_2025
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry ozmap2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry qgis2016ftth_case
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry reenskaug1979mvc
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry servicenow_inventory_2024
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry foa_splice_closure
+while executing---line 2271 of file abntex2/abntex2-alf.bst
++---------------------------------------------------------+
+| Estilo bibliográfico abntex2-alf.bst versão v<VERSION>           |
+| Em caso de dúvidas ou problemas com este estilo procure |
+| http://abntex2.googlecode.com                           |
++---------------------------------------------------------+
+You've used 46 entries,
+            6879 wiz_defined-function locations,
+            1434 strings with 16237 characters,
+and the built_in function-call counts, 29932 in all, are:
+= -- 2546
+> -- 867
+< -- 22
++ -- 358
+- -- 273
+* -- 1927
+:= -- 4218
+add.period$ -- 178
+call.type$ -- 46
+change.case$ -- 303
+chr.to.int$ -- 83
+cite$ -- 40
+duplicate$ -- 1596
+empty$ -- 2570
+format.name$ -- 1267
+if$ -- 7267
+int.to.chr$ -- 6
+int.to.str$ -- 1
+missing$ -- 760
+newline$ -- 217
+num.names$ -- 200
+pop$ -- 939
+preamble$ -- 1
+purify$ -- 153
+quote$ -- 0
+skip$ -- 1715
+stack$ -- 1
+substring$ -- 928
+swap$ -- 551
+text.length$ -- 8
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 7
+warning$ -- 0
+while$ -- 248
+width$ -- 0
+write$ -- 636
+(There were 14 error messages)

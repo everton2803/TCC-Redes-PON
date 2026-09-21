@@ -1,0 +1,280 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v<VERSION> }
+
+\bibitem[{APNIC Blog} 2024]{apnic_gpon_budget}
+\abntrefinfo{{APNIC Blog}}{{APNIC Blog}}{2024}
+{{APNIC Blog}.  \textbf{GPON power budget calculations}, 2024.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://blog.apnic.net/2024/11/14/gpon-power-budget-calculations/}.}
+
+\bibitem[Bostock, Ogievetsky e Heer 2011]{bostock2011d3}
+\abntrefinfo{Bostock, Ogievetsky e Heer}{Bostock; Ogievetsky; Heer}{2011}
+{BOSTOCK, Michael; OGIEVETSKY, Vadim; HEER, Jeffrey. D3: Data-driven documents.
+\textbf{IEEE Transactions on Visualization and Computer Graphics}, v.~17,
+  n.~12, p. 2301--2309, 2011.}
+
+\bibitem[Bray 2017]{bray2017json}
+\abntrefinfo{Bray}{Bray}{2017}
+{BRAY, Tim. \textbf{The JavaScript Object Notation (JSON) Data Interchange
+  Format}.
+[S.l.], 2017. Acesso em: mar. 2026. Dispon{\'\i}vel em:
+  \url{https://www.rfc-editor.org/rfc/rfc8259}.}
+
+\bibitem[Card, Mackinlay e Shneiderman 1999]{card1999information}
+\abntrefinfo{Card, Mackinlay e Shneiderman}{Card; Mackinlay; Shneiderman}{1999}
+{CARD, Stuart~K.; MACKINLAY, Jock~D.; SHNEIDERMAN, Ben. \textbf{Readings in
+  Information Visualization: Using Vision to Think}. San Francisco: Morgan
+  Kaufmann, 1999.}
+
+\bibitem[Chakali \textit{et al.} 2025]{chakali2025gis_ftth}
+\abntrefinfo{Chakali \textit{et al.}}{Chakali \textit{et al.}}{2025}
+{CHAKALI, Ahmed~Nadjib \textit{et al.} Enhanced management of fiber optic
+  networks using gis-based spatial analytics and real-time fault monitoring: A
+  case study of the boukhnfos ftth infrastructure in laghouat, algeria.
+2025.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://www.jisem-journal.com/index.php/journal/article/download/13870/6579/23553}.}
+
+\bibitem[Creswell 2014]{creswell2014research}
+\abntrefinfo{Creswell}{Creswell}{2014}
+{CRESWELL, John~W. \textbf{Research Design: Qualitative, Quantitative, and
+  Mixed Methods Approaches}. 4. ed. Thousand Oaks: SAGE Publications, 2014.}
+
+\bibitem[Fatahillah e Wulandari 2025]{fatahillah2025visnetwork_ftth}
+\abntrefinfo{Fatahillah e Wulandari}{Fatahillah; Wulandari}{2025}
+{FATAHILLAH, Wangsa~Reisyah; WULANDARI, Asri. Perancangan visualisasi topologi
+  jaringan akses ftth pada optical line terminal (olt) dengan library
+  vis-network.
+\textbf{Prosiding SNIV}, 2025.
+Acesso em: maio 2026.
+Dispon{\'\i}vel em:
+  \url{https://prosiding.pnj.ac.id/index.php/sniv/article/download/3890/2345/22044}.}
+
+\bibitem[Few 2012]{few2012information}
+\abntrefinfo{Few}{Few}{2012}
+{FEW, Stephen. \textbf{Show Me the Numbers: Designing Tables and Graphs to
+  Enlighten}. 2. ed. Burlingame: Analytics Press, 2012.}
+
+\bibitem[{Fibracem} 2024]{cto_fibracem}
+\abntrefinfo{{Fibracem}}{{Fibracem}}{2024}
+{{Fibracem}.  \textbf{Caixa Terminal Óptica CTO NAP NG}, 2024.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://www.fibracem.com/produtos/caixa-terminal-\%C3\%B3ptica-cto-nap-ng}.}
+
+\bibitem[Fielding 2000]{fielding2000rest}
+\abntrefinfo{Fielding}{Fielding}{2000}
+{FIELDING, Roy~Thomas.
+\textbf{Architectural Styles and the Design of Network-based Software
+  Architectures}.
+Tese (Doutorado) --- University of California, Irvine, 2000.}
+
+\bibitem[{FTTH Planner} 2026]{ftthplanner2026}
+\abntrefinfo{{FTTH Planner}}{{FTTH Planner}}{2026}
+{{FTTH Planner}.  \textbf{FTTx Planner | Software para Projetos de Fibra
+  Óptica FTTH}, 2026.
+Acesso em: maio 2026.
+Dispon{\'\i}vel em: \url{https://ftthplanner.com.br/}.}
+
+\bibitem[{GeoGrid Maps} 2026]{geogridmaps2026}
+\abntrefinfo{{GeoGrid Maps}}{{GeoGrid Maps}}{2026}
+{{GeoGrid Maps}.  \textbf{GeoGridMaps - Documentação de redes de fibra
+  óptica}, 2026.
+Acesso em: maio 2026.
+Dispon{\'\i}vel em: \url{https://geogridmaps.com.br/}.}
+
+\bibitem[Gil 2008]{gil2008metodos}
+\abntrefinfo{Gil}{Gil}{2008}
+{GIL, Antonio~Carlos. \textbf{Métodos e Técnicas de Pesquisa Social}. 6. ed.
+  São Paulo: Atlas, 2008.}
+
+\bibitem[{Holight Optical} 2025]{cto_ftth_distribution}
+\abntrefinfo{{Holight Optical}}{{Holight Optical}}{2025a}
+{{Holight Optical}.  \textbf{FAT vs FDB vs CTO Boxes: Differences in FTTH
+  Distribution Hardware}, 2025.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://www.holightoptic.com/fat-vs-fdb-vs-cto-box-differences-in-ftth-distribution-hardware/}.}
+
+\bibitem[{Holight Optical} 2025]{holight_optical_budget}
+\abntrefinfo{{Holight Optical}}{{Holight Optical}}{2025b}
+{\underline{\ \ \ \ \ \ \ \ }.  \textbf{What Is Optical Power Budget?}, 2025.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://www.holightoptic.com/what-is-optical-power-budget/}.}
+
+\bibitem[{IClass} 2026]{geogrid_iclass_2026}
+\abntrefinfo{{IClass}}{{IClass}}{2026}
+{{IClass}.  \textbf{GeoGrid Parceiro IClass}, 2026.
+Acesso em: maio 2026.
+Dispon{\'\i}vel em: \url{https://iclass.com.br/geogrid-parceiro-iclass/}.}
+
+\bibitem[{International Telecommunication Union} 2008]{itutg9841}
+\abntrefinfo{{International Telecommunication Union}}{{International
+  Telecommunication Union}}{2008}
+{{International Telecommunication Union}. \textbf{Gigabit-capable Passive
+  Optical Networks (GPON): General characteristics}.
+[S.l.], 2008. Acesso em: mar. 2026. Dispon{\'\i}vel em:
+  \url{https://www.itu.int/rec/T-REC-G.984.1}.}
+
+\bibitem[{International Telecommunication Union}
+  2010]{itu_optical_access_tutorial}
+\abntrefinfo{{International Telecommunication Union}}{{International
+  Telecommunication Union}}{2010}
+{\underline{\ \ \ \ \ \ \ \ }.  \textbf{Optical access transmission: from G-PON
+  to 10G XG-PON}, 2010.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://www.itu.int/en/ITU-T/studygroups/com15/Documents/tutorials/Optical_access_transmission.pdf}.}
+
+\bibitem[{International Telecommunication Union} 2019]{itutg9842}
+\abntrefinfo{{International Telecommunication Union}}{{International
+  Telecommunication Union}}{2019}
+{\underline{\ \ \ \ \ \ \ \ }. \textbf{Gigabit-capable passive optical networks
+  (GPON): Physical media dependent (PMD) layer specification}.
+[S.l.], 2019. Acesso em: mar. 2026. Dispon{\'\i}vel em:
+  \url{https://www.itu.int/rec/dologin_pub.asp?lang=e&id=T-REC-G.984.2-201908-I!!PDF-E&type=items}.}
+
+\bibitem[{International Telecommunication Union} 2024]{itutg652_2024}
+\abntrefinfo{{International Telecommunication Union}}{{International
+  Telecommunication Union}}{2024}
+{\underline{\ \ \ \ \ \ \ \ }. \textbf{Characteristics of a single-mode optical
+  fibre and cable}.
+[S.l.], 2024. Acesso em: mar. 2026. Dispon{\'\i}vel em:
+  \url{https://www.itu.int/epublications/publication/itu-t-g-652-2024-08-characteristics-of-a-single-mode-optical-fibre-and-cable}.}
+
+\bibitem[Keiser 2011]{keiser2011pon}
+\abntrefinfo{Keiser}{Keiser}{2011}
+{KEISER, Gerd. \textbf{Optical Fiber Communications}. 4. ed. New York:
+  McGraw-Hill, 2011.}
+
+\bibitem[Lokhande e Singh 2017]{irjet2017ftth_gis_autocad}
+\abntrefinfo{Lokhande e Singh}{Lokhande; Singh}{2017}
+{LOKHANDE, Manojkumar; SINGH, Amarjeet. \textbf{Design and Implementation of
+  FTTH}.
+[S.l.], 2017. Acesso em: mar. 2026. Dispon{\'\i}vel em:
+  \url{https://www.irjet.net/archives/V4/i10/IRJET-V4I10296.pdf}.}
+
+\bibitem[Merkel 2014]{merkel2014docker}
+\abntrefinfo{Merkel}{Merkel}{2014}
+{MERKEL, Dirk. Docker: Lightweight linux containers for consistent development
+  and deployment.
+\textbf{Linux Journal}, v.~2014, n.~239, 2014.}
+
+\bibitem[Munzner 2014]{munzner2014visualization}
+\abntrefinfo{Munzner}{Munzner}{2014}
+{MUNZNER, Tamara. \textbf{Visualization Analysis and Design}. Boca Raton: CRC
+  Press, 2014.}
+
+\bibitem[Oliviero e Cianfrani 2014]{oliviero2014fiber}
+\abntrefinfo{Oliviero e Cianfrani}{Oliviero; Cianfrani}{2014}
+{OLIVIERO, Andrew; CIANFRANI, David. \textbf{Fiber Optic Cabling}. 4. ed. New
+  York: McGraw-Hill, 2014.}
+
+\bibitem[{OZmap} 2025]{ozmap_help_2025}
+\abntrefinfo{{OZmap}}{{OZmap}}{2025}
+{{OZmap}.  \textbf{Introdução ao OZmap}, 2025.
+Acesso em: maio 2026.
+Dispon{\'\i}vel em:
+  \url{https://ajuda.ozmap.com.br/pt-BR/support/solutions/articles/44001695920-introdu\%C3\%A7\%C3\%A3o-ao-ozmap}.}
+
+\bibitem[{OZmap} 2026]{ozmap2026}
+\abntrefinfo{{OZmap}}{{OZmap}}{2026}
+{\underline{\ \ \ \ \ \ \ \ }.  \textbf{OZmap: A Melhor Solução de Mapeamento
+  de Redes Ópticas}, 2026.
+Acesso em: maio 2026.
+Dispon{\'\i}vel em: \url{https://ozmap.com/}.}
+
+\bibitem[Pahl 2015]{pahl2015containerization}
+\abntrefinfo{Pahl}{Pahl}{2015}
+{PAHL, Claus. Containerization and the paas cloud.
+\textbf{IEEE Cloud Computing}, v.~2, n.~3, p. 24--31, 2015.}
+
+\bibitem[Pressman e Maxim 2014]{pressman2014software}
+\abntrefinfo{Pressman e Maxim}{Pressman; Maxim}{2014}
+{PRESSMAN, Roger~S.; MAXIM, Bruce~R. \textbf{Software Engineering: A
+  Practitioner's Approach}. 8. ed. New York: McGraw-Hill, 2014.}
+
+\bibitem[Prodanov e Freitas 2013]{prodanov2013metodologia}
+\abntrefinfo{Prodanov e Freitas}{Prodanov; Freitas}{2013}
+{PRODANOV, Cleber~Cristiano; FREITAS, Ernani Cesar~de. \textbf{Metodologia do
+  Trabalho Científico: Métodos e Técnicas da Pesquisa e do Trabalho
+  Acadêmico}. 2. ed. Novo Hamburgo: Feevale, 2013.}
+
+\bibitem[{Prysmian Group} 2024]{prysmian_g652d_datasheet}
+\abntrefinfo{{Prysmian Group}}{{Prysmian Group}}{2024}
+{{Prysmian Group}. \textbf{Enhanced Single-Mode Fibre ITU-T G.652.D: Optical
+  Specifications}.
+[S.l.], 2024. Acesso em: mar. 2026. Dispon{\'\i}vel em:
+  \url{https://www.prysmian.com/sites/www.prysmian.com/files/media/products/Prysmian-Enhanced-Single-Mode-G-652-D-Datasheet.pdf}.}
+
+\bibitem[{QGIS Project} 2016]{qgis2016ftth_case}
+\abntrefinfo{{QGIS Project}}{{QGIS Project}}{2016}
+{{QGIS Project}.  \textbf{Using QGIS for FTTH/GPON network planning due to the
+  implementation European Digital Agenda (case study)}, 2016.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em: \url{https://qgis.org/project/case-studies/poland_ffth/}.}
+
+\bibitem[Reenskaug 1979]{reenskaug1979mvc}
+\abntrefinfo{Reenskaug}{Reenskaug}{1979}
+{REENSKAUG, Trygve.  \textbf{Models--Views--Controllers}, 1979.
+Xerox Palo Alto Research Center.}
+
+\bibitem[Rezgui e Bourezg 2022]{rezgui2022qgis_ftth}
+\abntrefinfo{Rezgui e Bourezg}{Rezgui; Bourezg}{2022}
+{REZGUI, Nedjm~Eddine; BOUREZG, Zaineb~Bouthina.
+\textbf{Planning FTTH Network using QGIS}.
+Disserta\c{c}\~{a}o (Mestrado) --- Mohamed Khider University of Biskra, 2022.
+  Acesso em: maio 2026.
+Dispon{\'\i}vel em:
+  \url{http://archives.univ-biskra.dz/bitstream/123456789/22297/1/Rezgui_nedjm_eddine.pdf}.}
+
+\bibitem[{ServiceNow} 2024]{servicenow_inventory_2024}
+\abntrefinfo{{ServiceNow}}{{ServiceNow}}{2024}
+{{ServiceNow}.  \textbf{Exploring Telecommunications Network Inventory}, 2024.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://www.servicenow.com/docs/r/xanadu/telecom-network-inventory/telecommunications-network-inventory/exploring-telecommunicatons-network-inventory.html}.}
+
+\bibitem[Sommerville 2016]{sommerville2016software}
+\abntrefinfo{Sommerville}{Sommerville}{2016}
+{SOMMERVILLE, Ian. \textbf{Software Engineering}. 10. ed. Boston: Pearson,
+  2016.}
+
+\bibitem[Tanenbaum e Wetherall 2011]{tanenbaum2011networks}
+\abntrefinfo{Tanenbaum e Wetherall}{Tanenbaum; Wetherall}{2011}
+{TANENBAUM, Andrew~S.; WETHERALL, David~J. \textbf{Computer Networks}. 5. ed.
+  Boston: Pearson, 2011.}
+
+\bibitem[{The Fiber Optic Association} 2024]{foa_splice_closure}
+\abntrefinfo{{The Fiber Optic Association}}{{The Fiber Optic
+  Association}}{2024}
+{{The Fiber Optic Association}.  \textbf{Fiber Optic Splice Closures}, 2024.
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em: \url{https://thefoa.org/tech/ref/install/closures.html}.}
+
+\bibitem[Vargas-Bustamante, Zapata e {\'A}lvarez-Tello
+  2025]{vargas2025gis_ecuador}
+\abntrefinfo{Vargas-Bustamante, Zapata e {\'A}lvarez-Tello}{Vargas-Bustamante;
+  Zapata; {\'A}lvarez-Tello}{2025}
+{VARGAS-BUSTAMANTE, Miguel; ZAPATA, Mireya; {\'A}LVAREZ-TELLO, Jorge. Planning
+  and management of fiber optic networks based on a geographic information
+  system: A case in ecuador. \textit{In}:  \textbf{Human-Centered Design,
+  Operation and Evaluation of Mobile Communications (HCII 2025)}. [s.n.], 2025,
+   (Lecture Notes in Computer Science).
+Acesso em: mar. 2026.
+Dispon{\'\i}vel em:
+  \url{https://link.springer.com/chapter/10.1007/978-3-031-93061-4_11}.}
+
+\bibitem[Ware 2013]{ware2013information}
+\abntrefinfo{Ware}{Ware}{2013}
+{WARE, Colin. \textbf{Information Visualization: Perception for Design}. 3. ed.
+  Boston: Morgan Kaufmann, 2013.}
+
+\end{thebibliography}

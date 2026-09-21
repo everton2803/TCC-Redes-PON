@@ -1,0 +1,3138 @@
+[4m>>>> Executing external compose provider "/usr/local/bin/docker-compose". Please see podman-compose(1) for how to disable this message. <<<<
+
+[0m Container latex-latex-run-70bb3fc25b6f Creating 
+ Container latex-latex-run-70bb3fc25b6f Created 
+/usr/local/texlive/2026/bin/x86_64-linux/xelatex
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(./abntex2-IFC.cls
+Document Class: abntex2-IFC 10/07/2016 Modelo do IFC baseado em abnTeX2
+(./abntex2/abntex2.cls
+Document Class: abntex2/abntex2 2013/10/26 v1.9 abnTeX2
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/memoir.cls
+Document Class: memoir 2025/11/04 v3.8.4b configurable book, report, article do
+cument class
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xpatch/xpatch.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/l3backend-xetex.def))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/mem12.clo)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/dcolumn.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/delarray.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty (/usr/local/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/shortvrb.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/textcase/textcase.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hxetex.def
+(/usr/local/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+))) (/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/memhfixc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bookmark.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bkm-xetex.def))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/babel.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/xebabel.def)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/en/babel-english.t
+ex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/pt/babel-brazilian
+.tex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/invalid/babel-braz
+il.tex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-english/english.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-portuges/brazilian.ldf)
+
+Package babel Warning: Name 'brazil' is deprecated.
+(babel)                Use 'brazilian' instead.
+(babel)                Reported on input line 4459.
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-portuges/brazilian.ldf))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/calc.sty)
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 708pt by 455pt
+Spine and edge margins: 85.35826pt and 56.9055pt
+Upper and lower margins: 85.35826pt and 51.68858pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7pt and 42.9055pt
+Sidecapsep and sidecapwidth: 7pt and 42pt
+Sidebarhsep and sidebarwidth: 7pt and 42pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 42pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+)) (./config_inicial.tex
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpage.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpage2e.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpagemodern.sty) 
+)) (/usr/local/texlive/2026/texmf-dist/tex/latex/tools/indentfirst.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-def/xetex.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/base/glossaries.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2026/texmf-dist/tex/generic/xkeyval/xkvutils.tex)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xfor/xfor.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tracklang/tracklang.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/tracklang/tracklang.tex))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/translator/translator.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-english/glossaries-eng
+lish.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-portuges/glossaries-pt
+-BR.ldf
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-portuges/glossaries-po
+rtuges-utf8.ldf))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-base.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-l3fp.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-utf8.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool-english/datatool-english
+.ldf
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool-english/datatool-english
+-utf8.ldf))
+
+Package tracklang Warning: No `datatool' support for dialect `brazilian'  on in
+put line 9924.
+
+
+Package tracklang Warning: No `datatool' support for dialect `brazilian'  on in
+put line 9924.
+
+)
+
+Package glossaries Warning: Overriding \printglossary on input line 6565.
+
+
+Package glossaries Warning: Overriding `theglossary' environment on input line 
+7773.
+
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-hypern
+av.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-list.s
+ty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-long.s
+ty (/usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-super.
+sty (/usr/local/texlive/2026/texmf-dist/tex/latex/supertabular/supertabular.sty
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-tree.s
+ty)) (/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/backref.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(./abntex2/abntex2cite.sty (./abntex2/abntex2abrev.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifpdf.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifxetex.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/relsize/relsize.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/float/float.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
+new hooks used!!
+))
+Writing index file main.idx 
+
+LaTeX Warning: \include should only be used after \begin{document} on input lin
+e 27.
+
+(./pretextuais/capa.tex)
+No file main.aux.
+
+Package hyperref Warning: Rerun to get /PageLabels entry.
+
+(./main.glsdefs)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 39--39
+ [][] 
+[1] [1] (./pretextuais/folhadeaprovacao.tex [2]) (./pretextuais/dedicatoria.tex
+ [3]) (./pretextuais/agradecimentos.tex [4]) (./pretextuais/resumo.tex [5]
+[6])
+No file main.lof.
+[7] (./pretextuais/acronimos.tex)
+No file main.acr.
+[8]
+No file main.toc.
+[9] (./conteudo/introducao.tex
+Cap\'{\i }tulo 1.
+
+LaTeX Warning: Citation `keiser2011pon' on page 10 undefined on input line 4.
+
+[10]
+
+LaTeX Warning: Citation `keiser2011pon' on page 11 undefined on input line 27.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 11 undefined on input line 
+27.
+
+[11]
+
+LaTeX Warning: Citation `munzner2014visualization' on page 12 undefined on inpu
+t line 29.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 12 undefined on input line 29.
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 12 undefined on input line 29.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 12 undefined on input line 3
+1.
+
+
+LaTeX Warning: Citation `bray2017json' on page 12 undefined on input line 31.
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 12 undefined on input line 31.
+
+[12]) [13] (./conteudo/fundamentacao.tex
+Cap\'{\i }tulo 2.
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 14 undefined on input l
+ine 7.
+
+
+LaTeX Warning: Reference `fig:core_acesso' on page 14 undefined on input line 9
+.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 14 undefined on input l
+ine 9.
+
+[14]
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 15 undefined on input l
+ine 22.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 15 undefined on input l
+ine 24.
+
+[15]
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 16 undefined on input line 
+26.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 16 undefined on input line 26.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 16 undefined on input line 26.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 16 undefined on input line 
+28.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 16 undefined on input line 30.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 32.
+
+
+LaTeX Warning: Citation `itutg9841' on page 16 undefined on input line 34.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 16 undefined on input line 34.
+
+
+Overfull \hbox (17.67145pt too wide) in paragraph at lines 34--35
+[]\TU/TeXGyreTermes(0)/m/n/12 A arquitetura []  [][]PON[][] organiza a rede de 
+acesso a partir de uma topologia ponto-multiponto,
+[16]
+
+LaTeX Warning: Reference `fig:arquitetura_pon' on page 17 undefined on input li
+ne 36.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 17 undefined on input line 36.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 17 undefined on input line 49.
+
+
+LaTeX Warning: Citation `itutg9842' on page 17 undefined on input line 49.
+
+
+LaTeX Warning: Citation `itutg9841' on page 17 undefined on input line 51.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 17 undefined on input line 51.
+
+[17]
+
+LaTeX Warning: Citation `foa_splice_closure' on page 18 undefined on input line
+ 53.
+
+
+LaTeX Warning: Citation `cto_ftth_distribution' on page 18 undefined on input l
+ine 53.
+
+
+LaTeX Warning: Citation `cto_fibracem' on page 18 undefined on input line 53.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 18 undefined on input line 55.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 18 undefined on input line 55.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 18 undefined on input line 
+55.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 57.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 18 undefined on input line 59.
+
+
+LaTeX Warning: Citation `itutg9841' on page 18 undefined on input line 59.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 18 undefined on input line 61.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 18 undefined on input line 
+61.
+
+[18]
+
+LaTeX Warning: Citation `keiser2011pon' on page 19 undefined on input line 63.
+
+
+LaTeX Warning: Reference `fig:topologias_pon' on page 19 undefined on input lin
+e 76.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 19 undefined on input line 76.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 19 undefined on input line 
+78.
+
+
+LaTeX Warning: Citation `itutg9841' on page 19 undefined on input line 78.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 19 undefined on i
+nput line 78.
+
+[19]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 80.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 82.
+
+
+LaTeX Warning: Citation `itutg9841' on page 20 undefined on input line 82.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 84.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 20 undefined on input 
+line 84.
+
+
+LaTeX Warning: Citation `itutg9841' on page 20 undefined on input line 86.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 20 undefined on i
+nput line 86.
+
+
+LaTeX Warning: Reference `tab:padroes_pon_divisao' on page 20 undefined on inpu
+t line 88.
+
+
+LaTeX Warning: Citation `itutg9841' on page 20 undefined on input line 88.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 88.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 20 undefined on i
+nput line 88.
+
+
+LaTeX Warning: Citation `itutg9841' on page 20 undefined on input line 104.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 104.
+
+
+
+LaTeX Warning: Reference `fig:epon_gpon_divisao' on page 20 undefined on input 
+line 107.
+
+
+LaTeX Warning: Citation `itutg9841' on page 20 undefined on input line 107.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 20 undefined on i
+nput line 107.
+
+[20]
+
+LaTeX Warning: Citation `keiser2011pon' on page 21 undefined on input line 120.
+
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 21 undefined on input 
+line 120.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 122.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 21 undefined on input line 124.
+
+
+[21]
+
+LaTeX Warning: Citation `keiser2011pon' on page 22 undefined on input line 126.
+
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 22 undefined on input line 
+126.
+
+
+LaTeX Warning: Reference `fig:perdas_consolidadas_enlace' on page 22 undefined 
+on input line 139.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 22 undefined on input line 139.
+
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 22 undefined on input 
+line 139.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 22 undefined on input 
+line 141.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 22 undefined on input line 
+141.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 22 undefined on input 
+line 141.
+
+[22]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 143.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 23 undefined on input line 145.
+
+
+
+LaTeX Warning: Citation `itutg9842' on page 23 undefined on input line 145.
+
+
+LaTeX Warning: Citation `itutg9842' on page 23 undefined on input line 147.
+
+
+LaTeX Warning: Citation `itutg9841' on page 23 undefined on input line 147.
+
+
+LaTeX Warning: Citation `itutg9842' on page 23 undefined on input line 147.
+
+
+LaTeX Warning: Reference `tab:classes_opticas_gpon' on page 23 undefined on inp
+ut line 149.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 23 undefined on input line 
+149.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 23 undefined on input line 
+164.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 23 undefined on input 
+line 164.
+
+
+LaTeX Warning: Reference `tab:classes_opticas_gpon' on page 23 undefined on inp
+ut line 167.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 23 undefined on input line 167.
+
+
+[23]
+
+LaTeX Warning: Reference `fig:transceiver_sfp_olt' on page 24 undefined on inpu
+t line 180.
+
+
+LaTeX Warning: Citation `itutg652_2024' on page 24 undefined on input line 186.
+
+
+
+LaTeX Warning: Citation `prysmian_g652d_datasheet' on page 24 undefined on inpu
+t line 188.
+
+
+LaTeX Warning: Citation `itutg652_2024' on page 24 undefined on input line 188.
+
+
+
+LaTeX Warning: Reference `fig:atenuacao_fibra' on page 24 undefined on input li
+ne 201.
+
+[24]
+
+LaTeX Warning: Reference `fig:splitter_optico ' on page 25 undefined on input l
+ine 205.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 25 undefined on input line 218.
+
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 25 undefined on input line 
+218.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 25 undefined on input line 220.
+
+
+[25]
+
+LaTeX Warning: Reference `tab:perdas_splitters' on page 26 undefined on input l
+ine 222.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 26 undefined on input line 
+222.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 26 undefined on input 
+line 222.
+
+
+LaTeX Warning: Reference `tab:perdas_splitters' on page 26 undefined on input l
+ine 245.
+
+
+LaTeX Warning: Reference `fig:perdas_conexoes_emendas' on page 26 undefined on 
+input line 249.
+
+[26]
+
+LaTeX Warning: Citation `keiser2011pon' on page 27 undefined on input line 268.
+
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 27 undefined on inpu
+t line 268.
+
+[27]
+
+LaTeX Warning: Citation `keiser2011pon' on page 28 undefined on input line 270.
+
+
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 28 undefined on input lin
+e 274.
+
+
+LaTeX Warning: Citation `vargas2025gis_ecuador' on page 28 undefined on input l
+ine 274.
+
+
+LaTeX Warning: Citation `irjet2017ftth_gis_autocad' on page 28 undefined on inp
+ut line 274.
+
+
+LaTeX Warning: Citation `qgis2016ftth_case' on page 28 undefined on input line 
+274.
+
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 28 undefined on input lin
+e 276.
+
+
+LaTeX Warning: Citation `vargas2025gis_ecuador' on page 28 undefined on input l
+ine 276.
+
+[28]
+
+LaTeX Warning: Citation `servicenow_inventory_2024' on page 29 undefined on inp
+ut line 278.
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 29 undefined on inpu
+t line 280.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 29 undefined on input line 280.
+
+
+
+LaTeX Warning: Reference `fig:comparacao_planejamento' on page 29 undefined on 
+input line 282.
+
+
+LaTeX Warning: Citation `card1999information' on page 29 undefined on input lin
+e 297.
+
+
+LaTeX Warning: Citation `ware2013information' on page 29 undefined on input lin
+e 297.
+
+
+LaTeX Warning: Citation `card1999information' on page 29 undefined on input lin
+e 299.
+
+[29]
+
+LaTeX Warning: Reference `fig:visualizacao_sistemas_complexos' on page 30 undef
+ined on input line 312.
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 30 undefined on inpu
+t line 312.
+
+
+LaTeX Warning: Citation `card1999information' on page 30 undefined on input lin
+e 312.
+
+[30]
+
+LaTeX Warning: Citation `ware2013information' on page 31 undefined on input lin
+e 314.
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 31 undefined on inpu
+t line 316.
+
+
+LaTeX Warning: Citation `few2012information' on page 31 undefined on input line
+ 320.
+
+[31]
+
+LaTeX Warning: Citation `pressman2014software' on page 32 undefined on input li
+ne 326.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 32 undefined on input
+ line 326.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 32 undefined on input l
+ine 328.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 32 undefined on input li
+ne 328.
+
+
+LaTeX Warning: Reference `fig:cliente_servidor' on page 32 undefined on input l
+ine 330.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 32 undefined on input l
+ine 330.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 32 undefined on input li
+ne 330.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 32 undefined on input li
+ne 343.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 32 undefined on input
+ line 343.
+
+[32]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 349.
+
+
+LaTeX Warning: Citation `reenskaug1979mvc' on page 33 undefined on input line 3
+51.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 33 undefined on input li
+ne 353.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 33 undefined on input
+ line 355.
+
+[33]
+
+LaTeX Warning: Reference `fig:mvc' on page 34 undefined on input line 357.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 34 undefined on input li
+ne 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 374.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\glspl' on input line 374.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 34 undefined on input l
+ine 376.
+
+[34]
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 35 undefined on input l
+ine 378.
+
+
+LaTeX Warning: Reference `fig:http_api' on page 35 undefined on input line 380.
+
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 35 undefined on input
+ line 380.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 35 undefined on input li
+ne 393.
+
+[35]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 400.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 36 undefined on input line 4
+02.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 36 undefined on input line 4
+04.
+
+
+LaTeX Warning: Reference `fig:api_restfull' on page 36 undefined on input line 
+406.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 36 undefined on input line 4
+06.
+
+[36]
+
+LaTeX Warning: Citation `fielding2000rest' on page 37 undefined on input line 4
+19.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 423.
+
+
+LaTeX Warning: Reference `fig:json_estrutura' on page 37 undefined on input lin
+e 427.
+
+
+LaTeX Warning: Citation `bray2017json' on page 37 undefined on input line 427.
+
+[37]
+
+LaTeX Warning: Citation `bray2017json' on page 38 undefined on input line 440.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 38 undefined on input
+ line 442.
+
+[38]
+
+LaTeX Warning: Citation `card1999information' on page 39 undefined on input lin
+e 450.
+
+
+LaTeX Warning: Citation `ware2013information' on page 39 undefined on input lin
+e 450.
+
+
+LaTeX Warning: Citation `card1999information' on page 39 undefined on input lin
+e 452.
+
+
+LaTeX Warning: Reference `fig:visualizacao_web' on page 39 undefined on input l
+ine 454.
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 39 undefined on inpu
+t line 454.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 39 undefined on input
+ line 467.
+
+[39]
+
+LaTeX Warning: Citation `bostock2011d3' on page 40 undefined on input line 473.
+
+
+
+LaTeX Warning: Reference `fig:d3js_conceito' on page 40 undefined on input line
+ 475.
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 40 undefined on input line 475.
+
+
+[40]
+
+LaTeX Warning: Citation `bostock2011d3' on page 41 undefined on input line 488.
+
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 41 undefined on inpu
+t line 490.
+
+[41]
+
+LaTeX Warning: Citation `pahl2015containerization' on page 42 undefined on inpu
+t line 501.
+
+
+LaTeX Warning: Reference `fig:docker_implantacao' on page 42 undefined on input
+ line 503.
+
+
+LaTeX Warning: Citation `merkel2014docker' on page 42 undefined on input line 5
+03.
+
+) [42] [43] (./conteudo/metodologia.tex
+Cap\'{\i }tulo 3.
+
+LaTeX Warning: Citation `gil2008metodos' on page 44 undefined on input line 7.
+
+
+LaTeX Warning: Citation `prodanov2013metodologia' on page 44 undefined on input
+ line 7.
+
+
+LaTeX Warning: Citation `creswell2014research' on page 44 undefined on input li
+ne 9.
+
+[44]
+
+LaTeX Warning: Reference `fig:arquitetura_solucao' on page 45 undefined on inpu
+t line 19.
+
+[45]
+
+LaTeX Warning: Reference `fig:fluxo_metodologia_desenvolvimento' on page 46 und
+efined on input line 40.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 46 undefined on input li
+ne 40.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 46 undefined on input
+ line 40.
+
+
+LaTeX Warning: Reference `fig:fluxo_metodologia_desenvolvimento' on page 46 und
+efined on input line 53.
+
+[46]
+
+LaTeX Warning: Citation `pressman2014software' on page 47 undefined on input li
+ne 61.
+
+
+LaTeX Warning: Reference `fig:fluxo_validacao' on page 47 undefined on input li
+ne 61.
+
+[47]
+
+LaTeX Warning: Reference `fig:fluxo_validacao' on page 48 undefined on input li
+ne 63.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 48 undefined on input
+ line 76.
+
+) [48] [49] (./conteudo/trabalhoscorrelatos.tex
+Cap\'{\i }tulo 4.
+
+LaTeX Warning: Citation `irjet2017ftth_gis_autocad' on page 50 undefined on inp
+ut line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 8.
+
+
+LaTeX Warning: Citation `irjet2017ftth_gis_autocad' on page 50 undefined on inp
+ut line 10.
+
+
+LaTeX Warning: Citation `rezgui2022qgis_ftth' on page 50 undefined on input lin
+e 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 15.
+
+
+LaTeX Warning: Citation `rezgui2022qgis_ftth' on page 50 undefined on input lin
+e 17.
+
+[50]
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 51 undefined on input lin
+e 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 21.
+
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 51 undefined on input lin
+e 23.
+
+
+LaTeX Warning: Citation `fatahillah2025visnetwork_ftth' on page 51 undefined on
+ input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 27.
+
+
+LaTeX Warning: Citation `fatahillah2025visnetwork_ftth' on page 51 undefined on
+ input line 29.
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 51 undefined on input line 36.
+
+[51]
+
+LaTeX Warning: Citation `geogridmaps2026' on page 52 undefined on input line 45
+.
+
+
+LaTeX Warning: Citation `geogrid_iclass_2026' on page 52 undefined on input lin
+e 45.
+
+[52]
+
+LaTeX Warning: Reference `fig:geogrid_mapa' on page 53 undefined on input line 
+47.
+
+
+LaTeX Warning: Reference `fig:geogrid_ceo' on page 53 undefined on input line 6
+0.
+
+[53]
+
+LaTeX Warning: Citation `ozmap2026' on page 54 undefined on input line 77.
+
+
+LaTeX Warning: Citation `ozmap_help_2025' on page 54 undefined on input line 77
+.
+
+
+LaTeX Warning: Reference `fig:ozmap_mapa' on page 54 undefined on input line 79
+.
+
+
+LaTeX Warning: Reference `fig:ozmap_diagrama' on page 54 undefined on input lin
+e 92.
+
+[54]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 110.
+
+
+LaTeX Warning: Citation `ftthplanner2026' on page 55 undefined on input line 11
+2.
+
+[55]
+
+LaTeX Warning: Reference `fig:planner_mapa' on page 56 undefined on input line 
+114.
+
+
+LaTeX Warning: Reference `fig:planner_ceo' on page 56 undefined on input line 1
+27.
+
+
+Overfull \hbox (1.56244pt too wide) in paragraph at lines 127--128
+[]\TU/TeXGyreTermes(0)/m/n/12 Adicionalmente, a Figura [] apresenta a visualiza
+ção de fusões em caixas de emenda,
+[56]
+
+LaTeX Warning: Reference `tab:comparativo_trabalhos' on page 57 undefined on in
+put line 151.
+
+
+LaTeX Warning: Reference `tab:comparativo_ferramentas' on page 57 undefined on 
+input line 151.
+
+[57]
+Underfull \hbox (badness 1796) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Rezgui e Bourezg
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento FTTH
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Chakali et al.
+
+Underfull \hbox (badness 1320) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Gestão de rede com
+
+Underfull \hbox (badness 1132) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Visualização web da
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Não integra orça-
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento lógico
+
+Underfull \hbox (badness 3792) in paragraph at lines 172--172
+\TU/TeXGyreTermes(0)/m/n/10.95 de redes PON com
+
+Underfull \hbox (badness 6445) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Integra visualização,
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Documentação de
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Mapeamento e
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 documentação geor-
+
+Underfull \hbox (badness 7433) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Foco cartográfico e
+
+Underfull \hbox (badness 2941) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Registro de elemen-
+
+Underfull \hbox (badness 2837) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Ausência de cálculo
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento lógico
+
+Underfull \hbox (badness 3792) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 de redes PON com
+
+Underfull \hbox (badness 6445) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Integra visualização,
+
+Underfull \hbox (badness 7326) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 em contexto acadê-
+[58]
+
+LaTeX Warning: Reference `fig:diagrama_proposta' on page 59 undefined on input 
+line 201.
+
+) [59] (./conteudo/desenvolvimento.tex
+Cap\'{\i }tulo 5.
+[60] [61]
+
+LaTeX Warning: Reference `fig:wireframe_interface' on page 62 undefined on inpu
+t line 69.
+
+[62]
+
+LaTeX Warning: Reference `fig:arquitetura_geral' on page 63 undefined on input 
+line 90.
+
+[63] [64]
+Overfull \hbox (45.76082pt too wide) in paragraph at lines 112--113
+[]\TU/TeXGyreTermes(0)/b/n/12 Serviços (\TU/TeXGyreTermes(0)/b/it/12 Services\T
+U/TeXGyreTermes(0)/b/n/12 ): \TU/TeXGyreTermes(0)/m/n/12 Concentram a lógica de
+ negócio do sistema. O serviço \TU/lmtt/m/n/12 calculo_optico.py
+
+LaTeX Warning: Reference `fig:diagrama_componentes' on page 65 undefined on inp
+ut line 117.
+
+[65]
+
+LaTeX Warning: Reference `fig:diagrama_implantacao' on page 66 undefined on inp
+ut line 134.
+
+[66] [67] [68]
+
+LaTeX Warning: Reference `fig:fluxo_calculo' on page 69 undefined on input line
+ 239.
+
+[69] [70]
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+[71]
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+
+Overfull \hbox (3.15576pt too wide) in paragraph at lines 304--304
+[]    \TU/lmtt/m/n/12 │   ├── controllers/      # Controladores REST (calculo.p
+y, projetos.py)[] 
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+
+Overfull \hbox (83.49571pt too wide) in paragraph at lines 305--305
+[]    \TU/lmtt/m/n/12 │   ├── services/         # Regras de negócio (calculo_op
+tico.py, projeto_service.py)[] 
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+[72]
+Overfull \hbox (2.07579pt too wide) in paragraph at lines 346--346
+[]    \TU/lmtt/m/n/12 tipo_splitter: Optional[str] = None  # "balanceado" ou "d
+esbalanceado"[] 
+
+Overfull \hbox (30.45692pt too wide) in paragraph at lines 367--368
+\TU/TeXGyreTermes(0)/m/n/12 exemplo, atributos como \TU/lmtt/m/n/12 potencia_tx
+_dbm \TU/TeXGyreTermes(0)/m/n/12 são exclusivos da OLT, enquanto \TU/lmtt/m/n/1
+2 razao_desbalanceada
+[73]
+
+LaTeX Warning: Reference `fig:fluxo_percurso_grafo' on page 74 undefined on inp
+ut line 373.
+
+[74]
+Overfull \hbox (100.95586pt too wide) in paragraph at lines 392--392
+[]\TU/lmtt/m/n/12 from app.models.constants import PERDAS_SPLITTER_BALANCEADO, 
+PERDAS_SPLITTER_DESBALANCEADO[] 
+
+Overfull \hbox (20.61575pt too wide) in paragraph at lines 397--397
+[]    \TU/lmtt/m/n/12 # Mapeia as conexões de saída: id_origem -> lista de (enl
+ace, id_destino)[] 
+
+Overfull \hbox (8.2558pt too wide) in paragraph at lines 398--398
+[]    \TU/lmtt/m/n/12 adjacencias: Dict[str, List[tuple]] = {no.id: [] for no i
+n projeto.nos}[] 
+
+Overfull \hbox (20.6158pt too wide) in paragraph at lines 401--401
+[]            \TU/lmtt/m/n/12 adjacencias[enlace.id_origem].append((enlace, enl
+ace.id_destino))[] 
+
+Overfull \hbox (39.15578pt too wide) in paragraph at lines 406--406
+[]        \TU/lmtt/m/n/12 raise ValueError("A topologia não possui uma OLT cada
+strada como raiz.")[] 
+
+Overfull \hbox (76.23581pt too wide) in paragraph at lines 408--408
+[]    \TU/lmtt/m/n/12 potencia_inicial = olt.potencia_tx_dbm if olt.potencia_tx
+_dbm is not None else 5.0[] 
+[75]
+Overfull \hbox (113.31577pt too wide) in paragraph at lines 439--439
+[]            \TU/lmtt/m/n/12 elif potencia_apos_no >= (sensibilidade + projeto
+.parametros.margem_sistema_db):[] 
+
+Overfull \hbox (20.61572pt too wide) in paragraph at lines 450--450
+[]        \TU/lmtt/m/n/12 # Propaga o sinal para os nós sucessores através dos 
+enlaces de fibra[] 
+
+Overfull \hbox (26.79576pt too wide) in paragraph at lines 454--454
+[]            \TU/lmtt/m/n/12 perda_conexoes = enlace.num_conexoes * enlace.per
+da_por_conexao_db[] 
+[76]
+Overfull \hbox (63.87576pt too wide) in paragraph at lines 477--477
+[]        \TU/lmtt/m/n/12 return PERDAS_SPLITTER_BALANCEADO.get(razao, 10.0 * m
+ath.log10(razao) + 0.5)[] 
+
+Overfull \hbox (63.8758pt too wide) in paragraph at lines 480--480
+[]        \TU/lmtt/m/n/12 return PERDAS_SPLITTER_DESBALANCEADO.get(razao_str, {
+}).get("passagem", 1.5)[] 
+[77]
+Overfull \hbox (11.6284pt too wide) in paragraph at lines 507--508
+[]\TU/TeXGyreTermes(0)/m/n/12 Já a persistência dos arquivos []  [][]JSON[][] n
+o disco é realizada pelo serviço \TU/lmtt/m/n/12 ProjetoService
+
+Overfull \hbox (45.33586pt too wide) in paragraph at lines 515--515
+[]\TU/lmtt/m/n/12 CAMINHO_PROJETOS = os.path.join(os.path.dirname(__file__), ".
+./../data/projects")[] 
+[78]
+
+LaTeX Warning: Reference `fig:estrutura_d3_canvas' on page 79 undefined on inpu
+t line 544.
+
+[79]
+Overfull \hbox (119.49571pt too wide) in paragraph at lines 599--599
+[]    \TU/lmtt/m/n/12 .text(d => `${d.nome} ${d.potencia_rx ? '(' + d.potencia_
+rx.toFixed(2) + ' dBm)' : ''}`);[] 
+[80]
+Overfull \hbox (57.69583pt too wide) in paragraph at lines 615--615
+[]    \TU/lmtt/m/n/12 d3.select(this).attr("transform", `translate(${d.posicao.
+x}, ${d.posicao.y})`);[] 
+
+Overfull \hbox (2.07579pt too wide) in paragraph at lines 634--634
+[]            \TU/lmtt/m/n/12 throw new Error(`Erro na requisição: ${response.s
+tatusText}`);[] 
+[81]) [82] (./conteudo/conclusao.tex
+Cap\'{\i }tulo 6.
+) [83]
+No file main.bbl.
+
+enddocument/afterlastpage (AED): lastpage setting LastPage.
+(./main.aux (./pretextuais/folhadeaprovacao.aux) (./pretextuais/dedicatoria.aux
+) (./pretextuais/agradecimentos.aux) (./pretextuais/resumo.aux)
+(./pretextuais/acronimos.aux) (./conteudo/introducao.aux)
+(./conteudo/fundamentacao.aux) (./conteudo/metodologia.aux)
+(./conteudo/trabalhoscorrelatos.aux) (./conteudo/desenvolvimento.aux)
+(./conteudo/conclusao.aux))
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package lastpage Warning: Rerun to get the references right on input line 115.
+
+ )
+(see the transcript file for additional information)
+Output written on main.pdf (84 pages).
+Transcript written on main.log.
+makeglossaries version 5.1 (2026-04-21)
+added glossary type 'acronym' (alg,acr,acn)
+makeindex  -s "main.ist" -t "main.alg" -o "main.acr" "main.acn"
+This is makeindex, version 2.18 [TeX Live 2026] (kpathsea + Thai support).
+Scanning style file ./main.ist...........................done (27 attributes redefined, 0 ignored).
+Scanning input file main.acn....done (299 entries accepted, 0 rejected).
+Sorting entries.....done (2696 comparisons).
+Generating output file main.acr....done (145 lines written, 0 warnings).
+Output written in main.acr.
+Transcript written in main.alg.
+This is BibTeX, Version 0.99e (TeX Live 2026)
+The top-level auxiliary file: main.aux
+The style file: abntex2/abntex2-alf.bst
+Database file #1: abntex2/abntex2-options.bib
+Database file #2: referencias.bib
+You can't pop an empty literal stack for entry apnic_gpon_budget
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry cto_fibracem
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry ftthplanner2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry geogridmaps2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry cto_ftth_distribution
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry holight_optical_budget
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry geogrid_iclass_2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry itu_optical_access_tutorial
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry ozmap_help_2025
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry ozmap2026
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry qgis2016ftth_case
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry reenskaug1979mvc
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry servicenow_inventory_2024
+while executing---line 2271 of file abntex2/abntex2-alf.bst
+You can't pop an empty literal stack for entry foa_splice_closure
+while executing---line 2271 of file abntex2/abntex2-alf.bst
++---------------------------------------------------------+
+| Estilo bibliográfico abntex2-alf.bst versão v<VERSION>           |
+| Em caso de dúvidas ou problemas com este estilo procure |
+| http://abntex2.googlecode.com                           |
++---------------------------------------------------------+
+(There were 14 error messages)
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(./abntex2-IFC.cls
+Document Class: abntex2-IFC 10/07/2016 Modelo do IFC baseado em abnTeX2
+(./abntex2/abntex2.cls
+Document Class: abntex2/abntex2 2013/10/26 v1.9 abnTeX2
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/memoir.cls
+Document Class: memoir 2025/11/04 v3.8.4b configurable book, report, article do
+cument class
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xpatch/xpatch.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/l3backend-xetex.def))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/mem12.clo)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/dcolumn.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/delarray.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty (/usr/local/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/shortvrb.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/textcase/textcase.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hxetex.def
+(/usr/local/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+))) (/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/memhfixc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bookmark.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bkm-xetex.def))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/babel.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/xebabel.def)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/en/babel-english.t
+ex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/pt/babel-brazilian
+.tex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/invalid/babel-braz
+il.tex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-english/english.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-portuges/brazilian.ldf)
+
+Package babel Warning: Name 'brazil' is deprecated.
+(babel)                Use 'brazilian' instead.
+(babel)                Reported on input line 4459.
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-portuges/brazilian.ldf))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/calc.sty)
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 708pt by 455pt
+Spine and edge margins: 85.35826pt and 56.9055pt
+Upper and lower margins: 85.35826pt and 51.68858pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7pt and 42.9055pt
+Sidecapsep and sidecapwidth: 7pt and 42pt
+Sidebarhsep and sidebarwidth: 7pt and 42pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 42pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+)) (./config_inicial.tex
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpage.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpage2e.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpagemodern.sty) 
+)) (/usr/local/texlive/2026/texmf-dist/tex/latex/tools/indentfirst.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-def/xetex.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/base/glossaries.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2026/texmf-dist/tex/generic/xkeyval/xkvutils.tex)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xfor/xfor.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tracklang/tracklang.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/tracklang/tracklang.tex))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/translator/translator.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-english/glossaries-eng
+lish.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-portuges/glossaries-pt
+-BR.ldf
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-portuges/glossaries-po
+rtuges-utf8.ldf))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-base.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-l3fp.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-utf8.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool-english/datatool-english
+.ldf
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool-english/datatool-english
+-utf8.ldf))
+
+Package tracklang Warning: No `datatool' support for dialect `brazilian'  on in
+put line 9924.
+
+
+Package tracklang Warning: No `datatool' support for dialect `brazilian'  on in
+put line 9924.
+
+)
+
+Package glossaries Warning: Overriding \printglossary on input line 6565.
+
+
+Package glossaries Warning: Overriding `theglossary' environment on input line 
+7773.
+
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-hypern
+av.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-list.s
+ty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-long.s
+ty (/usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-super.
+sty (/usr/local/texlive/2026/texmf-dist/tex/latex/supertabular/supertabular.sty
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-tree.s
+ty)) (/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/backref.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(./abntex2/abntex2cite.sty (./abntex2/abntex2abrev.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifpdf.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifxetex.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/relsize/relsize.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/float/float.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
+new hooks used!!
+))
+Writing index file main.idx 
+
+LaTeX Warning: \include should only be used after \begin{document} on input lin
+e 27.
+
+(./pretextuais/capa.tex) (./main.aux (./pretextuais/folhadeaprovacao.aux)
+(./pretextuais/dedicatoria.aux) (./pretextuais/agradecimentos.aux)
+(./pretextuais/resumo.aux) (./pretextuais/acronimos.aux)
+(./conteudo/introducao.aux) (./conteudo/fundamentacao.aux)
+(./conteudo/metodologia.aux) (./conteudo/trabalhoscorrelatos.aux)
+(./conteudo/desenvolvimento.aux) (./conteudo/conclusao.aux)) (./main.glsdefs)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 39--39
+ [][] 
+[1] [1] (./pretextuais/folhadeaprovacao.tex [2]) (./pretextuais/dedicatoria.tex
+ [3]) (./pretextuais/agradecimentos.tex [4]) (./pretextuais/resumo.tex [5]
+[6]) (./main.lof [7]) [8] (./pretextuais/acronimos.tex) (./main.acr
+Underfull \hbox (badness 10000) in paragraph at lines 144--144
+[]|[]\TU/TeXGyreTermes(0)/m/n/12 XGS-
+[9]) [10] (./main.toc [11]
+
+LaTeX Warning: Citation `irjet2017ftth_gis_autocad' on page 12 undefined on inp
+ut line 36.
+
+
+LaTeX Warning: Citation `rezgui2022qgis_ftth' on page 12 undefined on input lin
+e 37.
+
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 12 undefined on input lin
+e 38.
+
+
+LaTeX Warning: Citation `fatahillah2025visnetwork_ftth' on page 12 undefined on
+ input line 39.
+
+[12]) [13] (./conteudo/introducao.tex
+Cap\'{\i }tulo 1.
+
+LaTeX Warning: Citation `keiser2011pon' on page 14 undefined on input line 4.
+
+[14]
+
+LaTeX Warning: Citation `keiser2011pon' on page 15 undefined on input line 27.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 15 undefined on input line 
+27.
+
+[15]
+
+LaTeX Warning: Citation `munzner2014visualization' on page 16 undefined on inpu
+t line 29.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 16 undefined on input line 29.
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 16 undefined on input line 29.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 16 undefined on input line 3
+1.
+
+
+LaTeX Warning: Citation `bray2017json' on page 16 undefined on input line 31.
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 16 undefined on input line 31.
+
+[16]) [17] (./conteudo/fundamentacao.tex
+Cap\'{\i }tulo 2.
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 18 undefined on input l
+ine 7.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 18 undefined on input l
+ine 9.
+
+[18]
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 19 undefined on input l
+ine 22.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 19 undefined on input l
+ine 24.
+
+[19]
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 20 undefined on input line 
+26.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 26.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 26.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 20 undefined on input line 
+28.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 30.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 32.
+
+
+LaTeX Warning: Citation `itutg9841' on page 20 undefined on input line 34.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 20 undefined on input line 34.
+
+
+Overfull \hbox (17.67145pt too wide) in paragraph at lines 34--35
+[]\TU/TeXGyreTermes(0)/m/n/12 A arquitetura []  [][]PON[][] organiza a rede de 
+acesso a partir de uma topologia ponto-multiponto,
+[20]
+
+LaTeX Warning: Citation `keiser2011pon' on page 21 undefined on input line 36.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 21 undefined on input line 49.
+
+
+LaTeX Warning: Citation `itutg9842' on page 21 undefined on input line 49.
+
+
+LaTeX Warning: Citation `itutg9841' on page 21 undefined on input line 51.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 21 undefined on input line 51.
+
+[21]
+
+LaTeX Warning: Citation `foa_splice_closure' on page 22 undefined on input line
+ 53.
+
+
+LaTeX Warning: Citation `cto_ftth_distribution' on page 22 undefined on input l
+ine 53.
+
+
+LaTeX Warning: Citation `cto_fibracem' on page 22 undefined on input line 53.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 22 undefined on input line 55.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 22 undefined on input line 55.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 22 undefined on input line 
+55.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 57.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 22 undefined on input line 59.
+
+
+LaTeX Warning: Citation `itutg9841' on page 22 undefined on input line 59.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 22 undefined on input line 61.
+
+
+LaTeX Warning: Citation `oliviero2014fiber' on page 22 undefined on input line 
+61.
+
+[22]
+
+LaTeX Warning: Citation `keiser2011pon' on page 23 undefined on input line 63.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 23 undefined on input line 76.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 23 undefined on input line 
+78.
+
+
+LaTeX Warning: Citation `itutg9841' on page 23 undefined on input line 78.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 23 undefined on i
+nput line 78.
+
+[23]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 80.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 24 undefined on input line 82.
+
+
+LaTeX Warning: Citation `itutg9841' on page 24 undefined on input line 82.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 24 undefined on input line 84.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 24 undefined on input 
+line 84.
+
+
+LaTeX Warning: Citation `itutg9841' on page 24 undefined on input line 86.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 24 undefined on i
+nput line 86.
+
+
+LaTeX Warning: Citation `itutg9841' on page 24 undefined on input line 88.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 24 undefined on input line 88.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 24 undefined on i
+nput line 88.
+
+
+LaTeX Warning: Citation `itutg9841' on page 24 undefined on input line 104.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 24 undefined on input line 104.
+
+
+
+LaTeX Warning: Citation `itutg9841' on page 24 undefined on input line 107.
+
+
+LaTeX Warning: Citation `itu_optical_access_tutorial' on page 24 undefined on i
+nput line 107.
+
+[24]
+
+LaTeX Warning: Citation `keiser2011pon' on page 25 undefined on input line 120.
+
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 25 undefined on input 
+line 120.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 122.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 25 undefined on input line 124.
+
+
+[25]
+
+LaTeX Warning: Citation `keiser2011pon' on page 26 undefined on input line 126.
+
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 26 undefined on input line 
+126.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 26 undefined on input line 139.
+
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 26 undefined on input 
+line 139.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 26 undefined on input 
+line 141.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 26 undefined on input line 
+141.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 26 undefined on input 
+line 141.
+
+[26]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 143.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 27 undefined on input line 145.
+
+
+
+LaTeX Warning: Citation `itutg9842' on page 27 undefined on input line 145.
+
+
+LaTeX Warning: Citation `itutg9842' on page 27 undefined on input line 147.
+
+
+LaTeX Warning: Citation `itutg9841' on page 27 undefined on input line 147.
+
+
+LaTeX Warning: Citation `itutg9842' on page 27 undefined on input line 147.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 27 undefined on input line 
+149.
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 27 undefined on input line 
+164.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 27 undefined on input 
+line 164.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 27 undefined on input line 167.
+
+
+[27]
+
+LaTeX Warning: Citation `itutg652_2024' on page 28 undefined on input line 186.
+
+
+
+LaTeX Warning: Citation `prysmian_g652d_datasheet' on page 28 undefined on inpu
+t line 188.
+
+
+LaTeX Warning: Citation `itutg652_2024' on page 28 undefined on input line 188.
+
+
+[28]
+
+LaTeX Warning: Citation `keiser2011pon' on page 29 undefined on input line 218.
+
+
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 29 undefined on input line 
+218.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 29 undefined on input line 220.
+
+
+[29]
+
+LaTeX Warning: Citation `apnic_gpon_budget' on page 30 undefined on input line 
+222.
+
+
+LaTeX Warning: Citation `holight_optical_budget' on page 30 undefined on input 
+line 222.
+
+[30]
+
+LaTeX Warning: Citation `keiser2011pon' on page 31 undefined on input line 268.
+
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 31 undefined on inpu
+t line 268.
+
+[31]
+
+LaTeX Warning: Citation `keiser2011pon' on page 32 undefined on input line 270.
+
+
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 32 undefined on input lin
+e 274.
+
+
+LaTeX Warning: Citation `vargas2025gis_ecuador' on page 32 undefined on input l
+ine 274.
+
+
+LaTeX Warning: Citation `irjet2017ftth_gis_autocad' on page 32 undefined on inp
+ut line 274.
+
+
+LaTeX Warning: Citation `qgis2016ftth_case' on page 32 undefined on input line 
+274.
+
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 32 undefined on input lin
+e 276.
+
+
+LaTeX Warning: Citation `vargas2025gis_ecuador' on page 32 undefined on input l
+ine 276.
+
+[32]
+
+LaTeX Warning: Citation `servicenow_inventory_2024' on page 33 undefined on inp
+ut line 278.
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 33 undefined on inpu
+t line 280.
+
+
+LaTeX Warning: Citation `keiser2011pon' on page 33 undefined on input line 280.
+
+
+
+LaTeX Warning: Citation `card1999information' on page 33 undefined on input lin
+e 297.
+
+
+LaTeX Warning: Citation `ware2013information' on page 33 undefined on input lin
+e 297.
+
+
+LaTeX Warning: Citation `card1999information' on page 33 undefined on input lin
+e 299.
+
+[33]
+
+LaTeX Warning: Citation `munzner2014visualization' on page 34 undefined on inpu
+t line 312.
+
+
+LaTeX Warning: Citation `card1999information' on page 34 undefined on input lin
+e 312.
+
+[34]
+
+LaTeX Warning: Citation `ware2013information' on page 35 undefined on input lin
+e 314.
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 35 undefined on inpu
+t line 316.
+
+
+LaTeX Warning: Citation `few2012information' on page 35 undefined on input line
+ 320.
+
+[35]
+
+LaTeX Warning: Citation `pressman2014software' on page 36 undefined on input li
+ne 326.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 36 undefined on input
+ line 326.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 36 undefined on input l
+ine 328.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 36 undefined on input li
+ne 328.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 36 undefined on input l
+ine 330.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 36 undefined on input li
+ne 330.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 36 undefined on input li
+ne 343.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 36 undefined on input
+ line 343.
+
+[36]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 349.
+
+
+LaTeX Warning: Citation `reenskaug1979mvc' on page 37 undefined on input line 3
+51.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 37 undefined on input li
+ne 353.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 37 undefined on input
+ line 355.
+
+[37]
+
+LaTeX Warning: Citation `pressman2014software' on page 38 undefined on input li
+ne 357.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 374.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\glspl' on input line 374.
+
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 38 undefined on input l
+ine 376.
+
+[38]
+
+LaTeX Warning: Citation `tanenbaum2011networks' on page 39 undefined on input l
+ine 378.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 39 undefined on input
+ line 380.
+
+
+LaTeX Warning: Citation `pressman2014software' on page 39 undefined on input li
+ne 393.
+
+[39]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 400.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 40 undefined on input line 4
+02.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 40 undefined on input line 4
+04.
+
+
+LaTeX Warning: Citation `fielding2000rest' on page 40 undefined on input line 4
+06.
+
+[40]
+
+LaTeX Warning: Citation `fielding2000rest' on page 41 undefined on input line 4
+19.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 423.
+
+
+LaTeX Warning: Citation `bray2017json' on page 41 undefined on input line 427.
+
+[41]
+
+LaTeX Warning: Citation `bray2017json' on page 42 undefined on input line 440.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 42 undefined on input
+ line 442.
+
+[42]
+
+LaTeX Warning: Citation `card1999information' on page 43 undefined on input lin
+e 450.
+
+
+LaTeX Warning: Citation `ware2013information' on page 43 undefined on input lin
+e 450.
+
+
+LaTeX Warning: Citation `card1999information' on page 43 undefined on input lin
+e 452.
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 43 undefined on inpu
+t line 454.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 43 undefined on input
+ line 467.
+
+[43]
+
+LaTeX Warning: Citation `bostock2011d3' on page 44 undefined on input line 473.
+
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 44 undefined on input line 475.
+
+
+[44]
+
+LaTeX Warning: Citation `bostock2011d3' on page 45 undefined on input line 488.
+
+
+
+LaTeX Warning: Citation `munzner2014visualization' on page 45 undefined on inpu
+t line 490.
+
+[45]
+
+LaTeX Warning: Citation `pahl2015containerization' on page 46 undefined on inpu
+t line 501.
+
+
+LaTeX Warning: Citation `merkel2014docker' on page 46 undefined on input line 5
+03.
+
+) [46] [47] (./conteudo/metodologia.tex
+Cap\'{\i }tulo 3.
+
+LaTeX Warning: Citation `gil2008metodos' on page 48 undefined on input line 7.
+
+
+LaTeX Warning: Citation `prodanov2013metodologia' on page 48 undefined on input
+ line 7.
+
+
+LaTeX Warning: Citation `creswell2014research' on page 48 undefined on input li
+ne 9.
+
+[48] [49]
+
+LaTeX Warning: Citation `pressman2014software' on page 50 undefined on input li
+ne 40.
+
+
+LaTeX Warning: Citation `sommerville2016software' on page 50 undefined on input
+ line 40.
+
+[50]
+
+LaTeX Warning: Citation `pressman2014software' on page 51 undefined on input li
+ne 61.
+
+[51]
+
+LaTeX Warning: Citation `sommerville2016software' on page 52 undefined on input
+ line 76.
+
+) [52] [53] (./conteudo/trabalhoscorrelatos.tex
+Cap\'{\i }tulo 4.
+
+LaTeX Warning: Citation `irjet2017ftth_gis_autocad' on page 54 undefined on inp
+ut line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 8.
+
+
+LaTeX Warning: Citation `irjet2017ftth_gis_autocad' on page 54 undefined on inp
+ut line 10.
+
+
+LaTeX Warning: Citation `rezgui2022qgis_ftth' on page 54 undefined on input lin
+e 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 15.
+
+
+LaTeX Warning: Citation `rezgui2022qgis_ftth' on page 54 undefined on input lin
+e 17.
+
+[54]
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 55 undefined on input lin
+e 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 21.
+
+
+LaTeX Warning: Citation `chakali2025gis_ftth' on page 55 undefined on input lin
+e 23.
+
+
+LaTeX Warning: Citation `fatahillah2025visnetwork_ftth' on page 55 undefined on
+ input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 27.
+
+
+LaTeX Warning: Citation `fatahillah2025visnetwork_ftth' on page 55 undefined on
+ input line 29.
+
+
+LaTeX Warning: Citation `bostock2011d3' on page 55 undefined on input line 36.
+
+[55]
+
+LaTeX Warning: Citation `geogridmaps2026' on page 56 undefined on input line 45
+.
+
+
+LaTeX Warning: Citation `geogrid_iclass_2026' on page 56 undefined on input lin
+e 45.
+
+[56] [57]
+
+LaTeX Warning: Citation `ozmap2026' on page 58 undefined on input line 77.
+
+
+LaTeX Warning: Citation `ozmap_help_2025' on page 58 undefined on input line 77
+.
+
+[58]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 110.
+
+
+LaTeX Warning: Citation `ftthplanner2026' on page 59 undefined on input line 11
+2.
+
+[59]
+Overfull \hbox (1.56244pt too wide) in paragraph at lines 127--128
+[]\TU/TeXGyreTermes(0)/m/n/12 Adicionalmente, a Figura [][]28[][] apresenta a v
+isualização de fusões em caixas de emenda,
+[60] [61]
+Underfull \hbox (badness 1796) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Rezgui e Bourezg
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento FTTH
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Chakali et al.
+
+Underfull \hbox (badness 1320) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Gestão de rede com
+
+Underfull \hbox (badness 1132) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Visualização web da
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Não integra orça-
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento lógico
+
+Underfull \hbox (badness 3792) in paragraph at lines 172--172
+\TU/TeXGyreTermes(0)/m/n/10.95 de redes PON com
+
+Underfull \hbox (badness 6445) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Integra visualização,
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Documentação de
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Mapeamento e
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 documentação geor-
+
+Underfull \hbox (badness 7433) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Foco cartográfico e
+
+Underfull \hbox (badness 2941) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Registro de elemen-
+
+Underfull \hbox (badness 2837) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Ausência de cálculo
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento lógico
+
+Underfull \hbox (badness 3792) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 de redes PON com
+
+Underfull \hbox (badness 6445) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Integra visualização,
+
+Underfull \hbox (badness 7326) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 em contexto acadê-
+[62]) [63] (./conteudo/desenvolvimento.tex
+Cap\'{\i }tulo 5.
+[64] [65] [66] [67] [68]
+Overfull \hbox (45.76082pt too wide) in paragraph at lines 112--113
+[]\TU/TeXGyreTermes(0)/b/n/12 Serviços (\TU/TeXGyreTermes(0)/b/it/12 Services\T
+U/TeXGyreTermes(0)/b/n/12 ): \TU/TeXGyreTermes(0)/m/n/12 Concentram a lógica de
+ negócio do sistema. O serviço \TU/lmtt/m/n/12 calculo_optico.py
+[69] [70] [71] [72] [73] [74]
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+[75]
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+
+Overfull \hbox (3.15576pt too wide) in paragraph at lines 304--304
+[]    \TU/lmtt/m/n/12 │   ├── controllers/      # Controladores REST (calculo.p
+y, projetos.py)[] 
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+
+Overfull \hbox (83.49571pt too wide) in paragraph at lines 305--305
+[]    \TU/lmtt/m/n/12 │   ├── services/         # Regras de negócio (calculo_op
+tico.py, projeto_service.py)[] 
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+[76]
+Overfull \hbox (2.07579pt too wide) in paragraph at lines 346--346
+[]    \TU/lmtt/m/n/12 tipo_splitter: Optional[str] = None  # "balanceado" ou "d
+esbalanceado"[] 
+
+Overfull \hbox (30.45692pt too wide) in paragraph at lines 367--368
+\TU/TeXGyreTermes(0)/m/n/12 exemplo, atributos como \TU/lmtt/m/n/12 potencia_tx
+_dbm \TU/TeXGyreTermes(0)/m/n/12 são exclusivos da OLT, enquanto \TU/lmtt/m/n/1
+2 razao_desbalanceada
+[77] [78]
+Overfull \hbox (100.95586pt too wide) in paragraph at lines 392--392
+[]\TU/lmtt/m/n/12 from app.models.constants import PERDAS_SPLITTER_BALANCEADO, 
+PERDAS_SPLITTER_DESBALANCEADO[] 
+
+Overfull \hbox (20.61575pt too wide) in paragraph at lines 397--397
+[]    \TU/lmtt/m/n/12 # Mapeia as conexões de saída: id_origem -> lista de (enl
+ace, id_destino)[] 
+
+Overfull \hbox (8.2558pt too wide) in paragraph at lines 398--398
+[]    \TU/lmtt/m/n/12 adjacencias: Dict[str, List[tuple]] = {no.id: [] for no i
+n projeto.nos}[] 
+
+Overfull \hbox (20.6158pt too wide) in paragraph at lines 401--401
+[]            \TU/lmtt/m/n/12 adjacencias[enlace.id_origem].append((enlace, enl
+ace.id_destino))[] 
+
+Overfull \hbox (39.15578pt too wide) in paragraph at lines 406--406
+[]        \TU/lmtt/m/n/12 raise ValueError("A topologia não possui uma OLT cada
+strada como raiz.")[] 
+
+Overfull \hbox (76.23581pt too wide) in paragraph at lines 408--408
+[]    \TU/lmtt/m/n/12 potencia_inicial = olt.potencia_tx_dbm if olt.potencia_tx
+_dbm is not None else 5.0[] 
+[79]
+Overfull \hbox (113.31577pt too wide) in paragraph at lines 439--439
+[]            \TU/lmtt/m/n/12 elif potencia_apos_no >= (sensibilidade + projeto
+.parametros.margem_sistema_db):[] 
+
+Overfull \hbox (20.61572pt too wide) in paragraph at lines 450--450
+[]        \TU/lmtt/m/n/12 # Propaga o sinal para os nós sucessores através dos 
+enlaces de fibra[] 
+
+Overfull \hbox (26.79576pt too wide) in paragraph at lines 454--454
+[]            \TU/lmtt/m/n/12 perda_conexoes = enlace.num_conexoes * enlace.per
+da_por_conexao_db[] 
+[80]
+Overfull \hbox (63.87576pt too wide) in paragraph at lines 477--477
+[]        \TU/lmtt/m/n/12 return PERDAS_SPLITTER_BALANCEADO.get(razao, 10.0 * m
+ath.log10(razao) + 0.5)[] 
+
+Overfull \hbox (63.8758pt too wide) in paragraph at lines 480--480
+[]        \TU/lmtt/m/n/12 return PERDAS_SPLITTER_DESBALANCEADO.get(razao_str, {
+}).get("passagem", 1.5)[] 
+[81]
+Overfull \hbox (11.6284pt too wide) in paragraph at lines 507--508
+[]\TU/TeXGyreTermes(0)/m/n/12 Já a persistência dos arquivos []  [][]JSON[][] n
+o disco é realizada pelo serviço \TU/lmtt/m/n/12 ProjetoService
+
+Overfull \hbox (45.33586pt too wide) in paragraph at lines 515--515
+[]\TU/lmtt/m/n/12 CAMINHO_PROJETOS = os.path.join(os.path.dirname(__file__), ".
+./../data/projects")[] 
+[82] [83]
+Overfull \hbox (119.49571pt too wide) in paragraph at lines 599--599
+[]    \TU/lmtt/m/n/12 .text(d => `${d.nome} ${d.potencia_rx ? '(' + d.potencia_
+rx.toFixed(2) + ' dBm)' : ''}`);[] 
+[84]
+Overfull \hbox (57.69583pt too wide) in paragraph at lines 615--615
+[]    \TU/lmtt/m/n/12 d3.select(this).attr("transform", `translate(${d.posicao.
+x}, ${d.posicao.y})`);[] 
+
+Overfull \hbox (2.07579pt too wide) in paragraph at lines 634--634
+[]            \TU/lmtt/m/n/12 throw new Error(`Erro na requisição: ${response.s
+tatusText}`);[] 
+[85]) [86] (./conteudo/conclusao.tex
+Cap\'{\i }tulo 6.
+) [87] (./main.bbl (./main.brf)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\indent' on input line 3.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\uppercase' on input line 3.
+
+bibitemlist
+[88] [89]) [90] 
+enddocument/afterlastpage (AED): lastpage setting LastPage.
+(./main.aux (./pretextuais/folhadeaprovacao.aux) (./pretextuais/dedicatoria.aux
+) (./pretextuais/agradecimentos.aux) (./pretextuais/resumo.aux)
+(./pretextuais/acronimos.aux) (./conteudo/introducao.aux)
+(./conteudo/fundamentacao.aux) (./conteudo/metodologia.aux)
+(./conteudo/trabalhoscorrelatos.aux) (./conteudo/desenvolvimento.aux)
+(./conteudo/conclusao.aux))
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.brf' has changed.
+(rerunfilecheck)                Rerun to get bibliographical references right.
+
+ )
+(see the transcript file for additional information)
+Output written on main.pdf (91 pages).
+Transcript written on main.log.
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex)
+ restricted \write18 enabled.
+entering extended mode
+(./main.tex
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-08-10>
+(./abntex2-IFC.cls
+Document Class: abntex2-IFC 10/07/2016 Modelo do IFC baseado em abnTeX2
+(./abntex2/abntex2.cls
+Document Class: abntex2/abntex2 2013/10/26 v1.9 abnTeX2
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/ifthen.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/memoir.cls
+Document Class: memoir 2025/11/04 v3.8.4b configurable book, report, article do
+cument class
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xpatch/xpatch.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/expl3.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3kernel/l3backend-xetex.def))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/xparse/xparse.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/etoolbox/etoolbox.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/iftex.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/mem12.clo)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/array.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/dcolumn.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/delarray.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/tabularx.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/booktabs/booktabs.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/nameref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/refcount/refcount.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/infwarerr/infwarerr.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/gettitlestring/gettitlestring.s
+ty (/usr/local/texlive/2026/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/keyval.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty))))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/verbatim.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/shortvrb.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/textcase/textcase.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hycolor/hycolor.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/stringenc/stringenc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/intcalc/intcalc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/puenc.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/url/url.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bitset/bitset.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/hxetex.def
+(/usr/local/texlive/2026/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+))) (/usr/local/texlive/2026/texmf-dist/tex/latex/memoir/memhfixc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bookmark.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/bookmark/bkm-xetex.def))
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/babel.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/xebabel.def)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/en/babel-english.t
+ex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/pt/babel-brazilian
+.tex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel/locale/invalid/babel-braz
+il.tex)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-english/english.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-portuges/brazilian.ldf)
+
+Package babel Warning: Name 'brazil' is deprecated.
+(babel)                Use 'brazilian' instead.
+(babel)                Reported on input line 4459.
+
+(/usr/local/texlive/2026/texmf-dist/tex/generic/babel-portuges/brazilian.ldf))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/enumitem/enumitem.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tools/calc.sty)
+
+******************************************************
+Stock height and width: 845.04684pt by 597.50787pt
+Top and edge trims: 0pt and 0pt
+Page height and width: 845.04684pt by 597.50787pt
+Text height and width: 708pt by 455pt
+Spine and edge margins: 85.35826pt and 56.9055pt
+Upper and lower margins: 85.35826pt and 51.68858pt
+Headheight and headsep: 14.5pt and 19.8738pt
+Footskip: 30pt
+Columnsep and columnseprule: 10pt and 0pt
+Marginparsep and marginparwidth: 7pt and 42.9055pt
+Sidecapsep and sidecapwidth: 7pt and 42pt
+Sidebarhsep and sidebarwidth: 7pt and 42pt
+Sidebarvsep and sidebartopsep: 14.5pt and 0pt
+Sidebarheight: 590.14995pt
+Sidefoothsep and sidefootwidth: 7pt and 42pt
+Sidefootvsep and sidefootheight: 14.5pt and 590.14995pt
+******************************************************
+
+)) (./config_inicial.tex
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/base/fontenc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/fontspec/fontspec.cfg)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpage.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpage2e.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lastpage/lastpagemodern.sty) 
+)) (/usr/local/texlive/2026/texmf-dist/tex/latex/tools/indentfirst.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/color.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-def/xetex.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/graphics.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/trig.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/graphics.cfg)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/amsfonts.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/base/glossaries.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+(/usr/local/texlive/2026/texmf-dist/tex/generic/xkeyval/xkvutils.tex)))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/mfirstuc/mfirstuc.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xfor/xfor.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsgen.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/tracklang/tracklang.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/tracklang/tracklang.tex))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/translator/translator.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-english/glossaries-eng
+lish.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-portuges/glossaries-pt
+-BR.ldf
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries-portuges/glossaries-po
+rtuges-utf8.ldf))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-base.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amstext.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-l3fp.def)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool/datatool-utf8.ldf)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool-english/datatool-english
+.ldf
+(/usr/local/texlive/2026/texmf-dist/tex/latex/datatool-english/datatool-english
+-utf8.ldf))
+
+Package tracklang Warning: No `datatool' support for dialect `brazilian'  on in
+put line 9924.
+
+
+Package tracklang Warning: No `datatool' support for dialect `brazilian'  on in
+put line 9924.
+
+)
+
+Package glossaries Warning: Overriding \printglossary on input line 6565.
+
+
+Package glossaries Warning: Overriding `theglossary' environment on input line 
+7773.
+
+
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-hypern
+av.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-list.s
+ty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-long.s
+ty (/usr/local/texlive/2026/texmf-dist/tex/latex/tools/longtable.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-super.
+sty (/usr/local/texlive/2026/texmf-dist/tex/latex/supertabular/supertabular.sty
+))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/glossaries/styles/glossary-tree.s
+ty)) (/usr/local/texlive/2026/texmf-dist/tex/latex/hyperref/backref.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/geometry/geometry.sty
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifvtex.sty))
+(./abntex2/abntex2cite.sty (./abntex2/abntex2abrev.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifpdf.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/generic/iftex/ifxetex.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/relsize/relsize.sty))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/lipsum/lipsum.ltd.tex))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/multirow/multirow.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/float/float.sty)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics-cfg/color.cfg)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/local/texlive/2026/texmf-dist/tex/latex/colortbl/colortbl.sty
+new hooks used!!
+))
+Writing index file main.idx 
+
+LaTeX Warning: \include should only be used after \begin{document} on input lin
+e 27.
+
+(./pretextuais/capa.tex) (./main.aux (./pretextuais/folhadeaprovacao.aux)
+(./pretextuais/dedicatoria.aux) (./pretextuais/agradecimentos.aux)
+(./pretextuais/resumo.aux) (./pretextuais/acronimos.aux)
+(./conteudo/introducao.aux) (./conteudo/fundamentacao.aux)
+(./conteudo/metodologia.aux) (./conteudo/trabalhoscorrelatos.aux)
+(./conteudo/desenvolvimento.aux) (./conteudo/conclusao.aux)) (./main.glsdefs)
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd)
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 39--39
+ [][] 
+[1] [1] (./pretextuais/folhadeaprovacao.tex [2]) (./pretextuais/dedicatoria.tex
+ [3]) (./pretextuais/agradecimentos.tex [4]) (./pretextuais/resumo.tex [5]
+[6]) (./main.lof [7]) [8] (./pretextuais/acronimos.tex) (./main.acr
+Underfull \hbox (badness 10000) in paragraph at lines 144--144
+[]|[]\TU/TeXGyreTermes(0)/m/n/12 XGS-
+[9]) [10] (./main.toc [11] [12]) [13] (./conteudo/introducao.tex
+Cap\'{\i }tulo 1.
+[14] [15] [16]) [17] (./conteudo/fundamentacao.tex
+Cap\'{\i }tulo 2.
+[18] [19]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 32.
+
+
+Overfull \hbox (17.67145pt too wide) in paragraph at lines 34--35
+[]\TU/TeXGyreTermes(0)/m/n/12 A arquitetura []  [][]PON[][] organiza a rede de 
+acesso a partir de uma topologia ponto-multiponto,
+[20] [21]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 57.
+
+[22] [23]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 80.
+
+[24]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 122.
+
+[25] [26]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 143.
+
+[27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 349.
+
+[38]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 374.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\glspl' on input line 374.
+
+[39] [40]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 400.
+
+[41]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 423.
+
+[42] [43] [44] [45] [46]) [47] [48] (./conteudo/metodologia.tex
+Cap\'{\i }tulo 3.
+[49] [50] [51] [52]) [53] [54] (./conteudo/trabalhoscorrelatos.tex
+Cap\'{\i }tulo 4.
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 8.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 15.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 15.
+
+[55]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 21.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\cite ' on input line 27.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `subscript' on input line 27.
+
+[56] [57] [58] [59] [60]
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\gls' on input line 110.
+
+
+Overfull \hbox (1.56244pt too wide) in paragraph at lines 127--128
+[]\TU/TeXGyreTermes(0)/m/n/12 Adicionalmente, a Figura [][]28[][] apresenta a v
+isualização de fusões em caixas de emenda,
+[61] [62]
+Underfull \hbox (badness 1796) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Rezgui e Bourezg
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento FTTH
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Chakali et al.
+
+Underfull \hbox (badness 1320) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Gestão de rede com
+
+Underfull \hbox (badness 1132) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Visualização web da
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Não integra orça-
+
+Underfull \hbox (badness 10000) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento lógico
+
+Underfull \hbox (badness 3792) in paragraph at lines 172--172
+\TU/TeXGyreTermes(0)/m/n/10.95 de redes PON com
+
+Underfull \hbox (badness 6445) in paragraph at lines 172--172
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Integra visualização,
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Documentação de
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Mapeamento e
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 documentação geor-
+
+Underfull \hbox (badness 7433) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Foco cartográfico e
+
+Underfull \hbox (badness 2941) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Registro de elemen-
+
+Underfull \hbox (badness 2837) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Ausência de cálculo
+
+Underfull \hbox (badness 10000) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Planejamento lógico
+
+Underfull \hbox (badness 3792) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 de redes PON com
+
+Underfull \hbox (badness 6445) in paragraph at lines 192--192
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Integra visualização,
+
+Underfull \hbox (badness 7326) in paragraph at lines 192--192
+\TU/TeXGyreTermes(0)/m/n/10.95 em contexto acadê-
+[63]) [64] [65] (./conteudo/desenvolvimento.tex
+Cap\'{\i }tulo 5.
+[66] [67] [68] [69] [70]
+Overfull \hbox (45.76082pt too wide) in paragraph at lines 112--113
+[]\TU/TeXGyreTermes(0)/b/n/12 Serviços (\TU/TeXGyreTermes(0)/b/it/12 Services\T
+U/TeXGyreTermes(0)/b/n/12 ): \TU/TeXGyreTermes(0)/m/n/12 Concentram a lógica de
+ negócio do sistema. O serviço \TU/lmtt/m/n/12 calculo_optico.py
+[71] [72] [73] [74] [75] [76]
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+[77]
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+
+Overfull \hbox (3.15576pt too wide) in paragraph at lines 304--304
+[]    \TU/lmtt/m/n/12 │   ├── controllers/      # Controladores REST (calculo.p
+y, projetos.py)[] 
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+
+Overfull \hbox (83.49571pt too wide) in paragraph at lines 305--305
+[]    \TU/lmtt/m/n/12 │   ├── services/         # Regras de negócio (calculo_op
+tico.py, projeto_service.py)[] 
+Missing character: There is no │ (U+2502) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ├ (U+251C) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no └ (U+2514) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+Missing character: There is no ─ (U+2500) in font [lmmono12-regular]:!
+[78]
+Overfull \hbox (2.07579pt too wide) in paragraph at lines 346--346
+[]    \TU/lmtt/m/n/12 tipo_splitter: Optional[str] = None  # "balanceado" ou "d
+esbalanceado"[] 
+
+Overfull \hbox (30.45692pt too wide) in paragraph at lines 367--368
+\TU/TeXGyreTermes(0)/m/n/12 exemplo, atributos como \TU/lmtt/m/n/12 potencia_tx
+_dbm \TU/TeXGyreTermes(0)/m/n/12 são exclusivos da OLT, enquanto \TU/lmtt/m/n/1
+2 razao_desbalanceada
+[79] [80]
+Overfull \hbox (100.95586pt too wide) in paragraph at lines 392--392
+[]\TU/lmtt/m/n/12 from app.models.constants import PERDAS_SPLITTER_BALANCEADO, 
+PERDAS_SPLITTER_DESBALANCEADO[] 
+
+Overfull \hbox (20.61575pt too wide) in paragraph at lines 397--397
+[]    \TU/lmtt/m/n/12 # Mapeia as conexões de saída: id_origem -> lista de (enl
+ace, id_destino)[] 
+
+Overfull \hbox (8.2558pt too wide) in paragraph at lines 398--398
+[]    \TU/lmtt/m/n/12 adjacencias: Dict[str, List[tuple]] = {no.id: [] for no i
+n projeto.nos}[] 
+
+Overfull \hbox (20.6158pt too wide) in paragraph at lines 401--401
+[]            \TU/lmtt/m/n/12 adjacencias[enlace.id_origem].append((enlace, enl
+ace.id_destino))[] 
+
+Overfull \hbox (39.15578pt too wide) in paragraph at lines 406--406
+[]        \TU/lmtt/m/n/12 raise ValueError("A topologia não possui uma OLT cada
+strada como raiz.")[] 
+
+Overfull \hbox (76.23581pt too wide) in paragraph at lines 408--408
+[]    \TU/lmtt/m/n/12 potencia_inicial = olt.potencia_tx_dbm if olt.potencia_tx
+_dbm is not None else 5.0[] 
+[81]
+Overfull \hbox (113.31577pt too wide) in paragraph at lines 439--439
+[]            \TU/lmtt/m/n/12 elif potencia_apos_no >= (sensibilidade + projeto
+.parametros.margem_sistema_db):[] 
+
+Overfull \hbox (20.61572pt too wide) in paragraph at lines 450--450
+[]        \TU/lmtt/m/n/12 # Propaga o sinal para os nós sucessores através dos 
+enlaces de fibra[] 
+
+Overfull \hbox (26.79576pt too wide) in paragraph at lines 454--454
+[]            \TU/lmtt/m/n/12 perda_conexoes = enlace.num_conexoes * enlace.per
+da_por_conexao_db[] 
+[82]
+Overfull \hbox (63.87576pt too wide) in paragraph at lines 477--477
+[]        \TU/lmtt/m/n/12 return PERDAS_SPLITTER_BALANCEADO.get(razao, 10.0 * m
+ath.log10(razao) + 0.5)[] 
+
+Overfull \hbox (63.8758pt too wide) in paragraph at lines 480--480
+[]        \TU/lmtt/m/n/12 return PERDAS_SPLITTER_DESBALANCEADO.get(razao_str, {
+}).get("passagem", 1.5)[] 
+[83]
+Overfull \hbox (11.6284pt too wide) in paragraph at lines 507--508
+[]\TU/TeXGyreTermes(0)/m/n/12 Já a persistência dos arquivos []  [][]JSON[][] n
+o disco é realizada pelo serviço \TU/lmtt/m/n/12 ProjetoService
+
+Overfull \hbox (45.33586pt too wide) in paragraph at lines 515--515
+[]\TU/lmtt/m/n/12 CAMINHO_PROJETOS = os.path.join(os.path.dirname(__file__), ".
+./../data/projects")[] 
+[84] [85]
+Overfull \hbox (119.49571pt too wide) in paragraph at lines 599--599
+[]    \TU/lmtt/m/n/12 .text(d => `${d.nome} ${d.potencia_rx ? '(' + d.potencia_
+rx.toFixed(2) + ' dBm)' : ''}`);[] 
+[86]
+Overfull \hbox (57.69583pt too wide) in paragraph at lines 615--615
+[]    \TU/lmtt/m/n/12 d3.select(this).attr("transform", `translate(${d.posicao.
+x}, ${d.posicao.y})`);[] 
+
+Overfull \hbox (2.07579pt too wide) in paragraph at lines 634--634
+[]            \TU/lmtt/m/n/12 throw new Error(`Erro na requisição: ${response.s
+tatusText}`);[] 
+[87]) [88] (./conteudo/conclusao.tex
+Cap\'{\i }tulo 6.
+) [89] (./main.bbl (./main.brf)
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\indent' on input line 3.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\uppercase' on input line 3.
+
+bibitemlist
+[90] [91]) [92] 
+enddocument/afterlastpage (AED): lastpage setting LastPage.
+(./main.aux (./pretextuais/folhadeaprovacao.aux) (./pretextuais/dedicatoria.aux
+) (./pretextuais/agradecimentos.aux) (./pretextuais/resumo.aux)
+(./pretextuais/acronimos.aux) (./conteudo/introducao.aux)
+(./conteudo/fundamentacao.aux) (./conteudo/metodologia.aux)
+(./conteudo/trabalhoscorrelatos.aux) (./conteudo/desenvolvimento.aux)
+(./conteudo/conclusao.aux))
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+
+Package rerunfilecheck Warning: File `main.brf' has changed.
+(rerunfilecheck)                Rerun to get bibliographical references right.
+
+ )
+(see the transcript file for additional information)
+Output written on main.pdf (93 pages).
+Transcript written on main.log.
+PDF gerado: main.pdf

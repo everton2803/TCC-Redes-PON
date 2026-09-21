@@ -3,7 +3,9 @@
 % ---
 \usepackage[brazilian]{babel}    % Define o idioma do documento (resolve o erro do tracklang)
 \usepackage{fontspec}            % Gerenciamento moderno de fontes
-\setmainfont{Times New Roman}    % Fonte Times nativa para XeLaTeX/LuaLaTeX
+\IfFontExistsTF{Times New Roman}
+    {\setmainfont{Times New Roman}}
+    {\setmainfont{TeX Gyre Termes}}
 
 \usepackage{lastpage}            % Usado pela Ficha catalográfica
 \usepackage{indentfirst}         % Indenta o primeiro parágrafo de cada seção

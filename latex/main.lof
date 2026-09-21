@@ -1,0 +1,37 @@
+\babel@toc {brazil}{}\relax 
+\contentsline {figure}{\numberline {1}{\ignorespaces Diferença entre a rede \textit {core}/\textit {backbone} e a rede de acesso}}{19}{figure.2.1}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Arquitetura de uma rede \gls {pon} baseada em topologia ponto--multiponto}}{21}{figure.2.2}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Comparação entre topologias balanceada e desbalanceadas em redes \gls {pon}}}{24}{figure.2.3}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Comparação entre os padrões \gls {epon} e \gls {gpon} quanto à capacidade de divisão}}{26}{figure.2.4}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Consolidação das perdas no enlace óptico em redes \gls {pon}}}{27}{figure.2.5}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Conexão do transceptor óptico à porta \gls {sfp} da \gls {olt}}}{28}{figure.2.6}%
+\contentsline {figure}{\numberline {7}{\ignorespaces Atenuação do sinal ao longo da fibra óptica em função da distância}}{29}{figure.2.7}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Funcionamento do \textit {splitter} e divisão do sinal em redes \gls {pon}}}{30}{figure.2.8}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Perdas introduzidas por conexões e emendas na rede \gls {pon}}}{31}{figure.2.9}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Comparação entre o planejamento manual e o uso de ferramentas integradas no projeto de redes ópticas}}{34}{figure.2.10}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Processo de visualização de dados em sistemas complexos, desde a coleta e integração de dados até a geração de \textit {insights} para apoio à tomada de decisão}}{35}{figure.2.11}%
+\contentsline {figure}{\numberline {12}{\ignorespaces Modelo de arquitetura cliente-servidor, destacando a interação entre cliente e servidor por meio de requisições e respostas em uma rede de comunicação}}{37}{figure.2.12}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Fluxo de interação do padrão \gls {mvc}}}{39}{figure.2.13}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Comunicação entre cliente e servidor por meio de \gls {http} e \gls {api}}}{40}{figure.2.14}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Estrutura conceitual de uma \gls {api} \textit {RESTful}}}{41}{figure.2.15}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Estrutura conceitual do formato \gls {json}}}{43}{figure.2.16}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Visualização interativa de dados em aplicações web}}{44}{figure.2.17}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Transformação de dados em elementos visuais interativos com D3.js}}{45}{figure.2.18}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Execução de aplicações web em contêineres \textit {Docker}}}{47}{figure.2.19}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Arquitetura da solução proposta}}{51}{figure.3.20}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Fluxo da metodologia de desenvolvimento}}{52}{figure.3.21}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Fluxo de validação da solução}}{53}{figure.3.22}%
+\contentsline {figure}{\numberline {23}{\ignorespaces Visualização georreferenciada da rede, destacando a localização dos elementos}}{58}{figure.4.23}%
+\contentsline {figure}{\numberline {24}{\ignorespaces Detalhamento de fusões numa caixa de emenda}}{59}{figure.4.24}%
+\contentsline {figure}{\numberline {25}{\ignorespaces Visualização georreferenciada da rede no OZmap}}{60}{figure.4.25}%
+\contentsline {figure}{\numberline {26}{\ignorespaces Representação da rede com múltiplos elementos e alto nível de complexidade visual}}{60}{figure.4.26}%
+\contentsline {figure}{\numberline {27}{\ignorespaces Visualização georreferenciada da rede no FTTH Planner}}{61}{figure.4.27}%
+\contentsline {figure}{\numberline {28}{\ignorespaces Representação de fusões em caixa de emenda no FTTH Planner}}{62}{figure.4.28}%
+\contentsline {figure}{\numberline {29}{\ignorespaces Representação conceitual da rede óptica e do cálculo do orçamento óptico}}{64}{figure.4.29}%
+\contentsline {figure}{\numberline {30}{\ignorespaces Esquema de \textit {wireframe} para a interface de modelagem gráfica}}{69}{figure.5.30}%
+\contentsline {figure}{\numberline {31}{\ignorespaces Visão geral da arquitetura do sistema}}{70}{figure.5.31}%
+\contentsline {figure}{\numberline {32}{\ignorespaces Diagrama de componentes do \textit {backend}}}{71}{figure.5.32}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Diagrama de implantação do sistema containerizado}}{72}{figure.5.33}%
+\contentsline {figure}{\numberline {34}{\ignorespaces Fluxo de sinalização e cálculo do orçamento óptico}}{76}{figure.5.34}%
+\contentsline {figure}{\numberline {35}{\ignorespaces Fluxograma do algoritmo de travessia do grafo e cálculo óptico}}{80}{figure.5.35}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Mapeamento dos objetos de rede para elementos vetoriais \gls {svg} com D3.js}}{85}{figure.5.36}%

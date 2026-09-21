@@ -1,0 +1,840 @@
+\glsdefs@newdocentry{ifc}%
+{%
+name={\acronymfont {\glsentryshort {ifc}}},%
+sort={IFC},%
+type={acronym},%
+first={IFC},%
+firstplural={IFCs},%
+text={IFC},%
+plural={IFCs},%
+description={Instituto Federal Catarinense},%
+descriptionplural={Instituto Federal Catarinense},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Instituto Federal Catarinense},%
+longplural={Instituto Federal Catarinenses},%
+short={IFC},%
+shortplural={IFCs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ids}%
+{%
+name={\acronymfont {\glsentryshort {ids}}},%
+sort={IDS},%
+type={acronym},%
+first={Sistema de Detecção de Intrusão (IDS, do ingl\^es \protect \emph  {Intrusion Detection System})},%
+firstplural={Sistemas de Detecção de Intrusão (IDS, do ingl\^es \protect \emph  {Intrusion Detection System})},%
+text={IDS},%
+plural={IDSs},%
+description={sistema de detecção de intrusão},%
+descriptionplural={sistema de detecção de intrusão},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={sistema de detecção de intrusão},%
+longplural={sistemas de detecção de intrusão},%
+short={IDS},%
+shortplural={IDSs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{pon}%
+{%
+name={\acronymfont {\glsentryshort {pon}}},%
+sort={PON},%
+type={acronym},%
+first={PON},%
+firstplural={PONs},%
+text={PON},%
+plural={PONs},%
+description={\textit {Passive Optical Network}},%
+descriptionplural={\textit {Passive Optical Network}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Passive Optical Network}},%
+longplural={\protect \textit  {Passive Optical Network}s},%
+short={PON},%
+shortplural={PONs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ftth}%
+{%
+name={\acronymfont {\glsentryshort {ftth}}},%
+sort={FTTH},%
+type={acronym},%
+first={FTTH},%
+firstplural={FTTHs},%
+text={FTTH},%
+plural={FTTHs},%
+description={\textit {Fiber To The Home}},%
+descriptionplural={\textit {Fiber To The Home}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Fiber To The Home}},%
+longplural={\protect \textit  {Fiber To The Home}s},%
+short={FTTH},%
+shortplural={FTTHs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{mvc}%
+{%
+name={\acronymfont {\glsentryshort {mvc}}},%
+sort={MVC},%
+type={acronym},%
+first={MVC},%
+firstplural={MVCs},%
+text={MVC},%
+plural={MVCs},%
+description={\textit {Model, View and Controller}},%
+descriptionplural={\textit {Model, View and Controller}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Model, View and Controller}},%
+longplural={\protect \textit  {Model, View and Controller}s},%
+short={MVC},%
+shortplural={MVCs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{olt}%
+{%
+name={\acronymfont {\glsentryshort {olt}}},%
+sort={OLT},%
+type={acronym},%
+first={OLT},%
+firstplural={OLTs},%
+text={OLT},%
+plural={OLTs},%
+description={\textit {Optical Line Transmissor}},%
+descriptionplural={\textit {Optical Line Transmissor}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Optical Line Transmissor}},%
+longplural={\protect \textit  {Optical Line Transmissor}s},%
+short={OLT},%
+shortplural={OLTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cto}%
+{%
+name={\acronymfont {\glsentryshort {cto}}},%
+sort={CTO},%
+type={acronym},%
+first={CTO},%
+firstplural={CTOs},%
+text={CTO},%
+plural={CTOs},%
+description={\textit {Customer Terminal Outlet}},%
+descriptionplural={\textit {Customer Terminal Outlet}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Customer Terminal Outlet}},%
+longplural={\protect \textit  {Customer Terminal Outlet}s},%
+short={CTO},%
+shortplural={CTOs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cto2}%
+{%
+name={\acronymfont {\glsentryshort {cto2}}},%
+sort={CTO},%
+type={acronym},%
+first={Caixas de Terminação Óptica (CTOs, do inglês (\protect \textit  {Customer Terminal Outlet}))},%
+firstplural={Caixas de Terminação Óptica (CTOs, do inglês (\protect \textit  {Customer Terminal Outlet}))s},%
+text={CTO},%
+plural={CTOs},%
+description={Caixa de Terminação Óptica},%
+descriptionplural={Caixa de Terminação Óptica},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Caixa de Terminação Óptica},%
+longplural={Caixas de Terminação Óptica},%
+short={CTO},%
+shortplural={CTOs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{odn}%
+{%
+name={\acronymfont {\glsentryshort {odn}}},%
+sort={ODN},%
+type={acronym},%
+first={ODN},%
+firstplural={ODNs},%
+text={ODN},%
+plural={ODNs},%
+description={\textit {Optical Distribution Network}},%
+descriptionplural={\textit {Optical Distribution Network}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Optical Distribution Network}},%
+longplural={\protect \textit  {Optical Distribution Network}s},%
+short={ODN},%
+shortplural={ODNs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{onu}%
+{%
+name={\acronymfont {\glsentryshort {onu}}},%
+sort={ONU},%
+type={acronym},%
+first={ONU},%
+firstplural={ONUs},%
+text={ONU},%
+plural={ONUs},%
+description={\textit {Optical Network Unit}},%
+descriptionplural={\textit {Optical Network Unit}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Optical Network Unit}},%
+longplural={ONUs},%
+short={ONU},%
+shortplural={ONUs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ont}%
+{%
+name={\acronymfont {\glsentryshort {ont}}},%
+sort={ONT},%
+type={acronym},%
+first={ONT},%
+firstplural={ONTs},%
+text={ONT},%
+plural={ONTs},%
+description={\textit {Optical Network Terminal}},%
+descriptionplural={\textit {Optical Network Terminal}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Optical Network Terminal}},%
+longplural={\protect \textit  {Optical Network Terminal}s},%
+short={ONT},%
+shortplural={ONTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{http}%
+{%
+name={\acronymfont {\glsentryshort {http}}},%
+sort={HTTP},%
+type={acronym},%
+first={HTTP},%
+firstplural={HTTPs},%
+text={HTTP},%
+plural={HTTPs},%
+description={\textit {Hypertext Transfer Protocol}},%
+descriptionplural={\textit {Hypertext Transfer Protocol}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Hypertext Transfer Protocol}},%
+longplural={\protect \textit  {Hypertext Transfer Protocol}s},%
+short={HTTP},%
+shortplural={HTTPs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{api}%
+{%
+name={\acronymfont {\glsentryshort {api}}},%
+sort={API},%
+type={acronym},%
+first={API},%
+firstplural={APIs},%
+text={API},%
+plural={APIs},%
+description={\textit {Application Programming Interface}},%
+descriptionplural={\textit {Application Programming Interface}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Application Programming Interface}},%
+longplural={\protect \textit  {Application Programming Interface}s},%
+short={API},%
+shortplural={APIs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{rest}%
+{%
+name={\acronymfont {\glsentryshort {rest}}},%
+sort={REST},%
+type={acronym},%
+first={REST},%
+firstplural={RESTs},%
+text={REST},%
+plural={RESTs},%
+description={\textit {Representational State Transfer}},%
+descriptionplural={\textit {Representational State Transfer}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Representational State Transfer}},%
+longplural={\protect \textit  {Representational State Transfer}s},%
+short={REST},%
+shortplural={RESTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{json}%
+{%
+name={\acronymfont {\glsentryshort {json}}},%
+sort={JSON},%
+type={acronym},%
+first={JSON},%
+firstplural={JSONs},%
+text={JSON},%
+plural={JSONs},%
+description={\textit {JavaScript Object Notation}},%
+descriptionplural={\textit {JavaScript Object Notation}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {JavaScript Object Notation}},%
+longplural={\protect \textit  {JavaScript Object Notation}s},%
+short={JSON},%
+shortplural={JSONs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{gis}%
+{%
+name={\acronymfont {\glsentryshort {gis}}},%
+sort={GIS},%
+type={acronym},%
+first={GIS},%
+firstplural={GISs},%
+text={GIS},%
+plural={GISs},%
+description={\textit {Geographic Information System}},%
+descriptionplural={\textit {Geographic Information System}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Geographic Information System}},%
+longplural={\protect \textit  {Geographic Information System}s},%
+short={GIS},%
+shortplural={GISs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{sfp}%
+{%
+name={\acronymfont {\glsentryshort {sfp}}},%
+sort={SFP},%
+type={acronym},%
+first={SFP},%
+firstplural={SFPs},%
+text={SFP},%
+plural={SFPs},%
+description={\textit {Small Form-factor Pluggable}},%
+descriptionplural={\textit {Small Form-factor Pluggable}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Small Form-factor Pluggable}},%
+longplural={\protect \textit  {Small Form-factor Pluggable}s},%
+short={SFP},%
+shortplural={SFPs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{gbic}%
+{%
+name={\acronymfont {\glsentryshort {gbic}}},%
+sort={GBIC},%
+type={acronym},%
+first={GBIC},%
+firstplural={GBICs},%
+text={GBIC},%
+plural={GBICs},%
+description={\textit {Gigabit Interface Converter}},%
+descriptionplural={\textit {Gigabit Interface Converter}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Gigabit Interface Converter}},%
+longplural={\protect \textit  {Gigabit Interface Converter}s},%
+short={GBIC},%
+shortplural={GBICs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{uri}%
+{%
+name={\acronymfont {\glsentryshort {uri}}},%
+sort={URI},%
+type={acronym},%
+first={URI},%
+firstplural={URIs},%
+text={URI},%
+plural={URIs},%
+description={\textit {Uniform Resource Identifier}},%
+descriptionplural={\textit {Uniform Resource Identifier}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Uniform Resource Identifier}},%
+longplural={\protect \textit  {Uniform Resource Identifier}s},%
+short={URI},%
+shortplural={URIs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{epon}%
+{%
+name={\acronymfont {\glsentryshort {epon}}},%
+sort={EPON},%
+type={acronym},%
+first={EPON},%
+firstplural={EPONs},%
+text={EPON},%
+plural={EPONs},%
+description={\textit {Ethernet Passive Optical Network}},%
+descriptionplural={\textit {Ethernet Passive Optical Network}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Ethernet Passive Optical Network}},%
+longplural={\protect \textit  {Ethernet Passive Optical Network}s},%
+short={EPON},%
+shortplural={EPONs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{gpon}%
+{%
+name={\acronymfont {\glsentryshort {gpon}}},%
+sort={GPON},%
+type={acronym},%
+first={GPON},%
+firstplural={GPONs},%
+text={GPON},%
+plural={GPONs},%
+description={\textit {Gigabit Passive Optical Network}},%
+descriptionplural={\textit {Gigabit Passive Optical Network}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Gigabit Passive Optical Network}},%
+longplural={\protect \textit  {Gigabit Passive Optical Network}s},%
+short={GPON},%
+shortplural={GPONs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{xgpon}%
+{%
+name={\acronymfont {\glsentryshort {xgpon}}},%
+sort={XG-PON},%
+type={acronym},%
+first={XG-PON},%
+firstplural={XG-PONs},%
+text={XG-PON},%
+plural={XG-PONs},%
+description={10-\textit {Gigabit-capable Passive Optical Network}},%
+descriptionplural={10-\textit {Gigabit-capable Passive Optical Network}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={10-\protect \textit  {Gigabit-capable Passive Optical Network}},%
+longplural={10-\protect \textit  {Gigabit-capable Passive Optical Network}s},%
+short={XG-PON},%
+shortplural={XG-PONs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{xgspon}%
+{%
+name={\acronymfont {\glsentryshort {xgspon}}},%
+sort={XGS-PON},%
+type={acronym},%
+first={XGS-PON},%
+firstplural={XGS-PONs},%
+text={XGS-PON},%
+plural={XGS-PONs},%
+description={10-\textit {Gigabit Symmetric Passive Optical Network}},%
+descriptionplural={10-\textit {Gigabit Symmetric Passive Optical Network}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={10-\protect \textit  {Gigabit Symmetric Passive Optical Network}},%
+longplural={10-\protect \textit  {Gigabit Symmetric Passive Optical Network}s},%
+short={XGS-PON},%
+shortplural={XGS-PONs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{html}%
+{%
+name={\acronymfont {\glsentryshort {html}}},%
+sort={HTML},%
+type={acronym},%
+first={HTML},%
+firstplural={HTMLs},%
+text={HTML},%
+plural={HTMLs},%
+description={\textit {HyperText Markup Language}},%
+descriptionplural={\textit {HyperText Markup Language}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {HyperText Markup Language}},%
+longplural={\protect \textit  {HyperText Markup Language}s},%
+short={HTML},%
+shortplural={HTMLs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{svg}%
+{%
+name={\acronymfont {\glsentryshort {svg}}},%
+sort={SVG},%
+type={acronym},%
+first={SVG},%
+firstplural={SVGs},%
+text={SVG},%
+plural={SVGs},%
+description={\textit {Scalable Vector Graphics}},%
+descriptionplural={\textit {Scalable Vector Graphics}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Scalable Vector Graphics}},%
+longplural={\protect \textit  {Scalable Vector Graphics}s},%
+short={SVG},%
+shortplural={SVGs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{css}%
+{%
+name={\acronymfont {\glsentryshort {css}}},%
+sort={CSS},%
+type={acronym},%
+first={CSS},%
+firstplural={CSSs},%
+text={CSS},%
+plural={CSSs},%
+description={\textit {Cascading Style Sheets}},%
+descriptionplural={\textit {Cascading Style Sheets}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Cascading Style Sheets}},%
+longplural={\protect \textit  {Cascading Style Sheets}s},%
+short={CSS},%
+shortplural={CSSs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ia}%
+{%
+name={\acronymfont {\glsentryshort {ia}}},%
+sort={IA},%
+type={acronym},%
+first={IA},%
+firstplural={IAs},%
+text={IA},%
+plural={IAs},%
+description={Inteligência Artificial},%
+descriptionplural={Inteligência Artificial},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Inteligência Artificial},%
+longplural={Inteligência Artificials},%
+short={IA},%
+shortplural={IAs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{cnpq}%
+{%
+name={\acronymfont {\glsentryshort {cnpq}}},%
+sort={CNPq},%
+type={acronym},%
+first={CNPq},%
+firstplural={CNPqs},%
+text={CNPq},%
+plural={CNPqs},%
+description={Conselho Nacional de Desenvolvimento Científico e Tecnológico},%
+descriptionplural={Conselho Nacional de Desenvolvimento Científico e Tecnológico},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Conselho Nacional de Desenvolvimento Científico e Tecnológico},%
+longplural={Conselho Nacional de Desenvolvimento Científico e Tecnológicos},%
+short={CNPq},%
+shortplural={CNPqs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{mec}%
+{%
+name={\acronymfont {\glsentryshort {mec}}},%
+sort={MEC},%
+type={acronym},%
+first={MEC},%
+firstplural={MECs},%
+text={MEC},%
+plural={MECs},%
+description={Ministério da Educação},%
+descriptionplural={Ministério da Educação},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Ministério da Educação},%
+longplural={Ministério da Educaçãos},%
+short={MEC},%
+shortplural={MECs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{spa}%
+{%
+name={\acronymfont {\glsentryshort {spa}}},%
+sort={SPA},%
+type={acronym},%
+first={SPA},%
+firstplural={SPAs},%
+text={SPA},%
+plural={SPAs},%
+description={Single Page Application},%
+descriptionplural={Single Page Application},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Single Page Application},%
+longplural={Single Page Applications},%
+short={SPA},%
+shortplural={SPAs},%
+counter={page},%
+parent={},%
+%
+}%
+
