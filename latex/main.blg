@@ -2,16 +2,16 @@ This is BibTeX, Version 0.99e (TeX Live 2026)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: main.aux
 A level-1 auxiliary file: pretextuais/folhadeaprovacao.aux
-A level-1 auxiliary file: pretextuais/dedicatoria.aux
-A level-1 auxiliary file: pretextuais/agradecimentos.aux
 A level-1 auxiliary file: pretextuais/resumo.aux
 A level-1 auxiliary file: pretextuais/acronimos.aux
 A level-1 auxiliary file: conteudo/introducao.aux
 A level-1 auxiliary file: conteudo/fundamentacao.aux
-A level-1 auxiliary file: conteudo/metodologia.aux
 A level-1 auxiliary file: conteudo/trabalhoscorrelatos.aux
+A level-1 auxiliary file: conteudo/metodologia.aux
 A level-1 auxiliary file: conteudo/desenvolvimento.aux
+A level-1 auxiliary file: conteudo/resultado.aux
 A level-1 auxiliary file: conteudo/conclusao.aux
+A level-1 auxiliary file: postextuais/apendice.aux
 The style file: abntex2/abntex2-alf.bst
 Reallocated singl_function (elt_size=4) to 100 items from 50.
 Reallocated singl_function (elt_size=4) to 100 items from 50.
@@ -63,7 +63,7 @@ while executing---line 2271 of file abntex2/abntex2-alf.bst
 +---------------------------------------------------------+
 You've used 46 entries,
             6879 wiz_defined-function locations,
-            1434 strings with 16237 characters,
+            1434 strings with 16226 characters,
 and the built_in function-call counts, 29932 in all, are:
 = -- 2546
 > -- 867

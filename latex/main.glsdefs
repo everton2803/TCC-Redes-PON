@@ -838,3 +838,255 @@ parent={},%
 %
 }%
 
+\glsdefs@newdocentry{pop}%
+{%
+name={\acronymfont {\glsentryshort {pop}}},%
+sort={POP},%
+type={acronym},%
+first={POP},%
+firstplural={POPs},%
+text={POP},%
+plural={POPs},%
+description={\textit {Point of Presence}},%
+descriptionplural={\textit {Point of Presence}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Point of Presence}},%
+longplural={\protect \textit  {Point of Presence}s},%
+short={POP},%
+shortplural={POPs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{ceo}%
+{%
+name={\acronymfont {\glsentryshort {ceo}}},%
+sort={CEO},%
+type={acronym},%
+first={CEO},%
+firstplural={CEOs},%
+text={CEO},%
+plural={CEOs},%
+description={Caixa de Emenda Óptica},%
+descriptionplural={Caixa de Emenda Óptica},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={Caixa de Emenda Óptica},%
+longplural={Caixa de Emenda Ópticas},%
+short={CEO},%
+shortplural={CEOs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{dom}%
+{%
+name={\acronymfont {\glsentryshort {dom}}},%
+sort={DOM},%
+type={acronym},%
+first={DOM},%
+firstplural={DOMs},%
+text={DOM},%
+plural={DOMs},%
+description={\textit {Document Object Model}},%
+descriptionplural={\textit {Document Object Model}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Document Object Model}},%
+longplural={\protect \textit  {Document Object Model}s},%
+short={DOM},%
+shortplural={DOMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{otdr}%
+{%
+name={\acronymfont {\glsentryshort {otdr}}},%
+sort={OTDR},%
+type={acronym},%
+first={OTDR},%
+firstplural={OTDRs},%
+text={OTDR},%
+plural={OTDRs},%
+description={\textit {Optical Time Domain Reflectometer}},%
+descriptionplural={\textit {Optical Time Domain Reflectometer}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Optical Time Domain Reflectometer}},%
+longplural={\protect \textit  {Optical Time Domain Reflectometer}s},%
+short={OTDR},%
+shortplural={OTDRs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{wdm}%
+{%
+name={\acronymfont {\glsentryshort {wdm}}},%
+sort={WDM},%
+type={acronym},%
+first={WDM},%
+firstplural={WDMs},%
+text={WDM},%
+plural={WDMs},%
+description={\textit {Wavelength Division Multiplexing}},%
+descriptionplural={\textit {Wavelength Division Multiplexing}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Wavelength Division Multiplexing}},%
+longplural={\protect \textit  {Wavelength Division Multiplexing}s},%
+short={WDM},%
+shortplural={WDMs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{dfs}%
+{%
+name={\acronymfont {\glsentryshort {dfs}}},%
+sort={DFS},%
+type={acronym},%
+first={DFS},%
+firstplural={DFSs},%
+text={DFS},%
+plural={DFSs},%
+description={\textit {Depth-First Search}},%
+descriptionplural={\textit {Depth-First Search}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Depth-First Search}},%
+longplural={\protect \textit  {Depth-First Search}s},%
+short={DFS},%
+shortplural={DFSs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{jwt}%
+{%
+name={\acronymfont {\glsentryshort {jwt}}},%
+sort={JWT},%
+type={acronym},%
+first={JWT},%
+firstplural={JWTs},%
+text={JWT},%
+plural={JWTs},%
+description={\textit {JSON Web Token}},%
+descriptionplural={\textit {JSON Web Token}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {JSON Web Token}},%
+longplural={\protect \textit  {JSON Web Token}s},%
+short={JWT},%
+shortplural={JWTs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{xml}%
+{%
+name={\acronymfont {\glsentryshort {xml}}},%
+sort={XML},%
+type={acronym},%
+first={XML},%
+firstplural={XMLs},%
+text={XML},%
+plural={XMLs},%
+description={\textit {Extensible Markup Language}},%
+descriptionplural={\textit {Extensible Markup Language}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Extensible Markup Language}},%
+longplural={\protect \textit  {Extensible Markup Language}s},%
+short={XML},%
+shortplural={XMLs},%
+counter={page},%
+parent={},%
+%
+}%
+
+\glsdefs@newdocentry{apc}%
+{%
+name={\acronymfont {\glsentryshort {apc}}},%
+sort={APC},%
+type={acronym},%
+first={APC},%
+firstplural={APCs},%
+text={APC},%
+plural={APCs},%
+description={\textit {Angled Physical Contact}},%
+descriptionplural={\textit {Angled Physical Contact}},%
+symbol={\relax },%
+symbolplural={\relax },%
+user1={},%
+user2={},%
+user3={},%
+user4={},%
+user5={},%
+user6={},%
+long={\protect \textit  {Angled Physical Contact}},%
+longplural={\protect \textit  {Angled Physical Contact}s},%
+short={APC},%
+shortplural={APCs},%
+counter={page},%
+parent={},%
+%
+}%
+

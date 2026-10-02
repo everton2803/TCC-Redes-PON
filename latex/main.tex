@@ -5,6 +5,7 @@
 %=======================================================================
 
 \PassOptionsToPackage{brazilian}{babel}
+\PassOptionsToPackage{dvipsnames,table,xcdraw}{xcolor}
 \documentclass[
     % -- opções da classe memoir --
     12pt,                 % tamanho da fonte    
@@ -22,6 +23,7 @@
 
 % Usa \input em vez de \include no preâmbulo para as configurações
 \input{config_inicial}
+\input{config_angelita}
 
 % Capa inserida antes do \begin{document}
 \include{pretextuais/capa}
@@ -44,10 +46,10 @@
 % FOLHA DE APROVAÇÃO
 \include{pretextuais/folhadeaprovacao}
 
-% DEDICATÓRIA, AGRADECIMENTOS E EPÍGRAFE
-\include{pretextuais/dedicatoria}
-\include{pretextuais/agradecimentos}
-% \include{pretextuais/epigrafe} % Reativar quando o arquivo for adicionado.
+% DEDICATÓRIA, AGRADECIMENTOS E EPÍGRAFE (Removidos conforme orientação)
+% \include{pretextuais/dedicatoria}
+% \include{pretextuais/agradecimentos}
+% \include{pretextuais/epigrafe}
 
 % RESUMO
 \include{pretextuais/resumo}
@@ -98,6 +100,7 @@
 \include{conteudo/metodologia}
 %\include{conteudo/cronograma}
 \include{conteudo/desenvolvimento}
+\include{conteudo/resultado}
 \include{conteudo/conclusao}
 
 % ----------------------------------------------------------
@@ -109,7 +112,7 @@
 \bibliography{referencias}
 
 % APÊNDICES E ANEXOS (Descomentar se for usar)
-% \include{postextuais/apendice}
+\include{postextuais/apendice}
 % \include{postextuais/anexo}
 
 \end{document}

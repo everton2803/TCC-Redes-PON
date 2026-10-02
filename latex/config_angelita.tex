@@ -1,0 +1,84 @@
+\usepackage[dvipsnames]{xcolor} 
+\usepackage{soul}
+
+%% Comentários do professor
+\usepackage[textwidth=18mm,colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+
+\setlength{\marginparwidth}{19mm}
+
+\usepackage{xargs} 
+\newcommandx{\incerto}[2][1=]{\todo[linecolor=orange,backgroundcolor=orange!25,bordercolor=orange,#1]{#2}}
+\newcommandx{\alterar}[2][1=]{\todo[linecolor=blue,backgroundcolor=blue!25,bordercolor=blue,#1]{#2}}
+\newcommandx{\info}[2][1=]{\todo[linecolor=green,backgroundcolor=green!25,bordercolor=green,#1]{#2}}
+\newcommandx{\melhorar}[2][1=]{\todo[linecolor=yellow,backgroundcolor=yellow!25,bordercolor=yellow,#1]{#2}}
+
+%marcação das correções
+\newcommand{\revisadoprofessor}[1]{%
+    \todo[linecolor=RoyalBlue,backgroundcolor=RoyalBlue!25,bordercolor=RoyalBlue,inline]{ %
+        \textbf{Revisado até aqui pela professora Angelita.} \vspace{0.3em} \newline
+        \textbf{Orientações:} \newline
+        - Faça os ajustes necessários. \newline
+        - Para ajustes menores, apenas realize o ajuste e retire as marcações da professora. \newline
+        - Para ajustes maiores, use a tag \texttt{\textbackslash corrigido\{texto corrigido\}}, abrindo parênteses no início da correção e fechando no final.  Você pode incluir múltiplos parágrafos dentro da tag.\newline
+        #1
+    }%
+}
+
+\long\def\corrigido#1{{\color{RoyalBlue}#1}}
+% \corrigido{
+% Este é um texto longo que a professora pediu para alterar. 
+% Ele pode ter vários parágrafos.
+
+% Como este aqui, tudo continuará em azul para facilitar as próximas correções.
+% }
+
+% Para riscar o texto
+\newcommand{\remover}[1]{%
+  \setstcolor{red}\st{#1}
+}
+
+% Comentario no texto
+\newcommand{\add}[1]{%
+  \textcolor{RoyalBlue}{\textbf{#1}}
+}
+
+% Complementar frase
+\newcommand{\complemento}[1]{%
+  \textcolor{red}{???}\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{Falta complemento: {#1}}
+}
+
+%incluir citação
+\newcommand{\referencia}{%
+  \textcolor{red}{\(Ref!\)}\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{Incluir referencia aqui}
+}
+
+\newcommand{\virgula}{%
+  \textcolor{red}{\textbf{,}}
+}
+
+\newcommand{\substituir}[2]{%
+    \setstcolor{red}\st{#1}
+    \textcolor{red}{#2}
+}
+
+%quebrar frase/parágrafo
+\newcommand{\breakfr}{%
+  \textcolor{red}{\textbf{|}}\todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{QUEBRA DE FRASE}
+}
+\newcommand{\breakpr}{%
+  \textcolor{red}{$\hookleftarrow$} \todo[linecolor=red,backgroundcolor=red!25,bordercolor=red]{QUEBRA DE FRASE}
+}
+
+\newcommand{\corrigir}[2]{%
+    \hl{#1}%
+    \todo[linecolor=orange,backgroundcolor=orange!25,bordercolor=orange]{#2}%
+}
+
+%comando grifar
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\newcommand{\grifar}[1]{%
+  \begin{tikzpicture}[baseline=(char.base)]
+    \node[draw=red, ellipse, inner sep=2pt, thick] (char) {#1};
+  \end{tikzpicture}%
+}
