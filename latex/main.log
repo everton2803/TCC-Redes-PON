@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.9.27)  2 OCT 2026 15:24
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.9.27)  10 OCT 2026 20:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1740,7 +1740,7 @@ sbalanceada no \TU/TeXGyreTermes(0)/m/it/12 PON Planner \TU/TeXGyreTermes(0)/m/
 n/12 – CTOs 
  []
 
-[6]) [7]
+) [6] [7]
 \openout2 = `pretextuais/acronimos.aux'.
 
  (./pretextuais/acronimos.tex
@@ -1748,7 +1748,7 @@ n/12 – CTOs
 \openout8 = `main.glsdefs'.
 
 ) (./main.acr
-Underfull \hbox (badness 10000) in paragraph at lines 208--208
+Underfull \hbox (badness 10000) in paragraph at lines 225--225
 []|[]\TU/TeXGyreTermes(0)/m/n/12 XGS-
  []
 
@@ -1771,13 +1771,7 @@ Cap\'{\i }tulo 1.
 
 
 
-] [15] [16]
-Overfull \hbox (5.74084pt too wide) in paragraph at lines 45--46
-[]\TU/TeXGyreTermes(0)/b/n/12 Validação em Cenário Urbano (Cidade Alta - Videir
-a/SC): \TU/TeXGyreTermes(0)/m/n/12 Modelagem bem-sucedida
- []
-
-) [17]
+] [15] [16]) [17]
 \openout2 = `conteudo/fundamentacao.aux'.
 
  (./conteudo/fundamentacao.tex
@@ -1794,12 +1788,6 @@ File: images/core_acesso.png Graphic file (type bmp)
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `\gls' on input line 32.
-
-
-Overfull \hbox (17.67145pt too wide) in paragraph at lines 34--35
-[]\TU/TeXGyreTermes(0)/m/n/12 A arquitetura []  [][]PON[][] organiza a rede de 
-acesso a partir de uma topologia ponto-multiponto,
- []
 
 [20]
 File: images/arquitetura_pon.png Graphic file (type bmp)
@@ -2132,55 +2120,34 @@ File: images/arquitetura_geral.png Graphic file (type bmp)
 <images/arquitetura_geral.png>
 Package hyperref Info: bookmark level for unknown todo defaults to 0 on input l
 ine 104.
-
-Overfull \hbox (45.76082pt too wide) in paragraph at lines 113--114
-[]\TU/TeXGyreTermes(0)/b/n/12 Serviços (\TU/TeXGyreTermes(0)/b/it/12 Services\T
-U/TeXGyreTermes(0)/b/n/12 ): \TU/TeXGyreTermes(0)/m/n/12 Concentram a lógica de
- negócio do sistema. O serviço \TU/lmtt/m/n/12 calculo_optico.py
- []
-
-[71]
+ [71] [72]
 File: images/diagrama_componentes.png Graphic file (type bmp)
 <images/diagrama_componentes.png>
- [72]
 File: images/diagrama_implantacao.png Graphic file (type bmp)
 <images/diagrama_implantacao.png>
  [73] [74] [75]
 File: images/fluxo_calculo.png Graphic file (type bmp)
 <images/fluxo_calculo.png>
- [76]
-Overfull \hbox (44.64584pt too wide) in paragraph at lines 250--251
-[]\TU/TeXGyreTermes(0)/b/n/12 Entrada e configuração: \TU/lmtt/m/n/12 main.py\T
-U/TeXGyreTermes(0)/m/n/12 , \TU/lmtt/m/n/12 requirements.txt\TU/TeXGyreTermes(0
-)/m/n/12 , \TU/lmtt/m/n/12 Dockerfile \TU/TeXGyreTermes(0)/m/n/12 e \TU/lmtt/m/
-n/12 docker-compose.yml
- []
-
-[77]
-Overfull \hbox (31.35692pt too wide) in paragraph at lines 263--264
-\TU/TeXGyreTermes(0)/m/n/12 exemplo, atributos como \TU/lmtt/m/n/12 potencia_tx
-_dbm \TU/TeXGyreTermes(0)/m/n/12 são exclusivos da []  [][]OLT[][], enquanto \T
-U/lmtt/m/n/12 razao_desbalanceada
- []
-
+ [76] [77] [78]
 File: images/fluxo_percurso_grafo.png Graphic file (type bmp)
 <images/fluxo_percurso_grafo.png>
-[78] [79]
+ [79]
 File: images/estrutura_d3_canvas.png Graphic file (type bmp)
 <images/estrutura_d3_canvas.png>
  [80]) [81]
 \openout2 = `conteudo/resultado.aux'.
 
- (./conteudo/resultado.tex
+
+(./conteudo/resultado.tex
 Cap\'{\i }tulo 6.
-File: images/cidade_alta_google_earth.png Graphic file (type bmp)
-<images/cidade_alta_google_earth.png>
 [82
 
 
 
 
 ]
+File: images/cidade_alta_google_earth.png Graphic file (type bmp)
+<images/cidade_alta_google_earth.png>
 File: images/drawio_bloco1.png Graphic file (type bmp)
 <images/drawio_bloco1.png>
 File: images/drawio_bloco2.png Graphic file (type bmp)
@@ -2189,124 +2156,111 @@ File: images/drawio_bloco3.png Graphic file (type bmp)
 <images/drawio_bloco3.png>
 File: images/ponplanner_bloco1.png Graphic file (type bmp)
 <images/ponplanner_bloco1.png>
+ [83]
 File: images/ponplanner_bloco2.png Graphic file (type bmp)
 <images/ponplanner_bloco2.png>
 File: images/ponplanner_bloco3.png Graphic file (type bmp)
 <images/ponplanner_bloco3.png>
- [83]
-Overfull \hbox (61.23592pt too wide) in paragraph at lines 136--146
- [][] 
+
+Underfull \hbox (badness 1466) in paragraph at lines 147--147
+[]|\TU/TeXGyreTermes(0)/m/n/12 Desenho / Lançamento dos
  []
 
-[84]
+[84] [85]
 File: images/ibirama_geogrid.png Graphic file (type bmp)
 <images/ibirama_geogrid.png>
+ [86]
 File: images/drawio_ibirama_bloco1.png Graphic file (type bmp)
 <images/drawio_ibirama_bloco1.png>
 File: images/drawio_ibirama_bloco2.png Graphic file (type bmp)
 <images/drawio_ibirama_bloco2.png>
-File: images/ponplanner_resumo_desbal.png Graphic file (type bmp)
-<images/ponplanner_resumo_desbal.png>
-
-
-LaTeX Warning: Float too large for page by 13.70262pt on input line 200.
-
-[85]
-Overfull \hbox (52.31517pt too wide) in paragraph at lines 209--229
- [][] 
+ [87]
+Underfull \hbox (badness 6364) in paragraph at lines 201--201
+[][][]\TU/TeXGyreTermes(0)/m/n/12 Painel lateral na simulação
  []
 
+File: images/ponplanner_resumo_desbal.png Graphic file (type bmp)
+<images/ponplanner_resumo_desbal.png>
 File: images/ponplanner_resumo_bal.png Graphic file (type bmp)
 <images/ponplanner_resumo_bal.png>
 
-Overfull \hbox (67.4872pt too wide) in paragraph at lines 251--261
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 262--262
+[]|\TU/TeXGyreTermes(0)/m/n/12 Cálculo e Rebalancea-
  []
 
-[86] [87] [88] [89]
-Overfull \hbox (0.94028pt too wide) in paragraph at lines 292--293
+[88] [89] [90]
+Overfull \hbox (0.94028pt too wide) in paragraph at lines 294--295
 []\TU/TeXGyreTermes(0)/b/n/12 Persistência Local e Monousuário: \TU/TeXGyreTerm
 es(0)/m/n/12 O armazenamento dos projetos em arquivos []  [][]JSON[][]
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-[]|\TU/TeXGyreTermes(0)/b/n/10.95 Evidência nos
- []
-
-
-Underfull \hbox (badness 2205) in paragraph at lines 321--321
-[]|\TU/TeXGyreTermes(0)/m/n/10.95 1. Modelagem visual
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
+[91]
+Underfull \hbox (badness 2229) in paragraph at lines 323--323
 \TU/TeXGyreTermes(0)/m/n/10.95 de topologias []  [][]PON[][]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-[]|\TU/TeXGyreTermes(0)/m/n/10.95 Demonstração
+Underfull \hbox (badness 1960) in paragraph at lines 323--323
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 2. Cálculo automá-
  []
 
 
-Underfull \hbox (badness 4254) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 do orçamento óptico
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+\TU/TeXGyreTermes(0)/m/n/10.95 tico do orçamento
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 considerando perdas
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+\TU/TeXGyreTermes(0)/m/n/10.95 perdas de fibra,
  []
 
 
-Underfull \hbox (badness 7203) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 de fibra, conectores,
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 3. Apresentação
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-[]|\TU/TeXGyreTermes(0)/m/n/10.95 Motor de cálculo em Python
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+\TU/TeXGyreTermes(0)/m/n/10.95 de indicadores de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 (\TU/lmtt/m/n/10.95 calculo_optico.py\TU/TeXGyre
-Termes(0)/m/n/10.95 ) baseado
- []
-
-
-Underfull \hbox (badness 1622) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 margem e \TU/TeXGyreTermes(0)/m/it/10.95 status 
-\TU/TeXGyreTermes(0)/m/n/10.95 dos
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
 []|\TU/TeXGyreTermes(0)/m/n/10.95 Código de cores nos nós
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-[]|\TU/TeXGyreTermes(0)/m/n/10.95 Estrutura JSON
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+\TU/TeXGyreTermes(0)/m/n/10.95 (verde/amarelo/vermelho) e
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 validada na
+Underfull \hbox (badness 1259) in paragraph at lines 323--323
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Figuras [][]47[][] e [][]48[][] no Teste 2
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 Seção [][]5.3[][] e
+Underfull \hbox (badness 2310) in paragraph at lines 323--323
+\TU/TeXGyreTermes(0)/m/n/10.95 peração e troca de
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 321--321
-\TU/TeXGyreTermes(0)/m/n/10.95 arquivos em
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Esquema Pydantic
  []
 
-[90]) [91] [92] [93]
+
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+\TU/TeXGyreTermes(0)/m/n/10.95 (\TU/lmtt/m/n/10.95 network.py\TU/TeXGyreTermes(
+0)/m/n/10.95 ) e serviço
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 323--323
+[]|\TU/TeXGyreTermes(0)/m/n/10.95 Estrutura JSON validada
+ []
+
+) [92] [93]
 \openout2 = `conteudo/conclusao.aux'.
 
  (./conteudo/conclusao.tex
@@ -2381,18 +2335,13 @@ L3 programming layer <2020/03/25>
 
 LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-
-Package rerunfilecheck Warning: File `main.brf' has changed.
-(rerunfilecheck)                Rerun to get bibliographical references right.
-
-Package rerunfilecheck Info: Checksums for `main.brf':
-(rerunfilecheck)             Before: F79AEBB2AD0D6F5D7B6A2C9278C3099E;10409
-(rerunfilecheck)             After:  E16A64AF6903EDF56A10E18A50D22A91;10409.
+Package rerunfilecheck Info: File `main.brf' has not changed.
+(rerunfilecheck)             Checksum: 57D58F0497798915323360BC0C26CD7C;10409.
  ) 
 Here is how much of TeX's memory you used:
  41530 strings out of 467696
  865940 string characters out of 5420311
- 1545904 words of memory out of 5000000
+ 1545890 words of memory out of 5000000
  69934 multiletter control sequences out of 15000+600000
  637342 words of font info for 110 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

@@ -60,11 +60,11 @@
 \contentsline {section}{\numberline {5.3}Modelagem de Dados}{74}{section.5.3}%
 \contentsline {subsection}{\numberline {5.3.1}Modelo Conceitual e Estrutura dos Dados}{74}{subsection.5.3.1}%
 \contentsline {subsection}{\numberline {5.3.2}Esquema do Arquivo JSON de Projeto}{75}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Modelagem de Processos}{75}{section.5.4}%
+\contentsline {section}{\numberline {5.4}Modelagem de Processos}{76}{section.5.4}%
 \contentsline {subsection}{\numberline {5.4.1}Fluxo Principal de Sinalização e Cálculo}{76}{subsection.5.4.1}%
 \contentsline {subsection}{\numberline {5.4.2}Algoritmo de Cálculo do Orçamento Óptico}{77}{subsection.5.4.2}%
-\contentsline {section}{\numberline {5.5}Implementação dos Módulos Técnicos do Backend}{77}{section.5.5}%
-\contentsline {subsection}{\numberline {5.5.1}Estrutura de Diretórios e Módulos do \textit {Backend}}{77}{subsection.5.5.1}%
+\contentsline {section}{\numberline {5.5}Implementação dos Módulos Técnicos do Backend}{78}{section.5.5}%
+\contentsline {subsection}{\numberline {5.5.1}Estrutura de Diretórios e Módulos do \textit {Backend}}{78}{subsection.5.5.1}%
 \contentsline {subsection}{\numberline {5.5.2}Modelagem Pydantic e Esquema de Dados (\texttt {network.py})}{78}{subsection.5.5.2}%
 \contentsline {subsection}{\numberline {5.5.3}Camada de Serviços e Algoritmo de Cálculo Óptico (\texttt {calculo\_optico.py})}{78}{subsection.5.5.3}%
 \contentsline {subsection}{\numberline {5.5.4}Serviços de Controladores e Persistência de Dados}{80}{subsection.5.5.4}%
@@ -74,15 +74,15 @@
 \contentsline {chapter}{\chapternumberline {6}Resultados e Discussões}{82}{chapter.6}%
 \contentsline {section}{\numberline {6.1}Apresentação dos Resultados}{82}{section.6.1}%
 \contentsline {subsection}{\numberline {6.1.1}Métricas de Desempenho e Testes Funcionais da Solução}{82}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Teste 1 -- Estudo de Caso Urbano (Bairro Cidade Alta -- Videira/SC)}{82}{subsection.6.1.2}%
-\contentsline {subsection}{\numberline {6.1.3}Teste 2 -- Estudo de Caso Rural (Ibirama/SC)}{85}{subsection.6.1.3}%
-\contentsline {section}{\numberline {6.2}Análise e Discussão}{87}{section.6.2}%
-\contentsline {subsection}{\numberline {6.2.1}Interpretação dos Achados e Fidelidade Física do Cálculo}{87}{subsection.6.2.1}%
-\contentsline {subsection}{\numberline {6.2.2}Comparação com Trabalhos Relacionados}{89}{subsection.6.2.2}%
-\contentsline {subsection}{\numberline {6.2.3}Limitações da Solução}{90}{subsection.6.2.3}%
-\contentsline {section}{\numberline {6.3}Validação dos Objetivos}{90}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Cumprimento dos Objetivos Específicos}{90}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}Análise do Cumprimento do Objetivo Geral}{91}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.1.2}Teste 1 -- Estudo de Caso em Área Urbana}{83}{subsection.6.1.2}%
+\contentsline {subsection}{\numberline {6.1.3}Teste 2 -- Estudo de Caso em Área Rural}{85}{subsection.6.1.3}%
+\contentsline {section}{\numberline {6.2}Análise e Discussão}{89}{section.6.2}%
+\contentsline {subsection}{\numberline {6.2.1}Interpretação dos Achados e Fidelidade Física do Cálculo}{90}{subsection.6.2.1}%
+\contentsline {subsection}{\numberline {6.2.2}Comparação com Trabalhos Relacionados}{91}{subsection.6.2.2}%
+\contentsline {subsection}{\numberline {6.2.3}Limitações da Solução}{91}{subsection.6.2.3}%
+\contentsline {section}{\numberline {6.3}Validação dos Objetivos}{92}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Cumprimento dos Objetivos Específicos}{92}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}Análise do Cumprimento do Objetivo Geral}{92}{subsection.6.3.2}%
 \contentsline {chapter}{\chapternumberline {7}CONCLUSÃO}{94}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Síntese do Trabalho}{94}{section.7.1}%
 \contentsline {section}{\numberline {7.2}Contribuições}{96}{section.7.2}%
@@ -90,6 +90,6 @@
 \contentsline {section}{\numberline {7.4}Trabalhos Futuros}{98}{section.7.4}%
 \contentsline {chapter}{\indent \hspace {\cftparagraphnumwidth } {\hspace {-0.1cm}\uppercase {Refer\^encias}} }{100}{section*.13}%
 \renewcommand *{\cftappendixname }{AP\^ENDICE \space }
-\contentsline {appendix}{\chapternumberline {A}Diagramas de Blocos da Rede Rural de Ibirama -- SC (PON Planner)}{103}{appendix.A}%
+\contentsline {appendix}{\chapternumberline {A}Diagramas de Blocos da Rede Óptica em Área Rural (PON Planner)}{103}{appendix.A}%
 \contentsline {section}{\numberline {A.1}Topologia Desbalanceada Inicial (Com Nós Inoperantes em Vermelho)}{103}{appendix.A.1}%
 \contentsline {section}{\numberline {A.2}Topologia Otimizada e Balanceada (Nós Operacionais em Verde)}{105}{appendix.A.2}%

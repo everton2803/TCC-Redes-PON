@@ -1,0 +1,146 @@
+\documentclass[border=15pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows.meta,positioning,fit,backgrounds,calc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\begin{document}
+\begin{tikzpicture}[
+    font=\small,
+    >=Stealth,
+    block/.style={
+        draw=blue!75!black,
+        fill=blue!8,
+        rounded corners=4pt,
+        line width=1.1pt,
+        minimum width=5.8cm,
+        minimum height=1.05cm,
+        align=center,
+        font=\bfseries\small
+    },
+    decision/.style={
+        diamond,
+        draw=violet!85!black,
+        fill=violet!10,
+        aspect=2.0,
+        line width=1.2pt,
+        inner sep=3pt,
+        align=center,
+        font=\bfseries\small
+    },
+    startstop/.style={
+        draw=teal!80!black,
+        fill=teal!12,
+        rounded corners=14pt,
+        line width=1.2pt,
+        minimum width=5.8cm,
+        minimum height=1.05cm,
+        align=center,
+        font=\bfseries\small
+    },
+    line/.style={
+        draw=gray!80!black,
+        line width=1.2pt,
+        ->
+    },
+    lbl/.style={
+        font=\bfseries\footnotesize,
+        fill=white,
+        inner sep=2pt,
+        text=gray!90!black
+    },
+    colheader/.style={
+        draw=gray!50,
+        fill=gray!12,
+        rounded corners=5pt,
+        line width=1pt,
+        inner sep=7pt,
+        font=\bfseries\normalsize,
+        align=center
+    }
+]
+
+% =========================================================================
+% COLUNA 1: Inicialização e Controle do Percurso
+% =========================================================================
+
+\node[colheader, minimum width=6.6cm] (hdr1) {Fase 1: Inicializa\c{c}\~ao e Controle};
+
+\node[startstop, below=0.8cm of hdr1] (inicio) {In\'icio: Payload JSON do Projeto};
+\node[block, below=0.8cm of inicio] (map) {Mapear Adjac\^encias:\\Origem $\rightarrow$ Destino};
+\node[block, below=0.8cm of map] (raiz) {Localizar N\'os Raiz: OLT};
+\node[block, below=0.8cm of raiz] (pot_tx) {Obter Pot\^encia Inicial Tx:\\ex.: $+5{,}0$\,dBm};
+\node[block, below=0.8cm of pot_tx] (ins_fila) {Inserir OLT na Fila de Travessia};
+\node[decision, below=1.0cm of ins_fila] (dec_fila) {Fila de Processamento\\Vazia?};
+\node[startstop, below=1.2cm of dec_fila] (fim) {Fim: Retornar Grafo com\\Pot\^encias Recalculadas};
+
+% Conexões Coluna 1
+\draw[line] (inicio) -- (map);
+\draw[line] (map) -- (raiz);
+\draw[line] (raiz) -- (pot_tx);
+\draw[line] (pot_tx) -- (ins_fila);
+\draw[line] (ins_fila) -- (dec_fila);
+\draw[line] (dec_fila) -- node[lbl, right=2pt] {Sim} (fim);
+
+% =========================================================================
+% COLUNA 2: Processamento dos Nós e Propagação de Potência
+% =========================================================================
+
+\node[colheader, right=3.4cm of hdr1, minimum width=6.6cm] (hdr2) {Fase 2: Processamento e Propaga\c{c}\~ao};
+
+\node[block, below=0.8cm of hdr2] (retira) {Retirar Pr\'oximo N\'o da Fila};
+\node[decision, below=0.9cm of retira] (dec_spl) {N\'o \'e Splitter?};
+
+\node[block, below left=0.9cm and 0.2cm of dec_spl, minimum width=3.2cm, font=\bfseries\footnotesize] (sub_div) {Subtrair Perda de Divis\~ao\\($L_{\text{divisao}}$)};
+\node[block, below right=0.9cm and 0.2cm of dec_spl, minimum width=3.2cm, font=\bfseries\footnotesize] (manter_pot) {Manter Pot\^encia\\Passante};
+
+% Ponto de junção abaixo das duas opções do splitter
+\coordinate (split_merge) at ($(dec_spl.south) + (0, -2.4)$);
+\node[block, below=0.7cm of split_merge] (at_rx) {Atualizar Pot\^encia Rx do N\'o};
+
+\node[decision, below=0.9cm of at_rx] (dec_onu) {N\'o \'e ONU?};
+\node[block, right=1.6cm of dec_onu, minimum width=3.4cm, font=\bfseries\footnotesize] (class_onu) {Classificar Status:\\OK / Alerta / Falha};
+
+\node[block, below=1.1cm of dec_onu] (perc_enl) {Percorrer Enlaces de Sa\'ida};
+\node[block, below=0.7cm of perc_enl] (calc_perda) {Calcular Perda do Enlace:\\$L_{\text{fibra}} + L_{\text{conexoes}} + L_{\text{fusoes}}$};
+\node[block, below=0.7cm of calc_perda] (calc_cheg) {Calcular Pot\^encia de Chegada\\no Destino};
+\node[block, below=0.7cm of calc_cheg] (enf_dest) {Enfileirar N\'o Destino em Visitados};
+
+% Conexões Coluna 2
+\draw[line] (retira) -- (dec_spl);
+\draw[line] (dec_spl) -| node[lbl, pos=0.3] {Sim} (sub_div);
+\draw[line] (dec_spl) -| node[lbl, pos=0.3] {N\~ao} (manter_pot);
+\draw[line] (sub_div.south) |- (at_rx);
+\draw[line] (manter_pot.south) |- (at_rx);
+
+\draw[line] (at_rx) -- (dec_onu);
+\draw[line] (dec_onu) -- node[lbl, above] {Sim} (class_onu);
+\draw[line] (dec_onu) -- node[lbl, right=2pt] {N\~ao} (perc_enl);
+\draw[line] (class_onu) |- (perc_enl);
+
+\draw[line] (perc_enl) -- (calc_perda);
+\draw[line] (calc_perda) -- (calc_cheg);
+\draw[line] (calc_cheg) -- (enf_dest);
+
+% =========================================================================
+% Conexões entre Coluna 1 e Coluna 2
+% =========================================================================
+
+% Decisão Fila Vazia: "Não" vai para o topo da coluna 2 (retira)
+% Sai da esquerda de dec_fila, sobe por fora da caixa da Fase 1, entra por cima de retira
+\draw[line] (dec_fila.west) -- ++(-1.1,0) node[lbl, pos=0.3, above] {N\~ao} |- ($(retira.north) + (0, 0.55)$) -- (retira.north);
+
+% Fim da Coluna 2 (enf_dest) retorna para dec_fila pela direita da coluna 1
+\draw[line] (enf_dest.west) -- ++(-0.6,0) |- ($(dec_fila.east) + (0.4, 0)$) -- (dec_fila.east);
+
+% Bounding boxes de agrupamento de fases
+\begin{scope}[on background layer]
+    \node[draw=teal!40, fill=teal!3, rounded corners=10pt, line width=1.1pt, fit=(hdr1)(inicio)(fim)] (box1) {};
+    \node[draw=blue!40, fill=blue!3, rounded corners=10pt, line width=1.1pt, fit=(hdr2)(retira)(enf_dest)(class_onu)(sub_div)(manter_pot)] (box2) {};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

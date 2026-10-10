@@ -31,22 +31,22 @@
 \contentsline {figure}{\numberline {30}{\ignorespaces Esquema de \textit {wireframe} para a interface de modelagem gráfica}}{70}{figure.5.30}%
 \contentsline {figure}{\numberline {31}{\ignorespaces Visão geral da arquitetura do sistema}}{72}{figure.5.31}%
 \contentsline {figure}{\numberline {32}{\ignorespaces Diagrama de componentes do \textit {backend}}}{73}{figure.5.32}%
-\contentsline {figure}{\numberline {33}{\ignorespaces Diagrama de implantação do sistema containerizado}}{73}{figure.5.33}%
+\contentsline {figure}{\numberline {33}{\ignorespaces Diagrama de implantação do sistema containerizado}}{74}{figure.5.33}%
 \contentsline {figure}{\numberline {34}{\ignorespaces Diagrama de sequência do recálculo óptico em tempo real}}{76}{figure.5.34}%
 \contentsline {figure}{\numberline {35}{\ignorespaces Fluxograma do algoritmo de travessia do grafo e cálculo óptico}}{79}{figure.5.35}%
-\contentsline {figure}{\numberline {36}{\ignorespaces Mapeamento dos objetos de rede para elementos vetoriais \gls {svg} com D3.js}}{80}{figure.5.36}%
-\contentsline {figure}{\numberline {37}{\ignorespaces Mapeamento geográfico da rede GPON no Bairro Cidade Alta via Google Earth}}{83}{figure.6.37}%
-\contentsline {figure}{\numberline {38}{\ignorespaces Bloco 1 do diagrama no \textit {Draw.io} -- OLT, CEO-1 e CTOs 1 a 3}}{83}{figure.6.38}%
+\contentsline {figure}{\numberline {36}{\ignorespaces Mapeamento dos objetos de rede para elementos vetoriais \gls {svg} com D3.js}}{81}{figure.5.36}%
+\contentsline {figure}{\numberline {37}{\ignorespaces Mapeamento geográfico da rede GPON em área urbana}}{83}{figure.6.37}%
+\contentsline {figure}{\numberline {38}{\ignorespaces Bloco 1 do diagrama no \textit {Draw.io} -- OLT, CEO-1 e CTOs 1 a 3}}{84}{figure.6.38}%
 \contentsline {figure}{\numberline {39}{\ignorespaces Bloco 2 do diagrama no \textit {Draw.io} -- CEO-2 e CTOs 4 a 6}}{84}{figure.6.39}%
 \contentsline {figure}{\numberline {40}{\ignorespaces Bloco 3 do diagrama no \textit {Draw.io} -- CEO-3 e CTOs 7 e 8}}{85}{figure.6.40}%
 \contentsline {figure}{\numberline {41}{\ignorespaces Bloco 1 do diagrama no \textit {PON Planner} -- OLT, CEO-1 e CTOs 1 a 3}}{86}{figure.6.41}%
 \contentsline {figure}{\numberline {42}{\ignorespaces Bloco 2 do diagrama no \textit {PON Planner} -- CEO-2 e CTOs 4 a 6}}{86}{figure.6.42}%
 \contentsline {figure}{\numberline {43}{\ignorespaces Bloco 3 do diagrama no \textit {PON Planner} -- CEO-3 e CTOs 7 e 8}}{87}{figure.6.43}%
-\contentsline {figure}{\numberline {44}{\ignorespaces Mapeamento da rede rural de Ibirama -- SC no sistema GeoGrid Maps}}{88}{figure.6.44}%
+\contentsline {figure}{\numberline {44}{\ignorespaces Mapeamento da rede óptica em área rural no sistema de inventário}}{88}{figure.6.44}%
 \contentsline {figure}{\numberline {45}{\ignorespaces Bloco 1 do diagrama desbalanceado no \textit {Draw.io} -- OLT, CEO e CTOs 01 a 07}}{88}{figure.6.45}%
 \contentsline {figure}{\numberline {46}{\ignorespaces Bloco 2 do diagrama desbalanceado no \textit {Draw.io} -- CTOs 08 a 14}}{89}{figure.6.46}%
-\contentsline {figure}{\numberline {47}{\ignorespaces Painel lateral do \textit {PON Planner} na simulação desbalanceada (evidenciando alertas e falhas)}}{92}{figure.6.47}%
-\contentsline {figure}{\numberline {48}{\ignorespaces Painel lateral do \textit {PON Planner} após a otimização (com $100\%$ das ONUs em verde)}}{93}{figure.6.48}%
+\contentsline {figure}{\numberline {47}{\ignorespaces Painel lateral na simulação desbalanceada}}{90}{figure.6.47}%
+\contentsline {figure}{\numberline {48}{\ignorespaces Painel lateral após a otimização balanceada}}{90}{figure.6.48}%
 \contentsline {figure}{\numberline {49}{\ignorespaces Bloco 1 (Inicial) da topologia desbalanceada no \textit {PON Planner} -- OLT, CEO e CTOs 01 a 05}}{103}{figure.A.49}%
 \contentsline {figure}{\numberline {50}{\ignorespaces Bloco 2 (Intermediário) da topologia desbalanceada no \textit {PON Planner} -- CTOs 06 a 10}}{103}{figure.A.50}%
 \contentsline {figure}{\numberline {51}{\ignorespaces Bloco 3 (Final) da topologia desbalanceada no \textit {PON Planner} -- CTOs 11 a 14 com nós inoperantes}}{104}{figure.A.51}%

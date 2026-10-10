@@ -1,0 +1,200 @@
+\documentclass[border=15pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning,fit,backgrounds,calc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\begin{document}
+\begin{tikzpicture}[
+    font=\small,
+    >=Stealth,
+    actor/.style={
+        draw=violet!80!black,
+        fill=violet!10,
+        rounded corners=5pt,
+        line width=1.1pt,
+        minimum width=2.6cm,
+        minimum height=1.0cm,
+        align=center,
+        font=\bfseries\small
+    },
+    participant/.style={
+        draw=blue!80!black,
+        fill=blue!8,
+        rounded corners=5pt,
+        line width=1.1pt,
+        minimum width=3.8cm,
+        minimum height=1.0cm,
+        align=center,
+        font=\bfseries\small
+    },
+    lifeline/.style={
+        draw=blue!60!gray,
+        line width=0.9pt,
+        dashed
+    },
+    activebar/.style={
+        draw=blue!80!black,
+        fill=blue!15,
+        line width=0.9pt,
+        rounded corners=2pt
+    },
+    syncmsg/.style={
+        draw=gray!85!black,
+        line width=1.1pt,
+        ->
+    },
+    retmsg/.style={
+        draw=gray!85!black,
+        line width=1.0pt,
+        dashed,
+        ->
+    },
+    selfmsg/.style={
+        draw=gray!85!black,
+        line width=1.0pt,
+        ->
+    },
+    stepnum/.style={
+        circle,
+        fill=gray!80!black,
+        text=white,
+        font=\bfseries\scriptsize,
+        inner sep=1.2pt
+    },
+    lbl/.style={
+        font=\footnotesize,
+        align=center,
+        fill=white,
+        inner sep=2pt,
+        rounded corners=2pt
+    }
+]
+
+% =========================================================================
+% Lifelines / Participantes (Top)
+% =========================================================================
+
+\node[actor] (user_top) {Usu\'ario /\\Projetista};
+\node[participant, right=2.2cm of user_top] (fe_top) {Frontend\\(D3.js / SPA)};
+\node[participant, right=2.4cm of fe_top] (ctrl_top) {Controller\\(\texttt{calculo.py})};
+\node[participant, right=2.4cm of ctrl_top] (eng_top) {Engine\\(\texttt{calculo\_optico.py})};
+\node[participant, right=2.2cm of eng_top] (mod_top) {Models \& Constants\\(\texttt{network.py} / \texttt{constants.py})};
+
+% Coordenadas X das linhas de vida
+\coordinate (ux) at (user_top.south);
+\coordinate (fx) at (fe_top.south);
+\coordinate (cx) at (ctrl_top.south);
+\coordinate (ex) at (eng_top.south);
+\coordinate (mx) at (mod_top.south);
+
+% =========================================================================
+% Eventos / Mensagens Sequenciais
+% =========================================================================
+
+% 1. Interação do usuário
+\coordinate (y1) at ($(user_top.south) + (0, -1.0)$);
+\draw[syncmsg] (ux |- y1) -- node[above, lbl] {Adiciona/altera elemento de rede (OLT, Splitter, Fibra)} (fx |- y1);
+\node[stepnum, left=4pt] at (ux |- y1) {1};
+
+% 2. Frontend monta JSON (auto-chamada com loop largo)
+\coordinate (y2) at ($(y1) + (0, -1.1)$);
+\draw[selfmsg] (fx |- y2) -- ++(1.0,0) -- ++(0,-0.65) -- node[right=2pt, lbl] {Constr\'oi objeto JSON da topologia\\(n\'os, enlaces, par\^ametros)} ++(-1.0,0);
+\node[stepnum, left=4pt] at (fx |- y2) {2};
+
+% 3. Requisição HTTP POST
+\coordinate (y3) at ($(y2) + (0, -1.3)$);
+\draw[syncmsg] (fx |- y3) -- node[above, lbl] {HTTP POST \texttt{/api/calculo/recalcular} (payload JSON)} (cx |- y3);
+\node[stepnum, left=4pt] at (fx |- y3) {3};
+
+% 4. Controller valida com Pydantic
+\coordinate (y4) at ($(y3) + (0, -1.1)$);
+\draw[syncmsg] (cx |- y4) -- node[above, lbl] {Valida estrutura de dados com Pydantic} (mx |- y4);
+\node[stepnum, left=4pt] at (cx |- y4) {4};
+
+% 5. Retorno de dados validados
+\coordinate (y5) at ($(y4) + (0, -1.0)$);
+\draw[retmsg] (mx |- y5) -- node[above, lbl] {Dados validados} (cx |- y5);
+\node[stepnum, right=4pt] at (mx |- y5) {5};
+
+% 6. Controller invoca Engine
+\coordinate (y6) at ($(y5) + (0, -1.0)$);
+\draw[syncmsg] (cx |- y6) -- node[above, lbl] {Invoca \texttt{calcular\_orcamento\_optico(projeto)}} (ex |- y6);
+\node[stepnum, left=4pt] at (cx |- y6) {6};
+
+% 7. Engine consulta constantes
+\coordinate (y7) at ($(y6) + (0, -1.0)$);
+\draw[syncmsg] (ex |- y7) -- node[above, lbl] {Consulta perdas normatizadas e pot\^encias SFP} (mx |- y7);
+\node[stepnum, left=4pt] at (ex |- y7) {7};
+
+% 8. Retorno dos parâmetros físicos
+\coordinate (y8) at ($(y7) + (0, -1.0)$);
+\draw[retmsg] (mx |- y8) -- node[above, lbl] {Retorna par\^ametros f\'isicos ($0{,}35$\,dB/km, perdas de divisores)} (ex |- y8);
+\node[stepnum, right=4pt] at (mx |- y8) {8};
+
+% 9. Engine percorre grafo (auto-chamada DFS)
+\coordinate (y9) at ($(y8) + (0, -1.1)$);
+\draw[selfmsg] (ex |- y9) -- ++(1.0,0) -- ++(0,-0.6) -- node[right=2pt, lbl] {Percorre a \'arvore de rede a partir da OLT (DFS)} ++(-1.0,0);
+\node[stepnum, left=4pt] at (ex |- y9) {9};
+
+% 10. Engine acumula atenuação (auto-chamada)
+\coordinate (y10) at ($(y9) + (0, -1.2)$);
+\draw[selfmsg] (ex |- y10) -- ++(1.0,0) -- ++(0,-0.6) -- node[right=2pt, lbl] {Soma atenua\c{c}\~ao de fibra + fus\~oes + conectores + splitters} ++(-1.0,0);
+\node[stepnum, left=4pt] at (ex |- y10) {10};
+
+% 11. Engine determina Rx e status (auto-chamada)
+\coordinate (y11) at ($(y10) + (0, -1.2)$);
+\draw[selfmsg] (ex |- y11) -- ++(1.0,0) -- ++(0,-0.6) -- node[right=2pt, lbl] {Determina Pot\^encia Rx (dBm) e status em cada n\'o} ++(-1.0,0);
+\node[stepnum, left=4pt] at (ex |- y11) {11};
+
+% 12. Engine retorna para Controller
+\coordinate (y12) at ($(y11) + (0, -1.2)$);
+\draw[retmsg] (ex |- y12) -- node[above, lbl] {Retorna mapa de n\'iveis de sinal calculados} (cx |- y12);
+\node[stepnum, right=4pt] at (ex |- y12) {12};
+
+% 13. Resposta HTTP 200 OK
+\coordinate (y13) at ($(y12) + (0, -1.0)$);
+\draw[retmsg] (cx |- y13) -- node[above, lbl] {Resposta HTTP 200 OK (JSON com or\c{c}amento \'optico)} (fx |- y13);
+\node[stepnum, right=4pt] at (cx |- y13) {13};
+
+% 14. Frontend atualiza visualização (auto-chamada)
+\coordinate (y14) at ($(y13) + (0, -1.1)$);
+\draw[selfmsg] (fx |- y14) -- ++(1.0,0) -- ++(0,-0.65) -- node[right=2pt, lbl] {Atualiza r\'otulos de pot\^encia (dBm) e cores dos n\'os em tela} ++(-1.0,0);
+\node[stepnum, left=4pt] at (fx |- y14) {14};
+
+% 15. Atualização exibida ao usuário
+\coordinate (y15) at ($(y14) + (0, -1.3)$);
+\draw[retmsg] (fx |- y15) -- node[above, lbl] {Exibe topologia atualizada com indica\c{c}\~ao visual de sinal} (ux |- y15);
+\node[stepnum, right=4pt] at (fx |- y15) {15};
+
+% Fim inferior das linhas de vida
+\coordinate (y_bottom) at ($(y15) + (0, -1.0)$);
+
+% =========================================================================
+% Participantes (Bottom)
+% =========================================================================
+
+\node[actor, below of=user_top, at=(ux |- y_bottom)] (user_bot) {Usu\'ario /\\Projetista};
+\node[participant, below of=fe_top, at=(fx |- y_bottom)] (fe_bot) {Frontend\\(D3.js / SPA)};
+\node[participant, below of=ctrl_top, at=(cx |- y_bottom)] (ctrl_bot) {Controller\\(\texttt{calculo.py})};
+\node[participant, below of=eng_top, at=(ex |- y_bottom)] (eng_bot) {Engine\\(\texttt{calculo\_optico.py})};
+\node[participant, below of=mod_top, at=(mx |- y_bottom)] (mod_bot) {Models \& Constants\\(\texttt{network.py} / \texttt{constants.py})};
+
+% Desenha linhas de vida verticais no background
+\begin{scope}[on background layer]
+    \draw[lifeline] (user_top.south) -- (user_bot.north);
+    \draw[lifeline] (fe_top.south) -- (fe_bot.north);
+    \draw[lifeline] (ctrl_top.south) -- (ctrl_bot.north);
+    \draw[lifeline] (eng_top.south) -- (eng_bot.north);
+    \draw[lifeline] (mod_top.south) -- (mod_bot.north);
+    
+    % Barra de ativação do Controller (da chamada 3 até 13)
+    \draw[activebar] ($(cx |- y3) + (-0.16, 0.15)$) rectangle ($(cx |- y13) + (0.16, -0.15)$);
+    % Barra de ativação da Engine (da chamada 6 até 12)
+    \draw[activebar] ($(ex |- y6) + (-0.16, 0.15)$) rectangle ($(ex |- y12) + (0.16, -0.15)$);
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

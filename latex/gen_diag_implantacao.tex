@@ -1,0 +1,114 @@
+\documentclass[border=15pt]{standalone}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows.meta,positioning,fit,backgrounds,calc}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+\begin{document}
+\begin{tikzpicture}[
+    font=\small,
+    >=Stealth,
+    hostbox/.style={
+        draw=olive!80!black,
+        fill=yellow!7,
+        rounded corners=12pt,
+        line width=1.5pt
+    },
+    dockerbox/.style={
+        draw=blue!80!black,
+        fill=blue!5,
+        rounded corners=8pt,
+        line width=1.3pt
+    },
+    volumebox/.style={
+        draw=orange!80!black,
+        fill=orange!8,
+        rounded corners=8pt,
+        line width=1.3pt
+    },
+    clientnode/.style={
+        draw=gray!70!black,
+        fill=gray!15,
+        rounded corners=6pt,
+        line width=1.1pt,
+        minimum height=1.3cm,
+        minimum width=5.0cm,
+        align=center,
+        font=\bfseries\normalsize
+    },
+    portnode/.style={
+        draw=blue!70!black,
+        fill=blue!15,
+        rounded corners=6pt,
+        line width=1.1pt,
+        minimum height=1.2cm,
+        minimum width=5.2cm,
+        align=center,
+        font=\bfseries\normalsize
+    },
+    procnode/.style={
+        draw=teal!70!black,
+        fill=teal!15,
+        rounded corners=6pt,
+        line width=1.1pt,
+        minimum height=1.2cm,
+        minimum width=5.2cm,
+        align=center,
+        font=\bfseries\normalsize
+    },
+    storagenode/.style={
+        draw=orange!90!black,
+        fill=orange!20,
+        rounded corners=6pt,
+        line width=1.2pt,
+        minimum height=1.3cm,
+        minimum width=5.6cm,
+        align=center,
+        font=\bfseries\normalsize
+    },
+    lbl/.style={
+        fill=white,
+        draw=gray!50,
+        inner sep=4pt,
+        rounded corners=3pt,
+        font=\bfseries\footnotesize,
+        align=center
+    }
+]
+
+% 1. Coluna da Direita (Contêiner Docker)
+\node[portnode] (pint) {Porta Interna do Cont\^einer\\(Porta 8000)};
+\node[procnode, below=1.2cm of pint] (uvi) {Servidor ASGI\\(Uvicorn)};
+\node[procnode, below=1.2cm of uvi] (api) {Aplica\c{c}\~ao FastAPI\\(Backend / Controllers)};
+
+% 2. Coluna da Esquerda (Elementos do Host)
+\node[clientnode, left=4.5cm of pint] (pext) {Porta Exposta no Host\\(Porta 8000)};
+\node[storagenode, left=4.1cm of api] (vol) {Diret\'orio de Projetos:\\\texttt{backend/data/projects/}\\\normalsize (Arquivos JSON dos Grafos)};
+
+% Conexões internas do container
+\draw[->, line width=1.4pt, draw=teal!80!black] (pint) -- (uvi);
+\draw[->, line width=1.4pt, draw=teal!80!black] (uvi) -- (api);
+
+% Conexões externas
+\draw[->, line width=1.4pt, draw=blue!80!black] (pext) -- node[above, lbl] {Redirecionamento de Porta\\(Compose: 8000:8000)} (pint);
+\draw[<->, line width=1.4pt, draw=orange!90!black] (api) -- node[above, lbl] {Mapeamento de Volume\\(Leitura e Escrita Local)} (vol);
+
+% Caixas de agrupamento (Background na ordem exata de profundidade)
+\begin{scope}[on background layer]
+    % 1. Servidor Hospedeiro desenhado PRIMEIRO (fundo de tudo)
+    \node[hostbox, fit=(pext)(pint)(uvi)(api)(vol), inner xsep=32pt, inner ysep=48pt] (host) {};
+    \node[anchor=north west, font=\bfseries\large, text=olive!80!black] at ([xshift=18pt, yshift=-12pt]host.north west) {Servidor Hospedeiro (Host Machine / Sistema Operacional)};
+
+    % 2. Container Docker desenhado SEGUNDO (sobre o amarelo do host)
+    \node[dockerbox, fit=(pint)(uvi)(api), inner xsep=20pt, inner ysep=30pt] (dock) {};
+    \node[anchor=north, font=\bfseries\small, text=blue!85!black, align=center] at ([yshift=-6pt]dock.north) {Cont\^einer Docker (Python 3.11 Slim)\\Docker Compose Engine};
+
+    % 3. Volume de Dados desenhado TERCEIRO (sobre o amarelo do host)
+    \node[volumebox, fit=(vol), inner xsep=18pt, inner ysep=24pt] (vbox) {};
+    \node[anchor=north, font=\bfseries\normalsize, text=orange!90!black] at ([yshift=-8pt]vbox.north) {Volume de Dados (Host File System)};
+\end{scope}
+
+\end{tikzpicture}
+\end{document}

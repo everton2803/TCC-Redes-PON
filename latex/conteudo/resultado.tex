@@ -6,22 +6,24 @@ Neste capítulo são apresentados os resultados empíricos obtidos na validaçã
 \section{Apresentação dos Resultados}
 \label{sec:apresentacao_resultados}
 
-A coleta de dados empíricos foi estruturada para avaliar o desempenho computacional do \textit{backend}, a precisão física dos algoritmos de atenuação e o ganho de produtividade no planejamento de redes de acesso \gls{gpon}. Os cenários experimentais contemplam dois estudos de caso representativos de topologias reais.
+A coleta de dados empíricos foi estruturada para avaliar o desempenho computacional do \textit{backend}, a precisão física dos algoritmos de atenuação e o ganho de produtividade no planejamento de redes de acesso \gls{gpon}. Os cenários experimentais contemplam dois estudos de caso representativos de diferentes realidades de implantação física: uma rede em área urbana com topologia simétrica/balanceada e uma rede em área rural com topologia linear desbalanceada de longo alcance.
+
+Essa distinção é fundamental no planejamento óptico. Redes em áreas urbanas apresentam menor complexidade de balanceamento de sinal, pois a distribuição geográfica das caixas de atendimento é relativamente uniforme e as distâncias dos enlaces secundários são menores e mais homogêneas, viabilizando o uso direto de divisores balanceados (ex.: $1\times16$) com variações mínimas de atenuação entre os clientes. Em contrapartida, redes em áreas rurais impõem uma complexidade de balanceamento consideravelmente mais elevada: a densidade de assinantes é rarefeita, os cabos troncos percorrem grandes extensões lineares ao longo de rodovias ou estradas vicinais e o atendimento exige o encadeamento sucessivo de divisores desbalanceados (com razões como 10/90, 20/80 ou 30/70), onde a perda acumulada em cada elemento afeta diretamente todos os nós a jusante.
 
 \subsection{Métricas de Desempenho e Testes Funcionais da Solução}
 \label{subsec:desempenho_software}
 
 Os testes funcionais executados via suíte Pytest no \textit{backend} (\texttt{backend/tests}) confirmaram a estabilidade do motor de cálculo e a integridade da comunicação via \gls{api} RESTful. Em medições de tempo de resposta realizadas nos cenários de teste, o tempo gasto pelo servidor FastAPI para processar a travessia de grafos (\gls{dfs}) e retornar os níveis de potência recalculados de todos os caminhos situou-se na faixa de 5 a 15 milissegundos. Essa resposta assíncrona ágil garante a reatividade da interface web D3.js durante o arraste de nós e edição de propriedades.
 
-\subsection{Teste 1 -- Estudo de Caso Urbano (Bairro Cidade Alta -- Videira/SC)}
+\subsection{Teste 1 -- Estudo de Caso em Área Urbana}
 \label{subsec:teste1_cidade_alta}
 
-O Teste 1 simulou o planejamento de uma rede de acesso \gls{gpon} em malha urbana quadriculada no Bairro Cidade Alta, em Videira -- SC. A topologia foi projetada para atender 128 assinantes através de 8 Caixas de Atendimento (\gls{cto}) equipadas com \textit{splitters} balanceados de $1\times16$ e alimentadas por um cabo tronco de 2\,km a partir da central (\gls{olt}).
+O Teste 1 simulou o planejamento de uma rede de acesso \gls{gpon} em malha urbana quadriculada típica, com distribuição balanceada de clientes. A topologia foi projetada para atender 128 assinantes através de 8 Caixas de Atendimento (\gls{cto}) equipadas com \textit{splitters} balanceados de $1\times16$ e alimentadas por um cabo tronco de 2\,km a partir da central (\gls{olt}). Por se tratar de um cenário urbano com distâncias homogêneas entre os pontos de terminação, o balanceamento do orçamento óptico é inerentemente menos complexo, pois os divisores simétricos proporcionam perdas de inserção uniformes para cada ramal de atendimento.
 
-A Figura~\ref{fig:cidade_alta_google_earth} apresenta o levantamento geográfico inicial da área urbana realizado no \textit{Google Earth}.
+A Figura~\ref{fig:cidade_alta_google_earth} apresenta o levantamento geográfico da área urbana com a rota dos cabos e a distribuição das caixas de atendimento.
 
 \begin{figure}[htb]
-    \caption{Mapeamento geográfico da rede GPON no Bairro Cidade Alta via Google Earth}
+    \caption{Mapeamento geográfico da rede GPON em área urbana}
     \label{fig:cidade_alta_google_earth}
     \centering
     \parbox{16cm}{
@@ -107,7 +109,7 @@ A Tabela~\ref{tab:comparativo_teste1} apresenta os dados numéricos de potência
 
 \begin{table}[htb]
 \centering
-\caption{Comparação da potência óptica recebida (dBm) por CTO no Bairro Cidade Alta}
+\caption{Comparação da potência óptica recebida (dBm) por CTO no cenário de área urbana}
 \label{tab:comparativo_teste1}
 \small
 \begin{tabular}{c c c c}
@@ -133,32 +135,34 @@ A Tabela~\ref{tab:tempo_teste1} sintetiza o ganho de tempo obtido no Teste 1.
 \centering
 \caption{Comparação do tempo gasto na elaboração e balanceamento do Teste 1}
 \label{tab:tempo_teste1}
-\begin{tabular}{l c c c}
+\begin{tabularx}{\textwidth}{X c c c}
 \hline
 \textbf{Etapa} & \textbf{Método Tradicional} & \textbf{PON Planner} & \textbf{Desempenho} \\
 \hline
 Desenho / Lançamento dos Elementos & 10 min & 7 min & Redução de 30,0\% \\
 Cálculo e Balanceamento de Sinal & 45 min & 3 min & Redução de 93,3\% \\
 \hline
-\textbf{Tempo Total} & \textbf{55 min} & \textbf{10 min} & **Redução de 81,8\%** \\
+\textbf{Tempo Total} & \textbf{55 min} & \textbf{10 min} & \textbf{Redução de 81,8\%} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \par\footnotesize Fonte: Elaborado pelo autor.
 \end{table}
 
-\subsection{Teste 2 -- Estudo de Caso Rural (Ibirama/SC)}
+\subsection{Teste 2 -- Estudo de Caso em Área Rural}
 \label{subsec:teste2_ibirama}
 
-O Teste 2 avaliou a aplicação em uma topologia linear de longo alcance no interior de Ibirama -- SC, originalmente cadastrada no \textit{GeoGrid Maps}, conforme a Figura~\ref{fig:ibirama_geogrid}. A rede compreende 14 CTOs encadeadas e um cabo tronco alimentador de 9.500 metros ($\approx 9{,}5$\,km).
+O Teste 2 avaliou a aplicação em uma topologia linear de longo alcance típica de área rural, originalmente documentada em sistema de inventário georreferenciado, conforme ilustrado na Figura~\ref{fig:ibirama_geogrid}. A rede compreende 14 CTOs encadeadas ao longo de uma via principal e um cabo tronco alimentador de 9.500 metros ($\approx 9{,}5$\,km). 
+
+Diferente do cenário urbano, a rede rural impõe um desafio de balanceamento muito mais complexo e rigoroso. Devido à grande distância percorrida pelo tronco e à distribuição espaçada das caixas, é inviável utilizar divisores balanceados simétricos em cascata sem provocar atenuação excessiva nos clientes intermediários e finais. Exige-se, portanto, a adoção de \textit{splitters} desbalanceados em cada derivação, calculando com precisão a fração de potência desviada para o atendimento local e a fração passante transmitida para o segmento seguinte.
 
 \begin{figure}[htb]
-    \caption{Mapeamento da rede rural de Ibirama -- SC no sistema GeoGrid Maps}
+    \caption{Mapeamento da rede óptica em área rural no sistema de inventário}
     \label{fig:ibirama_geogrid}
     \centering
     \parbox{16cm}{
         \centering
         \includegraphics[width=0.9\textwidth]{images/ibirama_geogrid.png}
-        \par\footnotesize Fonte: Extraído do sistema GeoGrid Maps.
+        \par\footnotesize Fonte: Extraído de sistema de inventário de rede óptica.
     }
 \end{figure}
 
@@ -186,27 +190,38 @@ Na tentativa de cálculo manual desbalanceado via \textit{Draw.io} (tempo de des
     }
 \end{figure}
 
-Ao simular a mesma topologia no \textit{PON Planner} (tempo de modelagem de 20 minutos), a ferramenta acusou em tempo real o colapso de sinal nos nós finais. A Figura~\ref{fig:ponplanner_resumo_desbal} ilustra a captura do painel lateral de resumo exibindo a contagem automática dos terminais em alerta (amarelo) e falha (vermelho).
+Ao simular a mesma topologia no \textit{PON Planner} (tempo de modelagem de 20 minutos), a ferramenta acusou em tempo real o colapso de sinal nos nós finais, exibindo a contagem automática dos terminais em alerta e falha. Após a identificação das falhas, executou-se o rebalanceamento no \textit{PON Planner} em apenas 5 minutos (contra estimativa superior a 90 minutos no método manual), alcançando $100\%$ das ONUs em faixa operacional verde.
+
+As capturas do painel lateral de resumo antes e após a otimização são apresentadas lado a lado na Figura~\ref{fig:ponplanner_resumo_desbal} e na Figura~\ref{fig:ponplanner_resumo_bal}. Os diagramas completos em blocos estão disponíveis no Apêndice~\ref{apendice:diagramas_ibirama}.
 
 \begin{figure}[htb]
-    \caption{Painel lateral do \textit{PON Planner} na simulação desbalanceada (evidenciando alertas e falhas)}
-    \label{fig:ponplanner_resumo_desbal}
     \centering
-    \parbox{16cm}{
+    \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=0.45\textwidth]{images/ponplanner_resumo_desbal.png}
-        \par\footnotesize Fonte: Tela capturada da aplicação PON Planner.
-    }
+        \caption{Painel lateral na simulação desbalanceada}
+        \label{fig:ponplanner_resumo_desbal}
+        \vspace{0.2cm}
+        \includegraphics[width=0.55\textwidth]{images/ponplanner_resumo_desbal.png}
+        \par\vspace{0.2cm}\footnotesize Fonte: Tela capturada do PON Planner.
+    \end{minipage}\hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \caption{Painel lateral após a otimização balanceada}
+        \label{fig:ponplanner_resumo_bal}
+        \vspace{0.2cm}
+        \includegraphics[width=0.55\textwidth]{images/ponplanner_resumo_bal.png}
+        \par\vspace{0.2cm}\footnotesize Fonte: Tela capturada do PON Planner.
+    \end{minipage}
 \end{figure}
 
 A Tabela~\ref{tab:comparativo_teste2} consolida os dados numéricos coletados nas 14 \glspl{cto} nos três cenários: estimativa manual desbalanceada, cálculo físico real desbalanceado no \textit{PON Planner} e solução final balanceada no software.
 
 \begin{table}[htb]
 \centering
-\caption{Potência óptica (dBm) por CTO no cenário rural de Ibirama -- SC}
+\caption{Potência óptica (dBm) por CTO no cenário de área rural}
 \label{tab:comparativo_teste2}
 \small
-\begin{tabular}{c c c c c}
+\begin{tabularx}{\textwidth}{c *{3}{>{\centering\arraybackslash}X} c}
 \hline
 \textbf{CTO} & \textbf{Manual Desbal. (dBm)} & \textbf{PON Planner Desbal. (dBm)} & \textbf{PON Planner Bal. (dBm)} & \textbf{Status Final} \\
 \hline
@@ -221,26 +236,13 @@ CTO 08 & $-22{,}85$ & $-23{,}95$ & $-22{,}81$ & OK \\
 CTO 09 & $-22{,}35$ & $-23{,}55$ & $-23{,}91$ & OK \\
 CTO 10 & $-22{,}90$ & $-24{,}24$ & $-23{,}30$ & OK \\
 CTO 11 & $-22{,}45$ & $-23{,}73$ & $-23{,}20$ & OK \\
-CTO 12 & $\mathbf{-28{,}70 \text{ (Alerta)}}$ & $\mathbf{-29{,}83 \text{ (Falha)}}$ & $-23{,}99$ & OK \\
-CTO 13 & $\mathbf{-30{,}40 \text{ (Falha)}}$ & $\mathbf{-31{,}43 \text{ (Falha)}}$ & $-23{,}48$ & OK \\
-CTO 14 & $\mathbf{-30{,}40 \text{ (Falha)}}$ & $\mathbf{-31{,}43 \text{ (Falha)}}$ & $-23{,}48$ & OK \\
+CTO 12 & $\mathbf{-28{,}70}$ \textbf{(Alerta)} & $\mathbf{-29{,}83}$ \textbf{(Falha)} & $-23{,}99$ & OK \\
+CTO 13 & $\mathbf{-30{,}40}$ \textbf{(Falha)} & $\mathbf{-31{,}43}$ \textbf{(Falha)} & $-23{,}48$ & OK \\
+CTO 14 & $\mathbf{-30{,}40}$ \textbf{(Falha)} & $\mathbf{-31{,}43}$ \textbf{(Falha)} & $-23{,}48$ & OK \\
 \hline
-\end{tabular}
+\end{tabularx}
 \par\footnotesize Fonte: Elaborado pelo autor com base nos dados experimentais.
 \end{table}
-
-Após a identificação das falhas, executou-se o rebalanceamento no \textit{PON Planner} em apenas 5 minutos (contra estimativa superior a 90 minutos no método manual). A Figura~\ref{fig:ponplanner_resumo_bal} mostra a consolidação final do painel lateral com $100\%$ das ONUs em faixa operacional verde. Os diagramas completos em blocos estão disponíveis no Apêndice~\ref{apendice:diagramas_ibirama}.
-
-\begin{figure}[htb]
-    \caption{Painel lateral do \textit{PON Planner} após a otimização (com $100\%$ das ONUs em verde)}
-    \label{fig:ponplanner_resumo_bal}
-    \centering
-    \parbox{16cm}{
-        \centering
-        \includegraphics[width=0.45\textwidth]{images/ponplanner_resumo_bal.png}
-        \par\footnotesize Fonte: Tela capturada da aplicação PON Planner.
-    }
-\end{figure}
 
 A Tabela~\ref{tab:tempo_teste2} sintetiza a comparação de tempo no Teste 2.
 
@@ -248,16 +250,16 @@ A Tabela~\ref{tab:tempo_teste2} sintetiza a comparação de tempo no Teste 2.
 \centering
 \caption{Comparação do tempo de execução no Teste 2 (Rede Rural de 14 CTOs)}
 \label{tab:tempo_teste2}
-\begin{tabular}{l c c c}
+\begin{tabularx}{\textwidth}{X c c c}
 \hline
 \textbf{Etapa} & \textbf{Método Tradicional} & \textbf{PON Planner} & \textbf{Desempenho} \\
 \hline
 Modelagem / Lançamento Gráfico & 20 min & 20 min & Equivalente \\
-Cálculo e Rebalanceamento de Sinal & $> 90$ min & 5 min & **Redução $> 94,4\%$** \\
+Cálculo e Rebalanceamento de Sinal & $> 90$ min & 5 min & \textbf{Redução $> 94,4\%$} \\
 \hline
-\textbf{Tempo Total de Projeto} & \textbf{$> 110$ min} & \textbf{25 min} & **Redução de $\approx 77,2\%$** \\
+\textbf{Tempo Total de Projeto} & \textbf{$> 110$ min} & \textbf{25 min} & \textbf{Redução de $\approx 77,2\%$} \\
 \hline
-\end{tabular}
+\end{tabularx}
 \par\footnotesize Fonte: Elaborado pelo autor.
 \end{table}
 
@@ -306,17 +308,17 @@ A Tabela~\ref{tab:validacao_objetivos_especificos} estabelece a correspondência
 \caption{Quadro de verificação do cumprimento dos Objetivos Específicos}
 \label{tab:validacao_objetivos_especificos}
 \small
-\begin{tabularx}{\textwidth}{|p{3.5cm}|p{5.5cm}|X|c|}
+\begin{tabularx}{\textwidth}{|p{3.2cm}|p{4.6cm}|X|c|}
 \hline
 \textbf{Objetivo Específico} & \textbf{Funcionalidade / Artefato} & \textbf{Evidência nos Resultados} & \textbf{Status} \\
 \hline
-1. Modelagem visual de topologias \gls{pon} com inserção e edição de nós e enlaces. & Interface web \textit{SPA} com biblioteca D3.js e manipuladores de \textit{drag-and-drop}. & Demonstração prática nos Testes 1 e 2 (Figuras~\ref{fig:ponplanner_bloco1} a \ref{fig:ponplanner_bloco3}). & **Alcançado** \\
+1. Modelagem visual de topologias \gls{pon} com inserção e edição de nós e enlaces. & Interface web \textit{SPA} com biblioteca D3.js e manipuladores de \textit{drag-and-drop}. & Demonstração prática nos Testes 1 e 2 (Figuras~\ref{fig:ponplanner_bloco1} a \ref{fig:ponplanner_bloco3}). & \textbf{Alcançado} \\
 \hline
-2. Cálculo automático do orçamento óptico considerando perdas de fibra, conectores, fusões e \textit{splitters}. & Motor de cálculo em Python (\texttt{calculo\_optico.py}) baseado em travessia \gls{dfs}. & Tabelas~\ref{tab:comparativo_teste1} e \ref{tab:comparativo_teste2} com precisão física detalhada. & **Alcançado** \\
+2. Cálculo automático do orçamento óptico considerando perdas de fibra, conectores, fusões e \textit{splitters}. & Motor de cálculo em Python (\texttt{calculo\_optico.py}) baseado em travessia \gls{dfs}. & Tabelas~\ref{tab:comparativo_teste1} e \ref{tab:comparativo_teste2} com precisão física detalhada. & \textbf{Alcançado} \\
 \hline
-3. Apresentação de indicadores de potência, margem e \textit{status} dos enlaces. & Código de cores nos nós (verde/amarelo/vermelho) e painel lateral de resumo. & Figuras~\ref{fig:ponplanner_resumo_desbal} e \ref{fig:ponplanner_resumo_bal} no Teste 2 (RF5). & **Alcançado** \\
+3. Apresentação de indicadores de potência, margem e \textit{status} dos enlaces. & Código de cores nos nós (verde/amarelo/vermelho) e painel lateral de resumo. & Figuras~\ref{fig:ponplanner_resumo_desbal} e \ref{fig:ponplanner_resumo_bal} no Teste 2 (RF5). & \textbf{Alcançado} \\
 \hline
-4. Persistência, recuperação e troca de projetos em formato \gls{json}. & Esquema Pydantic (\texttt{network.py}) e serviço \texttt{ProjetoService}. & Estrutura JSON validada na Seção~\ref{sec:modelagem_dados} e arquivos em \texttt{data/projects}. & **Alcançado** \\
+4. Persistência, recuperação e troca de projetos em formato \gls{json}. & Esquema Pydantic (\texttt{network.py}) e serviço \texttt{ProjetoService}. & Estrutura JSON validada na Seção~\ref{sec:modelagem_dados} e arquivos em \texttt{data/projects}. & \textbf{Alcançado} \\
 \hline
 \end{tabularx}
 \par\footnotesize Fonte: Elaborado pelo autor.
@@ -324,6 +326,6 @@ A Tabela~\ref{tab:validacao_objetivos_especificos} estabelece a correspondência
 
 \subsection{Análise do Cumprimento do Objetivo Geral}
 
-O **Objetivo Geral** deste trabalho consistia em \textit{``desenvolver uma aplicação web interativa que integre a modelagem visual da topologia de redes ópticas \gls{pon} ao cálculo automático do orçamento óptico, fornecendo uma solução que auxilie o planejamento, a análise e a validação técnica de projetos de redes \gls{ftth}''}.
+O \textbf{Objetivo Geral} deste trabalho consistia em \textit{``desenvolver uma aplicação web interativa que integre a modelagem visual da topologia de redes ópticas \gls{pon} ao cálculo automático do orçamento óptico, fornecendo uma solução que auxilie o planejamento, a análise e a validação técnica de projetos de redes \gls{ftth}''}.
 
-Conforme demonstrado ao longo do desenvolvimento (Capítulo 5) e validado nos estudos de caso (Capítulo 6), a solução \textit{PON Planner} integrou com sucesso a modelagem gráfica de grafos ao cálculo dinâmico de perdas em tempo real. A ferramenta comprovou sua capacidade de elevar a precisão física do planejamento, eliminar falhas de diagnóstico causadas por simplificações manuais e reduzir o tempo total de elaboração e balanceamento de projetos \gls{gpon} em mais de $77\%$. Desse modo, conclui-se que o Objetivo Geral foi **plenamente alcançado**.
+Conforme demonstrado ao longo do desenvolvimento (Capítulo 5) e validado nos estudos de caso (Capítulo 6), a solução \textit{PON Planner} integrou com sucesso a modelagem gráfica de grafos ao cálculo dinâmico de perdas em tempo real. A ferramenta comprovou sua capacidade de elevar a precisão física do planejamento, eliminar falhas de diagnóstico causadas por simplificações manuais e reduzir o tempo total de elaboração e balanceamento de projetos \gls{gpon} em mais de $77\%$. Desse modo, conclui-se que o Objetivo Geral foi \textbf{plenamente alcançado}.

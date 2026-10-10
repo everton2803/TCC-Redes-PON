@@ -101,8 +101,6 @@ A Figura~\ref{fig:arquitetura_geral} apresenta a visão geral da arquitetura do 
 
 Ao realizar qualquer alteração na topologia (como adicionar um nó ou alterar o comprimento de um trecho de fibra), o \textit{frontend} monta o objeto da rede em \gls{json} e o dispara para o \textit{endpoint} de cálculo do \textit{backend}. O servidor processa a topologia, efetua a soma das atenuações e retorna os níveis de sinal calculados para cada nó, permitindo a atualização imediata da interface visual.
 
-\revisadoprofessor{}
-
 \subsection{Diagrama de Componentes}
 
 O \textit{backend} foi estruturado sob o padrão \gls{mvc}, utilizando o \textit{framework} FastAPI. A organização dos componentes é subdividida em três camadas principais:
@@ -110,7 +108,7 @@ O \textit{backend} foi estruturado sob o padrão \gls{mvc}, utilizando o \textit
 \begin{itemize}
     \item \textbf{Controladores (\textit{Controllers}):} Módulos responsáveis por expor as rotas da \gls{api} \gls{rest} e tratar as requisições \gls{http}. O controlador \texttt{calculo.py} recebe as estruturas de rede para validação e recalculo; o controlador \texttt{projetos.py} lida com operações de criação, leitura, atualização e exclusão de arquivos de topologia; e o controlador \texttt{pastas.py} gerencia a organização dos arquivos no servidor.
     
-    \item \textbf{Serviços (\textit{Services}):} Concentram a lógica de negócio do sistema. O serviço \texttt{calculo\_optico.py} contém os algoritmos matemáticos que percorrem a árvore da rede e somam as perdas distribuídas e concentradas. O serviço \texttt{projeto\_service.py} gerencia o manuseio e a serialização de dados no sistema de arquivos.
+    \item \textbf{Serviços (\textit{Services}):} Concentram as regras de negócio da aplicação. Por meio do módulo \texttt{calculo\_optico.py}, o sistema executa os algoritmos matemáticos que percorrem a árvore da rede e computam as perdas distribuídas e concentradas. Por sua vez, o serviço \texttt{projeto\_service.py} gerencia a persistência e a serialização dos dados no sistema de arquivos.
     
     \item \textbf{Modelos e Esquemas (\textit{Schemas}):} Definem a estrutura dos dados validados pelo Pydantic (\texttt{network.py}). Estabelecem a tipagem rigorosa para nós, enlaces e parâmetros globais do projeto.
 \end{itemize}
@@ -247,7 +245,7 @@ Esta seção detalha a implementação dos módulos do \textit{backend} da aplic
 
 A organização física dos arquivos no repositório separa as responsabilidades da aplicação em módulos:
 \begin{itemize}
-    \item \textbf{Entrada e configuração:} \texttt{main.py}, \texttt{requirements.txt}, \texttt{Dockerfile} e \texttt{docker-compose.yml} inicializam e padronizam a execução do servidor.
+    \item \textbf{Entrada e configuração:} arquivos como \texttt{main.py}, \texttt{requirements.txt}, \texttt{Dockerfile} e \texttt{docker-compose.yml} padronizam e inicializam a execução do servidor.
     \item \textbf{Controladores:} recebem as requisições da \gls{api} e encaminham cada operação ao serviço correspondente.
     \item \textbf{Serviços:} concentram o cálculo óptico e a persistência dos projetos.
     \item \textbf{Modelos:} definem os esquemas de dados e as constantes físicas utilizadas nos cálculos.
@@ -260,7 +258,7 @@ A validação dos dados no servidor é feita pela biblioteca Pydantic. As estrut
 
 A classe \texttt{ParametrosGlobais} estabelece as taxas teóricas e coeficientes de atenuação padrão utilizados na ausência de especificações nos enlaces. Já a classe \texttt{Posicao} armazena a localização espacial $(x,y)$ utilizada no \textit{canvas} gráfico.
 
-O \texttt{NoSchema} utiliza campos opcionais para suportar diferentes equipamentos. Por exemplo, atributos como \texttt{potencia\_tx\_dbm} são exclusivos da \gls{olt}, enquanto \texttt{razao\_desbalanceada} aplica-se apenas a \textit{splitters} ópticos. O \texttt{ProjetoSchema} consolida o documento \gls{json} completo.
+O modelo \texttt{NoSchema} utiliza campos opcionais para suportar diferentes equipamentos. Por exemplo, atributos como \texttt{potencia\_tx\_dbm} são exclusivos da \gls{olt}, enquanto o campo \texttt{razao\_desbalanceada} aplica-se apenas a \textit{splitters} ópticos. O \texttt{ProjetoSchema} consolida o documento \gls{json} completo.
 
 \subsection{Camada de Serviços e Algoritmo de Cálculo Óptico (\texttt{calculo\_optico.py})}
 
@@ -274,7 +272,7 @@ A Figura~\ref{fig:fluxo_percurso_grafo} ilustra o fluxo sequencial do algoritmo 
     \parbox{16cm}{
         \centering
         \label{fig:fluxo_percurso_grafo}
-        \includegraphics[width=0.35\textwidth]{images/fluxo_percurso_grafo.png}
+        \includegraphics[width=0.85\textwidth]{images/fluxo_percurso_grafo.png}
         \par\footnotesize Fonte: Elaboração própria com auxílio de \gls{ia}.
     }
 \end{figure}
@@ -337,3 +335,5 @@ A movimentação dos nós é tratada pelo evento de arrasto do D3.js. Durante a 
 \subsection{Comunicação Assíncrona e Reatividade}
 
 A reatividade do sistema ocorre pelo envio assíncrono do estado do grafo para a \gls{api} FastAPI. Sempre que o usuário move um nó ou altera uma propriedade no painel lateral, o \textit{frontend} serializa o projeto em \gls{json} e realiza uma requisição \texttt{POST}. Após a resposta, os valores de potência e as cores dos nós são atualizados sem recarregar a página. Respostas de erro são tratadas para preservar o estado visual e informar que o recálculo não foi concluído.
+
+\revisadoprofessor{}
